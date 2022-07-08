@@ -1,34 +1,5 @@
 package htbgo
 
-// Get Machine Matrix
-// https://www.hackthebox.com/api/v4/machine/graph/matrix/{machineID}
-
-type MachineMatrixInformation struct {
-	Info struct {
-		Aggregate struct {
-			Enum   float64 `json:"enum"`
-			Real   float64 `json:"real"`
-			CVE    float64 `json:"cve"`
-			Custom float64 `json:"custom"`
-			CTF    float64 `json:"ctf"`
-		}
-		Maker struct {
-			Enum   float64 `json:"enum"`
-			Real   float64 `json:"real"`
-			CVE    float64 `json:"cve"`
-			Custom float64 `json:"custom"`
-			CTF    float64 `json:"ctf"`
-		}
-		User struct {
-			Enum   float64 `json:"enum"`
-			Real   float64 `json:"real"`
-			CVE    float64 `json:"cve"`
-			Custom float64 `json:"custom"`
-			CTF    float64 `json:"ctf"`
-		}
-	}
-}
-
 type maker struct {
 	ID                  int    `json:"id"`
 	Name                string `json:"name"`
@@ -88,6 +59,34 @@ type machineInfo struct {
 		IsActive          bool   `json:"isActive"`
 		ActivePlayerCount int    `json:"active_player_count"`
 		ExpiresAt         string `json:"expires_at"`
+	}
+}
+
+// Get Machine Matrix
+// https://www.hackthebox.com/api/v4/machine/graph/matrix/{machineID}
+type MachineMatrixInformation struct {
+	Info struct {
+		Aggregate struct {
+			Enum   float64 `json:"enum"`
+			Real   float64 `json:"real"`
+			CVE    float64 `json:"cve"`
+			Custom float64 `json:"custom"`
+			CTF    float64 `json:"ctf"`
+		}
+		Maker struct {
+			Enum   float64 `json:"enum"`
+			Real   float64 `json:"real"`
+			CVE    float64 `json:"cve"`
+			Custom float64 `json:"custom"`
+			CTF    float64 `json:"ctf"`
+		}
+		User struct {
+			Enum   float64 `json:"enum"`
+			Real   float64 `json:"real"`
+			CVE    float64 `json:"cve"`
+			Custom float64 `json:"custom"`
+			CTF    float64 `json:"ctf"`
+		}
 	}
 }
 
