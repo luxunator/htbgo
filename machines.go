@@ -112,17 +112,13 @@ type MachineProfile struct {
 //	Get Active Machines
 // https://www.hackthebox.com/api/v4/machine/list
 type ActiveMachines struct {
-	Info []struct {
-		machineInfo
-	}
+	Info []machineInfo
 }
 
 // Get Retired Machines
 // https://www.hackthebox.com/api/v4/machine/list/retired
 type RetiredMachines struct {
-	Info []struct {
-		machineInfo
-	}
+	Info []machineInfo
 }
 
 func (s *Session) MachineMatrix(machineID string) (matrix MachineMatrixInformation) {
