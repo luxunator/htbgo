@@ -95,8 +95,8 @@ type MachineMatrixInformation struct {
 type MachineProfile struct {
 	Info struct {
 		machineInfo
-		Maker                 maker      `json:"maker"`
-		Maker2                maker      `json:"maker2"`
+		MakerPrimary          maker      `json:"maker"`
+		MakerSecondary        maker      `json:"maker2"`
 		AuthUserTimeOwnedUser string     `json:"authUserFirstUserTime"`
 		AuthUserTimeOwnedRoot string     `json:"authUserFirstRootTime"`
 		FirstBloodInUser      firstBlood `json:"userBlood"`
