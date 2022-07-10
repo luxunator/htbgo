@@ -91,8 +91,71 @@ type MachineMatrixInformation struct {
 	}
 }
 
+// Get the Information of the machine ( doesn't include the first blood information)
+//  https://www.hackthebox.com/api/v4/machine/info/{machineID}
+type MachineInformation struct {
+	Info struct {
+		ID                  int    `json:"id"`
+		Name                string `json:"name"`
+		OS                  string `json:"os"`
+		Active              int    `json:"active"`
+		Retired             int    `json:"retired"`
+		IP                  string `json:"ip"`
+		Points              int    `json:"points"`
+		StaticPoints        int    `json:"static_points"`
+		Release             string `json:"release"`
+		UserOwnCounts       int    `json:"user_owns_count"`
+		RootOwnCounts       int    `json:"root_owns_count"`
+		Free                bool   `json:"free"`
+		AuthUserIfUserOwns  bool   `json:"authUserInUserOwns"`
+		AuthUserIfRootOwns  bool   `json:"authUserInRootOwns"`
+		AuthUserHasReviewed bool   `json:"authUserHasReviewed"`
+		Stars               string `json:"stars"`
+		Difficulty          int    `json:"difficulty"`
+		Avatar              string `json:"avatar"`
+		FeedbackChart       struct {
+			CakeDifficulty      int `json:"counterCake"`
+			VeryEasyDifficulty  int `json:"counterVeryEasy"`
+			EasyDifficulty      int `json:"counterEasy"`
+			TooEasyDifficulty   int `json:"counterTooEasy"`
+			MediumDifficulty    int `json:"counterMedium"`
+			BitHardDifficulty   int `json:"counterBitHard"`
+			HardDifficulty      int `json:"counterHard"`
+			TooHardDifficulty   int `json:"counterTooHard"`
+			ExtraHardDifficulty int `json:"counterExHard"`
+			BrainFuckDifficulty int `json:"counterBrainFuck"`
+		} `json:"feedbackForChart"`
+		DifficultyText string `json:"difficultyText"`
+		IsCompleted    bool   `json:"isCompleted"`
+		LastResetTime  string `json:"last_reset_time"`
+		PlayInfo       struct {
+			IsSpawned         bool   `json:"isSpawned"`
+			IsSpawning        bool   `json:"isSpawning"`
+			IsActive          bool   `json:"isActive"`
+			ActivePlayerCount int    `json:"active_player_count"`
+			ExpiresAt         string `json:"expires_at"`
+		} `json:"playInfo"`
+		MakerPrimary struct {
+			ID                  int    `json:"id"`
+			Name                string `json:"name"`
+			Avatar              string `json:"avatar"`
+			AuthUserSentRespect bool   `json:"isRespected"`
+		} `json:"maker"`
+
+		MakerSecondary struct {
+			ID                  int    `json:"id"`
+			Name                string `json:"name"`
+			Avatar              string `json:"avatar"`
+			AuthUserSentRespect bool   `json:"isRespected"`
+		} `json:"maker2"`
+		Recommended  int `json:"recommended"`
+		ReviewsCount int `json:"reviews_count"`
+		SPFlag       int `json:"sp_flag"`
+	}
+}
+
 // Get the Profile of the machine (includes first blood information)
-// https://www.hackthebox.com/api/v4/machine/info/{machineID}
+// https://www.hackthebox.com/api/v4/machine/profile/{machineID}
 type MachineProfile struct {
 	Info struct {
 		ID                  int    `json:"id"`
@@ -313,6 +376,12 @@ type RetiredMachines struct {
 func (s *Session) MachineMatrix(machineID string) (matrix MachineMatrixInformation) {
 	var url string = "https://www.hackthebox.com/api/v4/machine/graph/matrix/" + machineID
 	parseJSON(s, url, &matrix)
+	return
+}
+
+func (s *Session) MachineInformation(machineID string) (machineInformation MachineInformation) {
+	var url string = "https://www.hackthebox.com/api/v4/machine/info/" + machineID
+	parseJSON(s, url, &machineInformation)
 	return
 }
 
