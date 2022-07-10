@@ -373,6 +373,25 @@ type RetiredMachines struct {
 	}
 }
 
+// Get the top 25 users in a machine
+// https://www.hackthebox.com/api/v4/machine/owns/top/{machineID}
+type TopUsers struct {
+	Info []struct {
+		ID                      int    `json:"id"`
+		Name                    string `json:"name"`
+		Avatar                  string `json:"avatar"`
+		RankID                  int    `json:"rank_id"`
+		Rank                    string `json:"rank_text"`
+		OwnDate                 string `json:"own_date"`
+		AuthUserOwnUserDate     string `json:"user_own_date"`
+		AuthUserOwnUserDuration string `json:"user_own_time"`
+		AuthUserOwnRootDuration string `json:"root_own_time"`
+		IsFirstBloodInUser      bool   `json:"is_user_blood"`
+		IsFirstBloodInRoot      bool   `json:"is_root_blood"`
+		Position                int    `json:"position"`
+	} `json:"info"`
+}
+
 func (s *Session) MachineMatrix(machineID string) (matrix MachineMatrixInformation) {
 	var url string = "https://www.hackthebox.com/api/v4/machine/graph/matrix/" + machineID
 	parseJSON(s, url, &matrix)
@@ -398,5 +417,10 @@ func (s *Session) ActiveMachines() (activeMachines ActiveMachines) {
 func (s *Session) RetiredMachines() (retiredMachines RetiredMachines) {
 	var url string = "https://www.hackthebox.com/api/v4/machine/list/retired"
 	parseJSON(s, url, &retiredMachines)
+	return
+}
+func (s *Session) MachineTopUsers(machineID string) (topUsers TopUsers) {
+	var url string = "https://www.hackthebox.com/api/v4/machine/owns/top/" + machineID
+	parseJSON(s, url, &topUsers)
 	return
 }
