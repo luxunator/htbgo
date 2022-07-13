@@ -468,8 +468,9 @@ func (s *Session) ScheduledMachines() (scheduledMachines ScheduledMachines) {
 	parseJSON(s, url, &scheduledMachines)
 	return
 }
-func (s *Session) TodoMachines() (todoMachines TodoMachines) {
-	var url string = "https://www.hackthebox.com/api/v4/machine/list/todo"
-	parseJSON(s, url, &todoMachines)
-	return
-}
+
+// func (s *Session) TodoMachines() (todoMachines TodoMachines) {
+// 	var url string = "https://www.hackthebox.com/api/v4/machine/list/todo"
+// 	parseJSON(s, url, &todoMachines)
+// 	return
+// }
