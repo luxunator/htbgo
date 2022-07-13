@@ -437,6 +437,23 @@ type RetiredMachineTags struct {
 	Info interface{} `json:"info"`
 }
 
+// Get the changelog of a machine
+// https://www.hackthebox.com/api/v4/machine/changelog/{machineID}
+
+type MachineChangelog struct {
+	Info []struct {
+		ID          int    `json:""`
+		UserID      int    `json:"user_id"`
+		MachineID   int    `json:"machine_id"`
+		Type        string `json:"type"`
+		Title       string `json:"title"`
+		Description string `json:"description"`
+		Released    int    `json:"released"`
+		CreatedAt   string `json:"created_at"`
+		UpdatedAt   string `json:"updated_at"`
+	} `json:"info"`
+}
+
 func (s *Session) MachineMatrix(machineID string) (matrix MachineMatrixInformation) {
 	var url string = "https://www.hackthebox.com/api/v4/machine/graph/matrix/" + machineID
 	parseJSON(s, url, &matrix)
@@ -485,5 +502,11 @@ func (s *Session) ScheduledMachines() (scheduledMachines ScheduledMachines) {
 func (s *Session) RetiredMachineTags(machineID string) (tags RetiredMachineTags) {
 	var url string = "https://www.hackthebox.com/api/v4/machine/tags/" + machineID
 	parseJSON(s, url, &tags)
+	return
+}
+
+func (s *Session) MachineChangelog(machineID string) (changelog MachineChangelog) {
+	var url string = "https://www.hackthebox.com/api/v4/machine/changelog/" + machineID
+	parseJSON(s, url, &changelog)
 	return
 }
