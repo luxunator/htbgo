@@ -430,6 +430,13 @@ type TodoMachines struct {
 	} `json:"info"`
 }
 
+// Get a retired machine their tags
+// https://www.hackthebox.com/api/v4/machine/tags/{machineID}
+
+type RetiredMachineTags struct {
+	Info interface{} `json:"info"`
+}
+
 func (s *Session) MachineMatrix(machineID string) (matrix MachineMatrixInformation) {
 	var url string = "https://www.hackthebox.com/api/v4/machine/graph/matrix/" + machineID
 	parseJSON(s, url, &matrix)
@@ -474,3 +481,9 @@ func (s *Session) ScheduledMachines() (scheduledMachines ScheduledMachines) {
 // 	parseJSON(s, url, &todoMachines)
 // 	return
 // }
+
+func (s *Session) RetiredMachineTags(machineID string) (tags RetiredMachineTags) {
+	var url string = "https://www.hackthebox.com/api/v4/machine/tags/" + machineID
+	parseJSON(s, url, &tags)
+	return
+}
