@@ -56,6 +56,7 @@ type University struct {
 }
 
 // get stats of a university by id
+// fixing weekly object later
 type UniversityStats struct {
 	Rank          int `json:"rank"`
 	UserOwns      int `json:"user_owns"`
