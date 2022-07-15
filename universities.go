@@ -55,6 +55,38 @@ type University struct {
 	} `json:"data"`
 }
 
+// get stats of a university by id
+type UniversityStats struct {
+	Rank          int `json:"rank"`
+	UserOwns      int `json:"user_owns"`
+	SystemOwns    int `json:"system_owns"`
+	FirstBloods   int `json:"first_bloods"`
+	ChallengeOwns int `json:"challenge_owns"`
+	Respects      int `json:"respects"`
+}
+
+// List University Members
+type UniversityMembers []struct {
+	ID              int    `json:"id"`
+	Name            string `json:"name"`
+	Avatar          string `json:"avatar"`
+	Rank            int    `json:"rank"`
+	Points          int    `json:"points"`
+	RootOwns        int    `json:"root_owns"`
+	RootBloodsCount int    `json:"root_bloods_count"`
+	UserBloodsCount int    `json:"user_bloods_count"`
+	UserOwns        int    `json:"user_owns"`
+	RankText        string `json:"rank_text"`
+	CountryName     string `json:"country_name"`
+	CountryCode     string `json:"country_code"`
+	Role            string `json:"role"`
+	University      struct {
+		ID        int `json:"id"`
+		CaptainID int `json:"captain_id"`
+	} `json:"university"`
+	Public int `json:"public"`
+}
+
 // will fix the query later
 func (s *Session) Universities(page string, query string) (universities Universities) {
 	if page == "" {
@@ -72,3 +104,12 @@ func (s *Session) University(id int) (university University) {
 
 	return
 }
+
+func (s *Session) UniversityStats(id int) (stats UniversityStats) {
+	var url string = "https://www.hackthebox.com/api/v4/university/stats/owns/" + strconv.Itoa(id)
+	parseJSON(s, url, &stats)
+
+	return
+}
+
+func 
