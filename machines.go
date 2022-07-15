@@ -454,6 +454,28 @@ type MachineChangelog struct {
 	} `json:"info"`
 }
 
+// Get the reviews of a retired machine
+// https://www.hackthebox.com/api/v4/machine/reviews/{machineID}
+
+type MachineReviews struct {
+	Message []struct {
+		ID        int    `json:"id"`
+		UserID    int    `json:"user_id"`
+		MachineID int    `json:"machine_id"`
+		Stars     int    `json:"stars"`
+		Message   string `json:"message"`
+		CreatedAt string `json:"created_at"`
+		UpdatedAt string `json:"updated_at"`
+		Title     string `json:"title"`
+		Released  int    `json:"released"`
+		User      struct {
+			ID     int    `json:"id"`
+			Name   string `json:"name"`
+			Avatar string `json:"avatar"`
+		} `json:"user"`
+	} `json:"message"`
+}
+
 func (s *Session) MachineMatrix(machineID string) (matrix MachineMatrixInformation) {
 	var url string = "https://www.hackthebox.com/api/v4/machine/graph/matrix/" + machineID
 	parseJSON(s, url, &matrix)
@@ -508,5 +530,11 @@ func (s *Session) RetiredMachineTags(machineID string) (tags RetiredMachineTags)
 func (s *Session) MachineChangelog(machineID string) (changelog MachineChangelog) {
 	var url string = "https://www.hackthebox.com/api/v4/machine/changelog/" + machineID
 	parseJSON(s, url, &changelog)
+	return
+}
+
+func (s *Session) MachineReviews(machineID string) (reviews MachineReviews) {
+	var url string = "https://www.hackthebox.com/api/v4/machine/reviews/" + machineID
+	parseJSON(s, url, &reviews)
 	return
 }
