@@ -66,11 +66,12 @@ type UniversityStats struct {
 }
 
 // List University Members
+// will fix Rank later because rank is int+string
 type UniversityMembers []struct {
-	ID              int    `json:"id"`
-	Name            string `json:"name"`
-	Avatar          string `json:"avatar"`
-	Rank            int    `json:"rank"`
+	ID     int    `json:"id"`
+	Name   string `json:"name"`
+	Avatar string `json:"avatar"`
+	// Rank            int    `json:"rank"`
 	Points          int    `json:"points"`
 	RootOwns        int    `json:"root_owns"`
 	RootBloodsCount int    `json:"root_bloods_count"`
@@ -112,4 +113,9 @@ func (s *Session) UniversityStats(id int) (stats UniversityStats) {
 	return
 }
 
-func 
+func (s *Session) UniversityMembers(id int) (members UniversityMembers) {
+	var url string = "https://www.hackthebox.com/api/v4/university/members/" + strconv.Itoa(id)
+	parseJSON(s, url, &members)
+
+	return
+}
