@@ -41,11 +41,11 @@ type MachineInformation struct {
 		Points              int    `json:"points"`
 		StaticPoints        int    `json:"static_points"`
 		Release             string `json:"release"`
-		UserOwnCounts       int    `json:"user_owns_count"`
-		RootOwnCounts       int    `json:"root_owns_count"`
+		UserOwnsCount       int    `json:"user_owns_count"`
+		RootOwnsCount       int    `json:"root_owns_count"`
 		Free                bool   `json:"free"`
-		AuthUserIfUserOwns  bool   `json:"authUserInUserOwns"`
-		AuthUserIfRootOwns  bool   `json:"authUserInRootOwns"`
+		AuthUserInUserOwns  bool   `json:"authUserInUserOwns"`
+		AuthUserInRootOwns  bool   `json:"authUserInRootOwns"`
 		AuthUserHasReviewed bool   `json:"authUserHasReviewed"`
 		Stars               string `json:"stars"`
 		Difficulty          int    `json:"difficulty"`
@@ -76,14 +76,14 @@ type MachineInformation struct {
 			ID                  int    `json:"id"`
 			Name                string `json:"name"`
 			Avatar              string `json:"avatar"`
-			AuthUserSentRespect bool   `json:"isRespected"`
+			IsRespected         bool   `json:"isRespected"`
 		} `json:"maker"`
 
 		MakerSecondary struct {
 			ID                  int    `json:"id"`
 			Name                string `json:"name"`
 			Avatar              string `json:"avatar"`
-			AuthUserSentRespect bool   `json:"isRespected"`
+			IsRespected         bool   `json:"isRespected"`
 		} `json:"maker2"`
 		Recommended  int `json:"recommended"`
 		ReviewsCount int `json:"reviews_count"`
@@ -104,11 +104,11 @@ type MachineProfile struct {
 		Points              int    `json:"points"`
 		StaticPoints        int    `json:"static_points"`
 		Release             string `json:"release"`
-		UserOwnCounts       int    `json:"user_owns_count"`
-		RootOwnCounts       int    `json:"root_owns_count"`
+		UserOwnsCount       int    `json:"user_owns_count"`
+		RootOwnsCount       int    `json:"root_owns_count"`
 		Free                bool   `json:"free"`
-		AuthUserIfUserOwns  bool   `json:"authUserInUserOwns"`
-		AuthUserIfRootOwns  bool   `json:"authUserInRootOwns"`
+		AuthUserInUserOwns  bool   `json:"authUserInUserOwns"`
+		AuthUserInRootOwns  bool   `json:"authUserInRootOwns"`
 		AuthUserHasReviewed bool   `json:"authUserHasReviewed"`
 		Stars               string `json:"stars"`
 		Difficulty          int    `json:"difficulty"`
@@ -140,43 +140,43 @@ type MachineProfile struct {
 			ID                  int    `json:"id"`
 			Name                string `json:"name"`
 			Avatar              string `json:"avatar"`
-			AuthUserSentRespect bool   `json:"isRespected"`
+			IsRespected bool           `json:"isRespected"`
 		} `json:"maker"`
 
 		MakerSecondary struct {
 			ID                  int    `json:"id"`
 			Name                string `json:"name"`
 			Avatar              string `json:"avatar"`
-			AuthUserSentRespect bool   `json:"isRespected"`
+			IsRespected bool           `json:"isRespected"`
 		} `json:"maker2"`
 
-		AuthUserTimeOwnedUser string `json:"authUserFirstUserTime"`
-		AuthUserTimeOwnedRoot string `json:"authUserFirstRootTime"`
-		FirstBloodInUser      struct {
+		AuthUserFirstUserTime string `json:"authUserFirstUserTime"`
+		AuthUserFirstRootTime string `json:"authUserFirstRootTime"`
+		UserBlood             struct {
 			User struct {
 				Name   string `json:"name"`
 				ID     int    `json:"id"`
 				Avatar string `json:"avatar"`
 			} `json:"user"`
 
-			MachineCreatedAt   string `json:"created_at"`
-			FirstBloodDuration string `json:"blood_difference"`
+			CreatedAt          string `json:"created_at"`
+			BloodDifference    string `json:"blood_difference"`
 		} `json:"userBlood"`
-		UserFirstBloodAvatar string `json:"userBloodAvatar"`
-		FirstBloodInRoot     struct {
+		UserBloodAvatar      string `json:"userBloodAvatar"`
+		RootBlood            struct {
 			User struct {
 				Name   string `json:"name"`
 				ID     int    `json:"id"`
 				Avatar string `json:"avatar"`
 			} `json:"user"`
 
-			MachineCreatedAt   string `json:"created_at"`
-			FirstBloodDuration string `json:"blood_difference"`
+			CreatedAt          string `json:"created_at"`
+			BloodDifference    string `json:"blood_difference"`
 		} `json:"rootBlood"`
 
-		RootFirstBloodAvatar string `json:"rootBloodAvatar"`
-		UserFirstBloodTime   string `json:"firstUserBloodTime"`
-		RootFirstBloodTime   string `json:"firstRootBloodTime"`
+		RootBloodAvatar      string `json:"rootBloodAvatar"`
+		FirstUserBloodTime   string `json:"firstUserBloodTime"`
+		FirstRootBloodTime   string `json:"firstRootBloodTime"`
 		Recommended          int    `json:"recommended"`
 	}
 }
@@ -191,10 +191,10 @@ type ActiveMachines struct {
 		Points              int    `json:"points"`
 		StaticPoints        int    `json:"static_points"`
 		Release             string `json:"release"`
-		UserOwnCounts       int    `json:"user_owns_count"`
-		RootOwnCounts       int    `json:"root_owns_count"`
-		AuthUserIfUserOwns  bool   `json:"authUserInUserOwns"`
-		AuthUserIfRootOwns  bool   `json:"authUserInRootOwns"`
+		UserOwnsCount       int    `json:"user_owns_count"`
+		RootOwnsCount       int    `json:"root_owns_count"`
+		AuthUserInUserOwns  bool   `json:"authUserInUserOwns"`
+		AuthUserInRootOwns  bool   `json:"authUserInRootOwns"`
 		IsTodo              bool   `json:"isTodo"`
 		AuthUserHasReviewed bool   `json:"authUserHasReviewed"`
 		Stars               string `json:"stars"`
@@ -228,13 +228,13 @@ type ActiveMachines struct {
 			ID                  int    `json:"id"`
 			Name                string `json:"name"`
 			Avatar              string `json:"avatar"`
-			AuthUserSentRespect bool   `json:"isRespected"`
+			IsRespected         bool   `json:"isRespected"`
 		} `json:"maker"`
 		MakerSecondary struct {
 			ID                  int    `json:"id"`
 			Name                string `json:"name"`
 			Avatar              string `json:"avatar"`
-			AuthUserSentRespect bool   `json:"isRespected"`
+			IsRespected         bool   `json:"isRespected"`
 		} `json:"maker2"`
 		Recommended int    `json:"recommended"`
 		SPFlag      int    `json:"sp_flag"`
@@ -253,10 +253,10 @@ type RetiredMachines struct {
 		Points              int    `json:"points"`
 		StaticPoints        int    `json:"static_points"`
 		Release             string `json:"release"`
-		UserOwnCounts       int    `json:"user_owns_count"`
-		RootOwnCounts       int    `json:"root_owns_count"`
-		AuthUserIfUserOwns  bool   `json:"authUserInUserOwns"`
-		AuthUserIfRootOwns  bool   `json:"authUserInRootOwns"`
+		UserOwnsCount       int    `json:"user_owns_count"`
+		RootOwnsCount       int    `json:"root_owns_count"`
+		AuthUserInUserOwns  bool   `json:"authUserInUserOwns"`
+		AuthUserInRootOwns  bool   `json:"authUserInRootOwns"`
 		IsTodo              bool   `json:"isTodo"`
 		AuthUserHasReviewed bool   `json:"authUserHasReviewed"`
 		Stars               string `json:"stars"`
@@ -291,13 +291,13 @@ type RetiredMachines struct {
 			ID                  int    `json:"id"`
 			Name                string `json:"name"`
 			Avatar              string `json:"avatar"`
-			AuthUserSentRespect bool   `json:"isRespected"`
+			IsRespected         bool   `json:"isRespected"`
 		} `json:"maker"`
 		MakerSecondary struct {
 			ID                  int    `json:"id"`
 			Name                string `json:"name"`
 			Avatar              string `json:"avatar"`
-			AuthUserSentRespect bool   `json:"isRespected"`
+			IsRespected         bool   `json:"isRespected"`
 		} `json:"maker2"`
 		Recommended int    `json:"recommended"`
 		SPFlag      int    `json:"sp_flag"`
@@ -305,7 +305,7 @@ type RetiredMachines struct {
 		IP          string `json:"ip"`
 		Tags        []struct {
 			ID             int `json:"id"`
-			TagCategoryIDs int `json:"tag_category_id"`
+			TagCategoryID  int `json:"tag_category_id"`
 		} `json:"tags"`
 	}
 }
@@ -318,13 +318,13 @@ type TopUsers struct {
 		Name                    string `json:"name"`
 		Avatar                  string `json:"avatar"`
 		RankID                  int    `json:"rank_id"`
-		Rank                    string `json:"rank_text"`
+		RankText                string `json:"rank_text"`
 		OwnDate                 string `json:"own_date"`
-		AuthUserOwnUserDate     string `json:"user_own_date"`
-		AuthUserOwnUserDuration string `json:"user_own_time"`
-		AuthUserOwnRootDuration string `json:"root_own_time"`
-		IsFirstBloodInUser      bool   `json:"is_user_blood"`
-		IsFirstBloodInRoot      bool   `json:"is_root_blood"`
+		UserOwnDate             string `json:"user_own_date"`
+		UserOwnTime             string `json:"user_own_time"`
+		RootOwnTime             string `json:"root_own_time"`
+		IsUserBlood             bool   `json:"is_user_blood"`
+		IsRootBlood             bool   `json:"is_root_blood"`
 		Position                int    `json:"position"`
 	} `json:"info"`
 }
@@ -442,7 +442,7 @@ type RetiredMachineTags struct {
 
 type MachineChangelog struct {
 	Info []struct {
-		ID          int    `json:""`
+		ID          int    `json:"id"`
 		UserID      int    `json:"user_id"`
 		MachineID   int    `json:"machine_id"`
 		Type        string `json:"type"`
