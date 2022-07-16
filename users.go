@@ -3,9 +3,9 @@ package htbgo
 // Bearer Connection Status
 // https://www.hackthebox.com/api/v4/user/connection/status
 
-type BearerConnectionStatus struct { //test
+type BearerConnectionStatus struct {
 	Status string `json:"status"`
-	Connection string `json:"connection"`
+	Connection interface{} `json:"connection"`
 }
 
 // Bearer Active Machine
@@ -126,8 +126,9 @@ type BearerSubscriptionsRecurly struct {
 // Bearer Enrolled Tracks
 // https://www.hackthebox.com/api/v4/user/tracks
 
-type BearerTracks []struct { // Empty array?
-
+type BearerTracks []struct {
+	ID int `json:"id"`
+	Complete int `json:"complete"`
 }
 
 /* TODO
@@ -177,8 +178,8 @@ type BearerUserRelationship struct {
 		Ranking int `json:"ranking"`
 		Avatar string `json:"avatar"`
 		Timezone string `json:"timezone"`
-		isVIP bool `json:"isVip"`
-		isDedicatedVip bool `json:"isDedicatedVip"`
+		IsVIP bool `json:"isVip"`
+		IsDedicatedVip bool `json:"isDedicatedVip"`
 		Public bool `json:"public"`
 		CountryName string `json:"country_name"`
 		CountryCode string `json:"country_code"`
@@ -223,7 +224,7 @@ type UserProgressChallenges struct {
 			Solved int `json:"solved"`
 			Total int `json:"total"`
 		} `json:"challenge_owns"`
-		ChallengeCategories struct {
+		ChallengeCategories []struct {
 			Name string `json:"name"`
 			OwnedFlags int `json:"owned_flags"`
 			TotalFlags int `json:"total_flags"`
@@ -265,7 +266,7 @@ type UserProgressFortresses struct {
 // User ProLabs Progress
 // https://www.hackthebox.com/api/v4/profile/progress/prolab/{userID}
 
-type UserProgressProLab struct {
+type UserProgressProLabs struct {
 	Profile struct {
 		ProLabs []struct {
 			Name string `json:"name"`
@@ -287,7 +288,7 @@ type UserAllActivities struct {
 			Date string `json:"date"`
 			DateDiff string `json:"date_diff"`
 			ObjectType string `json:"object_type"`
-			Type string `json:"fortress"`
+			Type string `json:"type"`
 			FirstBlood bool `json:"first_blood"`
 			ID int `json:"id"`
 			Name string `json:"name"`
@@ -453,7 +454,7 @@ type UserAllBadges struct {
 			CreatedAt string `json:"created_at"`
 			UpdatedAt string `json:"updated_at"`
 		} `json:"pivot"`
-	}
+	} `json:"badges"`
 }
 
 func (s *Session) ConnectionStatus() (status BearerConnectionStatus) {
@@ -586,7 +587,7 @@ func (s *Session) UserFortresses(userID string) (fortresses UserProgressFortress
 	return
 }
 
-func (s *Session) UserProLabs(userID string) (proLabs UserProgressProLab) {
+func (s *Session) UserProLabs(userID string) (proLabs UserProgressProLabs) {
 
 	var url string = "https://www.hackthebox.com/api/v4/profile/progress/prolab/" + userID
 	parseJSON(s, url, &proLabs)
