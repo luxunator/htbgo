@@ -73,17 +73,17 @@ type MachineInformation struct {
 			ExpiresAt         string `json:"expires_at"`
 		} `json:"playInfo"`
 		MakerPrimary struct {
-			ID                  int    `json:"id"`
-			Name                string `json:"name"`
-			Avatar              string `json:"avatar"`
-			IsRespected         bool   `json:"isRespected"`
+			ID          int    `json:"id"`
+			Name        string `json:"name"`
+			Avatar      string `json:"avatar"`
+			IsRespected bool   `json:"isRespected"`
 		} `json:"maker"`
 
 		MakerSecondary struct {
-			ID                  int    `json:"id"`
-			Name                string `json:"name"`
-			Avatar              string `json:"avatar"`
-			IsRespected         bool   `json:"isRespected"`
+			ID          int    `json:"id"`
+			Name        string `json:"name"`
+			Avatar      string `json:"avatar"`
+			IsRespected bool   `json:"isRespected"`
 		} `json:"maker2"`
 		Recommended  int `json:"recommended"`
 		ReviewsCount int `json:"reviews_count"`
@@ -137,17 +137,17 @@ type MachineProfile struct {
 		} `json:"playInfo"`
 
 		MakerPrimary struct {
-			ID                  int    `json:"id"`
-			Name                string `json:"name"`
-			Avatar              string `json:"avatar"`
-			IsRespected bool           `json:"isRespected"`
+			ID          int    `json:"id"`
+			Name        string `json:"name"`
+			Avatar      string `json:"avatar"`
+			IsRespected bool   `json:"isRespected"`
 		} `json:"maker"`
 
 		MakerSecondary struct {
-			ID                  int    `json:"id"`
-			Name                string `json:"name"`
-			Avatar              string `json:"avatar"`
-			IsRespected bool           `json:"isRespected"`
+			ID          int    `json:"id"`
+			Name        string `json:"name"`
+			Avatar      string `json:"avatar"`
+			IsRespected bool   `json:"isRespected"`
 		} `json:"maker2"`
 
 		AuthUserFirstUserTime string `json:"authUserFirstUserTime"`
@@ -159,25 +159,25 @@ type MachineProfile struct {
 				Avatar string `json:"avatar"`
 			} `json:"user"`
 
-			CreatedAt          string `json:"created_at"`
-			BloodDifference    string `json:"blood_difference"`
+			CreatedAt       string `json:"created_at"`
+			BloodDifference string `json:"blood_difference"`
 		} `json:"userBlood"`
-		UserBloodAvatar      string `json:"userBloodAvatar"`
-		RootBlood            struct {
+		UserBloodAvatar string `json:"userBloodAvatar"`
+		RootBlood       struct {
 			User struct {
 				Name   string `json:"name"`
 				ID     int    `json:"id"`
 				Avatar string `json:"avatar"`
 			} `json:"user"`
 
-			CreatedAt          string `json:"created_at"`
-			BloodDifference    string `json:"blood_difference"`
+			CreatedAt       string `json:"created_at"`
+			BloodDifference string `json:"blood_difference"`
 		} `json:"rootBlood"`
 
-		RootBloodAvatar      string `json:"rootBloodAvatar"`
-		FirstUserBloodTime   string `json:"firstUserBloodTime"`
-		FirstRootBloodTime   string `json:"firstRootBloodTime"`
-		Recommended          int    `json:"recommended"`
+		RootBloodAvatar    string `json:"rootBloodAvatar"`
+		FirstUserBloodTime string `json:"firstUserBloodTime"`
+		FirstRootBloodTime string `json:"firstRootBloodTime"`
+		Recommended        int    `json:"recommended"`
 	}
 }
 
@@ -225,16 +225,16 @@ type ActiveMachines struct {
 
 		Free         bool `json:"free"`
 		MakerPrimary struct {
-			ID                  int    `json:"id"`
-			Name                string `json:"name"`
-			Avatar              string `json:"avatar"`
-			IsRespected         bool   `json:"isRespected"`
+			ID          int    `json:"id"`
+			Name        string `json:"name"`
+			Avatar      string `json:"avatar"`
+			IsRespected bool   `json:"isRespected"`
 		} `json:"maker"`
 		MakerSecondary struct {
-			ID                  int    `json:"id"`
-			Name                string `json:"name"`
-			Avatar              string `json:"avatar"`
-			IsRespected         bool   `json:"isRespected"`
+			ID          int    `json:"id"`
+			Name        string `json:"name"`
+			Avatar      string `json:"avatar"`
+			IsRespected bool   `json:"isRespected"`
 		} `json:"maker2"`
 		Recommended int    `json:"recommended"`
 		SPFlag      int    `json:"sp_flag"`
@@ -288,24 +288,24 @@ type RetiredMachines struct {
 
 		Free         bool `json:"free"`
 		MakerPrimary struct {
-			ID                  int    `json:"id"`
-			Name                string `json:"name"`
-			Avatar              string `json:"avatar"`
-			IsRespected         bool   `json:"isRespected"`
+			ID          int    `json:"id"`
+			Name        string `json:"name"`
+			Avatar      string `json:"avatar"`
+			IsRespected bool   `json:"isRespected"`
 		} `json:"maker"`
 		MakerSecondary struct {
-			ID                  int    `json:"id"`
-			Name                string `json:"name"`
-			Avatar              string `json:"avatar"`
-			IsRespected         bool   `json:"isRespected"`
+			ID          int    `json:"id"`
+			Name        string `json:"name"`
+			Avatar      string `json:"avatar"`
+			IsRespected bool   `json:"isRespected"`
 		} `json:"maker2"`
 		Recommended int    `json:"recommended"`
 		SPFlag      int    `json:"sp_flag"`
 		EasyMonth   int    `json:"easy_month"`
 		IP          string `json:"ip"`
 		Tags        []struct {
-			ID             int `json:"id"`
-			TagCategoryID  int `json:"tag_category_id"`
+			ID            int `json:"id"`
+			TagCategoryID int `json:"tag_category_id"`
 		} `json:"tags"`
 	}
 }
@@ -314,18 +314,18 @@ type RetiredMachines struct {
 // https://www.hackthebox.com/api/v4/machine/owns/top/{machineID}
 type TopUsers struct {
 	Info []struct {
-		ID                      int    `json:"id"`
-		Name                    string `json:"name"`
-		Avatar                  string `json:"avatar"`
-		RankID                  int    `json:"rank_id"`
-		RankText                string `json:"rank_text"`
-		OwnDate                 string `json:"own_date"`
-		UserOwnDate             string `json:"user_own_date"`
-		UserOwnTime             string `json:"user_own_time"`
-		RootOwnTime             string `json:"root_own_time"`
-		IsUserBlood             bool   `json:"is_user_blood"`
-		IsRootBlood             bool   `json:"is_root_blood"`
-		Position                int    `json:"position"`
+		ID          int    `json:"id"`
+		Name        string `json:"name"`
+		Avatar      string `json:"avatar"`
+		RankID      int    `json:"rank_id"`
+		RankText    string `json:"rank_text"`
+		OwnDate     string `json:"own_date"`
+		UserOwnDate string `json:"user_own_date"`
+		UserOwnTime string `json:"user_own_time"`
+		RootOwnTime string `json:"root_own_time"`
+		IsUserBlood bool   `json:"is_user_blood"`
+		IsRootBlood bool   `json:"is_root_blood"`
+		Position    int    `json:"position"`
 	} `json:"info"`
 }
 

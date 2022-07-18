@@ -5,7 +5,7 @@ import (
 )
 
 type Session struct {
-	Token string
-	Client *http.Client
+	Token   string
+	Client  *http.Client
 	Headers http.Header
 }
