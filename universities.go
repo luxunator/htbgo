@@ -133,7 +133,6 @@ func (s *Session) UniversitiesWithQuery(page string, query string) (universities
 	return
 }
 
-// will fix the query later
 func (s *Session) Universities(page string, query ...string) (universities Universities) {
 	if page == "" {
 		page = "1"
