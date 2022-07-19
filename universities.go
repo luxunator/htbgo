@@ -7,6 +7,7 @@ type Universities struct {
 	Message string `json:"message"`
 	Section string `json:"section"`
 	Data    struct {
+		Page       int `json:"current_page"`
 		University []struct {
 			ID                   int      `json:"id"`
 			Name                 string   `json:"name"`
@@ -16,14 +17,23 @@ type Universities struct {
 			UsersCount           int      `json:"users_count"`
 			RespectedByCount     int      `json:"respected_by_count"`
 			Country              string   `json:"country"`
-			UsersAvatartThumb    []string `json:"user_avatars"`
+			UsersAvatarThumb     []string `json:"user_avatars"`
 		} `json:"data"`
-		NextPage     string `json:"next_page_url"`
-		Path         string `json:"path"`
-		PerPage      int    `json:"per_page"`
-		PreviousPage string `json:"prev_page_url"`
-		To           int    `json:"to"`
-		Total        int    `json:"total"`
+		FirstPageURL    string `json:"first_page_url"`
+		From            int    `json:"from"`
+		To              int    `json:"to"`
+		NextPageURL     string `json:"next_page_url"`
+		LastPage        int    `json:"last_page"`
+		LastPageURL     string `json:"last_page_url"`
+		Path            string `json:"path"`
+		PerPage         int    `json:"per_page"`
+		PreviousPageURL string `json:"prev_page_url"`
+		Links           []struct {
+			URL    string `json:"url"`
+			Label  string `json:"label"`
+			Active bool   `json:"active"`
+		}
+		Total int `json:"total"`
 	}
 }
 
