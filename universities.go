@@ -133,7 +133,7 @@ func (s *Session) UniversitiesSearch(query string, page int) (universities Unive
 	return
 }
 
-func (s *Session) University(id int) (university University) {
+func (s *Session) UniversityInfo(id int) (university University) {
 	var url string = "https://www.hackthebox.com/api/v4/university/profile/" + strconv.Itoa(id)
 	parseJSON(s, url, &university)
 
