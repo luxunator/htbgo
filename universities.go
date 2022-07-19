@@ -66,7 +66,7 @@ type University struct {
 }
 
 // get stats of a university by id
-type week struct {
+type Week struct {
 	UserOwns      int    `json:"user_owns"`
 	SystemOwns    int    `json:"system_owns"`
 	ChallengeOwns int    `json:"challenge_owns"`
