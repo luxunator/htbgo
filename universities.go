@@ -17,7 +17,7 @@ type Universities struct {
 			UsersCount           int      `json:"users_count"`
 			RespectedByCount     int      `json:"respected_by_count"`
 			Country              string   `json:"country"`
-			UsersAvatarThumb     []string `json:"user_avatars"`
+			UserAvatars          []string `json:"user_avatars"`
 		} `json:"data"`
 		FirstPageURL    string `json:"first_page_url"`
 		From            int    `json:"from"`
@@ -32,9 +32,9 @@ type Universities struct {
 			URL    string `json:"url"`
 			Label  string `json:"label"`
 			Active bool   `json:"active"`
-		}
+		} `json:"links"`
 		Total int `json:"total"`
-	}
+	} `json:"data"`
 }
 
 // get a profile of a university by id
