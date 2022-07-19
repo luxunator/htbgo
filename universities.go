@@ -109,18 +109,30 @@ type UniversityMembers []struct {
 	} `json:"university"`
 	Public int `json:"public"`
 }
-type RankInterface interface {
-}
 
-// will fix the query later
-func (s *Session) Universities(page string, query string) (universities Universities) {
-	if page == "" {
-		page = "1"
-	}
+func (s *Session) UniversitiesNoQuery(page string) (universities Universities) {
+	var url string = "https://www.hackthebox.com/api/v4/university/all/list?page=" + page
+	parseJSON(s, url, &universities)
+
+	return
+}
+func (s *Session) UniversitiesWithQuery(page string, query string) (universities Universities) {
 	var url string = "https://www.hackthebox.com/api/v4/university/all/list?page=" + page + "&search=" + query
 	parseJSON(s, url, &universities)
 
 	return
+}
+
+// will fix the query later
+func (s *Session) Universities(page string, query ...string) (universities Universities) {
+	if page == "" {
+		page = "1"
+	}
+	if len(query) > 0 {
+		return s.UniversitiesWithQuery(page, query[0])
+	} else {
+		return s.UniversitiesNoQuery(page)
+	}
 }
 
 func (s *Session) University(id int) (university University) {
