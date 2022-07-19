@@ -75,20 +75,20 @@ type Week struct {
 	WeekEndDate   string `json:"week_end_date"`
 }
 type Weeks struct {
-	Week1  week `json:"week1"`
-	Week2  week `json:"week2"`
-	Week3  week `json:"week3"`
-	Week4  week `json:"week4"`
-	Week5  week `json:"week5"`
-	Week6  week `json:"week6"`
-	Week7  week `json:"week7"`
-	Week8  week `json:"week8"`
-	Week9  week `json:"week9"`
-	Week10 week `json:"week10"`
-	Week11 week `json:"week11"`
-	Week12 week `json:"week12"`
+	Week1  Week `json:"week1"`
+	Week2  Week `json:"week2"`
+	Week3  Week `json:"week3"`
+	Week4  Week `json:"week4"`
+	Week5  Week `json:"week5"`
+	Week6  Week `json:"week6"`
+	Week7  Week `json:"week7"`
+	Week8  Week `json:"week8"`
+	Week9  Week `json:"week9"`
+	Week10 Week `json:"week10"`
+	Week11 Week `json:"week11"`
+	Week12 Week `json:"week12"`
 }
-type UniversityStats struct {
+type UniversityOwns struct {
 	Rank          int   `json:"rank"`
 	UserOwns      int   `json:"user_owns"`
 	SystemOwns    int   `json:"system_owns"`
@@ -99,7 +99,7 @@ type UniversityStats struct {
 }
 
 // List University Members
-type UniversityMembers []struct {
+type UniversityMembersList []struct {
 	ID              int         `json:"id"`
 	Name            string      `json:"name"`
 	Avatar          string      `json:"avatar"`
@@ -151,14 +151,14 @@ func (s *Session) University(id int) (university University) {
 	return
 }
 
-func (s *Session) UniversityStats(id int) (stats UniversityStats) {
+func (s *Session) UniversityOwns(id int) (stats UniversityOwns) {
 	var url string = "https://www.hackthebox.com/api/v4/university/stats/owns/" + strconv.Itoa(id)
 	parseJSON(s, url, &stats)
 
 	return
 }
 
-func (s *Session) UniversityMembers(id int) (members UniversityMembers) {
+func (s *Session) UniversityMembers(id int) (members UniversityMembersList) {
 	var url string = "https://www.hackthebox.com/api/v4/university/members/" + strconv.Itoa(id)
 	parseJSON(s, url, &members)
 
