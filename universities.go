@@ -56,7 +56,6 @@ type University struct {
 }
 
 // get stats of a university by id
-// fixing weekly object later
 type week struct {
 	UserOwns      int    `json:"user_owns"`
 	SystemOwns    int    `json:"system_owns"`
@@ -90,26 +89,27 @@ type UniversityStats struct {
 }
 
 // List University Members
-// will fix Rank later because rank is int+string
 type UniversityMembers []struct {
-	ID     int    `json:"id"`
-	Name   string `json:"name"`
-	Avatar string `json:"avatar"`
-	// Rank            int    `json:"rank"`
-	Points          int    `json:"points"`
-	RootOwns        int    `json:"root_owns"`
-	RootBloodsCount int    `json:"root_bloods_count"`
-	UserBloodsCount int    `json:"user_bloods_count"`
-	UserOwns        int    `json:"user_owns"`
-	RankText        string `json:"rank_text"`
-	CountryName     string `json:"country_name"`
-	CountryCode     string `json:"country_code"`
-	Role            string `json:"role"`
+	ID              int         `json:"id"`
+	Name            string      `json:"name"`
+	Avatar          string      `json:"avatar"`
+	Rank            interface{} `json:"rank"`
+	Points          int         `json:"points"`
+	RootOwns        int         `json:"root_owns"`
+	RootBloodsCount int         `json:"root_bloods_count"`
+	UserBloodsCount int         `json:"user_bloods_count"`
+	UserOwns        int         `json:"user_owns"`
+	RankText        string      `json:"rank_text"`
+	CountryName     string      `json:"country_name"`
+	CountryCode     string      `json:"country_code"`
+	Role            string      `json:"role"`
 	University      struct {
 		ID        int `json:"id"`
 		CaptainID int `json:"captain_id"`
 	} `json:"university"`
 	Public int `json:"public"`
+}
+type RankInterface interface {
 }
 
 // will fix the query later
