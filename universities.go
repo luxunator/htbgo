@@ -57,13 +57,36 @@ type University struct {
 
 // get stats of a university by id
 // fixing weekly object later
+type week struct {
+	UserOwns      int    `json:"user_owns"`
+	SystemOwns    int    `json:"system_owns"`
+	ChallengeOwns int    `json:"challenge_owns"`
+	FirstBloods   int    `json:"first_bloods"`
+	Respects      int    `json:"respects"`
+	WeekEndDate   string `json:"week_end_date"`
+}
+type Weeks struct {
+	Week1  week `json:"week1"`
+	Week2  week `json:"week2"`
+	Week3  week `json:"week3"`
+	Week4  week `json:"week4"`
+	Week5  week `json:"week5"`
+	Week6  week `json:"week6"`
+	Week7  week `json:"week7"`
+	Week8  week `json:"week8"`
+	Week9  week `json:"week9"`
+	Week10 week `json:"week10"`
+	Week11 week `json:"week11"`
+	Week12 week `json:"week12"`
+}
 type UniversityStats struct {
-	Rank          int `json:"rank"`
-	UserOwns      int `json:"user_owns"`
-	SystemOwns    int `json:"system_owns"`
-	FirstBloods   int `json:"first_bloods"`
-	ChallengeOwns int `json:"challenge_owns"`
-	Respects      int `json:"respects"`
+	Rank          int   `json:"rank"`
+	UserOwns      int   `json:"user_owns"`
+	SystemOwns    int   `json:"system_owns"`
+	FirstBloods   int   `json:"first_bloods"`
+	ChallengeOwns int   `json:"challenge_owns"`
+	Respects      int   `json:"respects"`
+	Weeks         Weeks `json:"weekly"`
 }
 
 // List University Members
