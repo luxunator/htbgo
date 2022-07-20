@@ -1,0 +1,246 @@
+package htbgo
+
+// Current Prolabs List
+// https://www.hackthebox.com/api/v4/prolabs
+
+type ProLabsList struct {
+	Status bool `json:"status"`
+	Data   struct {
+		Count int `json:"count"`
+		Labs  []struct {
+			ID                         int    `json:"id"`
+			Name                       string `json:"name"`
+			ReleaseAt                  string `json:"release_at"`
+			ProMachinesCount           int    `json:"pro_machines_count"`
+			ProFlagsCount              int    `json:"pro_flags_count"`
+			Ownership                  int    `json:"ownership"`
+			UserEligibleForCertificate bool   `json:"user_eligible_for_certificate"`
+			New                        bool   `json:"new"`
+			SkillLevel                 string `json:"skill_level"`
+			DesignatedCategory         string `json:"designated_category"`
+			Team                       string `json:"team"`
+			Level                      int    `json:"level"`
+			LabServersCount            int    `json:"lab_servers_count"`
+			CoverImageURL              string `json:"cover_img_url"`
+		} `json:"labs"`
+	} `json:"data"`
+}
+
+// Prolab Profile
+// https://www.hackthebox.com/api/v4/prolab/{prolabID}/info
+
+type ProLabProfile struct {
+	Status bool `json:"status"`
+	Data   struct {
+		ID               int      `json:"id"`
+		Name             string   `json:"name"`
+		Version          string   `json:"version"`
+		EntryPoints      []string `json:"entry_points"`
+		Description      string   `json:"description"`
+		VideoURL         string   `json:"video_url"`
+		ProMachinesCount int      `json:"pro_machines_count"`
+		ProFlagsCount    int      `json:"pro_flags_count"`
+		CoverImageURL    string   `json:"cover_image_url"`
+		LabServersCount  int      `json:"lab_servers_count"`
+		ActiveUsers      int      `json:"active_users"`
+		LabMaster        struct {
+			ID          int    `json:"id"`
+			Name        string `json:"name"`
+			AvatarThumb string `json:"avatar_thumb"`
+		} `json:"lab_master"`
+	} `json:"data"`
+}
+
+// Prolab Overview
+// https://www.hackthebox.com/api/v4/prolab/{prolabID}/overview
+
+type ProLabOverviewInfo struct {
+	Status bool `json:"status"`
+	Data   struct {
+		ID      int    `json:"id"`
+		Name    string `json:"name"`
+		Version string `json:"version"`
+		//Excerpt `json:"excerpt"` TODO
+		ProMachinesCount int `json:"pro_machines_count"`
+		ProFlagsCount    int `json:"pro_flags_count"`
+		SocialLinks      struct {
+			Discord string `json:"discord"`
+			Forum   string `json:"forum"`
+		} `json:"social_links"`
+		NewVersion       bool   `json:"new_version"`
+		OverviewImageURL string `json:"overview_image_url"`
+		SkillLevel       string `json:"skill_level"`
+		DesignatedLevel  struct {
+			Category    string `json:"category"`
+			Level       int    `json:"level"`
+			Description string `json:"description"`
+			Team        string `json:"team"`
+		} `json:"designated_level"`
+		LabMaster struct {
+			ID          int    `json:"id"`
+			Name        string `json:"name"`
+			AvatarThumb string `json:"avatar_thumb"`
+		} `json:"lab_master"`
+	} `json:"data"`
+}
+
+// Prolab Machines List
+// https://www.hackthebox.com/api/v4/prolab/{prolabID}/machines
+
+type ProLabMachinesList struct {
+	Status bool `json:"status"`
+	Data   []struct {
+		ID             int    `json:"id"`
+		Name           string `json:"name"`
+		OS             string `json:"os"`
+		AvatarThumbURL string `json:"avatar_thumb_url"`
+	} `json:"data"`
+}
+
+// Prolab Flags List
+// https://www.hackthebox.com/api/v4/prolab/{prolabID}/flags
+
+type ProLabFlagsList struct {
+	Status bool `json:"status"`
+	Data   []struct {
+		ID     int    `json:"id"`
+		Title  string `json:"title"`
+		Points int    `json:"points"`
+		Owned  bool   `json:"owned"`
+	} `json:"data"`
+}
+
+// Prolab FAQ
+// https://www.hackthebox.com/api/v4/prolab/{prolabID}/faq
+
+type ProLabFAQList struct {
+	Status bool `json:"status"`
+	Data   []struct {
+		Question string `json:"question"`
+		Answer   string `json:"answer"`
+		Generic  bool   `json:"generic"`
+	} `json:"data"`
+}
+
+// Prolab Selected Reviews
+// https://www.hackthebox.com/api/v4/prolab/{prolabID}/reviews_overview
+
+type ProLabSelectedReviewsList struct {
+	Status bool `json:"status"`
+	Data   struct {
+		TotalNumberOfRatings int `json:"total_number_of_ratings"`
+		UsersAverageRating   int `json:"users_average_rating"`
+		Feedbacks            []struct {
+			Rating int    `json:"rating"`
+			Text   string `json:"text"`
+			User   struct {
+				ID   int    `json:"id"`
+				Name string `json:"name"`
+			} `json:"user"`
+		} `json:"feedbacks"`
+	} `json:"data"`
+}
+
+// Prolab Paginated Reviews
+// https://www.hackthebox.com/api/v4/prolab/{prolabID}/reviews?page={page}
+
+type ProLabPaginatedReviewsList struct {
+	Data []struct {
+		ID                        int    `json:"id"`
+		Rating                    int    `json:"rating"`
+		Difficulty                int    `json:"difficulty"`
+		CreatedAt                 string `json:"created_at"`
+		Text                      string `json:"text"`
+		HelpfulProFeedbacksCount  int    `json:"helpful_pro_feedbacks_count"`
+		UserInHelpfulProFeedbacks bool   `json:"user_in_helpful_pro_feedbacks"`
+		User                      struct {
+			ID          int    `json:"id"`
+			Name        string `json:"name"`
+			AvatarThumb string `json:"avatar_thumb"`
+		} `json:"user"`
+	} `json:"data"`
+	Links struct {
+		First string `json:"first"`
+		Last  string `json:"last"`
+		Prev  string `json:"prev"`
+		Next  string `json:"next"`
+	} `json:"links"`
+	Meta struct {
+		CurrentPage int `json:"current_page"`
+		From        int `json:"from"`
+		LastPage    int `json:"last_page"`
+		Links       []struct {
+			URL    string `json:"url"`
+			Label  string `json:"label"`
+			Active bool   `json:"active"`
+		} `json:"links"`
+		Path    string `json:"path"`
+		PerPage int    `json:"per_page"`
+		To      int    `json:"to"`
+		Total   int    `json:"total"`
+	} `json:"meta"`
+}
+
+func (s *Session) ActiveProLabs() (proLabs ProLabsList) {
+
+	var url string = "https://www.hackthebox.com/api/v4/prolabs"
+	parseJSON(s, url, &proLabs)
+
+	return
+}
+
+func (s *Session) ProLabInfo(proLabID string) (info ProLabProfile) {
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabID + "/info"
+	parseJSON(s, url, &info)
+
+	return
+}
+
+func (s *Session) ProLabOverview(proLabID string) (overview ProLabOverviewInfo) {
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabID + "/overview"
+	parseJSON(s, url, &overview)
+
+	return
+}
+
+func (s *Session) ProLabMachines(proLabID string) (machines ProLabMachinesList) {
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabID + "/machines"
+	parseJSON(s, url, &machines)
+
+	return
+}
+
+func (s *Session) ProLabFlags(proLabID string) (flags ProLabFlagsList) {
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabID + "/flags"
+	parseJSON(s, url, &flags)
+
+	return
+}
+
+func (s *Session) ProLabFAQ(proLabID string) (faq ProLabFAQList) {
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabID + "/faq"
+	parseJSON(s, url, &faq)
+
+	return
+}
+
+func (s *Session) ProLabSelectedReviews(proLabID string) (reviews ProLabSelectedReviewsList) {
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabID + "/reviews_overview"
+	parseJSON(s, url, &reviews)
+
+	return
+}
+
+func (s *Session) ProLabPaginatedReviews(proLabID string, page string) (reviews ProLabPaginatedReviewsList) {
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabID + "/reviews?page=" + page
+	parseJSON(s, url, &reviews)
+
+	return
+}
