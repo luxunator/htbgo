@@ -139,6 +139,77 @@ type UserRankBracket struct {
 	} `json:"data"`
 }
 
+// Get the Rankings of the countries
+// https://www.hackthebox.com/api/v4/rankings/countries
+
+type CountryRanks struct {
+	Status bool `json:"status"`
+	Data   []struct {
+		Rank          int    `json:"rank"`
+		Country       string `json:"country"`
+		Members       int    `json:"members"`
+		Points        int    `json:"points"`
+		RootOwns      int    `json:"root_owns"`
+		UserOwns      int    `json:"user_owns"`
+		ChallengeOwns int    `json:"challenge_owns"`
+		RootBloods    int    `json:"root_bloods"`
+		UserBloods    int    `json:"user_bloods"`
+		Fortress      int    `json:"fortress"`
+		Endgame       int    `json:"endgame"`
+		Name          string `json:"name"`
+		RanksDiff     int    `json:"ranks_diff"`
+	} `json:"data"`
+}
+
+// Get the rankings of the teams
+// https://www.hackthebox.com/api/v4/rankings/teams
+
+type TeamRanks struct {
+	Status bool `json:"status"`
+	Data   []struct {
+		Rank            int    `json:"rank"`
+		Points          int    `json:"points"`
+		RootOwns        int    `json:"root_owns"`
+		UserOwns        int    `json:"user_owns"`
+		ChallengeOwns   int    `json:"challenge_owns"`
+		RootBloods      int    `json:"root_bloods"`
+		UserBloods      int    `json:"user_bloods"`
+		ChallengeBloods int    `json:"challenge_bloods"`
+		Fortress        int    `json:"fortress"`
+		Endgame         int    `json:"endgame"`
+		ID              int    `json:"id"`
+		Name            string `json:"name"`
+		AvatarThumbURL  string `json:"avatar_thumb_url"`
+		Country         string `json:"country"`
+		RanksDiff       int    `json:"ranks_diff"`
+	} `json:"data"`
+}
+
+// Get the rankings of the users
+// https://www.hackthebox.com/api/v4/rankings/users?vip=1
+
+type UserRanks struct {
+	Status bool `json:"status"`
+	Data   []struct {
+		Rank            int    `json:"rank"`
+		Points          int    `json:"points"`
+		RootOwns        int    `json:"root_owns"`
+		UserOwns        int    `json:"user_owns"`
+		ChallengeOwns   int    `json:"challenge_owns"`
+		RootBloods      int    `json:"root_bloods"`
+		UserBloods      int    `json:"user_bloods"`
+		ChallengeBloods int    `json:"challenge_bloods"`
+		Fortress        int    `json:"fortress"`
+		Endgame         int    `json:"endgame"`
+		ID              int    `json:"id"`
+		Name            string `json:"name"`
+		AvatarThumbURL  string `json:"avatar_thumb_url"`
+		Country         string `json:"country"`
+		Level           string `json:"level"`
+		RanksDiff       int    `json:"ranks_diff"`
+	} `json:"data"`
+}
+
 func (s *Session) UserRankInCountry(period string) (rank UserRankInCountry) {
 	var url string = "https://www.hackthebox.com/api/v4/rankings/country/best?period=" + period
 	parseJSON(s, url, &rank)
@@ -190,5 +261,23 @@ func (s *Session) UserOverview(period string, includeVIP int) (rankOverview User
 func (s *Session) UserRankBracket(includeVIP int) (rankBracket UserRankBracket) {
 	var url string = "https://www.hackthebox.com/api/v4/rankings/user/ranking_bracket?vip=" + strconv.Itoa(includeVIP)
 	parseJSON(s, url, &rankBracket)
+	return
+}
+
+func (s *Session) CountryRanks() (ranks CountryRanks) {
+	var url string = "https://www.hackthebox.com/api/v4/rankings/countries"
+	parseJSON(s, url, &ranks)
+	return
+}
+
+func (s *Session) TeamRanks() (ranks TeamRanks) {
+	var url string = "https://www.hackthebox.com/api/v4/rankings/teams"
+	parseJSON(s, url, &ranks)
+	return
+}
+
+func (s *Session) UserRanks(includeVIP int) (ranks UserRanks) {
+	var url string = "https://www.hackthebox.com/api/v4/rankings/users?vip=" + strconv.Itoa(includeVIP)
+	parseJSON(s, url, &ranks)
 	return
 }
