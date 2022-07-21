@@ -76,7 +76,7 @@ type TeamRankOverview struct {
 			Name           string `json:"name"`
 			AvatarURL      string `json:"avatar_url"`
 			AvatarThumbURL string `json:"avatar_thumb_url"`
-		} `json:"data"`
+		} `json:"team"`
 	} `json:"data"`
 }
 
@@ -131,7 +131,7 @@ type UserOverview struct {
 type UserRankBracket struct {
 	Status bool `json:"status"`
 	Data   struct {
-		Rank                 int    `json:"rank"`
+		Rank         interface{}    `json:"rank"`
 		Points               int    `json:"points"`
 		PointsForNextBracket int    `json:"points_for_next_bracket"`
 		CurrentBracket       string `json:"current_bracket"`
@@ -203,7 +203,7 @@ type UserRanks struct {
 		Endgame         int    `json:"endgame"`
 		ID              int    `json:"id"`
 		Name            string `json:"name"`
-		AvatarThumbURL  string `json:"avatar_thumb_url"`
+		AvatarThumb     string `json:"avatar_thumb"`
 		Country         string `json:"country"`
 		Level           string `json:"level"`
 		RanksDiff       int    `json:"ranks_diff"`
@@ -241,7 +241,7 @@ func (s *Session) TeamRankOverview(period string) (rankOverview TeamRankOverview
 }
 
 func (s *Session) TeamRankBracket() (rankBracket TeamRankBracket) {
-	var url string = "https://www.hackthebox.com/api/v4/rankings/country/ranking_bracket"
+	var url string = "https://www.hackthebox.com/api/v4/rankings/team/ranking_bracket"
 	parseJSON(s, url, &rankBracket)
 	return
 }
