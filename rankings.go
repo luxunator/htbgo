@@ -210,6 +210,27 @@ type UserRanks struct {
 	} `json:"data"`
 }
 
+type UniversitiesRankingList struct {
+	Status bool `json:"status"`
+	Data []struct {
+		Rank int `json:"rank"`
+		Students int `json:"students"`
+		Points int `json:"points"`
+		RootOwns int `json:"root_owns"`
+		UserOwns int `json:"user_owns"`
+		ChallengeOwns int `json:"challenge_owns"`
+		RootBloods int `json:"root_bloods"`
+		UserBloods int `json:"user_bloods"`
+		ChallengeBloods int `json:"challenge_bloods"`
+		Fortress int `json:"fortress"`
+		Endgame int `json:"endgame"`
+		ID int `json:"id"`
+		Name string `json:"name"`
+		Country string `json:"country"`
+		RanksDiff int `json:"ranks_diff"`
+	} `json:"data"`
+}
+
 func (s *Session) UserRankInCountry(period string) (rank UserRankInCountry) {
 	var url string = "https://www.hackthebox.com/api/v4/rankings/country/best?period=" + period
 	parseJSON(s, url, &rank)
@@ -279,5 +300,11 @@ func (s *Session) TeamRanks() (ranks TeamRanks) {
 func (s *Session) UserRanks(includeVIP int) (ranks UserRanks) {
 	var url string = "https://www.hackthebox.com/api/v4/rankings/users?vip=" + strconv.Itoa(includeVIP)
 	parseJSON(s, url, &ranks)
+	return
+}
+
+func (s *Session) UniversitiesRanking() (universities UniversitiesRankingList) {
+	var url string = "https://www.hackthebox.com/api/v4/rankings/universities"
+	parseJSON(s, url, &universities)
 	return
 }
