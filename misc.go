@@ -62,6 +62,23 @@ type MachineAndChallengeStats struct {
 	Companies int `json:"companies"`
 }
 
+// Changelogs
+// https://www.hackthebox.com/api/v4/changelogs
+type Changelogs struct {
+	Changelogs []struct {
+		ID          int    `json:"id"`
+		Version     string `json:"version"`
+		Description string `json:"description"`
+		CreatedAt   string `json:"created_at"`
+		Changes     []struct {
+			ID          int    `json:"id"`
+			ChangelogID int    `json:"changelog_id"`
+			Type        string `json:"type"`
+			Text        string `json:"text"`
+		} `json:"changes"`
+	} `json:"changelogs"`
+}
+
 func (s *Session) Badges() (badges Badges) {
 	var url string = "https://www.hackthebox.com/api/v4/category/badges"
 	parseJSON(s, url, &badges)
@@ -73,8 +90,15 @@ func (s *Session) BugFeedbackAreas() (areas BugFeedbackAreasList) {
 	parseJSON(s, url, &areas)
 	return
 }
+
 func (s *Session) MachineAndChallengeStats() (stats MachineAndChallengeStats) {
 	var url string = "https://www.hackthebox.com/api/v4/content/stats"
 	parseJSON(s, url, &stats)
+	return
+}
+
+func (s *Session) Changelogs() (changelogs Changelogs) {
+	var url string = "https://www.hackthebox.com/api/v4/changelogs"
+	parseJSON(s, url, &changelogs)
 	return
 }
