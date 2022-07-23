@@ -21,8 +21,23 @@ type Badges struct {
 	} `json:"categories"`
 }
 
+// List Bug Feedback Areas
+// https://www.hackthebox.com/api/v4/user/feedback/bug/areas
+type BugFeedbackAreasList struct {
+	Info []struct {
+		ID   int    `json:"id"`
+		Name string `json:"name"`
+	} `json:"info"`
+}
+
 func (s *Session) Badges() (badges Badges) {
 	var url string = "https://www.hackthebox.com/api/v4/category/badges"
 	parseJSON(s, url, &badges)
+	return
+}
+
+func (s *Session) BugFeedbackAreas() (areas BugFeedbackAreasList) {
+	var url string = "https://www.hackthebox.com/api/v4/user/feedback/bug/areas"
+	parseJSON(s, url, &areas)
 	return
 }
