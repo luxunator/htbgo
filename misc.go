@@ -111,6 +111,14 @@ type ImprovementFeedbackAreasList struct {
 	} `json:"info"`
 }
 
+// Various Stats
+// https://www.hackthebox.com/api/v4/user/dashboard
+type VariousStats struct {
+	DashboardPlayers struct {
+		OnlinePlayers string `json:"online_players"`
+	} `json:"dashboard_players"`
+}
+
 func (s *Session) Badges() (badges Badges) {
 	var url string = "https://www.hackthebox.com/api/v4/category/badges"
 	parseJSON(s, url, &badges)
@@ -144,5 +152,11 @@ func (s *Session) Servers() (servers HacktheboxServers) {
 func (s *Session) ImprovementFeedbackAreas() (areas ImprovementFeedbackAreasList) {
 	var url string = "https://www.hackthebox.com/api/v4/user/feedback/improvement/areas"
 	parseJSON(s, url, &areas)
+	return
+}
+
+func (s *Session) VariousStats() (stats VariousStats) {
+	var url string = "https://www.hackthebox.com/api/v4/user/dashboard"
+	parseJSON(s, url, &stats)
 	return
 }
