@@ -30,6 +30,38 @@ type BugFeedbackAreasList struct {
 	} `json:"info"`
 }
 
+// Machine And Challenge Stats
+// https://www.hackthebox.com/api/v4/content/stats
+type MachineAndChallengeStats struct {
+	Machines         int `json:"machines"`
+	Challenges       int `json:"challenges"`
+	Users            int `json:"users"`
+	RecruitmentUsers int `json:"recruitment_users"`
+	PlatformHours    int `json:"platform_hours"`
+	ChallengeTypes   []struct {
+		ID                 int    `json:"id"`
+		Name               string `json:"name"`
+		NumberOfChallenges int    `json:"challenges_count"`
+	} `json:"challenge_counts"`
+	Prolabs struct {
+		Info []struct {
+			ID       int `json:"id"`
+			Flags    int `json:"flags"`
+			Machines int `json:"machines"`
+		} `json:"info"`
+		Servers int `json:"servers"`
+		Users   int `json:"users"`
+	} `json:"prolabs"`
+	Universities  int `json:"universities"`
+	Endgames      int `json:"endgames"`
+	Fortresses    int `json:"fortresses"`
+	DedicatedLabs struct {
+		Labs  int `json:"labs"`
+		Users int `json:"users"`
+	} `json:"dedicated_labs"`
+	Companies int `json:"companies"`
+}
+
 func (s *Session) Badges() (badges Badges) {
 	var url string = "https://www.hackthebox.com/api/v4/category/badges"
 	parseJSON(s, url, &badges)
@@ -39,5 +71,10 @@ func (s *Session) Badges() (badges Badges) {
 func (s *Session) BugFeedbackAreas() (areas BugFeedbackAreasList) {
 	var url string = "https://www.hackthebox.com/api/v4/user/feedback/bug/areas"
 	parseJSON(s, url, &areas)
+	return
+}
+func (s *Session) MachineAndChallengeStats() (stats MachineAndChallengeStats) {
+	var url string = "https://www.hackthebox.com/api/v4/content/stats"
+	parseJSON(s, url, &stats)
 	return
 }
