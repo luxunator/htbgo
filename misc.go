@@ -119,6 +119,17 @@ type VariousStats struct {
 	} `json:"dashboard_players"`
 }
 
+// Sidebar changelogs
+// https://www.hackthebox.com/api/v4/sidebar/changelog
+
+type SidebarChangelogs struct {
+	Changelog struct {
+		ID        int    `json:"id"`
+		Version   string `json:"version"`
+		CreatedAt string `json:"created_at"`
+	} `json:"changelog"`
+}
+
 func (s *Session) Badges() (badges Badges) {
 	var url string = "https://www.hackthebox.com/api/v4/category/badges"
 	parseJSON(s, url, &badges)
@@ -158,5 +169,11 @@ func (s *Session) ImprovementFeedbackAreas() (areas ImprovementFeedbackAreasList
 func (s *Session) VariousStats() (stats VariousStats) {
 	var url string = "https://www.hackthebox.com/api/v4/user/dashboard"
 	parseJSON(s, url, &stats)
+	return
+}
+
+func (s *Session) SidebarChangelogs() (changelogs SidebarChangelogs) {
+	var url string = "https://www.hackthebox.com/api/v4/sidebar/changelog"
+	parseJSON(s, url, &changelogs)
 	return
 }
