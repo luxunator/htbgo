@@ -81,7 +81,6 @@ type Changelogs struct {
 
 // List Hackthebox Servers
 // https://www.hackthebox.com/api/v4/lab/list
-
 type HacktheboxServers struct {
 	LabCategories []struct {
 		Code     string `json:"code"`
@@ -101,6 +100,15 @@ type HacktheboxServers struct {
 	} `json:"release_arena_labs"`
 	ServerID int  `json:"server_id"`
 	Disabled bool `json:"disabled"`
+}
+
+// List Improvement Feedback Areas
+// https://www.hackthebox.com/api/v4/user/feedback/improvement/areas
+type ImprovementFeedbackAreasList struct {
+	Info []struct {
+		ID   int    `json:"id"`
+		Name string `json:"name"`
+	} `json:"info"`
 }
 
 func (s *Session) Badges() (badges Badges) {
@@ -130,5 +138,11 @@ func (s *Session) Changelogs() (changelogs Changelogs) {
 func (s *Session) Servers() (servers HacktheboxServers) {
 	var url string = "https://www.hackthebox.com/api/v4/lab/list"
 	parseJSON(s, url, &servers)
+	return
+}
+
+func (s *Session) ImprovementFeedbackAreas() (areas ImprovementFeedbackAreasList) {
+	var url string = "https://www.hackthebox.com/api/v4/user/feedback/improvement/areas"
+	parseJSON(s, url, &areas)
 	return
 }
