@@ -79,6 +79,30 @@ type Changelogs struct {
 	} `json:"changelogs"`
 }
 
+// List Hackthebox Servers
+// https://www.hackthebox.com/api/v4/lab/list
+
+type HacktheboxServers struct {
+	LabCategories []struct {
+		Code     string `json:"code"`
+		Name     string `json:"name"`
+		Location string `json:"location"`
+	} `json:"lab_categories"`
+	LabCategoryCode string `json:"lab_category_code"`
+	Servers         []struct {
+		ID                   int    `json:"id"`
+		Name                 string `json:"friendly_name"`
+		CurrentClientsActive int    `json:"current_clients"`
+	} `json:"servers"`
+	ReleaseArenaLabs []struct {
+		Name     string `json:"name"`
+		Location string `json:"location"`
+		Code     string `json:"code"`
+	} `json:"release_arena_labs"`
+	ServerID int  `json:"server_id"`
+	Disabled bool `json:"disabled"`
+}
+
 func (s *Session) Badges() (badges Badges) {
 	var url string = "https://www.hackthebox.com/api/v4/category/badges"
 	parseJSON(s, url, &badges)
@@ -100,5 +124,11 @@ func (s *Session) MachineAndChallengeStats() (stats MachineAndChallengeStats) {
 func (s *Session) Changelogs() (changelogs Changelogs) {
 	var url string = "https://www.hackthebox.com/api/v4/changelogs"
 	parseJSON(s, url, &changelogs)
+	return
+}
+
+func (s *Session) Servers() (servers HacktheboxServers) {
+	var url string = "https://www.hackthebox.com/api/v4/lab/list"
+	parseJSON(s, url, &servers)
 	return
 }
