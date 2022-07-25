@@ -98,9 +98,9 @@ type TeamRankBracket struct {
 type UserRank struct {
 	Status bool `json:"status"`
 	Data   struct {
-		Rank          interface{}    `json:"rank"`
-		Date          string `json:"date"`
-		RankChartData []int  `json:"rank_chart_data"`
+		Rank          interface{} `json:"rank"`
+		Date          string      `json:"date"`
+		RankChartData []int       `json:"rank_chart_data"`
 	} `json:"data"`
 }
 
@@ -110,10 +110,10 @@ type UserRank struct {
 type UserOverview struct {
 	Status bool `json:"status"`
 	Data   struct {
-		PointsDiff   int    `json:"points_diff"`
+		PointsDiff   int         `json:"points_diff"`
 		PointsGrowth interface{} `json:"points_growth"`
-		RanksDiff    int    `json:"ranks_diff"`
-		ChartData    []int  `json:"chart_data"`
+		RanksDiff    int         `json:"ranks_diff"`
+		ChartData    []int       `json:"chart_data"`
 		User         struct {
 			ID          int    `json:"id"`
 			Name        string `json:"name"`
@@ -129,11 +129,11 @@ type UserOverview struct {
 type UserRankBracket struct {
 	Status bool `json:"status"`
 	Data   struct {
-		Rank         interface{}    `json:"rank"`
-		Points               int    `json:"points"`
-		PointsForNextBracket int    `json:"points_for_next_bracket"`
-		CurrentBracket       string `json:"current_bracket"`
-		NextBracket          string `json:"next_bracket"`
+		Rank                 interface{} `json:"rank"`
+		Points               int         `json:"points"`
+		PointsForNextBracket int         `json:"points_for_next_bracket"`
+		CurrentBracket       string      `json:"current_bracket"`
+		NextBracket          string      `json:"next_bracket"`
 	} `json:"data"`
 }
 
@@ -210,22 +210,22 @@ type UserRanks struct {
 
 type UniversitiesRankingList struct {
 	Status bool `json:"status"`
-	Data []struct {
-		Rank int `json:"rank"`
-		Students int `json:"students"`
-		Points int `json:"points"`
-		RootOwns int `json:"root_owns"`
-		UserOwns int `json:"user_owns"`
-		ChallengeOwns int `json:"challenge_owns"`
-		RootBloods int `json:"root_bloods"`
-		UserBloods int `json:"user_bloods"`
-		ChallengeBloods int `json:"challenge_bloods"`
-		Fortress int `json:"fortress"`
-		Endgame int `json:"endgame"`
-		ID int `json:"id"`
-		Name string `json:"name"`
-		Country string `json:"country"`
-		RanksDiff int `json:"ranks_diff"`
+	Data   []struct {
+		Rank            int    `json:"rank"`
+		Students        int    `json:"students"`
+		Points          int    `json:"points"`
+		RootOwns        int    `json:"root_owns"`
+		UserOwns        int    `json:"user_owns"`
+		ChallengeOwns   int    `json:"challenge_owns"`
+		RootBloods      int    `json:"root_bloods"`
+		UserBloods      int    `json:"user_bloods"`
+		ChallengeBloods int    `json:"challenge_bloods"`
+		Fortress        int    `json:"fortress"`
+		Endgame         int    `json:"endgame"`
+		ID              int    `json:"id"`
+		Name            string `json:"name"`
+		Country         string `json:"country"`
+		RanksDiff       int    `json:"ranks_diff"`
 	} `json:"data"`
 }
 
@@ -272,7 +272,7 @@ func (s *Session) TeamRankBracket() (rankBracket TeamRankBracket) {
 }
 
 func (s *Session) UserRank(period string, wantVIP bool) (rank UserRank) {
-	
+
 	var url string = "https://www.hackthebox.com/api/v4/rankings/user/best?period=" + period + "&vip=" + stringFromVIP(wantVIP)
 	parseJSON(s, url, &rank)
 
