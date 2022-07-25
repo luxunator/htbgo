@@ -1,7 +1,5 @@
 package htbgo
 
-import "strconv"
-
 // Get the user's best rank within the period
 // Week - W 	Month - M 		Year -Y
 // https://www.hackthebox.com/api/v4/rankings/country/best?period={period}
@@ -100,7 +98,7 @@ type TeamRankBracket struct {
 type UserRank struct {
 	Status bool `json:"status"`
 	Data   struct {
-		Rank          int    `json:"rank"`
+		Rank          interface{}    `json:"rank"`
 		Date          string `json:"date"`
 		RankChartData []int  `json:"rank_chart_data"`
 	} `json:"data"`
@@ -113,7 +111,7 @@ type UserOverview struct {
 	Status bool `json:"status"`
 	Data   struct {
 		PointsDiff   int    `json:"points_diff"`
-		PointsGrowth string `json:"points_growth"`
+		PointsGrowth interface{} `json:"points_growth"`
 		RanksDiff    int    `json:"ranks_diff"`
 		ChartData    []int  `json:"chart_data"`
 		User         struct {
@@ -232,20 +230,26 @@ type UniversitiesRankingList struct {
 }
 
 func (s *Session) UserRankInCountry(period string) (rank UserRankInCountry) {
+
 	var url string = "https://www.hackthebox.com/api/v4/rankings/country/best?period=" + period
 	parseJSON(s, url, &rank)
+
 	return
 }
 
 func (s *Session) UserRankOverviewInCountry(period string) (rankOverview UserRankOverviewInCountry) {
+
 	var url string = "https://www.hackthebox.com/api/v4/rankings/country/overview?period=" + period
 	parseJSON(s, url, &rankOverview)
+
 	return
 }
 
 func (s *Session) UserRankBracketInCountry() (rankBracket UserRankBracketInCountry) {
+
 	var url string = "https://www.hackthebox.com/api/v4/rankings/country/ranking_bracket"
 	parseJSON(s, url, &rankBracket)
+
 	return
 }
 
@@ -267,44 +271,58 @@ func (s *Session) TeamRankBracket() (rankBracket TeamRankBracket) {
 	return
 }
 
-func (s *Session) UserRank(period string, includeVIP int) (rank UserRank) {
-	var url string = "https://www.hackthebox.com/api/v4/rankings/user/best?period=" + period + "&vip=" + strconv.Itoa(includeVIP)
+func (s *Session) UserRank(period string, wantVIP bool) (rank UserRank) {
+	
+	var url string = "https://www.hackthebox.com/api/v4/rankings/user/best?period=" + period + "&vip=" + stringFromVIP(wantVIP)
 	parseJSON(s, url, &rank)
+
 	return
 }
 
-func (s *Session) UserOverview(period string, includeVIP int) (rankOverview UserOverview) {
-	var url string = "https://www.hackthebox.com/api/v4/rankings/user/overview?period=" + period + "&vip=" + strconv.Itoa(includeVIP)
+func (s *Session) UserOverview(period string, wantVIP bool) (rankOverview UserOverview) {
+
+	var url string = "https://www.hackthebox.com/api/v4/rankings/user/overview?period=" + period + "&vip=" + stringFromVIP(wantVIP)
 	parseJSON(s, url, &rankOverview)
+
 	return
 }
 
-func (s *Session) UserRankBracket(includeVIP int) (rankBracket UserRankBracket) {
-	var url string = "https://www.hackthebox.com/api/v4/rankings/user/ranking_bracket?vip=" + strconv.Itoa(includeVIP)
+func (s *Session) UserRankBracket(wantVIP bool) (rankBracket UserRankBracket) {
+
+	var url string = "https://www.hackthebox.com/api/v4/rankings/user/ranking_bracket?vip=" + stringFromVIP(wantVIP)
 	parseJSON(s, url, &rankBracket)
+
 	return
 }
 
 func (s *Session) CountryRanks() (ranks CountryRanks) {
+
 	var url string = "https://www.hackthebox.com/api/v4/rankings/countries"
 	parseJSON(s, url, &ranks)
+
 	return
 }
 
 func (s *Session) TeamRanks() (ranks TeamRanks) {
+
 	var url string = "https://www.hackthebox.com/api/v4/rankings/teams"
 	parseJSON(s, url, &ranks)
+
 	return
 }
 
-func (s *Session) UserRanks(includeVIP int) (ranks UserRanks) {
-	var url string = "https://www.hackthebox.com/api/v4/rankings/users?vip=" + strconv.Itoa(includeVIP)
+func (s *Session) UserRanks(wantVIP bool) (ranks UserRanks) {
+
+	var url string = "https://www.hackthebox.com/api/v4/rankings/users?vip=" + stringFromVIP(wantVIP)
 	parseJSON(s, url, &ranks)
+
 	return
 }
 
 func (s *Session) UniversitiesRanking() (universities UniversitiesRankingList) {
+
 	var url string = "https://www.hackthebox.com/api/v4/rankings/universities"
 	parseJSON(s, url, &universities)
+
 	return
 }

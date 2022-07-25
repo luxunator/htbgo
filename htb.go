@@ -49,3 +49,12 @@ func parseJSON(s *Session, url string, location interface{}) {
 
 	return
 }
+
+func stringFromVIP(isVIP bool) (string) {
+	stringValue := "0"
+	if isVIP {
+		stringValue = "1"
+	}
+
+	return stringValue
+}
