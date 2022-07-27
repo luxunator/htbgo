@@ -267,14 +267,19 @@ func (s *Session) ProLabSelectedReviews(proLabID int) (reviews ProLabSelectedRev
 	return
 }
 
-func (s *Session) ProLabPaginatedReviews(proLabID int, page string) (reviews ProLabPaginatedReviewsList, err error) {
+func (s *Session) ProLabPaginatedReviews(proLabID int, page int) (reviews ProLabPaginatedReviewsList, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
 	if err != nil {
 		return
 	}
 
-	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/reviews?page=" + page
+	pageString, err := toPositiveIntString(page)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/reviews?page=" + pageString
 	err = parseJSON(s, url, &reviews)
 
 	return

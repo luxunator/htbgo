@@ -1,7 +1,5 @@
 package htbgo
 
-import "strconv"
-
 // Get a list of universities
 type Universities struct {
 	Message string `json:"message"`
@@ -122,7 +120,12 @@ type UniversityMembersList []struct {
 
 func (s *Session) UniversitiesByPage(page int) (universities Universities, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/university/all/list?page=" + strconv.Itoa(page)
+	pageString, err := toPositiveIntString(page)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/university/all/list?page=" + pageString
 	err = parseJSON(s, url, &universities)
 
 	return
@@ -130,7 +133,12 @@ func (s *Session) UniversitiesByPage(page int) (universities Universities, err e
 
 func (s *Session) UniversitiesSearch(query string, page int) (universities Universities, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/university/all/list?search=" + query + "&page=" + strconv.Itoa(page)
+	pageString, err := toPositiveIntString(page)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/university/all/list?search=" + query + "&page=" + pageString
 	err = parseJSON(s, url, &universities)
 
 	return
