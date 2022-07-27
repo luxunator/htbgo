@@ -121,34 +121,54 @@ type UniversityMembersList []struct {
 }
 
 func (s *Session) UniversitiesByPage(page int) (universities Universities) {
+
 	var url string = "https://www.hackthebox.com/api/v4/university/all/list?page=" + strconv.Itoa(page)
 	parseJSON(s, url, &universities)
 
 	return
 }
 func (s *Session) UniversitiesSearch(query string, page int) (universities Universities) {
+
 	var url string = "https://www.hackthebox.com/api/v4/university/all/list?search=" + query + "&page=" + strconv.Itoa(page)
 	parseJSON(s, url, &universities)
 
 	return
 }
 
-func (s *Session) UniversityInfo(id int) (university University) {
-	var url string = "https://www.hackthebox.com/api/v4/university/profile/" + strconv.Itoa(id)
+func (s *Session) UniversityInfo(universityID int) (university University, err error) {
+
+	universityIDString, err := toPositiveIntString(universityID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/university/profile/" + universityIDString
 	parseJSON(s, url, &university)
 
 	return
 }
 
-func (s *Session) UniversityOwns(id int) (stats UniversityOwns) {
-	var url string = "https://www.hackthebox.com/api/v4/university/stats/owns/" + strconv.Itoa(id)
+func (s *Session) UniversityOwns(universityID int) (stats UniversityOwns, err error) {
+
+	universityIDString, err := toPositiveIntString(universityID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/university/stats/owns/" + universityIDString
 	parseJSON(s, url, &stats)
 
 	return
 }
 
-func (s *Session) UniversityMembers(id int) (members UniversityMembersList) {
-	var url string = "https://www.hackthebox.com/api/v4/university/members/" + strconv.Itoa(id)
+func (s *Session) UniversityMembers(universityID int) (members UniversityMembersList, err error) {
+
+	universityIDString, err := toPositiveIntString(universityID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/university/members/" + universityIDString
 	parseJSON(s, url, &members)
 
 	return

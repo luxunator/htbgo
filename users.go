@@ -417,7 +417,7 @@ type UserProfile struct {
 		CurrentRankProgress int     `json:"current_rank_progress"`
 		NextRank            string  `json:"next_rank"`
 		NextRankPoints      float64 `json:"next_rank_points"`
-		RankOwnership       string  `json:"rank_ownership"`
+		RankOwnership       interface{}  `json:"rank_ownership"`
 		RankRequirement     int     `json:"rank_requirement"`
 		Ranking             int     `json:"ranking"`
 		Avatar              string  `json:"avatar"`
@@ -547,105 +547,170 @@ func (s *Session) ChallengeSubmissions() (submissions BearerChallengeSubmissions
 }
 */
 
-func (s *Session) UserRelationship(userID string) (relationship BearerUserRelationship) {
+func (s *Session) UserRelationship(userID int) (relationship BearerUserRelationship, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/user/profile/basic/" + userID
+	userIDString, err := toPositiveIntString(userID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/user/profile/basic/" + userIDString
 	parseJSON(s, url, &relationship)
 
 	return
 }
 
-func (s *Session) UserMachines(userID string) (machines UserProgressMachines) {
+func (s *Session) UserMachines(userID int) (machines UserProgressMachines, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/profile/progress/machines/os/" + userID
+	userIDString, err := toPositiveIntString(userID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/profile/progress/machines/os/" + userIDString
 	parseJSON(s, url, &machines)
 
 	return
 }
 
-func (s *Session) UserChallenges(userID string) (challenges UserProgressChallenges) {
+func (s *Session) UserChallenges(userID int) (challenges UserProgressChallenges, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/profile/progress/challenges/" + userID
+	userIDString, err := toPositiveIntString(userID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/profile/progress/challenges/" + userIDString
 	parseJSON(s, url, &challenges)
 
 	return
 }
 
-func (s *Session) UserEndgames(userID string) (endgames UserProgressEndgames) {
+func (s *Session) UserEndgames(userID int) (endgames UserProgressEndgames, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/profile/progress/endgame/" + userID
+	userIDString, err := toPositiveIntString(userID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/profile/progress/endgame/" + userIDString
 	parseJSON(s, url, &endgames)
 
 	return
 }
 
-func (s *Session) UserFortresses(userID string) (fortresses UserProgressFortresses) {
+func (s *Session) UserFortresses(userID int) (fortresses UserProgressFortresses, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/profile/progress/fortress/" + userID
+	userIDString, err := toPositiveIntString(userID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/profile/progress/fortress/" + userIDString
 	parseJSON(s, url, &fortresses)
 
 	return
 }
 
-func (s *Session) UserProLabs(userID string) (proLabs UserProgressProLabs) {
+func (s *Session) UserProLabs(userID int) (proLabs UserProgressProLabs, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/profile/progress/prolab/" + userID
+	userIDString, err := toPositiveIntString(userID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/profile/progress/prolab/" + userIDString
 	parseJSON(s, url, &proLabs)
 
 	return
 }
 
-func (s *Session) UserActivity(userID string) (activities UserAllActivities) {
+func (s *Session) UserActivity(userID int) (activities UserAllActivities, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/profile/activity/" + userID
+	userIDString, err := toPositiveIntString(userID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/profile/activity/" + userIDString
 	parseJSON(s, url, &activities)
 
 	return
 }
 
-func (s *Session) UserBloods(userID string) (bloods UserAllBloods) {
+func (s *Session) UserBloods(userID int) (bloods UserAllBloods, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/profile/bloods/" + userID
+	userIDString, err := toPositiveIntString(userID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/profile/bloods/" + userIDString
 	parseJSON(s, url, &bloods)
 
 	return
 }
 
-func (s *Session) UserSubmissions(userID string) (submissions UserAllSubmissions) {
+func (s *Session) UserSubmissions(userID int) (submissions UserAllSubmissions, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/profile/content/" + userID
+	userIDString, err := toPositiveIntString(userID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/profile/content/" + userIDString
 	parseJSON(s, url, &submissions)
 
 	return
 }
 
-func (s *Session) UserAchievements(userID string, duration string) (acheivements UserAllAchievements) {
+func (s *Session) UserAchievements(userID int, duration string) (acheivements UserAllAchievements, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/profile/graph/" + duration + "/" + userID
+	userIDString, err := toPositiveIntString(userID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/profile/graph/" + duration + "/" + userIDString
 	parseJSON(s, url, &acheivements)
 
 	return
 }
 
-func (s *Session) UserPathOwns(userID string) (owns UserAllAttackPaths) {
+func (s *Session) UserPathOwns(userID int) (owns UserAllAttackPaths, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/profile/chart/machines/attack/" + userID
+	userIDString, err := toPositiveIntString(userID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/profile/chart/machines/attack/" + userIDString
 	parseJSON(s, url, &owns)
 
 	return
 }
 
-func (s *Session) UserProfile(userID string) (profile UserProfile) {
+func (s *Session) UserProfile(userID int) (profile UserProfile, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/profile/" + userID
+	userIDString, err := toPositiveIntString(userID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/profile/" + userIDString
 	parseJSON(s, url, &profile)
 
 	return
 }
 
-func (s *Session) UserBadges(userID string) (badges UserAllBadges) {
+func (s *Session) UserBadges(userID int) (badges UserAllBadges, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/profile/badges/" + userID
+	userIDString, err := toPositiveIntString(userID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/profile/badges/" + userIDString
 	parseJSON(s, url, &badges)
 
 	return

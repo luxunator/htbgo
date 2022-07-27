@@ -75,9 +75,14 @@ func (s *Session) ActiveTracks() (tracks TracksList) {
 	return
 }
 
-func (s *Session) TrackInfo(trackID string) (info TrackProfile) {
+func (s *Session) TrackInfo(trackID int) (info TrackProfile, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/tracks/" + trackID
+	trackIDString, err := toPositiveIntString(trackID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/tracks/" + trackIDString
 	parseJSON(s, url, &info)
 
 	return

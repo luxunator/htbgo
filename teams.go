@@ -217,57 +217,92 @@ type TopTeamsList struct {
 	Data   []TopTeam `json:"data"`
 }
 
-func (s *Session) TeamInfo(teamID string) (team Team) {
+func (s *Session) TeamInfo(teamID int) (team Team, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/team/info/" + teamID
+	teamIDString, err := toPositiveIntString(teamID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/team/info/" + teamIDString
 	parseJSON(s, url, &team)
 
 	return
 }
 
-func (s *Session) TeamActivity(teamID string) (activities Activities) {
+func (s *Session) TeamActivity(teamID int) (activities Activities, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/team/activity/" + teamID
+	teamIDString, err := toPositiveIntString(teamID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/team/activity/" + teamIDString
 	parseJSON(s, url, &activities)
 
 	return
 }
 
-func (s *Session) TeamOwns(teamID string) (owns TeamOwnsWeeks) {
+func (s *Session) TeamOwns(teamID int) (owns TeamOwnsWeeks, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/team/stats/owns/" + teamID
+	teamIDString, err := toPositiveIntString(teamID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/team/stats/owns/" + teamIDString
 	parseJSON(s, url, &owns)
 
 	return
 }
 
-func (s *Session) TeamGraph(teamID string, duration string) (graph TeamGraphs) {
+func (s *Session) TeamGraph(teamID int, duration string) (graph TeamGraphs, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/team/graph/" + teamID + "?duration=" + duration
+	teamIDString, err := toPositiveIntString(teamID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/team/graph/" + teamIDString + "?duration=" + duration
 	parseJSON(s, url, &graph)
 
 	return
 }
 
-func (s *Session) TeamPathOwns(teamID string) (owns TeamAttackPaths) {
+func (s *Session) TeamPathOwns(teamID int) (owns TeamAttackPaths, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/team/chart/machines/attack/" + teamID
+	teamIDString, err := toPositiveIntString(teamID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/team/chart/machines/attack/" + teamIDString
 	parseJSON(s, url, &owns)
 
 	return
 }
 
-func (s *Session) TeamMembers(teamID string) (members TeamMemberList) {
+func (s *Session) TeamMembers(teamID int) (members TeamMemberList, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/team/members/" + teamID
+	teamIDString, err := toPositiveIntString(teamID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/team/members/" + teamIDString
 	parseJSON(s, url, &members)
 
 	return
 }
 
-func (s *Session) TeamInvitations(teamID string) (invitations TeamInvitationsList) {
+func (s *Session) TeamInvitations(teamID int) (invitations TeamInvitationsList, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/team/invitations/" + teamID
+	teamIDString, err := toPositiveIntString(teamID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/team/invitations/" + teamIDString
 	parseJSON(s, url, &invitations)
 
 	return

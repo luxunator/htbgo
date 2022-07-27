@@ -75,17 +75,27 @@ func (s *Session) ActiveFortresses() (fortresses ActiveFortressesList) {
 	return
 }
 
-func (s *Session) FortressInfo(fortressID string) (info FortessProfile) {
+func (s *Session) FortressInfo(fortressID int) (info FortessProfile, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/fortress/" + fortressID
+	fortressIDString, err := toPositiveIntString(fortressID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/fortress/" + fortressIDString
 	parseJSON(s, url, &info)
 
 	return
 }
 
-func (s *Session) FortressFlags(fortressID string) (flags FortressFlagList) {
+func (s *Session) FortressFlags(fortressID int) (flags FortressFlagList, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/fortress/" + fortressID + "/flags"
+	fortressIDString, err := toPositiveIntString(fortressID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/fortress/" + fortressIDString + "/flags"
 	parseJSON(s, url, &flags)
 
 	return

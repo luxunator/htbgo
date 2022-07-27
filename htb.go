@@ -2,12 +2,18 @@ package htbgo
 
 import (
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 	"time"
 )
 
 const VERSION string = "0.1.0"
+
+var (
+	ErrIntNotPositive = errors.New("value: integer not positive")
+)
 
 func New(token string) (s *Session, err error) {
 
@@ -23,7 +29,7 @@ func New(token string) (s *Session, err error) {
 	return
 }
 
-func parseJSON(s *Session, url string, location interface{}) {
+func parseJSON(s *Session, url string, schema interface{}) {
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		panic(err)
@@ -42,7 +48,7 @@ func parseJSON(s *Session, url string, location interface{}) {
 		panic(err)
 	}
 
-	err = json.Unmarshal([]byte(body), &location)
+	err = json.Unmarshal([]byte(body), &schema)
 	if err != nil {
 		panic(err)
 	}
@@ -50,11 +56,22 @@ func parseJSON(s *Session, url string, location interface{}) {
 	return
 }
 
-func stringFromVIP(isVIP bool) string {
-	stringValue := "0"
+func stringFromVIP(isVIP bool) (stringValue string) {
+	stringValue = "0"
+
 	if isVIP {
 		stringValue = "1"
 	}
 
-	return stringValue
+	return
+}
+
+func toPositiveIntString(num int) (positiveIntString string, err error) {
+	if num < 1 {
+		return "", ErrIntNotPositive
+	}
+
+	positiveIntString = strconv.Itoa(num)
+
+	return
 }

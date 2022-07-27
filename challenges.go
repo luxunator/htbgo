@@ -290,17 +290,27 @@ func (s *Session) RetiredChallenges() (challenges RetiredChallengesList) {
 	return
 }
 
-func (s *Session) ChallengeInfo(challengeID string) (info ChallengeProfile) {
+func (s *Session) ChallengeInfo(challengeID int) (info ChallengeProfile, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/challenge/info/" + challengeID
+	challengeIDString, err := toPositiveIntString(challengeID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/challenge/info/" + challengeIDString
 	parseJSON(s, url, &info)
 
 	return
 }
 
-func (s *Session) ChallengeActivity(challengeID string) (activities ChallengeActivities) {
+func (s *Session) ChallengeActivity(challengeID int) (activities ChallengeActivities, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/challenge/activity/" + challengeID
+	challengeIDString, err := toPositiveIntString(challengeID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/challenge/activity/" + challengeIDString
 	parseJSON(s, url, &activities)
 
 	return

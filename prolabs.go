@@ -189,57 +189,92 @@ func (s *Session) ActiveProLabs() (proLabs ProLabsList) {
 	return
 }
 
-func (s *Session) ProLabInfo(proLabID string) (info ProLabProfile) {
+func (s *Session) ProLabInfo(proLabID int) (info ProLabProfile, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabID + "/info"
+	proLabIDString, err := toPositiveIntString(proLabID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/info"
 	parseJSON(s, url, &info)
 
 	return
 }
 
-func (s *Session) ProLabOverview(proLabID string) (overview ProLabOverviewInfo) {
+func (s *Session) ProLabOverview(proLabID int) (overview ProLabOverviewInfo, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabID + "/overview"
+	proLabIDString, err := toPositiveIntString(proLabID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/overview"
 	parseJSON(s, url, &overview)
 
 	return
 }
 
-func (s *Session) ProLabMachines(proLabID string) (machines ProLabMachinesList) {
+func (s *Session) ProLabMachines(proLabID int) (machines ProLabMachinesList, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabID + "/machines"
+	proLabIDString, err := toPositiveIntString(proLabID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/machines"
 	parseJSON(s, url, &machines)
 
 	return
 }
 
-func (s *Session) ProLabFlags(proLabID string) (flags ProLabFlagsList) {
+func (s *Session) ProLabFlags(proLabID int) (flags ProLabFlagsList, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabID + "/flags"
+	proLabIDString, err := toPositiveIntString(proLabID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/flags"
 	parseJSON(s, url, &flags)
 
 	return
 }
 
-func (s *Session) ProLabFAQ(proLabID string) (faq ProLabFAQList) {
+func (s *Session) ProLabFAQ(proLabID int) (faq ProLabFAQList, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabID + "/faq"
+	proLabIDString, err := toPositiveIntString(proLabID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/faq"
 	parseJSON(s, url, &faq)
 
 	return
 }
 
-func (s *Session) ProLabSelectedReviews(proLabID string) (reviews ProLabSelectedReviewsList) {
+func (s *Session) ProLabSelectedReviews(proLabID int) (reviews ProLabSelectedReviewsList, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabID + "/reviews_overview"
+	proLabIDString, err := toPositiveIntString(proLabID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/reviews_overview"
 	parseJSON(s, url, &reviews)
 
 	return
 }
 
-func (s *Session) ProLabPaginatedReviews(proLabID string, page string) (reviews ProLabPaginatedReviewsList) {
+func (s *Session) ProLabPaginatedReviews(proLabID int, page string) (reviews ProLabPaginatedReviewsList, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabID + "/reviews?page=" + page
+	proLabIDString, err := toPositiveIntString(proLabID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/reviews?page=" + page
 	parseJSON(s, url, &reviews)
 
 	return

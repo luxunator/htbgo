@@ -143,55 +143,73 @@ type SidebarAnnouncement struct {
 }
 
 func (s *Session) Badges() (badges Badges) {
+
 	var url string = "https://www.hackthebox.com/api/v4/category/badges"
 	parseJSON(s, url, &badges)
+
 	return
 }
 
 func (s *Session) BugFeedbackAreas() (areas BugFeedbackAreasList) {
+
 	var url string = "https://www.hackthebox.com/api/v4/user/feedback/bug/areas"
 	parseJSON(s, url, &areas)
+
 	return
 }
 
 func (s *Session) MachineAndChallengeStats() (stats MachineAndChallengeStats) {
+
 	var url string = "https://www.hackthebox.com/api/v4/content/stats"
 	parseJSON(s, url, &stats)
+
 	return
 }
 
 func (s *Session) Changelogs() (changelogs Changelogs) {
+
 	var url string = "https://www.hackthebox.com/api/v4/changelogs"
 	parseJSON(s, url, &changelogs)
+
 	return
 }
 
 func (s *Session) Servers() (servers HacktheboxServers) {
+
 	var url string = "https://www.hackthebox.com/api/v4/lab/list"
 	parseJSON(s, url, &servers)
+
 	return
 }
 
 func (s *Session) ImprovementFeedbackAreas() (areas ImprovementFeedbackAreasList) {
+
 	var url string = "https://www.hackthebox.com/api/v4/user/feedback/improvement/areas"
 	parseJSON(s, url, &areas)
+
 	return
 }
 
 func (s *Session) VariousStats() (stats VariousStats) {
+
 	var url string = "https://www.hackthebox.com/api/v4/user/dashboard"
 	parseJSON(s, url, &stats)
+
 	return
 }
 
 func (s *Session) SidebarChangelogs() (changelogs SidebarChangelogs) {
+
 	var url string = "https://www.hackthebox.com/api/v4/sidebar/changelog"
 	parseJSON(s, url, &changelogs)
+
 	return
 }
 
 func (s *Session) Announcement() (announcement SidebarAnnouncement) {
+
 	var url string = "https://www.hackthebox.com/api/v4/sidebar/announcement"
 	parseJSON(s, url, &announcement)
+	
 	return
 }

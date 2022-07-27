@@ -476,42 +476,75 @@ type MachineReviews struct {
 	} `json:"message"`
 }
 
-func (s *Session) MachineMatrix(machineID string) (matrix MachineMatrixInformation) {
-	var url string = "https://www.hackthebox.com/api/v4/machine/graph/matrix/" + machineID
+func (s *Session) MachineMatrix(machineID int) (matrix MachineMatrixInformation, err error) {
+
+	machineIDString, err := toPositiveIntString(machineID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/machine/graph/matrix/" + machineIDString
 	parseJSON(s, url, &matrix)
+
 	return
 }
 
-func (s *Session) MachineInformation(machineID string) (machineInformation MachineInformation) {
-	var url string = "https://www.hackthebox.com/api/v4/machine/info/" + machineID
+func (s *Session) MachineInformation(machineID int) (machineInformation MachineInformation, err error) {
+
+	machineIDString, err := toPositiveIntString(machineID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/machine/info/" + machineIDString
 	parseJSON(s, url, &machineInformation)
+
 	return
 }
 
-func (s *Session) MachineProfile(machineID string) (machineProfile MachineProfile) {
-	var url string = "https://www.hackthebox.com/api/v4/machine/profile/" + machineID
+func (s *Session) MachineProfile(machineID int) (machineProfile MachineProfile, err error) {
+
+	machineIDString, err := toPositiveIntString(machineID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/machine/profile/" + machineIDString
 	parseJSON(s, url, &machineProfile)
+
 	return
 }
 func (s *Session) ActiveMachines() (activeMachines ActiveMachines) {
+
 	var url string = "https://www.hackthebox.com/api/v4/machine/list"
 	parseJSON(s, url, &activeMachines)
+
 	return
 }
 func (s *Session) RetiredMachines() (retiredMachines RetiredMachines) {
+
 	var url string = "https://www.hackthebox.com/api/v4/machine/list/retired"
 	parseJSON(s, url, &retiredMachines)
+
 	return
 }
-func (s *Session) MachineTopUsers(machineID string) (topUsers TopUsers) {
-	var url string = "https://www.hackthebox.com/api/v4/machine/owns/top/" + machineID
+func (s *Session) MachineTopUsers(machineID int) (topUsers TopUsers, err error) {
+
+	machineIDString, err := toPositiveIntString(machineID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/machine/owns/top/" + machineIDString
 	parseJSON(s, url, &topUsers)
 	return
 }
 
 func (s *Session) ScheduledMachines() (scheduledMachines ScheduledMachines) {
+
 	var url string = "https://www.hackthebox.com/api/v4/machine/unreleased"
 	parseJSON(s, url, &scheduledMachines)
+	
 	return
 }
 
@@ -521,20 +554,41 @@ func (s *Session) ScheduledMachines() (scheduledMachines ScheduledMachines) {
 // 	return
 // }
 
-func (s *Session) RetiredMachineTags(machineID string) (tags RetiredMachineTags) {
-	var url string = "https://www.hackthebox.com/api/v4/machine/tags/" + machineID
+func (s *Session) RetiredMachineTags(machineID int) (tags RetiredMachineTags, err error) {
+
+	machineIDString, err := toPositiveIntString(machineID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/machine/tags/" + machineIDString
 	parseJSON(s, url, &tags)
+
 	return
 }
 
-func (s *Session) MachineChangelog(machineID string) (changelog MachineChangelog) {
-	var url string = "https://www.hackthebox.com/api/v4/machine/changelog/" + machineID
+func (s *Session) MachineChangelog(machineID int) (changelog MachineChangelog, err error) {
+
+	machineIDString, err := toPositiveIntString(machineID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/machine/changelog/" + machineIDString
 	parseJSON(s, url, &changelog)
+
 	return
 }
 
-func (s *Session) MachineReviews(machineID string) (reviews MachineReviews) {
-	var url string = "https://www.hackthebox.com/api/v4/machine/reviews/" + machineID
+func (s *Session) MachineReviews(machineID int) (reviews MachineReviews, err error) {
+
+	machineIDString, err := toPositiveIntString(machineID)
+	if err != nil {
+		return
+	}
+
+	var url string = "https://www.hackthebox.com/api/v4/machine/reviews/" + machineIDString
 	parseJSON(s, url, &reviews)
+
 	return
 }
