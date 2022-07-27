@@ -250,42 +250,42 @@ type ChangeLogList struct {
 
 */
 
-func (s *Session) ChallengeRecommendations() (cards AllRecommendedChallengeCards) {
+func (s *Session) ChallengeRecommendations() (cards AllRecommendedChallengeCards, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/recommended"
-	parseJSON(s, url, &cards)
+	err = parseJSON(s, url, &cards)
 
 	return
 }
 
-func (s *Session) ChallengeRetiredRecommendations() (cards RetiredRecommendationChallengeCards) {
+func (s *Session) ChallengeRetiredRecommendations() (cards RetiredRecommendationChallengeCards, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/recommended/retired"
-	parseJSON(s, url, &cards)
+	err = parseJSON(s, url, &cards)
 
 	return
 }
 
-func (s *Session) ChallengeCategories() (categories ChallengeCategoryList) {
+func (s *Session) ChallengeCategories() (categories ChallengeCategoryList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/categories/list"
-	parseJSON(s, url, &categories)
+	err = parseJSON(s, url, &categories)
 
 	return
 }
 
-func (s *Session) ActiveChallenges() (challenges ActiveChallengesList) {
+func (s *Session) ActiveChallenges() (challenges ActiveChallengesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/list"
-	parseJSON(s, url, &challenges)
+	err = parseJSON(s, url, &challenges)
 
 	return
 }
 
-func (s *Session) RetiredChallenges() (challenges RetiredChallengesList) {
+func (s *Session) RetiredChallenges() (challenges RetiredChallengesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/list/retired"
-	parseJSON(s, url, &challenges)
+	err = parseJSON(s, url, &challenges)
 
 	return
 }
@@ -298,7 +298,7 @@ func (s *Session) ChallengeInfo(challengeID int) (info ChallengeProfile, err err
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/info/" + challengeIDString
-	parseJSON(s, url, &info)
+	err = parseJSON(s, url, &info)
 
 	return
 }
@@ -311,7 +311,7 @@ func (s *Session) ChallengeActivity(challengeID int) (activities ChallengeActivi
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/activity/" + challengeIDString
-	parseJSON(s, url, &activities)
+	err = parseJSON(s, url, &activities)
 
 	return
 }

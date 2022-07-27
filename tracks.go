@@ -67,10 +67,10 @@ type TrackProfile struct {
 	// CompletionCTA `json:"completion_cta"` TODO
 }
 
-func (s *Session) ActiveTracks() (tracks TracksList) {
+func (s *Session) ActiveTracks() (tracks TracksList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/tracks"
-	parseJSON(s, url, &tracks)
+	err = parseJSON(s, url, &tracks)
 
 	return
 }
@@ -83,7 +83,7 @@ func (s *Session) TrackInfo(trackID int) (info TrackProfile, err error) {
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/tracks/" + trackIDString
-	parseJSON(s, url, &info)
+	err = parseJSON(s, url, &info)
 
 	return
 }

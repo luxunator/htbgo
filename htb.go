@@ -29,29 +29,26 @@ func New(token string) (s *Session, err error) {
 	return
 }
 
-func parseJSON(s *Session, url string, schema interface{}) {
+func parseJSON(s *Session, url string, schema interface{}) (err error) {
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		panic(err)
+		return
 	}
 
 	req.Header = s.Headers
 
 	resp, err := s.Client.Do(req)
 	if err != nil {
-		panic(err)
+		return
 	}
 
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		panic(err)
+		return
 	}
 
 	err = json.Unmarshal([]byte(body), &schema)
-	if err != nil {
-		panic(err)
-	}
 
 	return
 }

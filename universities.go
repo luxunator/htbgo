@@ -120,17 +120,18 @@ type UniversityMembersList []struct {
 	Public int `json:"public"`
 }
 
-func (s *Session) UniversitiesByPage(page int) (universities Universities) {
+func (s *Session) UniversitiesByPage(page int) (universities Universities, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/university/all/list?page=" + strconv.Itoa(page)
-	parseJSON(s, url, &universities)
+	err = parseJSON(s, url, &universities)
 
 	return
 }
-func (s *Session) UniversitiesSearch(query string, page int) (universities Universities) {
+
+func (s *Session) UniversitiesSearch(query string, page int) (universities Universities, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/university/all/list?search=" + query + "&page=" + strconv.Itoa(page)
-	parseJSON(s, url, &universities)
+	err = parseJSON(s, url, &universities)
 
 	return
 }
@@ -143,7 +144,7 @@ func (s *Session) UniversityInfo(universityID int) (university University, err e
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/university/profile/" + universityIDString
-	parseJSON(s, url, &university)
+	err = parseJSON(s, url, &university)
 
 	return
 }
@@ -156,7 +157,7 @@ func (s *Session) UniversityOwns(universityID int) (stats UniversityOwns, err er
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/university/stats/owns/" + universityIDString
-	parseJSON(s, url, &stats)
+	err = parseJSON(s, url, &stats)
 
 	return
 }
@@ -169,7 +170,7 @@ func (s *Session) UniversityMembers(universityID int) (members UniversityMembers
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/university/members/" + universityIDString
-	parseJSON(s, url, &members)
+	err = parseJSON(s, url, &members)
 
 	return
 }

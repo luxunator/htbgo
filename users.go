@@ -457,74 +457,74 @@ type UserAllBadges struct {
 	} `json:"badges"`
 }
 
-func (s *Session) ConnectionStatus() (status BearerConnectionStatus) {
+func (s *Session) ConnectionStatus() (status BearerConnectionStatus, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/connection/status"
-	parseJSON(s, url, &status)
+	err = parseJSON(s, url, &status)
 
 	return
 }
 
-func (s *Session) ActiveMachine() (active BearerActiveMachine) {
+func (s *Session) ActiveMachine() (active BearerActiveMachine, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/active"
-	parseJSON(s, url, &active)
+	err = parseJSON(s, url, &active)
 
 	return
 }
 
-func (s *Session) Followers() (followers BearerFollowers) {
+func (s *Session) Followers() (followers BearerFollowers, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/followers"
-	parseJSON(s, url, &followers)
+	err = parseJSON(s, url, &followers)
 
 	return
 }
 
-func (s *Session) Profile() (profile BearerProfile) {
+func (s *Session) Profile() (profile BearerProfile, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/info"
-	parseJSON(s, url, &profile)
+	err = parseJSON(s, url, &profile)
 
 	return
 }
 
-func (s *Session) Settings() (settings BearerSettings) {
+func (s *Session) Settings() (settings BearerSettings, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/settings"
-	parseJSON(s, url, &settings)
+	err = parseJSON(s, url, &settings)
 
 	return
 }
 
-func (s *Session) Subscriptions() (subscriptions BearerSubscriptions) {
+func (s *Session) Subscriptions() (subscriptions BearerSubscriptions, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/subscriptions"
-	parseJSON(s, url, &subscriptions)
+	err = parseJSON(s, url, &subscriptions)
 
 	return
 }
 
-func (s *Session) SubscriptionsBalance() (balance BearerSubscriptionsBalance) {
+func (s *Session) SubscriptionsBalance() (balance BearerSubscriptionsBalance, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/subscriptions/balance"
-	parseJSON(s, url, &balance)
+	err = parseJSON(s, url, &balance)
 
 	return
 }
 
-func (s *Session) SubscriptionsRecurly() (recurly BearerSubscriptionsRecurly) {
+func (s *Session) SubscriptionsRecurly() (recurly BearerSubscriptionsRecurly, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/subscriptions/manage/recurly"
-	parseJSON(s, url, &recurly)
+	err = parseJSON(s, url, &recurly)
 
 	return
 }
 
-func (s *Session) Tracks() (tracks BearerTracks) {
+func (s *Session) Tracks() (tracks BearerTracks, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/tracks"
-	parseJSON(s, url, &tracks)
+	err = parseJSON(s, url, &tracks)
 
 	return
 }
@@ -555,7 +555,7 @@ func (s *Session) UserRelationship(userID int) (relationship BearerUserRelations
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/user/profile/basic/" + userIDString
-	parseJSON(s, url, &relationship)
+	err = parseJSON(s, url, &relationship)
 
 	return
 }
@@ -568,7 +568,7 @@ func (s *Session) UserMachines(userID int) (machines UserProgressMachines, err e
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/profile/progress/machines/os/" + userIDString
-	parseJSON(s, url, &machines)
+	err = parseJSON(s, url, &machines)
 
 	return
 }
@@ -581,7 +581,7 @@ func (s *Session) UserChallenges(userID int) (challenges UserProgressChallenges,
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/profile/progress/challenges/" + userIDString
-	parseJSON(s, url, &challenges)
+	err = parseJSON(s, url, &challenges)
 
 	return
 }
@@ -594,7 +594,7 @@ func (s *Session) UserEndgames(userID int) (endgames UserProgressEndgames, err e
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/profile/progress/endgame/" + userIDString
-	parseJSON(s, url, &endgames)
+	err = parseJSON(s, url, &endgames)
 
 	return
 }
@@ -607,7 +607,7 @@ func (s *Session) UserFortresses(userID int) (fortresses UserProgressFortresses,
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/profile/progress/fortress/" + userIDString
-	parseJSON(s, url, &fortresses)
+	err = parseJSON(s, url, &fortresses)
 
 	return
 }
@@ -620,7 +620,7 @@ func (s *Session) UserProLabs(userID int) (proLabs UserProgressProLabs, err erro
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/profile/progress/prolab/" + userIDString
-	parseJSON(s, url, &proLabs)
+	err = parseJSON(s, url, &proLabs)
 
 	return
 }
@@ -633,7 +633,7 @@ func (s *Session) UserActivity(userID int) (activities UserAllActivities, err er
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/profile/activity/" + userIDString
-	parseJSON(s, url, &activities)
+	err = parseJSON(s, url, &activities)
 
 	return
 }
@@ -646,7 +646,7 @@ func (s *Session) UserBloods(userID int) (bloods UserAllBloods, err error) {
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/profile/bloods/" + userIDString
-	parseJSON(s, url, &bloods)
+	err = parseJSON(s, url, &bloods)
 
 	return
 }
@@ -659,7 +659,7 @@ func (s *Session) UserSubmissions(userID int) (submissions UserAllSubmissions, e
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/profile/content/" + userIDString
-	parseJSON(s, url, &submissions)
+	err = parseJSON(s, url, &submissions)
 
 	return
 }
@@ -672,7 +672,7 @@ func (s *Session) UserAchievements(userID int, duration string) (acheivements Us
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/profile/graph/" + duration + "/" + userIDString
-	parseJSON(s, url, &acheivements)
+	err = parseJSON(s, url, &acheivements)
 
 	return
 }
@@ -685,7 +685,7 @@ func (s *Session) UserPathOwns(userID int) (owns UserAllAttackPaths, err error) 
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/profile/chart/machines/attack/" + userIDString
-	parseJSON(s, url, &owns)
+	err = parseJSON(s, url, &owns)
 
 	return
 }
@@ -698,7 +698,7 @@ func (s *Session) UserProfile(userID int) (profile UserProfile, err error) {
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/profile/" + userIDString
-	parseJSON(s, url, &profile)
+	err = parseJSON(s, url, &profile)
 
 	return
 }
@@ -711,7 +711,7 @@ func (s *Session) UserBadges(userID int) (badges UserAllBadges, err error) {
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/profile/badges/" + userIDString
-	parseJSON(s, url, &badges)
+	err = parseJSON(s, url, &badges)
 
 	return
 }

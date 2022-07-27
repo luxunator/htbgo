@@ -67,10 +67,10 @@ type FortressFlagList struct {
 	} `json:"data"`
 }
 
-func (s *Session) ActiveFortresses() (fortresses ActiveFortressesList) {
+func (s *Session) ActiveFortresses() (fortresses ActiveFortressesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/fortresses"
-	parseJSON(s, url, &fortresses)
+	err = parseJSON(s, url, &fortresses)
 
 	return
 }
@@ -83,7 +83,7 @@ func (s *Session) FortressInfo(fortressID int) (info FortessProfile, err error) 
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/fortress/" + fortressIDString
-	parseJSON(s, url, &info)
+	err = parseJSON(s, url, &info)
 
 	return
 }
@@ -96,7 +96,7 @@ func (s *Session) FortressFlags(fortressID int) (flags FortressFlagList, err err
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/fortress/" + fortressIDString + "/flags"
-	parseJSON(s, url, &flags)
+	err = parseJSON(s, url, &flags)
 
 	return
 }

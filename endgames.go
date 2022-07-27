@@ -89,10 +89,10 @@ type EndgameMachinesList struct {
 	} `json:"data"`
 }
 
-func (s *Session) ActiveEndgames() (endgames EndgamesList) {
+func (s *Session) ActiveEndgames() (endgames EndgamesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/endgames"
-	parseJSON(s, url, &endgames)
+	err = parseJSON(s, url, &endgames)
 
 	return
 }
@@ -105,7 +105,7 @@ func (s *Session) EndgameInfo(endgameID int) (endgame EndgameProfile, err error)
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/endgame/" + endgameIDString
-	parseJSON(s, url, &endgame)
+	err = parseJSON(s, url, &endgame)
 
 	return
 }
@@ -118,7 +118,7 @@ func (s *Session) EndgameFlags(endgameID int) (flags EndgameFlagsList, err error
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/endgame/" + endgameIDString + "/flags"
-	parseJSON(s, url, &flags)
+	err = parseJSON(s, url, &flags)
 
 	return
 }
@@ -131,7 +131,7 @@ func (s *Session) EndgameMachines(endgameID int) (machines EndgameMachinesList, 
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/endgame/" + endgameIDString + "/machines"
-	parseJSON(s, url, &machines)
+	err = parseJSON(s, url, &machines)
 
 	return
 }

@@ -142,74 +142,74 @@ type SidebarAnnouncement struct {
 	} `json:"announcement"`
 }
 
-func (s *Session) Badges() (badges Badges) {
+func (s *Session) Badges() (badges Badges, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/category/badges"
-	parseJSON(s, url, &badges)
+	err = parseJSON(s, url, &badges)
 
 	return
 }
 
-func (s *Session) BugFeedbackAreas() (areas BugFeedbackAreasList) {
+func (s *Session) BugFeedbackAreas() (areas BugFeedbackAreasList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/feedback/bug/areas"
-	parseJSON(s, url, &areas)
+	err = parseJSON(s, url, &areas)
 
 	return
 }
 
-func (s *Session) MachineAndChallengeStats() (stats MachineAndChallengeStats) {
+func (s *Session) MachineAndChallengeStats() (stats MachineAndChallengeStats, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/content/stats"
-	parseJSON(s, url, &stats)
+	err = parseJSON(s, url, &stats)
 
 	return
 }
 
-func (s *Session) Changelogs() (changelogs Changelogs) {
+func (s *Session) Changelogs() (changelogs Changelogs, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/changelogs"
-	parseJSON(s, url, &changelogs)
+	err = parseJSON(s, url, &changelogs)
 
 	return
 }
 
-func (s *Session) Servers() (servers HacktheboxServers) {
+func (s *Session) Servers() (servers HacktheboxServers, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/lab/list"
-	parseJSON(s, url, &servers)
+	err = parseJSON(s, url, &servers)
 
 	return
 }
 
-func (s *Session) ImprovementFeedbackAreas() (areas ImprovementFeedbackAreasList) {
+func (s *Session) ImprovementFeedbackAreas() (areas ImprovementFeedbackAreasList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/feedback/improvement/areas"
-	parseJSON(s, url, &areas)
+	err = parseJSON(s, url, &areas)
 
 	return
 }
 
-func (s *Session) VariousStats() (stats VariousStats) {
+func (s *Session) VariousStats() (stats VariousStats, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/dashboard"
-	parseJSON(s, url, &stats)
+	err = parseJSON(s, url, &stats)
 
 	return
 }
 
-func (s *Session) SidebarChangelogs() (changelogs SidebarChangelogs) {
+func (s *Session) SidebarChangelogs() (changelogs SidebarChangelogs, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/sidebar/changelog"
-	parseJSON(s, url, &changelogs)
+	err = parseJSON(s, url, &changelogs)
 
 	return
 }
 
-func (s *Session) Announcement() (announcement SidebarAnnouncement) {
+func (s *Session) Announcement() (announcement SidebarAnnouncement, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/sidebar/announcement"
-	parseJSON(s, url, &announcement)
+	err = parseJSON(s, url, &announcement)
 	
 	return
 }

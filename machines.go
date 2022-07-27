@@ -484,7 +484,7 @@ func (s *Session) MachineMatrix(machineID int) (matrix MachineMatrixInformation,
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/graph/matrix/" + machineIDString
-	parseJSON(s, url, &matrix)
+	err = parseJSON(s, url, &matrix)
 
 	return
 }
@@ -497,7 +497,7 @@ func (s *Session) MachineInformation(machineID int) (machineInformation MachineI
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/info/" + machineIDString
-	parseJSON(s, url, &machineInformation)
+	err = parseJSON(s, url, &machineInformation)
 
 	return
 }
@@ -510,24 +510,27 @@ func (s *Session) MachineProfile(machineID int) (machineProfile MachineProfile, 
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/profile/" + machineIDString
-	parseJSON(s, url, &machineProfile)
+	err = parseJSON(s, url, &machineProfile)
 
 	return
 }
-func (s *Session) ActiveMachines() (activeMachines ActiveMachines) {
+
+func (s *Session) ActiveMachines() (activeMachines ActiveMachines, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/list"
-	parseJSON(s, url, &activeMachines)
+	err = parseJSON(s, url, &activeMachines)
 
 	return
 }
-func (s *Session) RetiredMachines() (retiredMachines RetiredMachines) {
+
+func (s *Session) RetiredMachines() (retiredMachines RetiredMachines, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/list/retired"
-	parseJSON(s, url, &retiredMachines)
+	err = parseJSON(s, url, &retiredMachines)
 
 	return
 }
+
 func (s *Session) MachineTopUsers(machineID int) (topUsers TopUsers, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
@@ -536,14 +539,14 @@ func (s *Session) MachineTopUsers(machineID int) (topUsers TopUsers, err error) 
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/owns/top/" + machineIDString
-	parseJSON(s, url, &topUsers)
+	err = parseJSON(s, url, &topUsers)
 	return
 }
 
-func (s *Session) ScheduledMachines() (scheduledMachines ScheduledMachines) {
+func (s *Session) ScheduledMachines() (scheduledMachines ScheduledMachines, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/unreleased"
-	parseJSON(s, url, &scheduledMachines)
+	err = parseJSON(s, url, &scheduledMachines)
 	
 	return
 }
@@ -562,7 +565,7 @@ func (s *Session) RetiredMachineTags(machineID int) (tags RetiredMachineTags, er
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/tags/" + machineIDString
-	parseJSON(s, url, &tags)
+	err = parseJSON(s, url, &tags)
 
 	return
 }
@@ -575,7 +578,7 @@ func (s *Session) MachineChangelog(machineID int) (changelog MachineChangelog, e
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/changelog/" + machineIDString
-	parseJSON(s, url, &changelog)
+	err = parseJSON(s, url, &changelog)
 
 	return
 }
@@ -588,7 +591,7 @@ func (s *Session) MachineReviews(machineID int) (reviews MachineReviews, err err
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/reviews/" + machineIDString
-	parseJSON(s, url, &reviews)
+	err = parseJSON(s, url, &reviews)
 
 	return
 }

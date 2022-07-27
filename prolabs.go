@@ -181,10 +181,10 @@ type ProLabPaginatedReviewsList struct {
 	} `json:"meta"`
 }
 
-func (s *Session) ActiveProLabs() (proLabs ProLabsList) {
+func (s *Session) ActiveProLabs() (proLabs ProLabsList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/prolabs"
-	parseJSON(s, url, &proLabs)
+	err = parseJSON(s, url, &proLabs)
 
 	return
 }
@@ -197,7 +197,7 @@ func (s *Session) ProLabInfo(proLabID int) (info ProLabProfile, err error) {
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/info"
-	parseJSON(s, url, &info)
+	err = parseJSON(s, url, &info)
 
 	return
 }
@@ -210,7 +210,7 @@ func (s *Session) ProLabOverview(proLabID int) (overview ProLabOverviewInfo, err
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/overview"
-	parseJSON(s, url, &overview)
+	err = parseJSON(s, url, &overview)
 
 	return
 }
@@ -223,7 +223,7 @@ func (s *Session) ProLabMachines(proLabID int) (machines ProLabMachinesList, err
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/machines"
-	parseJSON(s, url, &machines)
+	err = parseJSON(s, url, &machines)
 
 	return
 }
@@ -236,7 +236,7 @@ func (s *Session) ProLabFlags(proLabID int) (flags ProLabFlagsList, err error) {
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/flags"
-	parseJSON(s, url, &flags)
+	err = parseJSON(s, url, &flags)
 
 	return
 }
@@ -249,7 +249,7 @@ func (s *Session) ProLabFAQ(proLabID int) (faq ProLabFAQList, err error) {
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/faq"
-	parseJSON(s, url, &faq)
+	err = parseJSON(s, url, &faq)
 
 	return
 }
@@ -262,7 +262,7 @@ func (s *Session) ProLabSelectedReviews(proLabID int) (reviews ProLabSelectedRev
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/reviews_overview"
-	parseJSON(s, url, &reviews)
+	err = parseJSON(s, url, &reviews)
 
 	return
 }
@@ -275,7 +275,7 @@ func (s *Session) ProLabPaginatedReviews(proLabID int, page string) (reviews Pro
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/prolab/" + proLabIDString + "/reviews?page=" + page
-	parseJSON(s, url, &reviews)
+	err = parseJSON(s, url, &reviews)
 
 	return
 }

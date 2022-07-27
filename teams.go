@@ -225,7 +225,7 @@ func (s *Session) TeamInfo(teamID int) (team Team, err error) {
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/team/info/" + teamIDString
-	parseJSON(s, url, &team)
+	err = parseJSON(s, url, &team)
 
 	return
 }
@@ -238,7 +238,7 @@ func (s *Session) TeamActivity(teamID int) (activities Activities, err error) {
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/team/activity/" + teamIDString
-	parseJSON(s, url, &activities)
+	err = parseJSON(s, url, &activities)
 
 	return
 }
@@ -251,7 +251,7 @@ func (s *Session) TeamOwns(teamID int) (owns TeamOwnsWeeks, err error) {
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/team/stats/owns/" + teamIDString
-	parseJSON(s, url, &owns)
+	err = parseJSON(s, url, &owns)
 
 	return
 }
@@ -264,7 +264,7 @@ func (s *Session) TeamGraph(teamID int, duration string) (graph TeamGraphs, err 
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/team/graph/" + teamIDString + "?duration=" + duration
-	parseJSON(s, url, &graph)
+	err = parseJSON(s, url, &graph)
 
 	return
 }
@@ -277,7 +277,7 @@ func (s *Session) TeamPathOwns(teamID int) (owns TeamAttackPaths, err error) {
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/team/chart/machines/attack/" + teamIDString
-	parseJSON(s, url, &owns)
+	err = parseJSON(s, url, &owns)
 
 	return
 }
@@ -290,7 +290,7 @@ func (s *Session) TeamMembers(teamID int) (members TeamMemberList, err error) {
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/team/members/" + teamIDString
-	parseJSON(s, url, &members)
+	err = parseJSON(s, url, &members)
 
 	return
 }
@@ -303,39 +303,39 @@ func (s *Session) TeamInvitations(teamID int) (invitations TeamInvitationsList, 
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/team/invitations/" + teamIDString
-	parseJSON(s, url, &invitations)
+	err = parseJSON(s, url, &invitations)
 
 	return
 }
 
-func (s *Session) TeamRankings(period string) (rankings TeamRankingHistory) {
+func (s *Session) TeamRankings(period string) (rankings TeamRankingHistory, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/best?period=" + period
-	parseJSON(s, url, &rankings)
+	err = parseJSON(s, url, &rankings)
 
 	return
 }
 
-func (s *Session) TeamPoints(period string) (points TeamPointsHistory) {
+func (s *Session) TeamPoints(period string) (points TeamPointsHistory, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/overview?period=" + period
-	parseJSON(s, url, &points)
+	err = parseJSON(s, url, &points)
 
 	return
 }
 
-func (s *Session) TeamBracket() (bracket TeamBracketCurrent) {
+func (s *Session) TeamBracket() (bracket TeamBracketCurrent, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/ranking_bracket"
-	parseJSON(s, url, &bracket)
+	err = parseJSON(s, url, &bracket)
 
 	return
 }
 
-func (s *Session) TopTeams() (teams TopTeamsList) {
+func (s *Session) TopTeams() (teams TopTeamsList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/teams"
-	parseJSON(s, url, &teams)
+	err = parseJSON(s, url, &teams)
 
 	return
 }
