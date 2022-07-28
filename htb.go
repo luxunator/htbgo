@@ -11,9 +11,19 @@ import (
 
 const VERSION string = "0.1.0"
 
+const (
+	Year        Duration = "1Y"
+	HalfYear    Duration = "6M"
+	QuarterYear Duration = "3M"
+	Month       Duration = "1M"
+	Week        Duration = "1W"
+)
+
 var (
 	ErrIntNotPositive = errors.New("value: integer not positive")
 )
+
+type Duration string
 
 func New(token string) (s *Session, err error) {
 

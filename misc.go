@@ -210,6 +210,6 @@ func (s *Session) Announcement() (announcement SidebarAnnouncement, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/sidebar/announcement"
 	err = parseJSON(s, url, &announcement)
-	
+
 	return
 }

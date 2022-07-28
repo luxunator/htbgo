@@ -92,7 +92,12 @@ type TeamAttackPaths struct {
 		Solved int `json:"solved"`
 		Total  int `json:"total"`
 	} `json:"machine_owns"`
-	AttackPaths interface{} `json:"machine_attack_paths"`
+	AttackPaths map[string]struct {
+		Name           string  `json:"name"`
+		Solved         int     `json:"solved"`
+		Total          int     `json:"total"`
+		AvgTeamsSolved float64 `json:"avg_teams_solved"`
+	} `json:"machine_attack_paths"`
 }
 
 // List Team Members
@@ -256,14 +261,14 @@ func (s *Session) TeamOwns(teamID int) (owns TeamOwnsWeeks, err error) {
 	return
 }
 
-func (s *Session) TeamGraph(teamID int, duration string) (graph TeamGraphs, err error) {
+func (s *Session) TeamGraph(teamID int, duration Duration) (graph TeamGraphs, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
 		return
 	}
 
-	var url string = "https://www.hackthebox.com/api/v4/team/graph/" + teamIDString + "?duration=" + duration
+	var url string = "https://www.hackthebox.com/api/v4/team/graph/" + teamIDString + "?duration=" + string(duration)
 	err = parseJSON(s, url, &graph)
 
 	return
@@ -308,17 +313,17 @@ func (s *Session) TeamInvitations(teamID int) (invitations TeamInvitationsList, 
 	return
 }
 
-func (s *Session) TeamRankings(period string) (rankings TeamRankingHistory, err error) {
+func (s *Session) TeamRankings(period Duration) (rankings TeamRankingHistory, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/rankings/team/best?period=" + period
+	var url string = "https://www.hackthebox.com/api/v4/rankings/team/best?period=" + string(period)
 	err = parseJSON(s, url, &rankings)
 
 	return
 }
 
-func (s *Session) TeamPoints(period string) (points TeamPointsHistory, err error) {
+func (s *Session) TeamPoints(period Duration) (points TeamPointsHistory, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/rankings/team/overview?period=" + period
+	var url string = "https://www.hackthebox.com/api/v4/rankings/team/overview?period=" + string(period)
 	err = parseJSON(s, url, &points)
 
 	return

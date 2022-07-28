@@ -64,7 +64,7 @@ type University struct {
 }
 
 // get stats of a university by id
-type Week struct {
+type OwnWeek struct {
 	UserOwns      int    `json:"user_owns"`
 	SystemOwns    int    `json:"system_owns"`
 	ChallengeOwns int    `json:"challenge_owns"`
@@ -73,18 +73,18 @@ type Week struct {
 	WeekEndDate   string `json:"week_end_date"`
 }
 type Weeks struct {
-	Week1  Week `json:"week1"`
-	Week2  Week `json:"week2"`
-	Week3  Week `json:"week3"`
-	Week4  Week `json:"week4"`
-	Week5  Week `json:"week5"`
-	Week6  Week `json:"week6"`
-	Week7  Week `json:"week7"`
-	Week8  Week `json:"week8"`
-	Week9  Week `json:"week9"`
-	Week10 Week `json:"week10"`
-	Week11 Week `json:"week11"`
-	Week12 Week `json:"week12"`
+	Week1  OwnWeek `json:"week1"`
+	Week2  OwnWeek `json:"week2"`
+	Week3  OwnWeek `json:"week3"`
+	Week4  OwnWeek `json:"week4"`
+	Week5  OwnWeek `json:"week5"`
+	Week6  OwnWeek `json:"week6"`
+	Week7  OwnWeek `json:"week7"`
+	Week8  OwnWeek `json:"week8"`
+	Week9  OwnWeek `json:"week9"`
+	Week10 OwnWeek `json:"week10"`
+	Week11 OwnWeek `json:"week11"`
+	Week12 OwnWeek `json:"week12"`
 }
 type UniversityOwns struct {
 	Rank          int   `json:"rank"`

@@ -411,26 +411,26 @@ type UserProfile struct {
 			Ranking int    `json:"ranking"`
 			Avatar  string `json:"avatar"`
 		} `json:"team"`
-		Respects            int     `json:"respects"`
-		Rank                string  `json:"rank"`
-		RankID              int     `json:"rank_id"`
-		CurrentRankProgress int     `json:"current_rank_progress"`
-		NextRank            string  `json:"next_rank"`
-		NextRankPoints      float64 `json:"next_rank_points"`
-		RankOwnership       interface{}  `json:"rank_ownership"`
-		RankRequirement     int     `json:"rank_requirement"`
-		Ranking             int     `json:"ranking"`
-		Avatar              string  `json:"avatar"`
-		Timezone            string  `json:"timezone"`
-		Points              int     `json:"points"`
-		CountryName         string  `json:"country_name"`
-		CountryCode         string  `json:"country_code"`
-		UniversityName      string  `json:"university_name"`
-		Description         string  `json:"description"`
-		Github              string  `json:"github"`
-		LinkedIn            string  `json:"linkedin"`
-		Twitter             string  `json:"twitter"`
-		Website             string  `json:"website"`
+		Respects            int         `json:"respects"`
+		Rank                string      `json:"rank"`
+		RankID              int         `json:"rank_id"`
+		CurrentRankProgress int         `json:"current_rank_progress"`
+		NextRank            string      `json:"next_rank"`
+		NextRankPoints      float64     `json:"next_rank_points"`
+		RankOwnership       interface{} `json:"rank_ownership"`
+		RankRequirement     int         `json:"rank_requirement"`
+		Ranking             int         `json:"ranking"`
+		Avatar              string      `json:"avatar"`
+		Timezone            string      `json:"timezone"`
+		Points              int         `json:"points"`
+		CountryName         string      `json:"country_name"`
+		CountryCode         string      `json:"country_code"`
+		UniversityName      string      `json:"university_name"`
+		Description         string      `json:"description"`
+		Github              string      `json:"github"`
+		LinkedIn            string      `json:"linkedin"`
+		Twitter             string      `json:"twitter"`
+		Website             string      `json:"website"`
 	}
 }
 
@@ -664,14 +664,14 @@ func (s *Session) UserSubmissions(userID int) (submissions UserAllSubmissions, e
 	return
 }
 
-func (s *Session) UserAchievements(userID int, duration string) (acheivements UserAllAchievements, err error) {
+func (s *Session) UserAchievements(userID int, duration Duration) (acheivements UserAllAchievements, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
 		return
 	}
 
-	var url string = "https://www.hackthebox.com/api/v4/profile/graph/" + duration + "/" + userIDString
+	var url string = "https://www.hackthebox.com/api/v4/profile/graph/" + string(duration) + "/" + userIDString
 	err = parseJSON(s, url, &acheivements)
 
 	return

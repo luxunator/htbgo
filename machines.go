@@ -434,7 +434,10 @@ type ScheduledMachines struct {
 // https://www.hackthebox.com/api/v4/machine/tags/{machineID}
 
 type RetiredMachineTags struct {
-	Info interface{} `json:"info"`
+	Info map[string]struct {
+		ID   int    `json:"id"`
+		Name string `json:"name"`
+	} `json:"info"`
 }
 
 // Get the changelog of a machine
@@ -547,7 +550,7 @@ func (s *Session) ScheduledMachines() (scheduledMachines ScheduledMachines, err 
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/unreleased"
 	err = parseJSON(s, url, &scheduledMachines)
-	
+
 	return
 }
 

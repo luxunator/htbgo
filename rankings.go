@@ -229,17 +229,17 @@ type UniversitiesRankingList struct {
 	} `json:"data"`
 }
 
-func (s *Session) UserRankInCountry(period string) (rank UserRankInCountry, err error) {
+func (s *Session) UserRankInCountry(period Duration) (rank UserRankInCountry, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/rankings/country/best?period=" + period
+	var url string = "https://www.hackthebox.com/api/v4/rankings/country/best?period=" + string(period)
 	err = parseJSON(s, url, &rank)
 
 	return
 }
 
-func (s *Session) UserRankOverviewInCountry(period string) (rankOverview UserRankOverviewInCountry, err error) {
+func (s *Session) UserRankOverviewInCountry(period Duration) (rankOverview UserRankOverviewInCountry, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/rankings/country/overview?period=" + period
+	var url string = "https://www.hackthebox.com/api/v4/rankings/country/overview?period=" + string(period)
 	err = parseJSON(s, url, &rankOverview)
 
 	return
@@ -253,17 +253,17 @@ func (s *Session) UserRankBracketInCountry() (rankBracket UserRankBracketInCount
 	return
 }
 
-func (s *Session) TeamRank(period string) (teamRank TeamRank, err error) {
+func (s *Session) TeamRank(period Duration) (teamRank TeamRank, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/rankings/team/best?period=" + period
+	var url string = "https://www.hackthebox.com/api/v4/rankings/team/best?period=" + string(period)
 	err = parseJSON(s, url, &teamRank)
 
 	return
 }
 
-func (s *Session) TeamRankOverview(period string) (rankOverview TeamRankOverview, err error) {
+func (s *Session) TeamRankOverview(period Duration) (rankOverview TeamRankOverview, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/rankings/team/overview?period=" + period
+	var url string = "https://www.hackthebox.com/api/v4/rankings/team/overview?period=" + string(period)
 	err = parseJSON(s, url, &rankOverview)
 
 	return
@@ -277,17 +277,17 @@ func (s *Session) TeamRankBracket() (rankBracket TeamRankBracket, err error) {
 	return
 }
 
-func (s *Session) UserRank(period string, wantVIP bool) (rank UserRank, err error) {
+func (s *Session) UserRank(period Duration, wantVIP bool) (rank UserRank, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/rankings/user/best?period=" + period + "&vip=" + stringFromVIP(wantVIP)
+	var url string = "https://www.hackthebox.com/api/v4/rankings/user/best?period=" + string(period) + "&vip=" + stringFromVIP(wantVIP)
 	err = parseJSON(s, url, &rank)
 
 	return
 }
 
-func (s *Session) UserOverview(period string, wantVIP bool) (rankOverview UserOverview, err error) {
+func (s *Session) UserOverview(period Duration, wantVIP bool) (rankOverview UserOverview, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/rankings/user/overview?period=" + period + "&vip=" + stringFromVIP(wantVIP)
+	var url string = "https://www.hackthebox.com/api/v4/rankings/user/overview?period=" + string(period) + "&vip=" + stringFromVIP(wantVIP)
 	err = parseJSON(s, url, &rankOverview)
 
 	return
