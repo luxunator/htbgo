@@ -389,7 +389,11 @@ type UserAllAttackPaths struct {
 			Solved int `json:"solved"`
 			Total  int `json:"total"`
 		} `json:"machine_owns"`
-		MachineAttackPaths interface{} `json:"machine_attack_paths"`
+		MachineAttackPaths map[string]struct{
+			Solved int `json:"solved"`
+			Total int `json:"total"`
+			AvgUserSolved float64 `json:"avg_user_solved"`
+		} `json:"machine_attack_paths"`
 	} `json:"profile"`
 }
 
