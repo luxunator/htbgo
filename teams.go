@@ -137,7 +137,7 @@ type InvitationRequest struct { // test
 		Name             string      `json:"name"`
 		Points           int         `json:"points"`
 		UserOwnsCount    int         `json:"user_owns_count"`
-		RootOwnsCount    int         `json:"user_owns_count"`
+		RootOwnsCount    int         `json:"root_owns_count"`
 		RespectedByCount int         `json:"respected_by_count"`
 		AvatarThumb      string      `json:"avatar_thumb"`
 		RankName         string      `json:"rank_name"`
