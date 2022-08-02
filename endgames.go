@@ -3,7 +3,7 @@ package htbgo
 // Endgames List
 // https://www.hackthebox.com/api/v4/endgames
 
-type EndgamesList struct {
+type EndgamesActiveList struct {
 	Status bool `json:"status"`
 	Data   []struct {
 		ID            int    `json:"id"`
@@ -31,7 +31,7 @@ type EndgamesList struct {
 // Endgame Profile
 // https://www.hackthebox.com/api/v4/endgame/{endgameID}
 
-type EndgameProfile struct {
+type EndgameInfo struct {
 	Status bool `json:"status"`
 	Data   struct {
 		ID            int    `json:"id"`
@@ -89,7 +89,7 @@ type EndgameMachinesList struct {
 	} `json:"data"`
 }
 
-func (s *Session) ActiveEndgames() (endgames EndgamesList, err error) {
+func (s *Session) EndgamesActive() (endgames EndgamesActiveList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/endgames"
 	err = parseJSON(s, url, &endgames)
@@ -97,7 +97,7 @@ func (s *Session) ActiveEndgames() (endgames EndgamesList, err error) {
 	return
 }
 
-func (s *Session) EndgameInfo(endgameID int) (endgame EndgameProfile, err error) {
+func (s *Session) Endgame(endgameID int) (endgame EndgameInfo, err error) {
 
 	endgameIDString, err := toPositiveIntString(endgameID)
 	if err != nil {

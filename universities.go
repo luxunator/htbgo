@@ -1,7 +1,7 @@
 package htbgo
 
 // Get a list of universities
-type Universities struct {
+type UniversitiesList struct {
 	Message string `json:"message"`
 	Section string `json:"section"`
 	Data    struct {
@@ -36,7 +36,7 @@ type Universities struct {
 }
 
 // get a profile of a university by id
-type University struct {
+type UniversityInfo struct {
 	Message string `json:"message"`
 	Data    struct {
 		ID                   int    `json:"id"`
@@ -86,7 +86,7 @@ type Weeks struct {
 	Week11 OwnWeek `json:"week11"`
 	Week12 OwnWeek `json:"week12"`
 }
-type UniversityOwns struct {
+type UniversityOwnsInfo struct {
 	Rank          int   `json:"rank"`
 	UserOwns      int   `json:"user_owns"`
 	SystemOwns    int   `json:"system_owns"`
@@ -118,7 +118,7 @@ type UniversityMembersList []struct {
 	Public int `json:"public"`
 }
 
-func (s *Session) UniversitiesByPage(page int) (universities Universities, err error) {
+func (s *Session) UniversitiesByPage(page int) (universities UniversitiesList, err error) {
 
 	pageString, err := toPositiveIntString(page)
 	if err != nil {
@@ -131,7 +131,7 @@ func (s *Session) UniversitiesByPage(page int) (universities Universities, err e
 	return
 }
 
-func (s *Session) UniversitiesSearch(query string, page int) (universities Universities, err error) {
+func (s *Session) UniversitiesSearch(query string, page int) (universities UniversitiesList, err error) {
 
 	pageString, err := toPositiveIntString(page)
 	if err != nil {
@@ -144,7 +144,7 @@ func (s *Session) UniversitiesSearch(query string, page int) (universities Unive
 	return
 }
 
-func (s *Session) UniversityInfo(universityID int) (university University, err error) {
+func (s *Session) University(universityID int) (university UniversityInfo, err error) {
 
 	universityIDString, err := toPositiveIntString(universityID)
 	if err != nil {
@@ -157,7 +157,7 @@ func (s *Session) UniversityInfo(universityID int) (university University, err e
 	return
 }
 
-func (s *Session) UniversityOwns(universityID int) (stats UniversityOwns, err error) {
+func (s *Session) UniversityOwns(universityID int) (stats UniversityOwnsInfo, err error) {
 
 	universityIDString, err := toPositiveIntString(universityID)
 	if err != nil {

@@ -2,7 +2,7 @@ package htbgo
 
 // Get Machine Matrix
 // https://www.hackthebox.com/api/v4/machine/graph/matrix/{machineID}
-type MachineMatrixInformation struct {
+type MachineMatrixInfo struct {
 	Info struct {
 		Aggregate struct {
 			Enum   float64 `json:"enum"`
@@ -30,7 +30,7 @@ type MachineMatrixInformation struct {
 
 // Get the Information of the machine ( doesn't include the first blood information)
 //  https://www.hackthebox.com/api/v4/machine/info/{machineID}
-type MachineInformation struct {
+type MachineInfo struct {
 	Info struct {
 		ID                  int    `json:"id"`
 		Name                string `json:"name"`
@@ -93,7 +93,7 @@ type MachineInformation struct {
 
 // Get the Profile of the machine (includes first blood information)
 // https://www.hackthebox.com/api/v4/machine/profile/{machineID}
-type MachineProfile struct {
+type MachineProfileInfo struct {
 	Info struct {
 		ID                  int    `json:"id"`
 		Name                string `json:"name"`
@@ -183,7 +183,7 @@ type MachineProfile struct {
 
 //	Get Active Machines
 // https://www.hackthebox.com/api/v4/machine/list
-type ActiveMachines struct {
+type MachinesActiveList struct {
 	Info []struct {
 		ID                  int    `json:"id"`
 		Name                string `json:"name"`
@@ -245,7 +245,7 @@ type ActiveMachines struct {
 
 // Get Retired Machines
 // https://www.hackthebox.com/api/v4/machine/list/retired
-type RetiredMachines struct {
+type MachinesRetiredList struct {
 	Info []struct {
 		ID                  int    `json:"id"`
 		Name                string `json:"name"`
@@ -312,7 +312,7 @@ type RetiredMachines struct {
 
 // Get the top 25 users in a machine
 // https://www.hackthebox.com/api/v4/machine/owns/top/{machineID}
-type TopUsers struct {
+type MachineTopsUsersList struct {
 	Info []struct {
 		ID          int    `json:"id"`
 		Name        string `json:"name"`
@@ -331,7 +331,7 @@ type TopUsers struct {
 
 // Get the list of scheduled machines to release
 // https://www.hackthebox.com/api/v4/machine/unreleased
-type ScheduledMachines struct {
+type MachinesToReleaseList struct {
 	Data []struct {
 		ID             int    `json:"id"`
 		Name           string `json:"name"`
@@ -433,7 +433,7 @@ type ScheduledMachines struct {
 // Get a retired machine their tags
 // https://www.hackthebox.com/api/v4/machine/tags/{machineID}
 
-type RetiredMachineTags struct {
+type MachineTagsMap struct {
 	Info map[string]struct {
 		ID   int    `json:"id"`
 		Name string `json:"name"`
@@ -443,7 +443,7 @@ type RetiredMachineTags struct {
 // Get the changelog of a machine
 // https://www.hackthebox.com/api/v4/machine/changelog/{machineID}
 
-type MachineChangelog struct {
+type MachineChangelogList struct {
 	Info []struct {
 		ID          int    `json:"id"`
 		UserID      int    `json:"user_id"`
@@ -460,7 +460,7 @@ type MachineChangelog struct {
 // Get the reviews of a retired machine
 // https://www.hackthebox.com/api/v4/machine/reviews/{machineID}
 
-type MachineReviews struct {
+type MachineReviewsList struct {
 	Message []struct {
 		ID        int    `json:"id"`
 		UserID    int    `json:"user_id"`
@@ -479,7 +479,7 @@ type MachineReviews struct {
 	} `json:"message"`
 }
 
-func (s *Session) MachineMatrix(machineID int) (matrix MachineMatrixInformation, err error) {
+func (s *Session) MachineMatrix(machineID int) (matrix MachineMatrixInfo, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
 	if err != nil {
@@ -492,7 +492,7 @@ func (s *Session) MachineMatrix(machineID int) (matrix MachineMatrixInformation,
 	return
 }
 
-func (s *Session) MachineInformation(machineID int) (machineInformation MachineInformation, err error) {
+func (s *Session) Machine(machineID int) (info MachineInfo, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
 	if err != nil {
@@ -500,12 +500,12 @@ func (s *Session) MachineInformation(machineID int) (machineInformation MachineI
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/info/" + machineIDString
-	err = parseJSON(s, url, &machineInformation)
+	err = parseJSON(s, url, &info)
 
 	return
 }
 
-func (s *Session) MachineProfile(machineID int) (machineProfile MachineProfile, err error) {
+func (s *Session) MachineProfile(machineID int) (profile MachineProfileInfo, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
 	if err != nil {
@@ -513,12 +513,12 @@ func (s *Session) MachineProfile(machineID int) (machineProfile MachineProfile, 
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/profile/" + machineIDString
-	err = parseJSON(s, url, &machineProfile)
+	err = parseJSON(s, url, &profile)
 
 	return
 }
 
-func (s *Session) ActiveMachines() (activeMachines ActiveMachines, err error) {
+func (s *Session) MachinesActive() (activeMachines MachinesActiveList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/list"
 	err = parseJSON(s, url, &activeMachines)
@@ -526,7 +526,7 @@ func (s *Session) ActiveMachines() (activeMachines ActiveMachines, err error) {
 	return
 }
 
-func (s *Session) RetiredMachines() (retiredMachines RetiredMachines, err error) {
+func (s *Session) MachinesRetired() (retiredMachines MachinesRetiredList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/list/retired"
 	err = parseJSON(s, url, &retiredMachines)
@@ -534,7 +534,7 @@ func (s *Session) RetiredMachines() (retiredMachines RetiredMachines, err error)
 	return
 }
 
-func (s *Session) MachineTopUsers(machineID int) (topUsers TopUsers, err error) {
+func (s *Session) MachineTopUsers(machineID int) (topUsers MachineTopsUsersList, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
 	if err != nil {
@@ -546,7 +546,7 @@ func (s *Session) MachineTopUsers(machineID int) (topUsers TopUsers, err error) 
 	return
 }
 
-func (s *Session) ScheduledMachines() (scheduledMachines ScheduledMachines, err error) {
+func (s *Session) MachinesToRelease() (scheduledMachines MachinesToReleaseList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/unreleased"
 	err = parseJSON(s, url, &scheduledMachines)
@@ -560,7 +560,7 @@ func (s *Session) ScheduledMachines() (scheduledMachines ScheduledMachines, err 
 // 	return
 // }
 
-func (s *Session) RetiredMachineTags(machineID int) (tags RetiredMachineTags, err error) {
+func (s *Session) MachineTags(machineID int) (tags MachineTagsMap, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
 	if err != nil {
@@ -573,7 +573,7 @@ func (s *Session) RetiredMachineTags(machineID int) (tags RetiredMachineTags, er
 	return
 }
 
-func (s *Session) MachineChangelog(machineID int) (changelog MachineChangelog, err error) {
+func (s *Session) MachineChangelog(machineID int) (changelog MachineChangelogList, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
 	if err != nil {
@@ -586,7 +586,7 @@ func (s *Session) MachineChangelog(machineID int) (changelog MachineChangelog, e
 	return
 }
 
-func (s *Session) MachineReviews(machineID int) (reviews MachineReviews, err error) {
+func (s *Session) MachineReviews(machineID int) (reviews MachineReviewsList, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
 	if err != nil {

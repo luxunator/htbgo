@@ -3,7 +3,7 @@ package htbgo
 // Get Team Profile
 // https://www.hackthebox.com/api/v4/team/info/{teamid}
 
-type Team struct {
+type TeamInfo struct {
 	ID              int    `json:"id"`
 	Name            string `json:"name"`
 	Points          int    `json:"points"`
@@ -30,7 +30,7 @@ type Team struct {
 // Get Team Activity
 // https://www.hackthebox.com/api/v4/team/activity/
 
-type Activities []struct {
+type TeamActivityList []struct {
 	User struct {
 		ID          int    `json:"id"`
 		Name        string `json:"name"`
@@ -62,7 +62,7 @@ type OwnsWeek struct {
 	WeekEndDate   string `json:"week_end_date"`
 }
 
-type TeamOwnsWeeks struct {
+type TeamOwnsByWeekMap struct {
 	Rank          int                 `json:"rank"`
 	UserOwns      int                 `json:"user_owns"`
 	SystemOwns    int                 `json:"system_owns"`
@@ -75,7 +75,7 @@ type TeamOwnsWeeks struct {
 // Get Team Graph for Duration
 // https://www.hackthebox.com/api/v4/team/graph/2102?duration={duration}
 
-type TeamGraphs struct {
+type TeamStatsDuringInfo struct {
 	Status bool `json:"status"`
 	Data   struct {
 		Points  []int `json:"points"`
@@ -87,7 +87,7 @@ type TeamGraphs struct {
 // Get Team Ownage by Attack Path
 // https://www.hackthebox.com/api/v4/team/chart/machines/attack/{teamid}
 
-type TeamAttackPaths struct {
+type TeamOwnsByPathMap struct {
 	MachineOwns struct {
 		Solved int `json:"solved"`
 		Total  int `json:"total"`
@@ -103,7 +103,7 @@ type TeamAttackPaths struct {
 // List Team Members
 // https://www.hackthebox.com/api/v4/team/members/{teamid}
 
-type TeamMemberList []struct {
+type TeamMembersList []struct {
 	ID              int         `json:"id"`
 	Name            string      `json:"name"`
 	Avatar          string      `json:"avatar"`
@@ -137,7 +137,7 @@ type InvitationRequest struct { // test
 		Name             string      `json:"name"`
 		Points           int         `json:"points"`
 		UserOwnsCount    int         `json:"user_owns_count"`
-		RootOwnsCount    int         `json:"user_owns_count"`
+		RootOwnsCount    int         `json:"root_owns_count"`
 		RespectedByCount int         `json:"respected_by_count"`
 		AvatarThumb      string      `json:"avatar_thumb"`
 		RankName         string      `json:"rank_name"`
@@ -154,7 +154,7 @@ type TeamInvitationsList struct {
 // Global Rank History for Bearer's Team
 // https://www.hackthebox.com/api/v4/rankings/team/best?period={duration}
 
-type TeamRankingHistory struct {
+type TeamRankingsInfo struct {
 	Status bool `json:"status"`
 	Data   struct {
 		Rank          int    `json:"rank"`
@@ -166,7 +166,7 @@ type TeamRankingHistory struct {
 // Global Points History for Bearer's Team
 // https://www.hackthebox.com/api/v4/rankings/team/overview?period={duration}
 
-type TeamPointsHistory struct {
+type TeamPointsInfo struct {
 	Status bool `json:"status"`
 	Data   struct {
 		PointsDiff   int    `json:"points_diff"`
@@ -222,7 +222,7 @@ type TopTeamsList struct {
 	Data   []TopTeam `json:"data"`
 }
 
-func (s *Session) TeamInfo(teamID int) (team Team, err error) {
+func (s *Session) Team(teamID int) (info TeamInfo, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
@@ -230,12 +230,12 @@ func (s *Session) TeamInfo(teamID int) (team Team, err error) {
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/team/info/" + teamIDString
-	err = parseJSON(s, url, &team)
+	err = parseJSON(s, url, &info)
 
 	return
 }
 
-func (s *Session) TeamActivity(teamID int) (activities Activities, err error) {
+func (s *Session) TeamActivity(teamID int) (activities TeamActivityList, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
@@ -248,7 +248,7 @@ func (s *Session) TeamActivity(teamID int) (activities Activities, err error) {
 	return
 }
 
-func (s *Session) TeamOwns(teamID int) (owns TeamOwnsWeeks, err error) {
+func (s *Session) TeamOwnsByWeek(teamID int) (owns TeamOwnsByWeekMap, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
@@ -261,7 +261,7 @@ func (s *Session) TeamOwns(teamID int) (owns TeamOwnsWeeks, err error) {
 	return
 }
 
-func (s *Session) TeamGraph(teamID int, duration Duration) (graph TeamGraphs, err error) {
+func (s *Session) TeamStatsDuring(teamID int, duration Duration) (graph TeamStatsDuringInfo, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
@@ -274,7 +274,7 @@ func (s *Session) TeamGraph(teamID int, duration Duration) (graph TeamGraphs, er
 	return
 }
 
-func (s *Session) TeamPathOwns(teamID int) (owns TeamAttackPaths, err error) {
+func (s *Session) TeamPathOwns(teamID int) (path TeamOwnsByPathMap, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
@@ -282,12 +282,12 @@ func (s *Session) TeamPathOwns(teamID int) (owns TeamAttackPaths, err error) {
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/team/chart/machines/attack/" + teamIDString
-	err = parseJSON(s, url, &owns)
+	err = parseJSON(s, url, &path)
 
 	return
 }
 
-func (s *Session) TeamMembers(teamID int) (members TeamMemberList, err error) {
+func (s *Session) TeamMembers(teamID int) (members TeamMembersList, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
@@ -313,7 +313,7 @@ func (s *Session) TeamInvitations(teamID int) (invitations TeamInvitationsList, 
 	return
 }
 
-func (s *Session) TeamRankings(period Duration) (rankings TeamRankingHistory, err error) {
+func (s *Session) TeamRankings(period Duration) (rankings TeamRankingsInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/best?period=" + string(period)
 	err = parseJSON(s, url, &rankings)
@@ -321,7 +321,7 @@ func (s *Session) TeamRankings(period Duration) (rankings TeamRankingHistory, er
 	return
 }
 
-func (s *Session) TeamPoints(period Duration) (points TeamPointsHistory, err error) {
+func (s *Session) TeamPoints(period Duration) (points TeamPointsInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/overview?period=" + string(period)
 	err = parseJSON(s, url, &points)

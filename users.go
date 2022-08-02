@@ -3,7 +3,7 @@ package htbgo
 // Bearer Connection Status
 // https://www.hackthebox.com/api/v4/user/connection/status
 
-type BearerConnectionStatus struct {
+type ConnectionStatus struct {
 	Status     string      `json:"status"`
 	Connection interface{} `json:"connection"`
 }
@@ -11,7 +11,7 @@ type BearerConnectionStatus struct {
 // Bearer Active Machine
 // https://www.hackthebox.com/api/v4/machine/active
 
-type BearerActiveMachine struct {
+type ActiveMachineInfo struct {
 	Info struct {
 		ID         int    `json:"id"`
 		Name       string `json:"name"`
@@ -28,7 +28,7 @@ type BearerActiveMachine struct {
 // Bearer Followers
 // https://www.hackthebox.com/api/v4/user/followers
 
-type BearerFollowers struct {
+type FollowersList struct {
 	Info []struct {
 		ID int `json:"id"`
 	} `json:"info"`
@@ -37,7 +37,7 @@ type BearerFollowers struct {
 // Bearer Profile
 // https://www.hackthebox.com/api/v4/user/info
 
-type BearerProfile struct {
+type ProfileInfo struct {
 	Info struct {
 		ID                         int    `json:"id"`
 		Name                       string `json:"name"`
@@ -77,7 +77,7 @@ type BearerProfile struct {
 // Bearer Settings
 // https://www.hackthebox.com/api/v4/user/settings
 
-type BearerSettings struct {
+type SettingsInfo struct {
 	Email              string `json:"email"`
 	EmailNotifications int    `json:"email_notifications"`
 	Public             int    `json:"public"`
@@ -88,7 +88,7 @@ type BearerSettings struct {
 // Bearer Subscriptions
 // https://www.hackthebox.com/api/v4/user/subscriptions
 
-type BearerSubscriptions struct {
+type SubscriptionsList struct {
 	Subscriptions []struct {
 		Name        string `json:"name"`
 		EndsAt      string `json:"ends_at"`
@@ -105,7 +105,7 @@ type BearerSubscriptions struct {
 // Bearer Subscriptions Balance
 // https://www.hackthebox.com/api/v4/user/subscriptions/balance
 
-type BearerSubscriptionsBalance struct {
+type SubscriptionsBalanceInfo struct {
 	Balances struct {
 		USD int `json:"USD"`
 		GBP int `json:"GBP"`
@@ -118,7 +118,7 @@ type BearerSubscriptionsBalance struct {
 // Bearer Recurly URL
 // https://www.hackthebox.com/api/v4/user/subscriptions/manage/recurly
 
-type BearerSubscriptionsRecurly struct {
+type SubscriptionsRecurlyInfo struct {
 	Message string `json:"message"`
 	URL     string `json:"url"`
 }
@@ -126,7 +126,7 @@ type BearerSubscriptionsRecurly struct {
 // Bearer Enrolled Tracks
 // https://www.hackthebox.com/api/v4/user/tracks
 
-type BearerTracks []struct {
+type EnrolledTracksList []struct {
 	ID       int `json:"id"`
 	Complete int `json:"complete"`
 }
@@ -152,7 +152,7 @@ type BearerChallengeSubmissions struct {
 // User Profile with Bearer Relationship
 // https://www.hackthebox.com/api/v4/user/profile/basic/{userID}
 
-type BearerUserRelationship struct {
+type UserRelationshipInfo struct {
 	Profile struct {
 		ID           int    `json:"id"`
 		SSOID        int    `json:"sso_id"`
@@ -204,7 +204,7 @@ type BearerUserRelationship struct {
 // User Machines Progress
 // https://www.hackthebox.com/api/v4/profile/progress/machines/os/{userID}
 
-type UserProgressMachines struct {
+type UserMachinesList struct {
 	Profile struct {
 		OperatingSystems []struct {
 			Name                 string  `json:"name"`
@@ -218,7 +218,7 @@ type UserProgressMachines struct {
 // User Challenges Progress
 // https://www.hackthebox.com/api/v4/profile/progress/challenges/{userID}
 
-type UserProgressChallenges struct {
+type UserChallengesList struct {
 	Profile struct {
 		ChallengeOwns struct {
 			Solved int `json:"solved"`
@@ -237,7 +237,7 @@ type UserProgressChallenges struct {
 // User Endgames Progress
 // https://www.hackthebox.com/api/v4/profile/progress/endgame/{userID}
 
-type UserProgressEndgames struct {
+type UserEndgamesList struct {
 	Profile struct {
 		Endgames []struct {
 			Name                 string  `json:"name"`
@@ -251,7 +251,7 @@ type UserProgressEndgames struct {
 // User Fortress Progress
 // https://www.hackthebox.com/api/v4/profile/progress/fortress/{userID}
 
-type UserProgressFortresses struct {
+type UserFortressesList struct {
 	Profile struct {
 		Fortresses []struct {
 			Name                 string  `json:"name"`
@@ -266,7 +266,7 @@ type UserProgressFortresses struct {
 // User ProLabs Progress
 // https://www.hackthebox.com/api/v4/profile/progress/prolab/{userID}
 
-type UserProgressProLabs struct {
+type UserProLabsList struct {
 	Profile struct {
 		ProLabs []struct {
 			Name                 string  `json:"name"`
@@ -282,7 +282,7 @@ type UserProgressProLabs struct {
 // User Activity
 // https://www.hackthebox.com/api/v4/profile/activity/{userID}
 
-type UserAllActivities struct {
+type UserActivityList struct {
 	Profile struct {
 		Activity []struct {
 			Date              string `json:"date"`
@@ -303,7 +303,7 @@ type UserAllActivities struct {
 // User Bloods
 // https://www.hackthebox.com/api/v4/profile/bloods/{userID}
 
-type UserAllBloods struct {
+type UserBloodsList struct {
 	Profile struct {
 		Bloods struct {
 			Machines []struct {
@@ -331,7 +331,7 @@ type UserAllBloods struct {
 // User Submissions
 // https://www.hackthebox.com/api/v4/profile/content/{userID}
 
-type UserAllSubmissions struct {
+type UserSubmissionsList struct {
 	Profile struct {
 		Content struct {
 			Machines []struct {
@@ -368,7 +368,7 @@ type UserAllSubmissions struct {
 // User Achievements
 // https://www.hackthebox.com/api/v4/profile/graph/{duration}/{userID}
 
-type UserAllAchievements struct {
+type UserAchievementsList struct {
 	Profile struct {
 		GraphData struct {
 			UserOwns      []int `json:"user_owns"`
@@ -383,15 +383,15 @@ type UserAllAchievements struct {
 // User Machine Owns By Attack Path
 // https://www.hackthebox.com/api/v4/profile/chart/machines/attack/{userID}
 
-type UserAllAttackPaths struct {
+type UserOwnsByPathMap struct {
 	Profile struct {
 		MachineOwns struct {
 			Solved int `json:"solved"`
 			Total  int `json:"total"`
 		} `json:"machine_owns"`
-		MachineAttackPaths map[string]struct{
-			Solved int `json:"solved"`
-			Total int `json:"total"`
+		MachineAttackPaths map[string]struct {
+			Solved        int     `json:"solved"`
+			Total         int     `json:"total"`
 			AvgUserSolved float64 `json:"avg_user_solved"`
 		} `json:"machine_attack_paths"`
 	} `json:"profile"`
@@ -400,7 +400,7 @@ type UserAllAttackPaths struct {
 // User Profile
 // https://www.hackthebox.com/api/v4/profile/{userID}
 
-type UserProfile struct {
+type UserProfileInfo struct {
 	Profile struct {
 		ID           int    `json:"id"`
 		SSOID        int    `json:"sso_id"`
@@ -441,7 +441,7 @@ type UserProfile struct {
 // User Badges
 // https://www.hackthebox.com/api/v4/profile/badges/{userID}
 
-type UserAllBadges struct {
+type UserBadgesList struct {
 	Badges []struct {
 		ID              int     `json:"id"`
 		Name            string  `json:"name"`
@@ -461,7 +461,7 @@ type UserAllBadges struct {
 	} `json:"badges"`
 }
 
-func (s *Session) ConnectionStatus() (status BearerConnectionStatus, err error) {
+func (s *Session) ConnectionStatusInfo() (status ConnectionStatus, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/connection/status"
 	err = parseJSON(s, url, &status)
@@ -469,7 +469,7 @@ func (s *Session) ConnectionStatus() (status BearerConnectionStatus, err error) 
 	return
 }
 
-func (s *Session) ActiveMachine() (active BearerActiveMachine, err error) {
+func (s *Session) ActiveMachine() (active ActiveMachineInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/active"
 	err = parseJSON(s, url, &active)
@@ -477,7 +477,7 @@ func (s *Session) ActiveMachine() (active BearerActiveMachine, err error) {
 	return
 }
 
-func (s *Session) Followers() (followers BearerFollowers, err error) {
+func (s *Session) Followers() (followers FollowersList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/followers"
 	err = parseJSON(s, url, &followers)
@@ -485,7 +485,7 @@ func (s *Session) Followers() (followers BearerFollowers, err error) {
 	return
 }
 
-func (s *Session) Profile() (profile BearerProfile, err error) {
+func (s *Session) Profile() (profile ProfileInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/info"
 	err = parseJSON(s, url, &profile)
@@ -493,7 +493,7 @@ func (s *Session) Profile() (profile BearerProfile, err error) {
 	return
 }
 
-func (s *Session) Settings() (settings BearerSettings, err error) {
+func (s *Session) Settings() (settings SettingsInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/settings"
 	err = parseJSON(s, url, &settings)
@@ -501,7 +501,7 @@ func (s *Session) Settings() (settings BearerSettings, err error) {
 	return
 }
 
-func (s *Session) Subscriptions() (subscriptions BearerSubscriptions, err error) {
+func (s *Session) Subscriptions() (subscriptions SubscriptionsList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/subscriptions"
 	err = parseJSON(s, url, &subscriptions)
@@ -509,7 +509,7 @@ func (s *Session) Subscriptions() (subscriptions BearerSubscriptions, err error)
 	return
 }
 
-func (s *Session) SubscriptionsBalance() (balance BearerSubscriptionsBalance, err error) {
+func (s *Session) SubscriptionsBalance() (balance SubscriptionsBalanceInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/subscriptions/balance"
 	err = parseJSON(s, url, &balance)
@@ -517,7 +517,7 @@ func (s *Session) SubscriptionsBalance() (balance BearerSubscriptionsBalance, er
 	return
 }
 
-func (s *Session) SubscriptionsRecurly() (recurly BearerSubscriptionsRecurly, err error) {
+func (s *Session) SubscriptionsRecurly() (recurly SubscriptionsRecurlyInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/subscriptions/manage/recurly"
 	err = parseJSON(s, url, &recurly)
@@ -525,7 +525,7 @@ func (s *Session) SubscriptionsRecurly() (recurly BearerSubscriptionsRecurly, er
 	return
 }
 
-func (s *Session) Tracks() (tracks BearerTracks, err error) {
+func (s *Session) EnrolledTracks() (tracks EnrolledTracksList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/tracks"
 	err = parseJSON(s, url, &tracks)
@@ -551,7 +551,7 @@ func (s *Session) ChallengeSubmissions() (submissions BearerChallengeSubmissions
 }
 */
 
-func (s *Session) UserRelationship(userID int) (relationship BearerUserRelationship, err error) {
+func (s *Session) UserRelationship(userID int) (relationship UserRelationshipInfo, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -564,7 +564,7 @@ func (s *Session) UserRelationship(userID int) (relationship BearerUserRelations
 	return
 }
 
-func (s *Session) UserMachines(userID int) (machines UserProgressMachines, err error) {
+func (s *Session) UserMachines(userID int) (machines UserMachinesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -577,7 +577,7 @@ func (s *Session) UserMachines(userID int) (machines UserProgressMachines, err e
 	return
 }
 
-func (s *Session) UserChallenges(userID int) (challenges UserProgressChallenges, err error) {
+func (s *Session) UserChallenges(userID int) (challenges UserChallengesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -590,7 +590,7 @@ func (s *Session) UserChallenges(userID int) (challenges UserProgressChallenges,
 	return
 }
 
-func (s *Session) UserEndgames(userID int) (endgames UserProgressEndgames, err error) {
+func (s *Session) UserEndgames(userID int) (endgames UserEndgamesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -603,7 +603,7 @@ func (s *Session) UserEndgames(userID int) (endgames UserProgressEndgames, err e
 	return
 }
 
-func (s *Session) UserFortresses(userID int) (fortresses UserProgressFortresses, err error) {
+func (s *Session) UserFortresses(userID int) (fortresses UserFortressesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -616,7 +616,7 @@ func (s *Session) UserFortresses(userID int) (fortresses UserProgressFortresses,
 	return
 }
 
-func (s *Session) UserProLabs(userID int) (proLabs UserProgressProLabs, err error) {
+func (s *Session) UserProLabs(userID int) (proLabs UserProLabsList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -629,7 +629,7 @@ func (s *Session) UserProLabs(userID int) (proLabs UserProgressProLabs, err erro
 	return
 }
 
-func (s *Session) UserActivity(userID int) (activities UserAllActivities, err error) {
+func (s *Session) UserActivity(userID int) (activities UserActivityList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -642,7 +642,7 @@ func (s *Session) UserActivity(userID int) (activities UserAllActivities, err er
 	return
 }
 
-func (s *Session) UserBloods(userID int) (bloods UserAllBloods, err error) {
+func (s *Session) UserBloods(userID int) (bloods UserBloodsList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -655,7 +655,7 @@ func (s *Session) UserBloods(userID int) (bloods UserAllBloods, err error) {
 	return
 }
 
-func (s *Session) UserSubmissions(userID int) (submissions UserAllSubmissions, err error) {
+func (s *Session) UserSubmissions(userID int) (submissions UserSubmissionsList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -668,7 +668,7 @@ func (s *Session) UserSubmissions(userID int) (submissions UserAllSubmissions, e
 	return
 }
 
-func (s *Session) UserAchievements(userID int, duration Duration) (acheivements UserAllAchievements, err error) {
+func (s *Session) UserAchievements(userID int, duration Duration) (acheivements UserAchievementsList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -681,7 +681,7 @@ func (s *Session) UserAchievements(userID int, duration Duration) (acheivements 
 	return
 }
 
-func (s *Session) UserPathOwns(userID int) (owns UserAllAttackPaths, err error) {
+func (s *Session) UserOwnsByPath(userID int) (path UserOwnsByPathMap, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -689,12 +689,12 @@ func (s *Session) UserPathOwns(userID int) (owns UserAllAttackPaths, err error) 
 	}
 
 	var url string = "https://www.hackthebox.com/api/v4/profile/chart/machines/attack/" + userIDString
-	err = parseJSON(s, url, &owns)
+	err = parseJSON(s, url, &path)
 
 	return
 }
 
-func (s *Session) UserProfile(userID int) (profile UserProfile, err error) {
+func (s *Session) User(userID int) (profile UserProfileInfo, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -707,7 +707,7 @@ func (s *Session) UserProfile(userID int) (profile UserProfile, err error) {
 	return
 }
 
-func (s *Session) UserBadges(userID int) (badges UserAllBadges, err error) {
+func (s *Session) UserBadges(userID int) (badges UserBadgesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
