@@ -1,5 +1,11 @@
 package htbgo
 
+type ProlabMaster struct {
+	ID          int    `json:"id"`
+	Name        string `json:"name"`
+	AvatarThumb string `json:"avatar_thumb"`
+}
+
 // Current Prolabs List
 // https://www.hackthebox.com/api/v4/prolabs
 
@@ -32,22 +38,18 @@ type ProLabsActiveList struct {
 type ProLabInfo struct {
 	Status bool `json:"status"`
 	Data   struct {
-		ID               int      `json:"id"`
-		Name             string   `json:"name"`
-		Version          string   `json:"version"`
-		EntryPoints      []string `json:"entry_points"`
-		Description      string   `json:"description"`
-		VideoURL         string   `json:"video_url"`
-		ProMachinesCount int      `json:"pro_machines_count"`
-		ProFlagsCount    int      `json:"pro_flags_count"`
-		CoverImageURL    string   `json:"cover_image_url"`
-		LabServersCount  int      `json:"lab_servers_count"`
-		ActiveUsers      int      `json:"active_users"`
-		LabMaster        struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			AvatarThumb string `json:"avatar_thumb"`
-		} `json:"lab_master"`
+		ID               int          `json:"id"`
+		Name             string       `json:"name"`
+		Version          string       `json:"version"`
+		EntryPoints      []string     `json:"entry_points"`
+		Description      string       `json:"description"`
+		VideoURL         string       `json:"video_url"`
+		ProMachinesCount int          `json:"pro_machines_count"`
+		ProFlagsCount    int          `json:"pro_flags_count"`
+		CoverImageURL    string       `json:"cover_image_url"`
+		LabServersCount  int          `json:"lab_servers_count"`
+		ActiveUsers      int          `json:"active_users"`
+		LabMaster        ProlabMaster `json:"lab_master"`
 	} `json:"data"`
 }
 
@@ -76,11 +78,7 @@ type ProLabOverviewInfo struct {
 			Description string `json:"description"`
 			Team        string `json:"team"`
 		} `json:"designated_level"`
-		LabMaster struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			AvatarThumb string `json:"avatar_thumb"`
-		} `json:"lab_master"`
+		LabMaster ProlabMaster `json:"lab_master"`
 	} `json:"data"`
 }
 

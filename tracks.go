@@ -1,61 +1,47 @@
 package htbgo
 
+type TrackCreator struct {
+	Type   string `json:"type"`
+	ID     int    `json:"id"`
+	Name   string `json:"name"`
+	Avatar string `json:"avatar"`
+}
+
 // List Available Tracks
 // https://www.hackthebox.com/api/v4/tracks
 
 type TracksActiveList []struct {
-	ID      int    `json:"id"`
-	Name    string `json:"name"`
-	Creator struct {
-		Type   string `json:"type"`
-		ID     int    `json:"id"`
-		Name   string `json:"name"`
-		Avatar string `json:"avatar"`
-	} `json:"creator"`
-	Official   bool   `json:"official"`
-	StaffPick  int    `json:"staff_pick"`
-	Difficulty string `json:"difficulty"`
-	CoverImage string `json:"cover_image"`
-	Likes      int    `json:"likes"`
+	ID         int          `json:"id"`
+	Name       string       `json:"name"`
+	Creator    TrackCreator `json:"creator"`
+	Official   bool         `json:"official"`
+	StaffPick  int          `json:"staff_pick"`
+	Difficulty string       `json:"difficulty"`
+	CoverImage string       `json:"cover_image"`
+	Likes      int          `json:"likes"`
 }
 
 // Track Profile
 // https://www.hackthebox.com/api/v4/tracks/{trackID}
 
 type TrackInfo struct {
-	ID          int    `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Difficulty  string `json:"difficulty"`
-	Creator     struct {
-		Type   string `json:"type"`
-		ID     int    `json:"id"`
-		Name   string `json:"name"`
-		Avatar string `json:"avatar"`
-	} `json:"creator"`
-	Official  bool `json:"official"`
-	StaffPick int  `json:"staff_pick"`
-	Items     []struct {
-		ID                int    `json:"id"`
-		Type              string `json:"type"`
-		Name              string `json:"name"`
-		Difficulty        string `json:"difficulty"`
-		DifficultyRatings struct {
-			CakeDifficulty      int `json:"counterCake"`
-			VeryEasyDifficulty  int `json:"counterVeryEasy"`
-			EasyDifficulty      int `json:"counterEasy"`
-			TooEasyDifficulty   int `json:"counterTooEasy"`
-			MediumDifficulty    int `json:"counterMedium"`
-			BitHardDifficulty   int `json:"counterBitHard"`
-			HardDifficulty      int `json:"counterHard"`
-			TooHardDifficulty   int `json:"counterTooHard"`
-			ExtraHardDifficulty int `json:"counterExHard"`
-			BrainFuckDifficulty int `json:"counterBrainFuck"`
-		} `json:"difficulty_ratings"`
-		Avatar   string `json:"avatar"`
-		OS       string `json:"os"`
-		Category string `json:"category"`
-		Complete bool   `json:"complete"`
+	ID          int          `json:"id"`
+	Name        string       `json:"name"`
+	Description string       `json:"description"`
+	Difficulty  string       `json:"difficulty"`
+	Creator     TrackCreator `json:"creator"`
+	Official    bool         `json:"official"`
+	StaffPick   int          `json:"staff_pick"`
+	Items       []struct {
+		ID              int          `json:"id"`
+		Type            string       `json:"type"`
+		Name            string       `json:"name"`
+		Difficulty      string       `json:"difficulty"`
+		DifficultyStats Difficulties `json:"difficulty_ratings"`
+		Avatar          string       `json:"avatar"`
+		OS              string       `json:"os"`
+		Category        string       `json:"category"`
+		Complete        bool         `json:"complete"`
 	}
 	CoverImage           string `json:"cover_image"`
 	Likes                int    `json:"likes"`

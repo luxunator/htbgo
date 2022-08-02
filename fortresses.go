@@ -1,5 +1,12 @@
 package htbgo
 
+type FortessFlags []struct {
+	ID     int    `json:"id"`
+	Title  string `json:"title"`
+	Points int    `json:"points"`
+	Owned  bool   `json:"owned"`
+}
+
 // Active Fortesses List
 // https://www.hackthebox.com/api/v4/fortresses
 
@@ -45,12 +52,7 @@ type FortessInfo struct {
 			Code      int    `json:"code"`
 			Message   string `json:"message"`
 		} `json:"user_availability"`
-		Flags []struct {
-			ID     int    `json:"id"`
-			Title  string `json:"title"`
-			Points int    `json:"points"`
-			Owned  bool   `json:"owned"`
-		} `json:"flags"`
+		Flags FortessFlags `json:"flags"`
 	} `json:"data"`
 }
 
@@ -58,13 +60,8 @@ type FortessInfo struct {
 // https://www.hackthebox.com/api/v4/fortress/{fortressID}/flags
 
 type FortressFlagList struct {
-	Status bool `json:"status"`
-	Data   []struct {
-		ID     int    `json:"id"`
-		Title  string `json:"title"`
-		Points int    `json:"points"`
-		Owned  bool   `json:"owned"`
-	} `json:"data"`
+	Status bool         `json:"status"`
+	Data   FortessFlags `json:"data"`
 }
 
 func (s *Session) FortressesActive() (fortresses FortressesActiveMap, err error) {

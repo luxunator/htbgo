@@ -1,30 +1,34 @@
 package htbgo
 
+type EndgameCreators []struct {
+	ID          int    `json:"id"`
+	Name        string `json:"name"`
+	AvatarThumb string `json:"avatar_thumb"`
+}
+
+type EndgameAvailability struct {
+	Available bool   `json:"available"`
+	Code      int    `json:"code"`
+	Message   string `json:"message"`
+}
+
 // Endgames List
 // https://www.hackthebox.com/api/v4/endgames
 
 type EndgamesActiveList struct {
 	Status bool `json:"status"`
 	Data   []struct {
-		ID            int    `json:"id"`
-		Name          string `json:"name"`
-		AvatarUrl     string `json:"avatar_url"`
-		CoverImageUrl string `json:"cover_image_url"`
-		Retired       bool   `json:"retired"`
-		Vip           bool   `json:"vip"`
-		Creators      []struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			AvatarThumb string `json:"avatar_thumb"`
-		} `json:"creators"`
-		EndgameMachinesCount int `json:"endgame_machines_count"`
-		EndgameFlagsCount    int `json:"endgame_flags_count"`
-		UserAvailability     struct {
-			Available bool   `json:"available"`
-			Code      int    `json:"code"`
-			Message   string `json:"message"`
-		} `json:"user_availability"`
-		New bool `json:"new"`
+		ID                   int                 `json:"id"`
+		Name                 string              `json:"name"`
+		AvatarUrl            string              `json:"avatar_url"`
+		CoverImageUrl        string              `json:"cover_image_url"`
+		Retired              bool                `json:"retired"`
+		Vip                  bool                `json:"vip"`
+		Creators             EndgameCreators     `json:"creators"`
+		EndgameMachinesCount int                 `json:"endgame_machines_count"`
+		EndgameFlagsCount    int                 `json:"endgame_flags_count"`
+		Availability         EndgameAvailability `json:"user_availability"`
+		New                  bool                `json:"new"`
 	} `json:"data"`
 }
 
@@ -34,32 +38,24 @@ type EndgamesActiveList struct {
 type EndgameInfo struct {
 	Status bool `json:"status"`
 	Data   struct {
-		ID            int    `json:"id"`
-		Name          string `json:"name"`
-		AvatarUrl     string `json:"avatar_url"`
-		CoverImageUrl string `json:"cover_image_url"`
-		Retired       bool   `json:"retired"`
-		Vip           bool   `json:"vip"`
-		Creators      []struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			AvatarThumb string `json:"avatar_thumb"`
-		} `json:"creators"`
-		Points            int      `json:"points"`
-		PlayersCompleted  int      `json:"players_completed"`
-		EndgameResetVotes int      `json:"endgame_reset_votes"`
-		MostRecentReset   string   `json:"most_recent_reset"`
-		EntryPoints       []string `json:"entry_points"`
-		VideoURL          string   `json:"video_url"`
-		Description       string   `json:"description"`
-		CompletionIcon    string   `json:"completion_icon"`
-		CompletionText    string   `json:"completion_text"`
-		HasUserFinished   bool     `json:"has_user_finished"`
-		UserAvailability  struct {
-			Available bool   `json:"available"`
-			Code      int    `json:"code"`
-			Message   string `json:"message"`
-		} `json:"user_availability"`
+		ID                int                 `json:"id"`
+		Name              string              `json:"name"`
+		AvatarUrl         string              `json:"avatar_url"`
+		CoverImageUrl     string              `json:"cover_image_url"`
+		Retired           bool                `json:"retired"`
+		Vip               bool                `json:"vip"`
+		Creators          EndgameCreators     `json:"creators"`
+		Points            int                 `json:"points"`
+		PlayersCompleted  int                 `json:"players_completed"`
+		EndgameResetVotes int                 `json:"endgame_reset_votes"`
+		MostRecentReset   string              `json:"most_recent_reset"`
+		EntryPoints       []string            `json:"entry_points"`
+		VideoURL          string              `json:"video_url"`
+		Description       string              `json:"description"`
+		CompletionIcon    string              `json:"completion_icon"`
+		CompletionText    string              `json:"completion_text"`
+		HasUserFinished   bool                `json:"has_user_finished"`
+		Availability      EndgameAvailability `json:"user_availability"`
 	}
 }
 

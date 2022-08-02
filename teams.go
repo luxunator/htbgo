@@ -53,7 +53,7 @@ type TeamActivityList []struct {
 // Get Team Owns
 // https://www.hackthebox.com/api/v4/team/stats/owns/{teamid}
 
-type OwnsWeek struct {
+type TeamOwnsWeek struct {
 	UserOwns      int    `json:"user_owns"`
 	SystemOwns    int    `json:"system_owns"`
 	ChallengeOwns int    `json:"challenge_owns"`
@@ -63,13 +63,13 @@ type OwnsWeek struct {
 }
 
 type TeamOwnsByWeekMap struct {
-	Rank          int                 `json:"rank"`
-	UserOwns      int                 `json:"user_owns"`
-	SystemOwns    int                 `json:"system_owns"`
-	FirstBloods   int                 `json:"first_bloods"`
-	ChallengeOwns int                 `json:"challenge_owns"`
-	Respects      int                 `json:"respects"`
-	Weeks         map[string]OwnsWeek `json:"weekly"`
+	Rank          int                     `json:"rank"`
+	UserOwns      int                     `json:"user_owns"`
+	SystemOwns    int                     `json:"system_owns"`
+	FirstBloods   int                     `json:"first_bloods"`
+	ChallengeOwns int                     `json:"challenge_owns"`
+	Respects      int                     `json:"respects"`
+	Weeks         map[string]TeamOwnsWeek `json:"weekly"`
 }
 
 // Get Team Graph for Duration
@@ -127,28 +127,26 @@ type TeamMembersList []struct {
 // List Team Invitations (only if team captain)
 // https://www.hackthebox.com/api/v4/team/invitations/{teamid}
 
-type InvitationRequest struct { // test
-	ID          int `json:"id"`
-	UserID      int `json:"user_id"`
-	TeamID      int `json:"team_id"`
-	UserRequest int `json:"user_request"`
-	User        struct {
-		ID               int         `json:"id"`
-		Name             string      `json:"name"`
-		Points           int         `json:"points"`
-		UserOwnsCount    int         `json:"user_owns_count"`
-		RootOwnsCount    int         `json:"root_owns_count"`
-		RespectedByCount int         `json:"respected_by_count"`
-		AvatarThumb      string      `json:"avatar_thumb"`
-		RankName         string      `json:"rank_name"`
-		Ranking          interface{} `json:"ranking"`
-	} `json:"user"`
-}
-
 type TeamInvitationsList struct {
-	Headers   struct{}            `json:"headers"`
-	Original  []InvitationRequest `json:"original"`
-	Exception bool                `json:"exception"`
+	Headers  struct{} `json:"headers"`
+	Original []struct {
+		ID          int `json:"id"`
+		UserID      int `json:"user_id"`
+		TeamID      int `json:"team_id"`
+		UserRequest int `json:"user_request"`
+		User        struct {
+			ID               int         `json:"id"`
+			Name             string      `json:"name"`
+			Points           int         `json:"points"`
+			UserOwnsCount    int         `json:"user_owns_count"`
+			RootOwnsCount    int         `json:"root_owns_count"`
+			RespectedByCount int         `json:"respected_by_count"`
+			AvatarThumb      string      `json:"avatar_thumb"`
+			RankName         string      `json:"rank_name"`
+			Ranking          interface{} `json:"ranking"`
+		} `json:"user"`
+	} `json:"original"`
+	Exception bool `json:"exception"`
 }
 
 // Global Rank History for Bearer's Team

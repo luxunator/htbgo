@@ -64,7 +64,7 @@ type UniversityInfo struct {
 }
 
 // get stats of a university by id
-type OwnWeek struct {
+type UniversityOwnsWeek struct {
 	UserOwns      int    `json:"user_owns"`
 	SystemOwns    int    `json:"system_owns"`
 	ChallengeOwns int    `json:"challenge_owns"`
@@ -72,28 +72,28 @@ type OwnWeek struct {
 	Respects      int    `json:"respects"`
 	WeekEndDate   string `json:"week_end_date"`
 }
-type Weeks struct {
-	Week1  OwnWeek `json:"week1"`
-	Week2  OwnWeek `json:"week2"`
-	Week3  OwnWeek `json:"week3"`
-	Week4  OwnWeek `json:"week4"`
-	Week5  OwnWeek `json:"week5"`
-	Week6  OwnWeek `json:"week6"`
-	Week7  OwnWeek `json:"week7"`
-	Week8  OwnWeek `json:"week8"`
-	Week9  OwnWeek `json:"week9"`
-	Week10 OwnWeek `json:"week10"`
-	Week11 OwnWeek `json:"week11"`
-	Week12 OwnWeek `json:"week12"`
+type UniversityOwnsWeeks struct {
+	WeekOne    UniversityOwnsWeek `json:"week1"`
+	WeekTwo    UniversityOwnsWeek `json:"week2"`
+	WeekThree  UniversityOwnsWeek `json:"week3"`
+	WeekFour   UniversityOwnsWeek `json:"week4"`
+	WeekFive   UniversityOwnsWeek `json:"week5"`
+	WeekSix    UniversityOwnsWeek `json:"week6"`
+	WeekSeven  UniversityOwnsWeek `json:"week7"`
+	WeekEight  UniversityOwnsWeek `json:"week8"`
+	WeekNine   UniversityOwnsWeek `json:"week9"`
+	WeekTen    UniversityOwnsWeek `json:"week10"`
+	WeekEleven UniversityOwnsWeek `json:"week11"`
+	WeekTwelve UniversityOwnsWeek `json:"week12"`
 }
 type UniversityOwnsInfo struct {
-	Rank          int   `json:"rank"`
-	UserOwns      int   `json:"user_owns"`
-	SystemOwns    int   `json:"system_owns"`
-	FirstBloods   int   `json:"first_bloods"`
-	ChallengeOwns int   `json:"challenge_owns"`
-	Respects      int   `json:"respects"`
-	Weeks         Weeks `json:"weekly"`
+	Rank          int                 `json:"rank"`
+	UserOwns      int                 `json:"user_owns"`
+	SystemOwns    int                 `json:"system_owns"`
+	FirstBloods   int                 `json:"first_bloods"`
+	ChallengeOwns int                 `json:"challenge_owns"`
+	Respects      int                 `json:"respects"`
+	Weeks         UniversityOwnsWeeks `json:"weekly"`
 }
 
 // List University Members

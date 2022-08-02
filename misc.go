@@ -1,5 +1,10 @@
 package htbgo
 
+type ReportAreas []struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
+}
+
 // List of BadgesList
 // https://www.hackthebox.com/api/v4/category/badges
 type BadgesList struct {
@@ -24,10 +29,7 @@ type BadgesList struct {
 // List Bug Feedback Areas
 // https://www.hackthebox.com/api/v4/user/feedback/bug/areas
 type ReportBugAreasList struct {
-	Info []struct {
-		ID   int    `json:"id"`
-		Name string `json:"name"`
-	} `json:"info"`
+	Info ReportAreas `json:"info"`
 }
 
 // Machine And Challenge Stats
@@ -105,10 +107,7 @@ type ServersList struct {
 // List Improvement Feedback Areas
 // https://www.hackthebox.com/api/v4/user/feedback/improvement/areas
 type ReportImprovementAreasList struct {
-	Info []struct {
-		ID   int    `json:"id"`
-		Name string `json:"name"`
-	} `json:"info"`
+	Info ReportAreas `json:"info"`
 }
 
 // Various Stats

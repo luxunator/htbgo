@@ -5,35 +5,24 @@ package htbgo
 
 type StartingPointMachinesList struct {
 	Info []struct {
-		ID                  int    `json:"id"`
-		Name                string `json:"name"`
-		OS                  string `json:"os"`
-		Points              int    `json:"points"`
-		StaticPoints        int    `json:"static_points"`
-		Release             string `json:"release"`
-		UserOwnsCount       int    `json:"user_owns_count"`
-		RootOwnsCount       int    `json:"root_owns_count"`
-		AuthUserInUserOwns  bool   `json:"authUserInUserOwns"`
-		AuthUserInRootOwns  bool   `json:"authUserInRootOwns"`
-		IsTodo              bool   `json:"isTodo"`
-		AuthUserHasReviewed bool   `json:"authUserHasReviewed"`
-		Stars               string `json:"stars"`
-		Difficulty          int    `json:"difficulty"`
-		FeedbackForChart    struct {
-			CakeDifficulty      int `json:"counterCake"`
-			VeryEasyDifficulty  int `json:"counterVeryEasy"`
-			EasyDifficulty      int `json:"counterEasy"`
-			TooEasyDifficulty   int `json:"counterTooEasy"`
-			MediumDifficulty    int `json:"counterMedium"`
-			BitHardDifficulty   int `json:"counterBitHard"`
-			HardDifficulty      int `json:"counterHard"`
-			TooHardDifficulty   int `json:"counterTooHard"`
-			ExtraHardDifficulty int `json:"counterExHard"`
-			BrainFuckDifficulty int `json:"counterBrainFuck"`
-		} `json:"feedbackForChart"`
-		Avatar         string `json:"avatar"`
-		DifficultyText string `json:"difficultyText"`
-		PlayInfo       struct {
+		ID                  int          `json:"id"`
+		Name                string       `json:"name"`
+		OS                  string       `json:"os"`
+		Points              int          `json:"points"`
+		StaticPoints        int          `json:"static_points"`
+		Release             string       `json:"release"`
+		UserOwnsCount       int          `json:"user_owns_count"`
+		RootOwnsCount       int          `json:"root_owns_count"`
+		AuthUserInUserOwns  bool         `json:"authUserInUserOwns"`
+		AuthUserInRootOwns  bool         `json:"authUserInRootOwns"`
+		IsTodo              bool         `json:"isTodo"`
+		AuthUserHasReviewed bool         `json:"authUserHasReviewed"`
+		Stars               string       `json:"stars"`
+		Difficulty          int          `json:"difficulty"`
+		DifficultyStats     Difficulties `json:"feedbackForChart"`
+		Avatar              string       `json:"avatar"`
+		DifficultyText      string       `json:"difficultyText"`
+		PlayInfo            struct {
 			IsSpawned         bool   `json:"isSpawned"`
 			IsSpawning        bool   `json:"isSpawning"`
 			IsActive          bool   `json:"isActive"`

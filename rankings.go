@@ -1,16 +1,26 @@
 package htbgo
 
+type RankBracket struct {
+	Rank                 int    `json:"rank"`
+	Points               int    `json:"points"`
+	PointsForNextBracket int    `json:"points_for_next_bracket"`
+	CurrentBracket       string `json:"current_bracket"`
+	NextBracket          string `json:"next_bracket"`
+}
+
+type RankDuring struct {
+	Rank          int    `json:"rank"`
+	Date          string `json:"date"`
+	RankChartData []int  `json:"rank_chart_data"`
+}
+
 // Get the user's best rank within the period
 // Week - W 	Month - M 		Year -Y
 // https://www.hackthebox.com/api/v4/rankings/country/best?period={period}
 
 type RankInCountryBestDuringInfo struct {
-	Status bool `json:"status"`
-	Data   struct {
-		Rank          int    `json:"rank"`
-		Date          string `json:"date"`
-		RankChartData []int  `json:"rank_chart_data"`
-	} `json:"data"`
+	Status bool       `json:"status"`
+	Data   RankDuring `json:"data"`
 }
 
 // Get the overview of the user's rank in the country
@@ -35,14 +45,8 @@ type RankInCountryDuringInfo struct {
 // https://www.hackthebox.com/api/v4/rankings/country/ranking_bracket
 
 type RankBracketInCountryInfo struct {
-	Status bool `json:"status"`
-	Data   struct {
-		Rank                 int    `json:"rank"`
-		Points               int    `json:"points"`
-		PointsForNextBracket int    `json:"points_for_next_bracket"`
-		CurrentBracket       string `json:"current_bracket"`
-		NextBracket          string `json:"next_bracket"`
-	} `json:"data"`
+	Status bool        `json:"status"`
+	Data   RankBracket `json:"data"`
 }
 
 // Get the user's current team their best rank within a period
@@ -50,12 +54,8 @@ type RankBracketInCountryInfo struct {
 // https://www.hackthebox.com/api/v4/rankings/team/best?period=1Y
 
 type RankOfTeamBestDuringInfo struct {
-	Status bool `json:"status"`
-	Data   struct {
-		Rank          int    `json:"rank"`
-		Date          string `json:"date"`
-		RankChartData []int  `json:"rank_chart_data"`
-	} `json:"data"`
+	Status bool       `json:"status"`
+	Data   RankDuring `json:"data"`
 }
 
 // Get the user's current team their rank overview
@@ -82,26 +82,16 @@ type RankOfTeamDuringInfo struct {
 // https://www.hackthebox.com/api/v4/rankings/country/ranking_bracket
 
 type RankBracketOfTeamInfo struct {
-	Status bool `json:"status"`
-	Data   struct {
-		Rank                 int    `json:"rank"`
-		Points               int    `json:"points"`
-		PointsForNextBracket int    `json:"points_for_next_bracket"`
-		CurrentBracket       string `json:"current_bracket"`
-		NextBracket          string `json:"next_bracket"`
-	} `json:"data"`
+	Status bool        `json:"status"`
+	Data   RankBracket `json:"data"`
 }
 
 // Get the user's best rank in the general leaderboard for a certain period.
 // https://www.hackthebox.com/api/v4/rankings/user/best?period={period}&vip={numberValue}
 
 type RankBestDuringInfo struct {
-	Status bool `json:"status"`
-	Data   struct {
-		Rank          interface{} `json:"rank"`
-		Date          string      `json:"date"`
-		RankChartData []int       `json:"rank_chart_data"`
-	} `json:"data"`
+	Status bool       `json:"status"`
+	Data   RankDuring `json:"data"`
 }
 
 // Get the user's rank overview in the general ledearboard for a certain period.

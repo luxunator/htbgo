@@ -1,30 +1,52 @@
 package htbgo
 
+type MachineMatrixGroup struct {
+	Enum   float64 `json:"enum"`
+	Real   float64 `json:"real"`
+	CVE    float64 `json:"cve"`
+	Custom float64 `json:"custom"`
+	CTF    float64 `json:"ctf"`
+}
+
+type MachineCreators []struct {
+	ID     int    `json:"id"`
+	Name   string `json:"name"`
+	Avatar string `json:"avatar"`
+}
+
+type MachineCreator struct {
+	ID          int    `json:"id"`
+	Name        string `json:"name"`
+	Avatar      string `json:"avatar"`
+	IsRespected bool   `json:"isRespected"`
+}
+
+type MachineStatus struct {
+	IsSpawned         bool   `json:"isSpawned"`
+	IsSpawning        bool   `json:"isSpawning"`
+	IsActive          bool   `json:"isActive"`
+	ActivePlayerCount int    `json:"active_player_count"`
+	ExpiresAt         string `json:"expires_at"`
+}
+
+type MachineBlood struct {
+	User struct {
+		Name   string `json:"name"`
+		ID     int    `json:"id"`
+		Avatar string `json:"avatar"`
+	} `json:"user"`
+
+	CreatedAt       string `json:"created_at"`
+	BloodDifference string `json:"blood_difference"`
+}
+
 // Get Machine Matrix
 // https://www.hackthebox.com/api/v4/machine/graph/matrix/{machineID}
 type MachineMatrixInfo struct {
 	Info struct {
-		Aggregate struct {
-			Enum   float64 `json:"enum"`
-			Real   float64 `json:"real"`
-			CVE    float64 `json:"cve"`
-			Custom float64 `json:"custom"`
-			CTF    float64 `json:"ctf"`
-		}
-		Maker struct {
-			Enum   float64 `json:"enum"`
-			Real   float64 `json:"real"`
-			CVE    float64 `json:"cve"`
-			Custom float64 `json:"custom"`
-			CTF    float64 `json:"ctf"`
-		}
-		User struct {
-			Enum   float64 `json:"enum"`
-			Real   float64 `json:"real"`
-			CVE    float64 `json:"cve"`
-			Custom float64 `json:"custom"`
-			CTF    float64 `json:"ctf"`
-		}
+		Aggregate MachineMatrixGroup
+		Maker     MachineMatrixGroup
+		User      MachineMatrixGroup
 	}
 }
 
@@ -32,62 +54,34 @@ type MachineMatrixInfo struct {
 //  https://www.hackthebox.com/api/v4/machine/info/{machineID}
 type MachineInfo struct {
 	Info struct {
-		ID                  int    `json:"id"`
-		Name                string `json:"name"`
-		OS                  string `json:"os"`
-		Active              int    `json:"active"`
-		Retired             int    `json:"retired"`
-		IP                  string `json:"ip"`
-		Points              int    `json:"points"`
-		StaticPoints        int    `json:"static_points"`
-		Release             string `json:"release"`
-		UserOwnsCount       int    `json:"user_owns_count"`
-		RootOwnsCount       int    `json:"root_owns_count"`
-		Free                bool   `json:"free"`
-		AuthUserInUserOwns  bool   `json:"authUserInUserOwns"`
-		AuthUserInRootOwns  bool   `json:"authUserInRootOwns"`
-		AuthUserHasReviewed bool   `json:"authUserHasReviewed"`
-		Stars               string `json:"stars"`
-		Difficulty          int    `json:"difficulty"`
-		Avatar              string `json:"avatar"`
-		FeedbackChart       struct {
-			CakeDifficulty      int `json:"counterCake"`
-			VeryEasyDifficulty  int `json:"counterVeryEasy"`
-			EasyDifficulty      int `json:"counterEasy"`
-			TooEasyDifficulty   int `json:"counterTooEasy"`
-			MediumDifficulty    int `json:"counterMedium"`
-			BitHardDifficulty   int `json:"counterBitHard"`
-			HardDifficulty      int `json:"counterHard"`
-			TooHardDifficulty   int `json:"counterTooHard"`
-			ExtraHardDifficulty int `json:"counterExHard"`
-			BrainFuckDifficulty int `json:"counterBrainFuck"`
-		} `json:"feedbackForChart"`
-		DifficultyText string `json:"difficultyText"`
-		IsCompleted    bool   `json:"isCompleted"`
-		LastResetTime  string `json:"last_reset_time"`
-		PlayInfo       struct {
-			IsSpawned         bool   `json:"isSpawned"`
-			IsSpawning        bool   `json:"isSpawning"`
-			IsActive          bool   `json:"isActive"`
-			ActivePlayerCount int    `json:"active_player_count"`
-			ExpiresAt         string `json:"expires_at"`
-		} `json:"playInfo"`
-		MakerPrimary struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			Avatar      string `json:"avatar"`
-			IsRespected bool   `json:"isRespected"`
-		} `json:"maker"`
-
-		MakerSecondary struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			Avatar      string `json:"avatar"`
-			IsRespected bool   `json:"isRespected"`
-		} `json:"maker2"`
-		Recommended  int `json:"recommended"`
-		ReviewsCount int `json:"reviews_count"`
-		SPFlag       int `json:"sp_flag"`
+		ID                  int            `json:"id"`
+		Name                string         `json:"name"`
+		OS                  string         `json:"os"`
+		Active              int            `json:"active"`
+		Retired             int            `json:"retired"`
+		IP                  string         `json:"ip"`
+		Points              int            `json:"points"`
+		StaticPoints        int            `json:"static_points"`
+		Release             string         `json:"release"`
+		UserOwnsCount       int            `json:"user_owns_count"`
+		RootOwnsCount       int            `json:"root_owns_count"`
+		Free                bool           `json:"free"`
+		AuthUserInUserOwns  bool           `json:"authUserInUserOwns"`
+		AuthUserInRootOwns  bool           `json:"authUserInRootOwns"`
+		AuthUserHasReviewed bool           `json:"authUserHasReviewed"`
+		Stars               string         `json:"stars"`
+		Difficulty          int            `json:"difficulty"`
+		Avatar              string         `json:"avatar"`
+		DifficultyStats     Difficulties   `json:"feedbackForChart"`
+		DifficultyText      string         `json:"difficultyText"`
+		IsCompleted         bool           `json:"isCompleted"`
+		LastResetTime       string         `json:"last_reset_time"`
+		PlayInfo            MachineStatus  `json:"playInfo"`
+		MakerPrimary        MachineCreator `json:"maker"`
+		MakerSecondary      MachineCreator `json:"maker2"`
+		Recommended         int            `json:"recommended"`
+		ReviewsCount        int            `json:"reviews_count"`
+		SPFlag              int            `json:"sp_flag"`
 	}
 }
 
@@ -95,89 +89,40 @@ type MachineInfo struct {
 // https://www.hackthebox.com/api/v4/machine/profile/{machineID}
 type MachineProfileInfo struct {
 	Info struct {
-		ID                  int    `json:"id"`
-		Name                string `json:"name"`
-		OS                  string `json:"os"`
-		Active              int    `json:"active"`
-		Retired             int    `json:"retired"`
-		IP                  string `json:"ip"`
-		Points              int    `json:"points"`
-		StaticPoints        int    `json:"static_points"`
-		Release             string `json:"release"`
-		UserOwnsCount       int    `json:"user_owns_count"`
-		RootOwnsCount       int    `json:"root_owns_count"`
-		Free                bool   `json:"free"`
-		AuthUserInUserOwns  bool   `json:"authUserInUserOwns"`
-		AuthUserInRootOwns  bool   `json:"authUserInRootOwns"`
-		AuthUserHasReviewed bool   `json:"authUserHasReviewed"`
-		Stars               string `json:"stars"`
-		Difficulty          int    `json:"difficulty"`
-		Avatar              string `json:"avatar"`
-		FeedbackChart       struct {
-			CakeDifficulty      int `json:"counterCake"`
-			VeryEasyDifficulty  int `json:"counterVeryEasy"`
-			EasyDifficulty      int `json:"counterEasy"`
-			TooEasyDifficulty   int `json:"counterTooEasy"`
-			MediumDifficulty    int `json:"counterMedium"`
-			BitHardDifficulty   int `json:"counterBitHard"`
-			HardDifficulty      int `json:"counterHard"`
-			TooHardDifficulty   int `json:"counterTooHard"`
-			ExtraHardDifficulty int `json:"counterExHard"`
-			BrainFuckDifficulty int `json:"counterBrainFuck"`
-		} `json:"feedbackForChart"`
-		DifficultyText string `json:"difficultyText"`
-		IsCompleted    bool   `json:"isCompleted"`
-		LastResetTime  string `json:"last_reset_time"`
-		PlayInfo       struct {
-			IsSpawned         bool   `json:"isSpawned"`
-			IsSpawning        bool   `json:"isSpawning"`
-			IsActive          bool   `json:"isActive"`
-			ActivePlayerCount int    `json:"active_player_count"`
-			ExpiresAt         string `json:"expires_at"`
-		} `json:"playInfo"`
-
-		MakerPrimary struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			Avatar      string `json:"avatar"`
-			IsRespected bool   `json:"isRespected"`
-		} `json:"maker"`
-
-		MakerSecondary struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			Avatar      string `json:"avatar"`
-			IsRespected bool   `json:"isRespected"`
-		} `json:"maker2"`
-
-		AuthUserFirstUserTime string `json:"authUserFirstUserTime"`
-		AuthUserFirstRootTime string `json:"authUserFirstRootTime"`
-		UserBlood             struct {
-			User struct {
-				Name   string `json:"name"`
-				ID     int    `json:"id"`
-				Avatar string `json:"avatar"`
-			} `json:"user"`
-
-			CreatedAt       string `json:"created_at"`
-			BloodDifference string `json:"blood_difference"`
-		} `json:"userBlood"`
-		UserBloodAvatar string `json:"userBloodAvatar"`
-		RootBlood       struct {
-			User struct {
-				Name   string `json:"name"`
-				ID     int    `json:"id"`
-				Avatar string `json:"avatar"`
-			} `json:"user"`
-
-			CreatedAt       string `json:"created_at"`
-			BloodDifference string `json:"blood_difference"`
-		} `json:"rootBlood"`
-
-		RootBloodAvatar    string `json:"rootBloodAvatar"`
-		FirstUserBloodTime string `json:"firstUserBloodTime"`
-		FirstRootBloodTime string `json:"firstRootBloodTime"`
-		Recommended        int    `json:"recommended"`
+		ID                    int            `json:"id"`
+		Name                  string         `json:"name"`
+		OS                    string         `json:"os"`
+		Active                int            `json:"active"`
+		Retired               int            `json:"retired"`
+		IP                    string         `json:"ip"`
+		Points                int            `json:"points"`
+		StaticPoints          int            `json:"static_points"`
+		Release               string         `json:"release"`
+		UserOwnsCount         int            `json:"user_owns_count"`
+		RootOwnsCount         int            `json:"root_owns_count"`
+		Free                  bool           `json:"free"`
+		AuthUserInUserOwns    bool           `json:"authUserInUserOwns"`
+		AuthUserInRootOwns    bool           `json:"authUserInRootOwns"`
+		AuthUserHasReviewed   bool           `json:"authUserHasReviewed"`
+		Stars                 string         `json:"stars"`
+		Difficulty            int            `json:"difficulty"`
+		Avatar                string         `json:"avatar"`
+		DifficultyStats       Difficulties   `json:"feedbackForChart"`
+		DifficultyText        string         `json:"difficultyText"`
+		IsCompleted           bool           `json:"isCompleted"`
+		LastResetTime         string         `json:"last_reset_time"`
+		PlayInfo              MachineStatus  `json:"playInfo"`
+		MakerPrimary          MachineCreator `json:"maker"`
+		MakerSecondary        MachineCreator `json:"maker2"`
+		AuthUserFirstUserTime string         `json:"authUserFirstUserTime"`
+		AuthUserFirstRootTime string         `json:"authUserFirstRootTime"`
+		UserBlood             MachineBlood   `json:"userBlood"`
+		UserBloodAvatar       string         `json:"userBloodAvatar"`
+		RootBlood             MachineBlood   `json:"rootBlood"`
+		RootBloodAvatar       string         `json:"rootBloodAvatar"`
+		FirstUserBloodTime    string         `json:"firstUserBloodTime"`
+		FirstRootBloodTime    string         `json:"firstRootBloodTime"`
+		Recommended           int            `json:"recommended"`
 	}
 }
 
@@ -185,61 +130,33 @@ type MachineProfileInfo struct {
 // https://www.hackthebox.com/api/v4/machine/list
 type MachinesActiveList struct {
 	Info []struct {
-		ID                  int    `json:"id"`
-		Name                string `json:"name"`
-		OS                  string `json:"os"`
-		Points              int    `json:"points"`
-		StaticPoints        int    `json:"static_points"`
-		Release             string `json:"release"`
-		UserOwnsCount       int    `json:"user_owns_count"`
-		RootOwnsCount       int    `json:"root_owns_count"`
-		AuthUserInUserOwns  bool   `json:"authUserInUserOwns"`
-		AuthUserInRootOwns  bool   `json:"authUserInRootOwns"`
-		IsTodo              bool   `json:"isTodo"`
-		AuthUserHasReviewed bool   `json:"authUserHasReviewed"`
-		Stars               string `json:"stars"`
-		Difficulty          int    `json:"difficulty"`
-		FeedbackChart       struct {
-			CakeDifficulty      int `json:"counterCake"`
-			VeryEasyDifficulty  int `json:"counterVeryEasy"`
-			EasyDifficulty      int `json:"counterEasy"`
-			TooEasyDifficulty   int `json:"counterTooEasy"`
-			MediumDifficulty    int `json:"counterMedium"`
-			BitHardDifficulty   int `json:"counterBitHard"`
-			HardDifficulty      int `json:"counterHard"`
-			TooHardDifficulty   int `json:"counterTooHard"`
-			ExtraHardDifficulty int `json:"counterExHard"`
-			BrainFuckDifficulty int `json:"counterBrainFuck"`
-		} `json:"feedbackForChart"`
-		Avatar         string `json:"avatar"`
-		DifficultyText string `json:"difficultyText"`
-		IsCompleted    bool   `json:"isCompleted"`
-		LastResetTime  string `json:"last_reset_time"`
-		PlayInfo       struct {
-			IsSpawned         bool   `json:"isSpawned"`
-			IsSpawning        bool   `json:"isSpawning"`
-			IsActive          bool   `json:"isActive"`
-			ActivePlayerCount int    `json:"active_player_count"`
-			ExpiresAt         string `json:"expires_at"`
-		} `json:"playInfo"`
-
-		Free         bool `json:"free"`
-		MakerPrimary struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			Avatar      string `json:"avatar"`
-			IsRespected bool   `json:"isRespected"`
-		} `json:"maker"`
-		MakerSecondary struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			Avatar      string `json:"avatar"`
-			IsRespected bool   `json:"isRespected"`
-		} `json:"maker2"`
-		Recommended int    `json:"recommended"`
-		SPFlag      int    `json:"sp_flag"`
-		EasyMonth   int    `json:"easy_month"`
-		IP          string `json:"ip"`
+		ID                  int            `json:"id"`
+		Name                string         `json:"name"`
+		OS                  string         `json:"os"`
+		Points              int            `json:"points"`
+		StaticPoints        int            `json:"static_points"`
+		Release             string         `json:"release"`
+		UserOwnsCount       int            `json:"user_owns_count"`
+		RootOwnsCount       int            `json:"root_owns_count"`
+		AuthUserInUserOwns  bool           `json:"authUserInUserOwns"`
+		AuthUserInRootOwns  bool           `json:"authUserInRootOwns"`
+		IsTodo              bool           `json:"isTodo"`
+		AuthUserHasReviewed bool           `json:"authUserHasReviewed"`
+		Stars               string         `json:"stars"`
+		Difficulty          int            `json:"difficulty"`
+		DifficultyStats     Difficulties   `json:"feedbackForChart"`
+		Avatar              string         `json:"avatar"`
+		DifficultyText      string         `json:"difficultyText"`
+		IsCompleted         bool           `json:"isCompleted"`
+		LastResetTime       string         `json:"last_reset_time"`
+		PlayInfo            MachineStatus  `json:"playInfo"`
+		Free                bool           `json:"free"`
+		MakerPrimary        MachineCreator `json:"maker"`
+		MakerSecondary      MachineCreator `json:"maker2"`
+		Recommended         int            `json:"recommended"`
+		SPFlag              int            `json:"sp_flag"`
+		EasyMonth           int            `json:"easy_month"`
+		IP                  string         `json:"ip"`
 	}
 }
 
@@ -247,63 +164,34 @@ type MachinesActiveList struct {
 // https://www.hackthebox.com/api/v4/machine/list/retired
 type MachinesRetiredList struct {
 	Info []struct {
-		ID                  int    `json:"id"`
-		Name                string `json:"name"`
-		OS                  string `json:"os"`
-		Points              int    `json:"points"`
-		StaticPoints        int    `json:"static_points"`
-		Release             string `json:"release"`
-		UserOwnsCount       int    `json:"user_owns_count"`
-		RootOwnsCount       int    `json:"root_owns_count"`
-		AuthUserInUserOwns  bool   `json:"authUserInUserOwns"`
-		AuthUserInRootOwns  bool   `json:"authUserInRootOwns"`
-		IsTodo              bool   `json:"isTodo"`
-		AuthUserHasReviewed bool   `json:"authUserHasReviewed"`
-		Stars               string `json:"stars"`
-		Difficulty          int    `json:"difficulty"`
-		FeedbackChart       struct {
-			CakeDifficulty      int `json:"counterCake"`
-			VeryEasyDifficulty  int `json:"counterVeryEasy"`
-			EasyDifficulty      int `json:"counterEasy"`
-			TooEasyDifficulty   int `json:"counterTooEasy"`
-			MediumDifficulty    int `json:"counterMedium"`
-			BitHardDifficulty   int `json:"counterBitHard"`
-			HardDifficulty      int `json:"counterHard"`
-			TooHardDifficulty   int `json:"counterTooHard"`
-			ExtraHardDifficulty int `json:"counterExHard"`
-			BrainFuckDifficulty int `json:"counterBrainFuck"`
-		} `json:"feedbackForChart"`
-
-		Avatar         string `json:"avatar"`
-		DifficultyText string `json:"difficultyText"`
-		IsCompleted    bool   `json:"isCompleted"`
-		LastResetTime  string `json:"last_reset_time"`
-		PlayInfo       struct {
-			IsSpawned         bool   `json:"isSpawned"`
-			IsSpawning        bool   `json:"isSpawning"`
-			IsActive          bool   `json:"isActive"`
-			ActivePlayerCount int    `json:"active_player_count"`
-			ExpiresAt         string `json:"expires_at"`
-		} `json:"playInfo"`
-
-		Free         bool `json:"free"`
-		MakerPrimary struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			Avatar      string `json:"avatar"`
-			IsRespected bool   `json:"isRespected"`
-		} `json:"maker"`
-		MakerSecondary struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			Avatar      string `json:"avatar"`
-			IsRespected bool   `json:"isRespected"`
-		} `json:"maker2"`
-		Recommended int    `json:"recommended"`
-		SPFlag      int    `json:"sp_flag"`
-		EasyMonth   int    `json:"easy_month"`
-		IP          string `json:"ip"`
-		Tags        []struct {
+		ID                  int            `json:"id"`
+		Name                string         `json:"name"`
+		OS                  string         `json:"os"`
+		Points              int            `json:"points"`
+		StaticPoints        int            `json:"static_points"`
+		Release             string         `json:"release"`
+		UserOwnsCount       int            `json:"user_owns_count"`
+		RootOwnsCount       int            `json:"root_owns_count"`
+		AuthUserInUserOwns  bool           `json:"authUserInUserOwns"`
+		AuthUserInRootOwns  bool           `json:"authUserInRootOwns"`
+		IsTodo              bool           `json:"isTodo"`
+		AuthUserHasReviewed bool           `json:"authUserHasReviewed"`
+		Stars               string         `json:"stars"`
+		Difficulty          int            `json:"difficulty"`
+		DifficultyStats     Difficulties   `json:"feedbackForChart"`
+		Avatar              string         `json:"avatar"`
+		DifficultyText      string         `json:"difficultyText"`
+		IsCompleted         bool           `json:"isCompleted"`
+		LastResetTime       string         `json:"last_reset_time"`
+		PlayInfo            MachineStatus  `json:"playInfo"`
+		Free                bool           `json:"free"`
+		MakerPrimary        MachineCreator `json:"maker"`
+		MakerSecondary      MachineCreator `json:"maker2"`
+		Recommended         int            `json:"recommended"`
+		SPFlag              int            `json:"sp_flag"`
+		EasyMonth           int            `json:"easy_month"`
+		IP                  string         `json:"ip"`
+		Tags                []struct {
 			ID            int `json:"id"`
 			TagCategoryID int `json:"tag_category_id"`
 		} `json:"tags"`
@@ -333,26 +221,16 @@ type MachineTopsUsersList struct {
 // https://www.hackthebox.com/api/v4/machine/unreleased
 type MachinesToReleaseList struct {
 	Data []struct {
-		ID             int    `json:"id"`
-		Name           string `json:"name"`
-		OS             string `json:"os"`
-		Avatar         string `json:"avatar"`
-		Release        string `json:"release"`
-		Difficulty     int    `json:"difficulty"`
-		DifficultyText string `json:"difficulty_text"`
-		FirstCreator   []struct {
-			ID     int    `json:"id"`
-			Name   string `json:"name"`
-			Avatar string `json:"avatar"`
-		} `json:"firstCreator"`
-
-		CoCreators []struct {
-			ID     int    `json:"id"`
-			Name   string `json:"name"`
-			Avatar string `json:"avatar"`
-		} `json:"coCreators"`
-
-		Retiring struct {
+		ID             int             `json:"id"`
+		Name           string          `json:"name"`
+		OS             string          `json:"os"`
+		Avatar         string          `json:"avatar"`
+		Release        string          `json:"release"`
+		Difficulty     int             `json:"difficulty"`
+		DifficultyText string          `json:"difficulty_text"`
+		FirstCreator   MachineCreators `json:"firstCreator"`
+		CoCreators     MachineCreators `json:"coCreators"`
+		Retiring       struct {
 			DifficultyText string `json:"difficulty_text"`
 			Avatar         string `json:"avatar"`
 			OS             string `json:"os"`
