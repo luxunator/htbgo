@@ -3,7 +3,7 @@ package htbgo
 // Bearer Connection Status
 // https://www.hackthebox.com/api/v4/user/connection/status
 
-type ConnectionStatus struct {
+type ConnectionStatusInfo struct {
 	Status     string      `json:"status"`
 	Connection interface{} `json:"connection"`
 }
@@ -400,7 +400,7 @@ type UserOwnsByPathMap struct {
 // User Profile
 // https://www.hackthebox.com/api/v4/profile/{userID}
 
-type UserProfileInfo struct {
+type UserInfo struct {
 	Profile struct {
 		ID           int    `json:"id"`
 		SSOID        int    `json:"sso_id"`
@@ -461,7 +461,7 @@ type UserBadgesList struct {
 	} `json:"badges"`
 }
 
-func (s *Session) ConnectionStatusInfo() (status ConnectionStatus, err error) {
+func (s *Session) ConnectionStatus() (status ConnectionStatusInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/connection/status"
 	err = parseJSON(s, url, &status)
@@ -694,7 +694,7 @@ func (s *Session) UserOwnsByPath(userID int) (path UserOwnsByPathMap, err error)
 	return
 }
 
-func (s *Session) User(userID int) (profile UserProfileInfo, err error) {
+func (s *Session) User(userID int) (profile UserInfo, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {

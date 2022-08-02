@@ -81,7 +81,7 @@ type RankOfTeamDuringInfo struct {
 // Get the user's current team their rank bracket
 // https://www.hackthebox.com/api/v4/rankings/country/ranking_bracket
 
-type RankBracketOfTeam struct {
+type RankBracketOfTeamInfo struct {
 	Status bool `json:"status"`
 	Data   struct {
 		Rank                 int    `json:"rank"`
@@ -95,7 +95,7 @@ type RankBracketOfTeam struct {
 // Get the user's best rank in the general leaderboard for a certain period.
 // https://www.hackthebox.com/api/v4/rankings/user/best?period={period}&vip={numberValue}
 
-type RankBestDuring struct {
+type RankBestDuringInfo struct {
 	Status bool `json:"status"`
 	Data   struct {
 		Rank          interface{} `json:"rank"`
@@ -107,7 +107,7 @@ type RankBestDuring struct {
 // Get the user's rank overview in the general ledearboard for a certain period.
 // https://www.hackthebox.com/api/v4/rankings/user/overview?period=1Y&vip=0
 
-type RankDuring struct {
+type RankDuringInfo struct {
 	Status bool `json:"status"`
 	Data   struct {
 		PointsDiff   int         `json:"points_diff"`
@@ -126,7 +126,7 @@ type RankDuring struct {
 // Get the user's  current rank bracket in the general leaderboard
 // https://www.hackthebox.com/api/v4/rankings/user/ranking_bracket?vip=0
 
-type RankBracket struct {
+type RankBracketInfo struct {
 	Status bool `json:"status"`
 	Data   struct {
 		Rank                 interface{} `json:"rank"`
@@ -269,7 +269,7 @@ func (s *Session) RankOfTeamDuring(period Duration) (info RankOfTeamDuringInfo, 
 	return
 }
 
-func (s *Session) RankBracketOfTeamInfo() (bracket RankBracketOfTeam, err error) {
+func (s *Session) RankBracketOfTeam() (bracket RankBracketOfTeamInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/ranking_bracket"
 	err = parseJSON(s, url, &bracket)
@@ -277,7 +277,7 @@ func (s *Session) RankBracketOfTeamInfo() (bracket RankBracketOfTeam, err error)
 	return
 }
 
-func (s *Session) RankBestDuringInfo(period Duration, wantVIP bool) (rank RankBestDuring, err error) {
+func (s *Session) RankBestDuring(period Duration, wantVIP bool) (rank RankBestDuringInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/user/best?period=" + string(period) + "&vip=" + stringFromVIP(wantVIP)
 	err = parseJSON(s, url, &rank)
@@ -285,7 +285,7 @@ func (s *Session) RankBestDuringInfo(period Duration, wantVIP bool) (rank RankBe
 	return
 }
 
-func (s *Session) RankDuringInfo(period Duration, wantVIP bool) (rank RankDuring, err error) {
+func (s *Session) RankDuring(period Duration, wantVIP bool) (rank RankDuringInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/user/overview?period=" + string(period) + "&vip=" + stringFromVIP(wantVIP)
 	err = parseJSON(s, url, &rank)
@@ -293,7 +293,7 @@ func (s *Session) RankDuringInfo(period Duration, wantVIP bool) (rank RankDuring
 	return
 }
 
-func (s *Session) RankBracketInfo(wantVIP bool) (bracket RankBracket, err error) {
+func (s *Session) RankBracket(wantVIP bool) (bracket RankBracketInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/user/ranking_bracket?vip=" + stringFromVIP(wantVIP)
 	err = parseJSON(s, url, &bracket)

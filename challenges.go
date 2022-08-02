@@ -3,7 +3,7 @@ package htbgo
 // Challenge Recommendation Cards
 // https://www.hackthebox.com/api/v4/challenge/recommended
 
-type AllRecommendedChallengeCards struct {
+type ChallengesSuggestedInfo struct {
 	State   []string `json:"state"`
 	CardOne struct {
 		ID           int    `json:"id"`
@@ -28,7 +28,7 @@ type AllRecommendedChallengeCards struct {
 // Challenge Reccomendation Cards Retired
 // https://www.hackthebox.com/api/v4/challenge/recommended/retired
 
-type RetiredRecommendationChallengeCards struct {
+type ChallengesRetiredSuggestedInfo struct {
 	CardOne struct {
 		ID           int    `json:"id"`
 		Name         string `json:"name"`
@@ -70,7 +70,7 @@ type BearerChallengeReviews struct {
 // List Challenge Categories
 // https://www.hackthebox.com/api/v4/challenge/categories/list
 
-type ChallengeCategoryList struct {
+type ChallengeCategoriesList struct {
 	Info []struct {
 		ID   int    `json:"id"`
 		Name string `json:"name"`
@@ -80,7 +80,7 @@ type ChallengeCategoryList struct {
 // List Active Challenges
 // https://www.hackthebox.com/api/v4/challenge/list
 
-type ActiveChallengesList struct {
+type ChallengesActiveList struct {
 	Challenges []struct {
 		ID              int    `json:"id"`
 		Name            string `json:"name"`
@@ -121,7 +121,7 @@ type ActiveChallengesList struct {
 // List Retired Challenges
 // https://www.hackthebox.com/api/v4/challenge/list/retired
 
-type RetiredChallengesList struct {
+type ChallengesRetiredList struct {
 	Challenges []struct {
 		ID              int    `json:"id"`
 		Name            string `json:"name"`
@@ -162,7 +162,7 @@ type RetiredChallengesList struct {
 // Challenge Profile
 // https://www.hackthebox.com/api/v4/challenge/info/{challengeID}
 
-type ChallengeProfile struct {
+type ChallengeInfo struct {
 	Challenge struct {
 		ID              int    `json:"id"`
 		Name            string `json:"name"`
@@ -218,7 +218,7 @@ type ChallengeProfile struct {
 // Challenge Activity
 // https://www.hackthebox.com/api/v4/challenge/activity/{challengeID}
 
-type ChallengeActivities struct {
+type ChallengeActivityList struct {
 	Info struct {
 		Activity []struct {
 			CreatedAt  string `json:"created_at"`
@@ -250,7 +250,7 @@ type ChangeLogList struct {
 
 */
 
-func (s *Session) ChallengeRecommendations() (cards AllRecommendedChallengeCards, err error) {
+func (s *Session) ChallengesSuggested() (cards ChallengesSuggestedInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/recommended"
 	err = parseJSON(s, url, &cards)
@@ -258,7 +258,7 @@ func (s *Session) ChallengeRecommendations() (cards AllRecommendedChallengeCards
 	return
 }
 
-func (s *Session) ChallengeRetiredRecommendations() (cards RetiredRecommendationChallengeCards, err error) {
+func (s *Session) ChallengesRetiredSuggested() (cards ChallengesRetiredSuggestedInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/recommended/retired"
 	err = parseJSON(s, url, &cards)
@@ -266,7 +266,7 @@ func (s *Session) ChallengeRetiredRecommendations() (cards RetiredRecommendation
 	return
 }
 
-func (s *Session) ChallengeCategories() (categories ChallengeCategoryList, err error) {
+func (s *Session) ChallengeCategories() (categories ChallengeCategoriesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/categories/list"
 	err = parseJSON(s, url, &categories)
@@ -274,7 +274,7 @@ func (s *Session) ChallengeCategories() (categories ChallengeCategoryList, err e
 	return
 }
 
-func (s *Session) ActiveChallenges() (challenges ActiveChallengesList, err error) {
+func (s *Session) ChallengesActive() (challenges ChallengesActiveList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/list"
 	err = parseJSON(s, url, &challenges)
@@ -282,7 +282,7 @@ func (s *Session) ActiveChallenges() (challenges ActiveChallengesList, err error
 	return
 }
 
-func (s *Session) RetiredChallenges() (challenges RetiredChallengesList, err error) {
+func (s *Session) ChallengesRetired() (challenges ChallengesRetiredList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/list/retired"
 	err = parseJSON(s, url, &challenges)
@@ -290,7 +290,7 @@ func (s *Session) RetiredChallenges() (challenges RetiredChallengesList, err err
 	return
 }
 
-func (s *Session) ChallengeInfo(challengeID int) (info ChallengeProfile, err error) {
+func (s *Session) Challenge(challengeID int) (info ChallengeInfo, err error) {
 
 	challengeIDString, err := toPositiveIntString(challengeID)
 	if err != nil {
@@ -303,7 +303,7 @@ func (s *Session) ChallengeInfo(challengeID int) (info ChallengeProfile, err err
 	return
 }
 
-func (s *Session) ChallengeActivity(challengeID int) (activities ChallengeActivities, err error) {
+func (s *Session) ChallengeActivity(challengeID int) (activities ChallengeActivityList, err error) {
 
 	challengeIDString, err := toPositiveIntString(challengeID)
 	if err != nil {

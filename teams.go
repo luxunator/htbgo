@@ -182,46 +182,6 @@ type TeamPointsInfo struct {
 	} `json:"data"`
 }
 
-// Current Rank Overview for Bearer's Team
-// https://www.hackthebox.com/api/v4/rankings/team/ranking_bracket
-
-type TeamBracketCurrent struct {
-	Status bool `json:"status"`
-	Data   struct {
-		Rank                 int    `json:"rank"`
-		Points               int    `json:"points"`
-		PointsForNextBracket int    `json:"points_for_next_bracket"`
-		CurrentBracket       string `json:"current_bracket"`
-		NextBracket          string `json:"next_bracket"`
-	} `json:"data"`
-}
-
-// List Top-Ranked Teams
-// https://www.hackthebox.com/api/v4/rankings/teams
-
-type TopTeam struct {
-	Rank            int    `json:"rank"`
-	Points          int    `json:"points"`
-	RootOwns        int    `json:"root_owns"`
-	UserOwns        int    `json:"user_owns"`
-	ChallengeOwns   int    `json:"challenge_owns"`
-	RootBloods      int    `json:"root_bloods"`
-	UserBloods      int    `json:"user_bloods"`
-	ChallengeBloods int    `json:"challenge_bloods"`
-	Fortress        int    `json:"fortress"`
-	Endgame         int    `json:"endgame"`
-	ID              int    `json:"id"`
-	Name            string `json:"name"`
-	AvatarThumbURL  string `json:"avatar_thumb_url"`
-	Country         string `json:"country"`
-	RanksDiff       int    `json:"ranks_diff"`
-}
-
-type TopTeamsList struct {
-	Status bool      `json:"status"`
-	Data   []TopTeam `json:"data"`
-}
-
 func (s *Session) Team(teamID int) (info TeamInfo, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
@@ -274,7 +234,7 @@ func (s *Session) TeamStatsDuring(teamID int, duration Duration) (graph TeamStat
 	return
 }
 
-func (s *Session) TeamPathOwns(teamID int) (path TeamOwnsByPathMap, err error) {
+func (s *Session) TeamOwnsByPath(teamID int) (path TeamOwnsByPathMap, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
@@ -325,22 +285,6 @@ func (s *Session) TeamPoints(period Duration) (points TeamPointsInfo, err error)
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/overview?period=" + string(period)
 	err = parseJSON(s, url, &points)
-
-	return
-}
-
-func (s *Session) TeamBracket() (bracket TeamBracketCurrent, err error) {
-
-	var url string = "https://www.hackthebox.com/api/v4/rankings/team/ranking_bracket"
-	err = parseJSON(s, url, &bracket)
-
-	return
-}
-
-func (s *Session) TopTeams() (teams TopTeamsList, err error) {
-
-	var url string = "https://www.hackthebox.com/api/v4/rankings/teams"
-	err = parseJSON(s, url, &teams)
 
 	return
 }

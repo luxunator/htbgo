@@ -3,7 +3,7 @@ package htbgo
 // Active Fortesses List
 // https://www.hackthebox.com/api/v4/fortresses
 
-type ActiveFortressesList struct {
+type FortressesActiveMap struct {
 	Status bool `json:"status"`
 	Data   map[string]struct {
 		ID            int    `json:"id"`
@@ -18,7 +18,7 @@ type ActiveFortressesList struct {
 // Fortress Profile
 // https://www.hackthebox.com/api/v4/fortress/{fortressID}
 
-type FortessProfile struct {
+type FortessInfo struct {
 	Status bool `json:"enum"`
 	Data   struct {
 		ID            int    `json:"id"`
@@ -67,7 +67,7 @@ type FortressFlagList struct {
 	} `json:"data"`
 }
 
-func (s *Session) ActiveFortresses() (fortresses ActiveFortressesList, err error) {
+func (s *Session) FortressesActive() (fortresses FortressesActiveMap, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/fortresses"
 	err = parseJSON(s, url, &fortresses)
@@ -75,7 +75,7 @@ func (s *Session) ActiveFortresses() (fortresses ActiveFortressesList, err error
 	return
 }
 
-func (s *Session) FortressInfo(fortressID int) (info FortessProfile, err error) {
+func (s *Session) Fortress(fortressID int) (info FortessInfo, err error) {
 
 	fortressIDString, err := toPositiveIntString(fortressID)
 	if err != nil {
