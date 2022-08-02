@@ -3,7 +3,7 @@ package htbgo
 // List Available Tracks
 // https://www.hackthebox.com/api/v4/tracks
 
-type TracksList []struct {
+type TracksActiveList []struct {
 	ID      int    `json:"id"`
 	Name    string `json:"name"`
 	Creator struct {
@@ -22,7 +22,7 @@ type TracksList []struct {
 // Track Profile
 // https://www.hackthebox.com/api/v4/tracks/{trackID}
 
-type TrackProfile struct {
+type TrackInfo struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
@@ -67,7 +67,7 @@ type TrackProfile struct {
 	// CompletionCTA `json:"completion_cta"` TODO
 }
 
-func (s *Session) ActiveTracks() (tracks TracksList, err error) {
+func (s *Session) TracksActive() (tracks TracksActiveList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/tracks"
 	err = parseJSON(s, url, &tracks)
@@ -75,7 +75,7 @@ func (s *Session) ActiveTracks() (tracks TracksList, err error) {
 	return
 }
 
-func (s *Session) TrackInfo(trackID int) (info TrackProfile, err error) {
+func (s *Session) Track(trackID int) (info TrackInfo, err error) {
 
 	trackIDString, err := toPositiveIntString(trackID)
 	if err != nil {

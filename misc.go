@@ -1,8 +1,8 @@
 package htbgo
 
-// List of Badges
+// List of BadgesList
 // https://www.hackthebox.com/api/v4/category/badges
-type Badges struct {
+type BadgesList struct {
 	Categories []struct {
 		ID     int    `json:"id"`
 		Name   string `json:"name"`
@@ -23,7 +23,7 @@ type Badges struct {
 
 // List Bug Feedback Areas
 // https://www.hackthebox.com/api/v4/user/feedback/bug/areas
-type BugFeedbackAreasList struct {
+type ReportBugAreasList struct {
 	Info []struct {
 		ID   int    `json:"id"`
 		Name string `json:"name"`
@@ -32,7 +32,7 @@ type BugFeedbackAreasList struct {
 
 // Machine And Challenge Stats
 // https://www.hackthebox.com/api/v4/content/stats
-type MachineAndChallengeStats struct {
+type LabsStatsInfo struct {
 	Machines         int `json:"machines"`
 	Challenges       int `json:"challenges"`
 	Users            int `json:"users"`
@@ -62,9 +62,9 @@ type MachineAndChallengeStats struct {
 	Companies int `json:"companies"`
 }
 
-// Changelogs
+// ChangelogsList
 // https://www.hackthebox.com/api/v4/changelogs
-type Changelogs struct {
+type ChangelogsList struct {
 	Changelogs []struct {
 		ID          int    `json:"id"`
 		Version     string `json:"version"`
@@ -81,7 +81,7 @@ type Changelogs struct {
 
 // List Hackthebox Servers
 // https://www.hackthebox.com/api/v4/lab/list
-type HacktheboxServers struct {
+type ServersList struct {
 	LabCategories []struct {
 		Code     string `json:"code"`
 		Name     string `json:"name"`
@@ -104,7 +104,7 @@ type HacktheboxServers struct {
 
 // List Improvement Feedback Areas
 // https://www.hackthebox.com/api/v4/user/feedback/improvement/areas
-type ImprovementFeedbackAreasList struct {
+type ReportImprovementAreasList struct {
 	Info []struct {
 		ID   int    `json:"id"`
 		Name string `json:"name"`
@@ -113,7 +113,7 @@ type ImprovementFeedbackAreasList struct {
 
 // Various Stats
 // https://www.hackthebox.com/api/v4/user/dashboard
-type VariousStats struct {
+type StatsInfo struct {
 	DashboardPlayers struct {
 		OnlinePlayers string `json:"online_players"`
 	} `json:"dashboard_players"`
@@ -122,7 +122,7 @@ type VariousStats struct {
 // Sidebar changelogs
 // https://www.hackthebox.com/api/v4/sidebar/changelog
 
-type SidebarChangelogs struct {
+type ChangelogsSidebarInfo struct {
 	Changelog struct {
 		ID        int    `json:"id"`
 		Version   string `json:"version"`
@@ -133,7 +133,7 @@ type SidebarChangelogs struct {
 // Announcement
 // https://www.hackthebox.com/api/v4/sidebar/announcement
 
-type SidebarAnnouncement struct {
+type AnnouncementInfo struct {
 	Announcement struct {
 		ID        int    `json:"id"`
 		UpdatedAt string `json:"updated_at"`
@@ -142,7 +142,7 @@ type SidebarAnnouncement struct {
 	} `json:"announcement"`
 }
 
-func (s *Session) Badges() (badges Badges, err error) {
+func (s *Session) Badges() (badges BadgesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/category/badges"
 	err = parseJSON(s, url, &badges)
@@ -150,7 +150,7 @@ func (s *Session) Badges() (badges Badges, err error) {
 	return
 }
 
-func (s *Session) BugFeedbackAreas() (areas BugFeedbackAreasList, err error) {
+func (s *Session) ReportBugAreas() (areas ReportBugAreasList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/feedback/bug/areas"
 	err = parseJSON(s, url, &areas)
@@ -158,7 +158,7 @@ func (s *Session) BugFeedbackAreas() (areas BugFeedbackAreasList, err error) {
 	return
 }
 
-func (s *Session) MachineAndChallengeStats() (stats MachineAndChallengeStats, err error) {
+func (s *Session) LabsStats() (stats LabsStatsInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/content/stats"
 	err = parseJSON(s, url, &stats)
@@ -166,7 +166,7 @@ func (s *Session) MachineAndChallengeStats() (stats MachineAndChallengeStats, er
 	return
 }
 
-func (s *Session) Changelogs() (changelogs Changelogs, err error) {
+func (s *Session) Changelogs() (changelogs ChangelogsList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/changelogs"
 	err = parseJSON(s, url, &changelogs)
@@ -174,7 +174,7 @@ func (s *Session) Changelogs() (changelogs Changelogs, err error) {
 	return
 }
 
-func (s *Session) Servers() (servers HacktheboxServers, err error) {
+func (s *Session) Servers() (servers ServersList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/lab/list"
 	err = parseJSON(s, url, &servers)
@@ -182,7 +182,7 @@ func (s *Session) Servers() (servers HacktheboxServers, err error) {
 	return
 }
 
-func (s *Session) ImprovementFeedbackAreas() (areas ImprovementFeedbackAreasList, err error) {
+func (s *Session) ReportImprovementAreas() (areas ReportImprovementAreasList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/feedback/improvement/areas"
 	err = parseJSON(s, url, &areas)
@@ -190,7 +190,7 @@ func (s *Session) ImprovementFeedbackAreas() (areas ImprovementFeedbackAreasList
 	return
 }
 
-func (s *Session) VariousStats() (stats VariousStats, err error) {
+func (s *Session) Stats() (stats StatsInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/dashboard"
 	err = parseJSON(s, url, &stats)
@@ -198,7 +198,7 @@ func (s *Session) VariousStats() (stats VariousStats, err error) {
 	return
 }
 
-func (s *Session) SidebarChangelogs() (changelogs SidebarChangelogs, err error) {
+func (s *Session) ChangelogsSidebar() (changelogs ChangelogsSidebarInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/sidebar/changelog"
 	err = parseJSON(s, url, &changelogs)
@@ -206,7 +206,7 @@ func (s *Session) SidebarChangelogs() (changelogs SidebarChangelogs, err error) 
 	return
 }
 
-func (s *Session) Announcement() (announcement SidebarAnnouncement, err error) {
+func (s *Session) Announcement() (announcement AnnouncementInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/sidebar/announcement"
 	err = parseJSON(s, url, &announcement)

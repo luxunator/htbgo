@@ -3,7 +3,7 @@ package htbgo
 // Current Prolabs List
 // https://www.hackthebox.com/api/v4/prolabs
 
-type ProLabsList struct {
+type ProLabsActiveList struct {
 	Status bool `json:"status"`
 	Data   struct {
 		Count int `json:"count"`
@@ -29,7 +29,7 @@ type ProLabsList struct {
 // Prolab Profile
 // https://www.hackthebox.com/api/v4/prolab/{prolabID}/info
 
-type ProLabProfile struct {
+type ProLabInfo struct {
 	Status bool `json:"status"`
 	Data   struct {
 		ID               int      `json:"id"`
@@ -181,7 +181,7 @@ type ProLabPaginatedReviewsList struct {
 	} `json:"meta"`
 }
 
-func (s *Session) ActiveProLabs() (proLabs ProLabsList, err error) {
+func (s *Session) ProLabsActive() (proLabs ProLabsActiveList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/prolabs"
 	err = parseJSON(s, url, &proLabs)
@@ -189,7 +189,7 @@ func (s *Session) ActiveProLabs() (proLabs ProLabsList, err error) {
 	return
 }
 
-func (s *Session) ProLabInfo(proLabID int) (info ProLabProfile, err error) {
+func (s *Session) ProLab(proLabID int) (info ProLabInfo, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
 	if err != nil {
