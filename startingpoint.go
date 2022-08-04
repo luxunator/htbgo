@@ -1,51 +1,48 @@
 package htbgo
 
+type StartingPointCreator struct {
+	ID          int    `json:"id"`
+	Name        string `json:"name"`
+	Avatar      string `json:"avatar"`
+	IsRespected bool   `json:"isRespected"`
+}
+
 // Starting Point Machines List
 // https://www.hackthebox.com/api/v4/sp/machines
 
 type StartingPointMachinesList struct {
 	Info []struct {
-		ID                  int          `json:"id"`
-		Name                string       `json:"name"`
-		OS                  string       `json:"os"`
-		Points              int          `json:"points"`
-		StaticPoints        int          `json:"static_points"`
-		Release             string       `json:"release"`
-		UserOwnsCount       int          `json:"user_owns_count"`
-		RootOwnsCount       int          `json:"root_owns_count"`
-		AuthUserInUserOwns  bool         `json:"authUserInUserOwns"`
-		AuthUserInRootOwns  bool         `json:"authUserInRootOwns"`
-		IsTodo              bool         `json:"isTodo"`
-		AuthUserHasReviewed bool         `json:"authUserHasReviewed"`
-		Stars               string       `json:"stars"`
-		Difficulty          int          `json:"difficulty"`
-		DifficultyStats     Difficulties `json:"feedbackForChart"`
-		Avatar              string       `json:"avatar"`
-		DifficultyText      string       `json:"difficultyText"`
-		PlayInfo            struct {
-			IsSpawned         bool   `json:"isSpawned"`
-			IsSpawning        bool   `json:"isSpawning"`
-			IsActive          bool   `json:"isActive"`
-			ActivePlayerCount int    `json:"active_player_count"`
-			ExpiresAt         string `json:"expires_at"`
+		ID              int          `json:"id"`
+		Name            string       `json:"name"`
+		OS              string       `json:"os"`
+		Points          int          `json:"points"`
+		StaticPoints    int          `json:"static_points"`
+		Release         string       `json:"release"`
+		UserOwns        int          `json:"user_owns_count"`
+		RootOwns        int          `json:"root_owns_count"`
+		InUserOwns      bool         `json:"authUserInUserOwns"`
+		InRootOwns      bool         `json:"authUserInRootOwns"`
+		IsTodo          bool         `json:"isTodo"`
+		HasReviewed     bool         `json:"authUserHasReviewed"`
+		Stars           string       `json:"stars"`
+		DifficultyAvg   int          `json:"difficulty"`
+		DifficultyStats Difficulties `json:"feedbackForChart"`
+		Avatar          string       `json:"avatar"`
+		Difficulty      string       `json:"difficultyText"`
+		PlayInfo        struct {
+			IsSpawned   bool   `json:"isSpawned"`
+			IsSpawning  bool   `json:"isSpawning"`
+			IsActive    bool   `json:"isActive"`
+			PlayerCount int    `json:"active_player_count"`
+			ExpiresAt   string `json:"expires_at"`
 		} `json:"playInfo"`
-		Free  bool `json:"free"`
-		Maker struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			Avatar      string `json:"avatar"`
-			IsRespected bool   `json:"isRespected"`
-		} `json:"maker"`
-		MakerTwo struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			Avatar      string `json:"avatar"`
-			IsRespected bool   `json:"isRespected"`
-		} `json:"maker2"`
-		Recommended  int  `json:"recommended"`
-		SPFlag       int  `json:"sp_flag"`
-		EasyMonth    int  `json:"easy_month"`
-		RootFlagOnly bool `json:"root_flag_only"`
+		IsFree          bool                 `json:"free"`
+		CreatorOne      StartingPointCreator `json:"maker"`
+		CreatorTwo      StartingPointCreator `json:"maker2"`
+		Recommended     int                  `json:"recommended"`
+		SPFlag          int                  `json:"sp_flag"`
+		EasyMonth       int                  `json:"easy_month"`
+		HasRootFlagOnly bool                 `json:"root_flag_only"`
 	}
 }
 

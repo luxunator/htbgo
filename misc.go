@@ -12,16 +12,16 @@ type BadgesList struct {
 		ID     int    `json:"id"`
 		Name   string `json:"name"`
 		Badges []struct {
-			ID              int    `json:"id"`
-			Name            string `json:"name"`
-			Description     string `json:"description_en"`
-			Color           string `json:"color"`
-			Icon            string `json:"icon"`
-			BadgeCategoryID int    `json:"badge_category_id"`
-			BadgeableType   string `json:"badgeable_type"`
-			BadgeableID     int    `json:"badgeable_id"`
-			Percentage      int    `json:"percentage"`
-			UsersCount      int    `json:"users_count"`
+			ID            int    `json:"id"`
+			Name          string `json:"name"`
+			Description   string `json:"description_en"`
+			Color         string `json:"color"`
+			Icon          string `json:"icon"`
+			CategoryID    int    `json:"badge_category_id"`
+			BadgeableType string `json:"badgeable_type"`
+			BadgeableID   int    `json:"badgeable_id"`
+			Percentage    int    `json:"percentage"`
+			UsersCount    int    `json:"users_count"`
 		} `json:"badges"`
 	} `json:"categories"`
 }
@@ -41,9 +41,9 @@ type LabsStatsInfo struct {
 	RecruitmentUsers int `json:"recruitment_users"`
 	PlatformHours    int `json:"platform_hours"`
 	ChallengeTypes   []struct {
-		ID                 int    `json:"id"`
-		Name               string `json:"name"`
-		NumberOfChallenges int    `json:"challenges_count"`
+		ID    int    `json:"id"`
+		Name  string `json:"name"`
+		Count int    `json:"challenges_count"`
 	} `json:"challenge_counts"`
 	Prolabs struct {
 		Info []struct {
@@ -114,7 +114,7 @@ type ReportImprovementAreasList struct {
 // https://www.hackthebox.com/api/v4/user/dashboard
 type StatsInfo struct {
 	DashboardPlayers struct {
-		OnlinePlayers string `json:"online_players"`
+		Online string `json:"online_players"`
 	} `json:"dashboard_players"`
 }
 

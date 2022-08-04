@@ -58,60 +58,33 @@ type ChallengeCategoriesList struct {
 // List Active Challenges
 // https://www.hackthebox.com/api/v4/challenge/list
 
-type ChallengesActiveList struct {
-	Challenges []struct {
-		ID                  int          `json:"id"`
-		Name                string       `json:"name"`
-		URLName             string       `json:"url_name"`
-		Retired             int          `json:"retired"`
-		Difficulty          string       `json:"difficulty"`
-		AvgDifficulty       int          `json:"avg_difficulty"`
-		Points              string       `json:"points"`
-		StaticPoints        string       `json:"static_points"`
-		DifficultyStats     Difficulties `json:"difficulty_chart"`
-		DifficultyChartArr  []int        `json:"difficulty_chart_arr"`
-		Solves              int          `json:"solves"`
-		Likes               int          `json:"likes"`
-		Dislikes            int          `json:"dislikes"`
-		ReleaseDate         string       `json:"release_date"`
-		IsCompleted         bool         `json:"isCompleted"`
-		ChallengeCategoryID int          `json:"challenge_category_id"`
-		LikeByAuthUser      bool         `json:"likeByAuthUser"`
-		DislikeByAuthUser   bool         `json:"dislikeByAuthUser"`
-		AuthUserSolve       bool         `json:"authUserSolve"`
-		IsActive            bool         `json:"isActive"`
-		IsTodo              bool         `json:"isTodo"`
-		Recommended         int          `json:"recommended"`
-	} `json:"challenges"`
-}
-
 // List Retired Challenges
 // https://www.hackthebox.com/api/v4/challenge/list/retired
 
-type ChallengesRetiredList struct {
+type ChallengesList struct {
 	Challenges []struct {
-		ID                  int          `json:"id"`
-		Name                string       `json:"name"`
-		URLName             string       `json:"url_name"`
-		Retired             int          `json:"retired"`
-		Difficulty          string       `json:"difficulty"`
-		AvgDifficulty       int          `json:"avg_difficulty"`
-		Points              int          `json:"points"` // Need to change from 0
-		StaticPoints        string       `json:"static_points"`
-		DifficultyStats     Difficulties `json:"difficulty_chart"`
-		DifficultyChartArr  []int        `json:"difficulty_chart_arr"`
-		Solves              int          `json:"solves"`
-		Likes               int          `json:"likes"`
-		Dislikes            int          `json:"dislikes"`
-		ReleaseDate         string       `json:"release_date"`
-		IsCompleted         bool         `json:"isCompleted"`
-		ChallengeCategoryID int          `json:"challenge_category_id"`
-		LikeByAuthUser      bool         `json:"likeByAuthUser"`
-		DislikeByAuthUser   bool         `json:"dislikeByAuthUser"`
-		AuthUserSolve       bool         `json:"authUserSolve"`
-		IsActive            bool         `json:"isActive"`
-		IsTodo              bool         `json:"isTodo"`
-		Recommended         int          `json:"recommended"`
+		ID                 int          `json:"id"`
+		Name               string       `json:"name"`
+		URLName            string       `json:"url_name"`
+		Retired            int          `json:"retired"`
+		Difficulty         string       `json:"difficulty"`
+		DifficultyAvg      int          `json:"avg_difficulty"`
+		Points             interface{}  `json:"points"`
+		StaticPoints       string       `json:"static_points"`
+		DifficultyStats    Difficulties `json:"difficulty_chart"`
+		DifficultyStatsArr []int        `json:"difficulty_chart_arr"`
+		Solves             int          `json:"solves"`
+		Likes              int          `json:"likes"`
+		Dislikes           int          `json:"dislikes"`
+		ReleaseDate        string       `json:"release_date"`
+		IsCompleted        bool         `json:"isCompleted"`
+		CategoryID         int          `json:"challenge_category_id"`
+		IsLiked            bool         `json:"likeByAuthUser"`
+		IsDisliked         bool         `json:"dislikeByAuthUser"`
+		IsSolved           bool         `json:"authUserSolve"`
+		IsActive           bool         `json:"isActive"`
+		IsTodo             bool         `json:"isTodo"`
+		Recommended        int          `json:"recommended"`
 	} `json:"challenges"`
 }
 
@@ -120,43 +93,43 @@ type ChallengesRetiredList struct {
 
 type ChallengeInfo struct {
 	Challenge struct {
-		ID                   int          `json:"id"`
-		Name                 string       `json:"name"`
-		Retired              int          `json:"retired"`
-		Difficulty           string       `json:"difficulty"`
-		Points               string       `json:"points"`
-		DifficultyStats      Difficulties `json:"difficulty_chart"`
-		Solves               int          `json:"solves"`
-		AuthUserSolveTime    string       `json:"authUserSolveTime"`
-		Likes                int          `json:"likes"`
-		Dislikes             int          `json:"dislikes"`
-		Description          string       `json:"description"`
-		CategoryName         string       `json:"category_name"`
-		FirstBloodUserID     int          `json:"first_blood_user_id"`
-		FirstBloodUser       string       `json:"first_blood_user"`
-		FirstBloodTime       string       `json:"first_blood_time"`
-		FirstBloodUserAvatar string       `json:"first_blood_user_avatar"`
-		CreatorID            int          `json:"creator_id"`
-		CreatorName          string       `json:"creator_name"`
-		CreatorAvatar        string       `json:"creator_avatar"`
-		IsRespected          bool         `json:"isRespected"`
-		CreatorTwoID         int          `json:"creator2_id"`
-		CreatorTwoName       string       `json:"creator2_name"`
-		CreatorTwoAvatar     string       `json:"creator2_avatar"`
-		IsRespectedTwo       bool         `json:"isRespected2"`
-		Download             bool         `json:"download"`
-		SHA256               string       `json:"sha256"`
-		Docker               bool         `json:"docker"`
-		DockerIP             string       `json:"docker_ip"`
-		DockerPort           int          `json:"docker_port"`
-		ReleaseDate          string       `json:"release_date"`
-		Released             int          `json:"released"`
-		AuthUserSolve        bool         `json:"authUserSolve"`
-		LikeByAuthUser       bool         `json:"likeByAuthUser"`
-		DislikeByAuthUser    bool         `json:"dislikeByAuthUser"`
-		IsTodo               bool         `json:"isTodo"`
-		Recommended          int          `json:"recommended"`
-		AuthUserHasReviewed  bool         `json:"authUserHasReviewed"`
+		ID                    int          `json:"id"`
+		Name                  string       `json:"name"`
+		Retired               int          `json:"retired"`
+		Difficulty            string       `json:"difficulty"`
+		Points                string       `json:"points"`
+		DifficultyStats       Difficulties `json:"difficulty_chart"`
+		Solves                int          `json:"solves"`
+		SolveTime             string       `json:"authUserSolveTime"`
+		Likes                 int          `json:"likes"`
+		Dislikes              int          `json:"dislikes"`
+		Description           string       `json:"description"`
+		CategoryName          string       `json:"category_name"`
+		BloodUserID           int          `json:"first_blood_user_id"`
+		BloodUser             string       `json:"first_blood_user"`
+		BloodTime             string       `json:"first_blood_time"`
+		BloodUserAvatar       string       `json:"first_blood_user_avatar"`
+		CreatorID             int          `json:"creator_id"`
+		CreatorName           string       `json:"creator_name"`
+		CreatorAvatar         string       `json:"creator_avatar"`
+		CreatorIsRespected    bool         `json:"isRespected"`
+		CreatorTwoID          int          `json:"creator2_id"`
+		CreatorTwoName        string       `json:"creator2_name"`
+		CreatorTwoAvatar      string       `json:"creator2_avatar"`
+		CreatorTwoIsRespected bool         `json:"isRespected2"`
+		HasDownload           bool         `json:"download"`
+		SHA256                string       `json:"sha256"`
+		HasDocker             bool         `json:"docker"`
+		DockerIP              string       `json:"docker_ip"`
+		DockerPort            int          `json:"docker_port"`
+		ReleaseDate           string       `json:"release_date"`
+		Released              int          `json:"released"`
+		IsSolved              bool         `json:"authUserSolve"`
+		IsLiked               bool         `json:"likeByAuthUser"`
+		IsDisliked            bool         `json:"dislikeByAuthUser"`
+		IsTodo                bool         `json:"isTodo"`
+		Recommended           int          `json:"recommended"`
+		HasReviewed           bool         `json:"authUserHasReviewed"`
 	} `json:"challenge"`
 }
 
@@ -219,7 +192,7 @@ func (s *Session) ChallengeCategories() (categories ChallengeCategoriesList, err
 	return
 }
 
-func (s *Session) ChallengesActive() (challenges ChallengesActiveList, err error) {
+func (s *Session) ChallengesActive() (challenges ChallengesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/list"
 	err = parseJSON(s, url, &challenges)
@@ -227,7 +200,7 @@ func (s *Session) ChallengesActive() (challenges ChallengesActiveList, err error
 	return
 }
 
-func (s *Session) ChallengesRetired() (challenges ChallengesRetiredList, err error) {
+func (s *Session) ChallengesRetired() (challenges ChallengesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/list/retired"
 	err = parseJSON(s, url, &challenges)

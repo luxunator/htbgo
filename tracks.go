@@ -14,10 +14,10 @@ type TracksActiveList []struct {
 	ID         int          `json:"id"`
 	Name       string       `json:"name"`
 	Creator    TrackCreator `json:"creator"`
-	Official   bool         `json:"official"`
+	IsOfficial bool         `json:"official"`
 	StaffPick  int          `json:"staff_pick"`
 	Difficulty string       `json:"difficulty"`
-	CoverImage string       `json:"cover_image"`
+	Cover      string       `json:"cover_image"`
 	Likes      int          `json:"likes"`
 }
 
@@ -30,7 +30,7 @@ type TrackInfo struct {
 	Description string       `json:"description"`
 	Difficulty  string       `json:"difficulty"`
 	Creator     TrackCreator `json:"creator"`
-	Official    bool         `json:"official"`
+	IsOfficial  bool         `json:"official"`
 	StaffPick   int          `json:"staff_pick"`
 	Items       []struct {
 		ID              int          `json:"id"`
@@ -41,16 +41,16 @@ type TrackInfo struct {
 		Avatar          string       `json:"avatar"`
 		OS              string       `json:"os"`
 		Category        string       `json:"category"`
-		Complete        bool         `json:"complete"`
-	}
-	CoverImage           string `json:"cover_image"`
+		IsComplete      bool         `json:"complete"`
+	} `json:"items"`
+	Cover                string `json:"cover_image"`
 	Likes                int    `json:"likes"`
-	Liked                bool   `json:"liked"`
-	Enrolled             bool   `json:"enrolled"`
+	HasLiked             bool   `json:"liked"`
+	IsEnrolled           bool   `json:"enrolled"`
 	HasCompletionMessage bool   `json:"has_completion_message"`
 	CompletionURL        string `json:"completion_url"`
 	CompletionMessage    string `json:"completion_message"`
-	// CompletionCTA `json:"completion_cta"` TODO
+	CompletionCTA        interface{}`json:"completion_cta"`
 }
 
 func (s *Session) TracksActive() (tracks TracksActiveList, err error) {

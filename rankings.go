@@ -1,17 +1,17 @@
 package htbgo
 
 type RankBracket struct {
-	Rank                 int    `json:"rank"`
-	Points               int    `json:"points"`
-	PointsForNextBracket int    `json:"points_for_next_bracket"`
-	CurrentBracket       string `json:"current_bracket"`
-	NextBracket          string `json:"next_bracket"`
+	Rank           int    `json:"rank"`
+	Points         int    `json:"points"`
+	PointsToGo     int    `json:"points_for_next_bracket"`
+	CurrentBracket string `json:"current_bracket"`
+	NextBracket    string `json:"next_bracket"`
 }
 
 type RankDuring struct {
 	Rank          int    `json:"rank"`
 	Date          string `json:"date"`
-	RankChartData []int  `json:"rank_chart_data"`
+	RankChart     []int  `json:"rank_chart_data"`
 }
 
 // Get the user's best rank within the period
@@ -33,7 +33,7 @@ type RankInCountryDuringInfo struct {
 		PointsDiff   int    `json:"points_diff"`
 		PointsGrowth string `json:"points_growth"`
 		RanksDiff    int    `json:"ranks_diff"`
-		ChartData    []int  `json:"chart_data"`
+		Chart        []int  `json:"chart_data"`
 		Country      struct {
 			Code string `json:"code"`
 			Name string `json:"name"`
@@ -68,12 +68,12 @@ type RankOfTeamDuringInfo struct {
 		PointsDiff   int    `json:"points_diff"`
 		PointsGrowth string `json:"points_growth"`
 		RanksDiff    int    `json:"ranks_diff"`
-		ChartData    []int  `json:"chart_data"`
+		Chart        []int  `json:"chart_data"`
 		Team         struct {
-			ID             int    `json:"id"`
-			Name           string `json:"name"`
-			AvatarURL      string `json:"avatar_url"`
-			AvatarThumbURL string `json:"avatar_thumb_url"`
+			ID     int    `json:"id"`
+			Name   string `json:"name"`
+			Avatar string `json:"avatar_url"`
+			Thumb  string `json:"avatar_thumb_url"`
 		} `json:"team"`
 	} `json:"data"`
 }
@@ -103,12 +103,12 @@ type RankDuringInfo struct {
 		PointsDiff   int         `json:"points_diff"`
 		PointsGrowth interface{} `json:"points_growth"`
 		RanksDiff    int         `json:"ranks_diff"`
-		ChartData    []int       `json:"chart_data"`
+		Chart        []int       `json:"chart_data"`
 		User         struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			Avatar      string `json:"avatar"`
-			AvatarThumb string `json:"avatar_thumb"`
+			ID     int    `json:"id"`
+			Name   string `json:"name"`
+			Avatar string `json:"avatar"`
+			Thumb  string `json:"avatar_thumb"`
 		} `json:"user"`
 	} `json:"data"`
 }
@@ -117,14 +117,8 @@ type RankDuringInfo struct {
 // https://www.hackthebox.com/api/v4/rankings/user/ranking_bracket?vip=0
 
 type RankBracketInfo struct {
-	Status bool `json:"status"`
-	Data   struct {
-		Rank                 interface{} `json:"rank"`
-		Points               int         `json:"points"`
-		PointsForNextBracket int         `json:"points_for_next_bracket"`
-		CurrentBracket       string      `json:"current_bracket"`
-		NextBracket          string      `json:"next_bracket"`
-	} `json:"data"`
+	Status bool        `json:"status"`
+	Data   RankBracket `json:"data"`
 }
 
 // Get the Rankings of the countries
@@ -167,7 +161,7 @@ type RanksOfTeamsList struct {
 		Endgame         int    `json:"endgame"`
 		ID              int    `json:"id"`
 		Name            string `json:"name"`
-		AvatarThumbURL  string `json:"avatar_thumb_url"`
+		Thumb           string `json:"avatar_thumb_url"`
 		Country         string `json:"country"`
 		RanksDiff       int    `json:"ranks_diff"`
 	} `json:"data"`
@@ -191,7 +185,7 @@ type RanksOfUsersList struct {
 		Endgame         int    `json:"endgame"`
 		ID              int    `json:"id"`
 		Name            string `json:"name"`
-		AvatarThumb     string `json:"avatar_thumb"`
+		Thumb           string `json:"avatar_thumb"`
 		Country         string `json:"country"`
 		Level           string `json:"level"`
 		RanksDiff       int    `json:"ranks_diff"`

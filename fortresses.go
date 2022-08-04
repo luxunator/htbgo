@@ -13,12 +13,12 @@ type FortessFlags []struct {
 type FortressesActiveMap struct {
 	Status bool `json:"status"`
 	Data   map[string]struct {
-		ID            int    `json:"id"`
-		Name          string `json:"name"`
-		Image         string `json:"image"`
-		CoverImageUrl string `json:"cover_image_url"`
-		New           bool   `json:"new"`
-		NumberOfFlags int    `json:"number_of_flags"`
+		ID         int    `json:"id"`
+		Name       string `json:"name"`
+		Logo       string `json:"image"`
+		CoverSmall string `json:"cover_image_url"`
+		IsNew      bool   `json:"new"`
+		Flags      int    `json:"number_of_flags"`
 	} `json:"data"`
 }
 
@@ -28,26 +28,26 @@ type FortressesActiveMap struct {
 type FortessInfo struct {
 	Status bool `json:"enum"`
 	Data   struct {
-		ID            int    `json:"id"`
-		Name          string `json:"name"`
-		IP            string `json:"ip"`
-		Image         string `json:"image"`
-		CoverImageUrl string `json:"cover_image_url"`
-		Company       struct {
+		ID        int    `json:"id"`
+		Name      string `json:"name"`
+		IP        string `json:"ip"`
+		Logo      string `json:"image"`
+		CoverFull string `json:"cover_image_url"`
+		Company   struct {
 			ID          int    `json:"id"`
 			Name        string `json:"name"`
 			Description string `json:"description"`
 			URL         string `json:"url"`
 			Image       string `json:"image"`
 		} `json:"company"`
-		ResetVotes           int    `json:"reset_votes"`
-		Description          string `json:"description"`
-		HasCompletionMessage bool   `json:"has_completion_message"`
-		CompletionMessage    string `json:"completion_message"`
-		ProgressPercent      int    `json:"progress_percent"`
-		PlayersCompleted     int    `json:"players_completed"`
-		Points               string `json:"points"`
-		UserAvailability     struct {
+		ResetVotes           int      `json:"reset_votes"`
+		Description          string   `json:"description"`
+		HasCompletionMessage bool     `json:"has_completion_message"`
+		CompletionMessage    string   `json:"completion_message"`
+		Progress             int      `json:"progress_percent"`
+		PlayersCompleted     int      `json:"players_completed"`
+		Points               string   `json:"points"`
+		Availability         struct {
 			Available bool   `json:"available"`
 			Code      int    `json:"code"`
 			Message   string `json:"message"`

@@ -25,6 +25,19 @@ var (
 
 type Duration string
 
+type Difficulties struct {
+	Cake      int `json:"counterCake"`
+	VeryEasy  int `json:"counterVeryEasy"`
+	Easy      int `json:"counterEasy"`
+	TooEasy   int `json:"counterTooEasy"`
+	Medium    int `json:"counterMedium"`
+	BitHard   int `json:"counterBitHard"`
+	Hard      int `json:"counterHard"`
+	TooHard   int `json:"counterTooHard"`
+	ExtraHard int `json:"counterExHard"`
+	BrainFuck int `json:"counterBrainFuck"`
+}
+
 func New(token string) (s *Session, err error) {
 
 	s = &Session{
@@ -37,19 +50,6 @@ func New(token string) (s *Session, err error) {
 	}
 
 	return
-}
-
-type Difficulties struct {
-	Cake      int `json:"counterCake"`
-	VeryEasy  int `json:"counterVeryEasy"`
-	Easy      int `json:"counterEasy"`
-	TooEasy   int `json:"counterTooEasy"`
-	Medium    int `json:"counterMedium"`
-	BitHard   int `json:"counterBitHard"`
-	Hard      int `json:"counterHard"`
-	TooHard   int `json:"counterTooHard"`
-	ExtraHard int `json:"counterExHard"`
-	BrainFuck int `json:"counterBrainFuck"`
 }
 
 func parseJSON(s *Session, url string, schema interface{}) (err error) {
