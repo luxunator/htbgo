@@ -64,7 +64,7 @@ type FortressFlagList struct {
 	Data   FortessFlags `json:"data"`
 }
 
-func (s *Session) FortressesActive() (fortresses FortressesActiveMap, err error) {
+func (s *Session) FortressesActive() (fortresses *FortressesActiveMap, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/fortresses"
 	err = parseJSON(s, url, &fortresses)
@@ -72,7 +72,7 @@ func (s *Session) FortressesActive() (fortresses FortressesActiveMap, err error)
 	return
 }
 
-func (s *Session) Fortress(fortressID int) (info FortessInfo, err error) {
+func (s *Session) Fortress(fortressID int) (info *FortessInfo, err error) {
 
 	fortressIDString, err := toPositiveIntString(fortressID)
 	if err != nil {
@@ -85,7 +85,7 @@ func (s *Session) Fortress(fortressID int) (info FortessInfo, err error) {
 	return
 }
 
-func (s *Session) FortressFlags(fortressID int) (flags FortressFlagList, err error) {
+func (s *Session) FortressFlags(fortressID int) (flags *FortressFlagList, err error) {
 
 	fortressIDString, err := toPositiveIntString(fortressID)
 	if err != nil {

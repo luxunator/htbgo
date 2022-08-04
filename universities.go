@@ -118,7 +118,7 @@ type UniversityMembersList []struct {
 	Public int `json:"public"`
 }
 
-func (s *Session) UniversitiesByPage(page int) (universities UniversitiesList, err error) {
+func (s *Session) UniversitiesByPage(page int) (universities *UniversitiesList, err error) {
 
 	pageString, err := toPositiveIntString(page)
 	if err != nil {
@@ -131,7 +131,7 @@ func (s *Session) UniversitiesByPage(page int) (universities UniversitiesList, e
 	return
 }
 
-func (s *Session) UniversitiesSearch(query string, page int) (universities UniversitiesList, err error) {
+func (s *Session) UniversitiesSearch(query string, page int) (universities *UniversitiesList, err error) {
 
 	pageString, err := toPositiveIntString(page)
 	if err != nil {
@@ -144,7 +144,7 @@ func (s *Session) UniversitiesSearch(query string, page int) (universities Unive
 	return
 }
 
-func (s *Session) University(universityID int) (university UniversityInfo, err error) {
+func (s *Session) University(universityID int) (university *UniversityInfo, err error) {
 
 	universityIDString, err := toPositiveIntString(universityID)
 	if err != nil {
@@ -157,7 +157,7 @@ func (s *Session) University(universityID int) (university UniversityInfo, err e
 	return
 }
 
-func (s *Session) UniversityOwns(universityID int) (stats UniversityOwnsInfo, err error) {
+func (s *Session) UniversityOwns(universityID int) (stats *UniversityOwnsInfo, err error) {
 
 	universityIDString, err := toPositiveIntString(universityID)
 	if err != nil {
@@ -170,7 +170,7 @@ func (s *Session) UniversityOwns(universityID int) (stats UniversityOwnsInfo, er
 	return
 }
 
-func (s *Session) UniversityMembers(universityID int) (members UniversityMembersList, err error) {
+func (s *Session) UniversityMembers(universityID int) (members *UniversityMembersList, err error) {
 
 	universityIDString, err := toPositiveIntString(universityID)
 	if err != nil {

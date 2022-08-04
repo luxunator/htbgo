@@ -180,7 +180,7 @@ type TeamPointsInfo struct {
 	} `json:"data"`
 }
 
-func (s *Session) Team(teamID int) (info TeamInfo, err error) {
+func (s *Session) Team(teamID int) (info *TeamInfo, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
@@ -193,7 +193,7 @@ func (s *Session) Team(teamID int) (info TeamInfo, err error) {
 	return
 }
 
-func (s *Session) TeamActivity(teamID int) (activities TeamActivityList, err error) {
+func (s *Session) TeamActivity(teamID int) (activities *TeamActivityList, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
@@ -206,7 +206,7 @@ func (s *Session) TeamActivity(teamID int) (activities TeamActivityList, err err
 	return
 }
 
-func (s *Session) TeamOwnsByWeek(teamID int) (owns TeamOwnsByWeekMap, err error) {
+func (s *Session) TeamOwnsByWeek(teamID int) (owns *TeamOwnsByWeekMap, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
@@ -219,7 +219,7 @@ func (s *Session) TeamOwnsByWeek(teamID int) (owns TeamOwnsByWeekMap, err error)
 	return
 }
 
-func (s *Session) TeamStatsDuring(teamID int, duration Duration) (graph TeamStatsDuringInfo, err error) {
+func (s *Session) TeamStatsDuring(teamID int, duration Duration) (graph *TeamStatsDuringInfo, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
@@ -232,7 +232,7 @@ func (s *Session) TeamStatsDuring(teamID int, duration Duration) (graph TeamStat
 	return
 }
 
-func (s *Session) TeamOwnsByPath(teamID int) (path TeamOwnsByPathMap, err error) {
+func (s *Session) TeamOwnsByPath(teamID int) (path *TeamOwnsByPathMap, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
@@ -245,7 +245,7 @@ func (s *Session) TeamOwnsByPath(teamID int) (path TeamOwnsByPathMap, err error)
 	return
 }
 
-func (s *Session) TeamMembers(teamID int) (members TeamMembersList, err error) {
+func (s *Session) TeamMembers(teamID int) (members *TeamMembersList, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
@@ -258,7 +258,7 @@ func (s *Session) TeamMembers(teamID int) (members TeamMembersList, err error) {
 	return
 }
 
-func (s *Session) TeamInvitations(teamID int) (invitations TeamInvitationsList, err error) {
+func (s *Session) TeamInvitations(teamID int) (invitations *TeamInvitationsList, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
 	if err != nil {
@@ -271,7 +271,7 @@ func (s *Session) TeamInvitations(teamID int) (invitations TeamInvitationsList, 
 	return
 }
 
-func (s *Session) TeamRankings(period Duration) (rankings TeamRankingsInfo, err error) {
+func (s *Session) TeamRankings(period Duration) (rankings *TeamRankingsInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/best?period=" + string(period)
 	err = parseJSON(s, url, &rankings)
@@ -279,7 +279,7 @@ func (s *Session) TeamRankings(period Duration) (rankings TeamRankingsInfo, err 
 	return
 }
 
-func (s *Session) TeamPoints(period Duration) (points TeamPointsInfo, err error) {
+func (s *Session) TeamPoints(period Duration) (points *TeamPointsInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/overview?period=" + string(period)
 	err = parseJSON(s, url, &points)

@@ -131,24 +131,6 @@ type EnrolledTracksList []struct {
 	Complete int `json:"complete"`
 }
 
-/* TODO
-
-// Bearer Machine Submissions
-// https://www.hackthebox.com/api/v4/user/submissions/machines
-
-type BearerMachineSubmissions struct {
-
-}
-
-// Bearer Challenge Submissions
-// https://www.hackthebox.com/api/v4/user/submissions/challenges
-
-type BearerChallengeSubmissions struct {
-
-}
-
-*/
-
 // User Profile with Bearer Relationship
 // https://www.hackthebox.com/api/v4/user/profile/basic/{userID}
 
@@ -533,25 +515,7 @@ func (s *Session) EnrolledTracks() (tracks EnrolledTracksList, err error) {
 	return
 }
 
-/*
-func (s *Session) MachineSubmissions() (submissions BearerMachineSubmissions) {
-
-	var url string = "https://www.hackthebox.com/api/v4/team/info/" + teamID
-	parseJSON(s, url, &team)
-
-	return
-}
-
-func (s *Session) ChallengeSubmissions() (submissions BearerChallengeSubmissions) {
-
-	var url string = "https://www.hackthebox.com/api/v4/team/info/" + teamID
-	parseJSON(s, url, &team)
-
-	return
-}
-*/
-
-func (s *Session) UserRelationship(userID int) (relationship UserRelationshipInfo, err error) {
+func (s *Session) UserRelationship(userID int) (relationship *UserRelationshipInfo, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -564,7 +528,7 @@ func (s *Session) UserRelationship(userID int) (relationship UserRelationshipInf
 	return
 }
 
-func (s *Session) UserMachines(userID int) (machines UserMachinesList, err error) {
+func (s *Session) UserMachines(userID int) (machines *UserMachinesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -577,7 +541,7 @@ func (s *Session) UserMachines(userID int) (machines UserMachinesList, err error
 	return
 }
 
-func (s *Session) UserChallenges(userID int) (challenges UserChallengesList, err error) {
+func (s *Session) UserChallenges(userID int) (challenges *UserChallengesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -590,7 +554,7 @@ func (s *Session) UserChallenges(userID int) (challenges UserChallengesList, err
 	return
 }
 
-func (s *Session) UserEndgames(userID int) (endgames UserEndgamesList, err error) {
+func (s *Session) UserEndgames(userID int) (endgames *UserEndgamesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -603,7 +567,7 @@ func (s *Session) UserEndgames(userID int) (endgames UserEndgamesList, err error
 	return
 }
 
-func (s *Session) UserFortresses(userID int) (fortresses UserFortressesList, err error) {
+func (s *Session) UserFortresses(userID int) (fortresses *UserFortressesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -616,7 +580,7 @@ func (s *Session) UserFortresses(userID int) (fortresses UserFortressesList, err
 	return
 }
 
-func (s *Session) UserProLabs(userID int) (proLabs UserProLabsList, err error) {
+func (s *Session) UserProLabs(userID int) (proLabs *UserProLabsList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -629,7 +593,7 @@ func (s *Session) UserProLabs(userID int) (proLabs UserProLabsList, err error) {
 	return
 }
 
-func (s *Session) UserActivity(userID int) (activities UserActivityList, err error) {
+func (s *Session) UserActivity(userID int) (activities *UserActivityList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -642,7 +606,7 @@ func (s *Session) UserActivity(userID int) (activities UserActivityList, err err
 	return
 }
 
-func (s *Session) UserBloods(userID int) (bloods UserBloodsList, err error) {
+func (s *Session) UserBloods(userID int) (bloods *UserBloodsList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -655,7 +619,7 @@ func (s *Session) UserBloods(userID int) (bloods UserBloodsList, err error) {
 	return
 }
 
-func (s *Session) UserSubmissions(userID int) (submissions UserSubmissionsList, err error) {
+func (s *Session) UserSubmissions(userID int) (submissions *UserSubmissionsList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -668,7 +632,7 @@ func (s *Session) UserSubmissions(userID int) (submissions UserSubmissionsList, 
 	return
 }
 
-func (s *Session) UserAchievements(userID int, duration Duration) (acheivements UserAchievementsList, err error) {
+func (s *Session) UserAchievements(userID int, duration Duration) (acheivements *UserAchievementsList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -681,7 +645,7 @@ func (s *Session) UserAchievements(userID int, duration Duration) (acheivements 
 	return
 }
 
-func (s *Session) UserOwnsByPath(userID int) (path UserOwnsByPathMap, err error) {
+func (s *Session) UserOwnsByPath(userID int) (path *UserOwnsByPathMap, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -694,7 +658,7 @@ func (s *Session) UserOwnsByPath(userID int) (path UserOwnsByPathMap, err error)
 	return
 }
 
-func (s *Session) User(userID int) (profile UserInfo, err error) {
+func (s *Session) User(userID int) (profile *UserInfo, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {
@@ -707,7 +671,7 @@ func (s *Session) User(userID int) (profile UserInfo, err error) {
 	return
 }
 
-func (s *Session) UserBadges(userID int) (badges UserBadgesList, err error) {
+func (s *Session) UserBadges(userID int) (badges *UserBadgesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
 	if err != nil {

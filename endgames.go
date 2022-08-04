@@ -85,7 +85,7 @@ type EndgameMachinesList struct {
 	} `json:"data"`
 }
 
-func (s *Session) EndgamesActive() (endgames EndgamesActiveList, err error) {
+func (s *Session) EndgamesActive() (endgames *EndgamesActiveList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/endgames"
 	err = parseJSON(s, url, &endgames)
@@ -93,7 +93,7 @@ func (s *Session) EndgamesActive() (endgames EndgamesActiveList, err error) {
 	return
 }
 
-func (s *Session) Endgame(endgameID int) (endgame EndgameInfo, err error) {
+func (s *Session) Endgame(endgameID int) (endgame *EndgameInfo, err error) {
 
 	endgameIDString, err := toPositiveIntString(endgameID)
 	if err != nil {
@@ -106,7 +106,7 @@ func (s *Session) Endgame(endgameID int) (endgame EndgameInfo, err error) {
 	return
 }
 
-func (s *Session) EndgameFlags(endgameID int) (flags EndgameFlagsList, err error) {
+func (s *Session) EndgameFlags(endgameID int) (flags *EndgameFlagsList, err error) {
 
 	endgameIDString, err := toPositiveIntString(endgameID)
 	if err != nil {
@@ -119,7 +119,7 @@ func (s *Session) EndgameFlags(endgameID int) (flags EndgameFlagsList, err error
 	return
 }
 
-func (s *Session) EndgameMachines(endgameID int) (machines EndgameMachinesList, err error) {
+func (s *Session) EndgameMachines(endgameID int) (machines *EndgameMachinesList, err error) {
 
 	endgameIDString, err := toPositiveIntString(endgameID)
 	if err != nil {

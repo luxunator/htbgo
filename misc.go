@@ -141,7 +141,7 @@ type AnnouncementInfo struct {
 	} `json:"announcement"`
 }
 
-func (s *Session) Badges() (badges BadgesList, err error) {
+func (s *Session) Badges() (badges *BadgesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/category/badges"
 	err = parseJSON(s, url, &badges)
@@ -149,7 +149,7 @@ func (s *Session) Badges() (badges BadgesList, err error) {
 	return
 }
 
-func (s *Session) ReportBugAreas() (areas ReportBugAreasList, err error) {
+func (s *Session) ReportBugAreas() (areas *ReportBugAreasList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/feedback/bug/areas"
 	err = parseJSON(s, url, &areas)
@@ -157,7 +157,7 @@ func (s *Session) ReportBugAreas() (areas ReportBugAreasList, err error) {
 	return
 }
 
-func (s *Session) LabsStats() (stats LabsStatsInfo, err error) {
+func (s *Session) LabsStats() (stats *LabsStatsInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/content/stats"
 	err = parseJSON(s, url, &stats)
@@ -165,7 +165,7 @@ func (s *Session) LabsStats() (stats LabsStatsInfo, err error) {
 	return
 }
 
-func (s *Session) Changelogs() (changelogs ChangelogsList, err error) {
+func (s *Session) Changelogs() (changelogs *ChangelogsList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/changelogs"
 	err = parseJSON(s, url, &changelogs)
@@ -173,7 +173,7 @@ func (s *Session) Changelogs() (changelogs ChangelogsList, err error) {
 	return
 }
 
-func (s *Session) Servers() (servers ServersList, err error) {
+func (s *Session) Servers() (servers *ServersList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/lab/list"
 	err = parseJSON(s, url, &servers)
@@ -181,7 +181,7 @@ func (s *Session) Servers() (servers ServersList, err error) {
 	return
 }
 
-func (s *Session) ReportImprovementAreas() (areas ReportImprovementAreasList, err error) {
+func (s *Session) ReportImprovementAreas() (areas *ReportImprovementAreasList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/feedback/improvement/areas"
 	err = parseJSON(s, url, &areas)
@@ -189,7 +189,7 @@ func (s *Session) ReportImprovementAreas() (areas ReportImprovementAreasList, er
 	return
 }
 
-func (s *Session) Stats() (stats StatsInfo, err error) {
+func (s *Session) Stats() (stats *StatsInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/dashboard"
 	err = parseJSON(s, url, &stats)
@@ -197,7 +197,7 @@ func (s *Session) Stats() (stats StatsInfo, err error) {
 	return
 }
 
-func (s *Session) ChangelogsSidebar() (changelogs ChangelogsSidebarInfo, err error) {
+func (s *Session) ChangelogsSidebar() (changelogs *ChangelogsSidebarInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/sidebar/changelog"
 	err = parseJSON(s, url, &changelogs)
@@ -205,7 +205,7 @@ func (s *Session) ChangelogsSidebar() (changelogs ChangelogsSidebarInfo, err err
 	return
 }
 
-func (s *Session) Announcement() (announcement AnnouncementInfo, err error) {
+func (s *Session) Announcement() (announcement *AnnouncementInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/sidebar/announcement"
 	err = parseJSON(s, url, &announcement)

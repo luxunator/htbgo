@@ -53,7 +53,7 @@ type TrackInfo struct {
 	CompletionCTA        interface{}`json:"completion_cta"`
 }
 
-func (s *Session) TracksActive() (tracks TracksActiveList, err error) {
+func (s *Session) TracksActive() (tracks *TracksActiveList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/tracks"
 	err = parseJSON(s, url, &tracks)
@@ -61,7 +61,7 @@ func (s *Session) TracksActive() (tracks TracksActiveList, err error) {
 	return
 }
 
-func (s *Session) Track(trackID int) (info TrackInfo, err error) {
+func (s *Session) Track(trackID int) (info *TrackInfo, err error) {
 
 	trackIDString, err := toPositiveIntString(trackID)
 	if err != nil {

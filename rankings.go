@@ -213,7 +213,7 @@ type RanksOfUniversitiesList struct {
 	} `json:"data"`
 }
 
-func (s *Session) RankInCountryBestDuring(period Duration) (rank RankInCountryBestDuringInfo, err error) {
+func (s *Session) RankInCountryBestDuring(period Duration) (rank *RankInCountryBestDuringInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/country/best?period=" + string(period)
 	err = parseJSON(s, url, &rank)
@@ -221,7 +221,7 @@ func (s *Session) RankInCountryBestDuring(period Duration) (rank RankInCountryBe
 	return
 }
 
-func (s *Session) RankInCountryDuring(period Duration) (rank RankInCountryDuringInfo, err error) {
+func (s *Session) RankInCountryDuring(period Duration) (rank *RankInCountryDuringInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/country/overview?period=" + string(period)
 	err = parseJSON(s, url, &rank)
@@ -229,7 +229,7 @@ func (s *Session) RankInCountryDuring(period Duration) (rank RankInCountryDuring
 	return
 }
 
-func (s *Session) RankBracketInCountry() (bracket RankBracketInCountryInfo, err error) {
+func (s *Session) RankBracketInCountry() (bracket *RankBracketInCountryInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/country/ranking_bracket"
 	err = parseJSON(s, url, &bracket)
@@ -237,7 +237,7 @@ func (s *Session) RankBracketInCountry() (bracket RankBracketInCountryInfo, err 
 	return
 }
 
-func (s *Session) RankOfTeamBestDuring(period Duration) (rank RankOfTeamBestDuringInfo, err error) {
+func (s *Session) RankOfTeamBestDuring(period Duration) (rank *RankOfTeamBestDuringInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/best?period=" + string(period)
 	err = parseJSON(s, url, &rank)
@@ -245,7 +245,7 @@ func (s *Session) RankOfTeamBestDuring(period Duration) (rank RankOfTeamBestDuri
 	return
 }
 
-func (s *Session) RankOfTeamDuring(period Duration) (info RankOfTeamDuringInfo, err error) {
+func (s *Session) RankOfTeamDuring(period Duration) (info *RankOfTeamDuringInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/overview?period=" + string(period)
 	err = parseJSON(s, url, &info)
@@ -253,7 +253,7 @@ func (s *Session) RankOfTeamDuring(period Duration) (info RankOfTeamDuringInfo, 
 	return
 }
 
-func (s *Session) RankBracketOfTeam() (bracket RankBracketOfTeamInfo, err error) {
+func (s *Session) RankBracketOfTeam() (bracket *RankBracketOfTeamInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/ranking_bracket"
 	err = parseJSON(s, url, &bracket)
@@ -261,7 +261,7 @@ func (s *Session) RankBracketOfTeam() (bracket RankBracketOfTeamInfo, err error)
 	return
 }
 
-func (s *Session) RankBestDuring(period Duration, wantVIP bool) (rank RankBestDuringInfo, err error) {
+func (s *Session) RankBestDuring(period Duration, wantVIP bool) (rank *RankBestDuringInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/user/best?period=" + string(period) + "&vip=" + stringFromVIP(wantVIP)
 	err = parseJSON(s, url, &rank)
@@ -269,7 +269,7 @@ func (s *Session) RankBestDuring(period Duration, wantVIP bool) (rank RankBestDu
 	return
 }
 
-func (s *Session) RankDuring(period Duration, wantVIP bool) (rank RankDuringInfo, err error) {
+func (s *Session) RankDuring(period Duration, wantVIP bool) (rank *RankDuringInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/user/overview?period=" + string(period) + "&vip=" + stringFromVIP(wantVIP)
 	err = parseJSON(s, url, &rank)
@@ -277,7 +277,7 @@ func (s *Session) RankDuring(period Duration, wantVIP bool) (rank RankDuringInfo
 	return
 }
 
-func (s *Session) RankBracket(wantVIP bool) (bracket RankBracketInfo, err error) {
+func (s *Session) RankBracket(wantVIP bool) (bracket *RankBracketInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/user/ranking_bracket?vip=" + stringFromVIP(wantVIP)
 	err = parseJSON(s, url, &bracket)
@@ -285,7 +285,7 @@ func (s *Session) RankBracket(wantVIP bool) (bracket RankBracketInfo, err error)
 	return
 }
 
-func (s *Session) RanksOfCountries() (ranks RanksOfCountriesList, err error) {
+func (s *Session) RanksOfCountries() (ranks *RanksOfCountriesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/countries"
 	err = parseJSON(s, url, &ranks)
@@ -293,7 +293,7 @@ func (s *Session) RanksOfCountries() (ranks RanksOfCountriesList, err error) {
 	return
 }
 
-func (s *Session) RanksOfTeams() (ranks RanksOfTeamsList, err error) {
+func (s *Session) RanksOfTeams() (ranks *RanksOfTeamsList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/teams"
 	err = parseJSON(s, url, &ranks)
@@ -301,7 +301,7 @@ func (s *Session) RanksOfTeams() (ranks RanksOfTeamsList, err error) {
 	return
 }
 
-func (s *Session) RanksOfUsers(wantVIP bool) (ranks RanksOfUsersList, err error) {
+func (s *Session) RanksOfUsers(wantVIP bool) (ranks *RanksOfUsersList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/users?vip=" + stringFromVIP(wantVIP)
 	err = parseJSON(s, url, &ranks)
@@ -309,7 +309,7 @@ func (s *Session) RanksOfUsers(wantVIP bool) (ranks RanksOfUsersList, err error)
 	return
 }
 
-func (s *Session) RanksOfUniversities() (universities RanksOfUniversitiesList, err error) {
+func (s *Session) RanksOfUniversities() (universities *RanksOfUniversitiesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/universities"
 	err = parseJSON(s, url, &universities)

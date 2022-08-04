@@ -179,7 +179,7 @@ type ProLabPaginatedReviewsList struct {
 	} `json:"meta"`
 }
 
-func (s *Session) ProLabsActive() (proLabs ProLabsActiveList, err error) {
+func (s *Session) ProLabsActive() (proLabs *ProLabsActiveList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/prolabs"
 	err = parseJSON(s, url, &proLabs)
@@ -187,7 +187,7 @@ func (s *Session) ProLabsActive() (proLabs ProLabsActiveList, err error) {
 	return
 }
 
-func (s *Session) ProLab(proLabID int) (info ProLabInfo, err error) {
+func (s *Session) ProLab(proLabID int) (info *ProLabInfo, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
 	if err != nil {
@@ -200,7 +200,7 @@ func (s *Session) ProLab(proLabID int) (info ProLabInfo, err error) {
 	return
 }
 
-func (s *Session) ProLabOverview(proLabID int) (overview ProLabOverviewInfo, err error) {
+func (s *Session) ProLabOverview(proLabID int) (overview *ProLabOverviewInfo, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
 	if err != nil {
@@ -213,7 +213,7 @@ func (s *Session) ProLabOverview(proLabID int) (overview ProLabOverviewInfo, err
 	return
 }
 
-func (s *Session) ProLabMachines(proLabID int) (machines ProLabMachinesList, err error) {
+func (s *Session) ProLabMachines(proLabID int) (machines *ProLabMachinesList, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
 	if err != nil {
@@ -226,7 +226,7 @@ func (s *Session) ProLabMachines(proLabID int) (machines ProLabMachinesList, err
 	return
 }
 
-func (s *Session) ProLabFlags(proLabID int) (flags ProLabFlagsList, err error) {
+func (s *Session) ProLabFlags(proLabID int) (flags *ProLabFlagsList, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
 	if err != nil {
@@ -239,7 +239,7 @@ func (s *Session) ProLabFlags(proLabID int) (flags ProLabFlagsList, err error) {
 	return
 }
 
-func (s *Session) ProLabFAQ(proLabID int) (faq ProLabFAQList, err error) {
+func (s *Session) ProLabFAQ(proLabID int) (faq *ProLabFAQList, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
 	if err != nil {
@@ -252,7 +252,7 @@ func (s *Session) ProLabFAQ(proLabID int) (faq ProLabFAQList, err error) {
 	return
 }
 
-func (s *Session) ProLabSelectedReviews(proLabID int) (reviews ProLabSelectedReviewsList, err error) {
+func (s *Session) ProLabSelectedReviews(proLabID int) (reviews *ProLabSelectedReviewsList, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
 	if err != nil {
@@ -265,7 +265,7 @@ func (s *Session) ProLabSelectedReviews(proLabID int) (reviews ProLabSelectedRev
 	return
 }
 
-func (s *Session) ProLabPaginatedReviews(proLabID int, page int) (reviews ProLabPaginatedReviewsList, err error) {
+func (s *Session) ProLabPaginatedReviews(proLabID int, page int) (reviews *ProLabPaginatedReviewsList, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
 	if err != nil {

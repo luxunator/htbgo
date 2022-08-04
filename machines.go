@@ -40,6 +40,11 @@ type MachineBlood struct {
 	BloodDiff string `json:"blood_difference"`
 }
 
+type MachineTags []struct {
+	ID         int `json:"id"`
+	CategoryID int `json:"tag_category_id"`
+}
+
 // Get Machine Matrix
 // https://www.hackthebox.com/api/v4/machine/graph/matrix/{machineID}
 type MachineMatrixInfo struct {
@@ -191,10 +196,7 @@ type MachinesRetiredList struct {
 		SPFlag          int            `json:"sp_flag"`
 		EasyMonth       int            `json:"easy_month"`
 		IP              string         `json:"ip"`
-		Tags            []struct {
-			ID         int `json:"id"`
-			CategoryID int `json:"tag_category_id"`
-		} `json:"tags"`
+		Tags            MachineTags    `json:"tags"`
 	}
 }
 
@@ -243,70 +245,36 @@ type MachinesToReleaseList struct {
 // Get the list of machines using the todo endpoint (STUPID API)
 // https://www.hackthebox.com/api/v4/machine/list/todo
 
-// type TodoMachines struct {
-// 	Info []struct {
-// 		ID                  int    `json:"id"`
-// 		Name                string `json:"name"`
-// 		OS                  string `json:"os"`
-// 		Points              int    `json:"points"`
-// 		StaticPoints        int    `json:"static_points"`
-// 		Release             string `json:"release"`
-// 		UserOwnCounts       int    `json:"user_owns_count"`
-// 		RootOwnCounts       int    `json:"root_owns_count"`
-// 		AuthUserIfUserOwns  bool   `json:"authUserInUserOwns"`
-// 		AuthUserIfRootOwns  bool   `json:"authUserInRootOwns"`
-// 		IsTodo              bool   `json:"isTodo"`
-// 		AuthUserHasReviewed bool   `json:"authUserHasReviewed"`
-// 		Stars               string `json:"stars"`
-// 		Difficulty          int    `json:"difficulty"`
-// 		FeedbackChart       struct {
-// 			CakeDifficulty      int `json:"counterCake"`
-// 			VeryEasyDifficulty  int `json:"counterVeryEasy"`
-// 			EasyDifficulty      int `json:"counterEasy"`
-// 			TooEasyDifficulty   int `json:"counterTooEasy"`
-// 			MediumDifficulty    int `json:"counterMedium"`
-// 			BitHardDifficulty   int `json:"counterBitHard"`
-// 			HardDifficulty      int `json:"counterHard"`
-// 			TooHardDifficulty   int `json:"counterTooHard"`
-// 			ExtraHardDifficulty int `json:"counterExHard"`
-// 			BrainFuckDifficulty int `json:"counterBrainFuck"`
-// 		} `json:"feedbackForChart"`
-
-// 		Avatar         string `json:"avatar"`
-// 		DifficultyText string `json:"difficultyText"`
-// 		PlayInfo       struct {
-// 			IsSpawned         bool   `json:"isSpawned"`
-// 			IsSpawning        bool   `json:"isSpawning"`
-// 			IsActive          bool   `json:"isActive"`
-// 			ActivePlayerCount int    `json:"active_player_count"`
-// 			ExpiresAt         string `json:"expires_at"`
-// 		} `json:"playInfo"`
-
-// 		Free         bool `json:"free"`
-// 		MakerPrimary struct {
-// 			ID                  int    `json:"id"`
-// 			Name                string `json:"name"`
-// 			Avatar              string `json:"avatar"`
-// 			AuthUserSentRespect bool   `json:"isRespected"`
-// 		} `json:"maker"`
-
-// 		MakerSecondary struct {
-// 			ID                  int    `json:"id"`
-// 			Name                string `json:"name"`
-// 			Avatar              string `json:"avatar"`
-// 			AuthUserSentRespect bool   `json:"isRespected"`
-// 		} `json:"maker2"`
-
-// 		Recommended int    `json:"recommended"`
-// 		SPFlag      int    `json:"sp_flag"`
-// 		EasyMonth   int    `json:"easy_month"`
-// 		IP          string `json:"ip"`
-// 		Tags        []struct {
-// 			ID             int `json:"id"`
-// 			TagCategoryIDs int `json:"tag_category_id"`
-// 		} `json:"tags"`
-// 	} `json:"info"`
-// }
+type MachinesTodoList struct {
+	Info []struct {
+		ID              int            `json:"id"`
+		Name            string         `json:"name"`
+		OS              string         `json:"os"`
+		Points          int            `json:"points"`
+		StaticPoints    int            `json:"static_points"`
+		Release         string         `json:"release"`
+		UserOwns        int            `json:"user_owns_count"`
+		RootOwns        int            `json:"root_owns_count"`
+		HasOwnedUser    bool           `json:"authUserInUserOwns"`
+		HasOwnedRoot    bool           `json:"authUserInRootOwns"`
+		IsTodo          bool           `json:"isTodo"`
+		HasReviewed     bool           `json:"authUserHasReviewed"`
+		Stars           string         `json:"stars"`
+		DifficultyAvg   int            `json:"difficulty"`
+		DifficultyStats Difficulties   `json:"feedbackForChart"`
+		Avatar          string         `json:"avatar"`
+		Difficulty      string         `json:"difficultyText"`
+		PlayInfo        MachineStatus  `json:"playInfo"`
+		IsFree          bool           `json:"free"`
+		CreatorOne      MachineCreator `json:"maker"`
+		CreatorTwo      MachineCreator `json:"maker2"`
+		Recommended     int            `json:"recommended"`
+		SPFlag          int            `json:"sp_flag"`
+		EasyMonth       int            `json:"easy_month"`
+		IP              string         `json:"ip"`
+		Tags            MachineTags    `json:"tags"`
+	} `json:"info"`
+}
 
 // Get a retired machine their tags
 // https://www.hackthebox.com/api/v4/machine/tags/{machineID}
@@ -357,7 +325,7 @@ type MachineReviewsList struct {
 	} `json:"message"`
 }
 
-func (s *Session) MachineMatrix(machineID int) (matrix MachineMatrixInfo, err error) {
+func (s *Session) MachineMatrix(machineID int) (matrix *MachineMatrixInfo, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
 	if err != nil {
@@ -370,7 +338,7 @@ func (s *Session) MachineMatrix(machineID int) (matrix MachineMatrixInfo, err er
 	return
 }
 
-func (s *Session) Machine(machineID int) (info MachineInfo, err error) {
+func (s *Session) Machine(machineID int) (info *MachineInfo, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
 	if err != nil {
@@ -383,7 +351,7 @@ func (s *Session) Machine(machineID int) (info MachineInfo, err error) {
 	return
 }
 
-func (s *Session) MachineProfile(machineID int) (profile MachineProfileInfo, err error) {
+func (s *Session) MachineProfile(machineID int) (profile *MachineProfileInfo, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
 	if err != nil {
@@ -396,7 +364,7 @@ func (s *Session) MachineProfile(machineID int) (profile MachineProfileInfo, err
 	return
 }
 
-func (s *Session) MachinesActive() (activeMachines MachinesActiveList, err error) {
+func (s *Session) MachinesActive() (activeMachines *MachinesActiveList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/list"
 	err = parseJSON(s, url, &activeMachines)
@@ -404,7 +372,7 @@ func (s *Session) MachinesActive() (activeMachines MachinesActiveList, err error
 	return
 }
 
-func (s *Session) MachinesRetired() (retiredMachines MachinesRetiredList, err error) {
+func (s *Session) MachinesRetired() (retiredMachines *MachinesRetiredList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/list/retired"
 	err = parseJSON(s, url, &retiredMachines)
@@ -412,7 +380,7 @@ func (s *Session) MachinesRetired() (retiredMachines MachinesRetiredList, err er
 	return
 }
 
-func (s *Session) MachineTopUsers(machineID int) (topUsers MachineTopsUsersList, err error) {
+func (s *Session) MachineTopUsers(machineID int) (topUsers *MachineTopsUsersList, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
 	if err != nil {
@@ -424,7 +392,7 @@ func (s *Session) MachineTopUsers(machineID int) (topUsers MachineTopsUsersList,
 	return
 }
 
-func (s *Session) MachinesToRelease() (scheduledMachines MachinesToReleaseList, err error) {
+func (s *Session) MachinesToRelease() (scheduledMachines *MachinesToReleaseList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/unreleased"
 	err = parseJSON(s, url, &scheduledMachines)
@@ -432,13 +400,15 @@ func (s *Session) MachinesToRelease() (scheduledMachines MachinesToReleaseList, 
 	return
 }
 
-// func (s *Session) TodoMachines() (todoMachines TodoMachines) {
-// 	var url string = "https://www.hackthebox.com/api/v4/machine/list/todo"
-// 	parseJSON(s, url, &todoMachines)
-// 	return
-// }
+func (s *Session) MachinesTodo() (machines *MachinesTodoList, err error) {
 
-func (s *Session) MachineTags(machineID int) (tags MachineTagsMap, err error) {
+	var url string = "https://www.hackthebox.com/api/v4/machine/list/todo"
+	err = parseJSON(s, url, &machines)
+
+	return
+}
+
+func (s *Session) MachineTags(machineID int) (tags *MachineTagsMap, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
 	if err != nil {
@@ -451,7 +421,7 @@ func (s *Session) MachineTags(machineID int) (tags MachineTagsMap, err error) {
 	return
 }
 
-func (s *Session) MachineChangelog(machineID int) (changelog MachineChangelogList, err error) {
+func (s *Session) MachineChangelog(machineID int) (changelog *MachineChangelogList, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
 	if err != nil {
@@ -464,7 +434,7 @@ func (s *Session) MachineChangelog(machineID int) (changelog MachineChangelogLis
 	return
 }
 
-func (s *Session) MachineReviews(machineID int) (reviews MachineReviewsList, err error) {
+func (s *Session) MachineReviews(machineID int) (reviews *MachineReviewsList, err error) {
 
 	machineIDString, err := toPositiveIntString(machineID)
 	if err != nil {

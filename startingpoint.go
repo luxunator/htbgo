@@ -46,7 +46,7 @@ type StartingPointMachinesList struct {
 	}
 }
 
-func (s *Session) StartingPointMachines() (machines StartingPointMachinesList, err error) {
+func (s *Session) StartingPointMachines() (machines *StartingPointMachinesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/sp/machines"
 	err = parseJSON(s, url, &machines)

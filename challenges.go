@@ -27,24 +27,6 @@ type ChallengesRetiredSuggestedInfo struct {
 	CardTwo ChallengeCard `json:"card2"`
 }
 
-/* Not Implemented
-
-// Challenge Reviews
-// https://www.hackthebox.com/api/v4/challenge/reviews/{challengeID}
-
-type UserChallengeReviews struct {
-
-}
-
-// Bearer Challenge Reviews
-// https://www.hackthebox.com/api/v4/challenge/reviews/user/{challengeID}
-
-type BearerChallengeReviews struct {
-
-}
-
-*/
-
 // List Challenge Categories
 // https://www.hackthebox.com/api/v4/challenge/categories/list
 
@@ -150,25 +132,7 @@ type ChallengeActivityList struct {
 	} `json:"info"`
 }
 
-/* Not Implemented
-
-// Changelog
-// https://www.hackthebox.com/api/v4/challenge/reviews/{challengeID}
-
-type ChangeLogList struct {
-
-}
-
-*/
-
-/* TODO
-
-// Challenge Download (ZIP Blob)
-// https://www.hackthebox.com/api/v4/challenge/download/{challengeID}
-
-*/
-
-func (s *Session) ChallengesSuggested() (cards ChallengesSuggestedInfo, err error) {
+func (s *Session) ChallengesSuggested() (cards *ChallengesSuggestedInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/recommended"
 	err = parseJSON(s, url, &cards)
@@ -176,7 +140,7 @@ func (s *Session) ChallengesSuggested() (cards ChallengesSuggestedInfo, err erro
 	return
 }
 
-func (s *Session) ChallengesRetiredSuggested() (cards ChallengesRetiredSuggestedInfo, err error) {
+func (s *Session) ChallengesRetiredSuggested() (cards *ChallengesRetiredSuggestedInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/recommended/retired"
 	err = parseJSON(s, url, &cards)
@@ -184,7 +148,7 @@ func (s *Session) ChallengesRetiredSuggested() (cards ChallengesRetiredSuggested
 	return
 }
 
-func (s *Session) ChallengeCategories() (categories ChallengeCategoriesList, err error) {
+func (s *Session) ChallengeCategories() (categories *ChallengeCategoriesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/categories/list"
 	err = parseJSON(s, url, &categories)
@@ -192,7 +156,7 @@ func (s *Session) ChallengeCategories() (categories ChallengeCategoriesList, err
 	return
 }
 
-func (s *Session) ChallengesActive() (challenges ChallengesList, err error) {
+func (s *Session) ChallengesActive() (challenges *ChallengesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/list"
 	err = parseJSON(s, url, &challenges)
@@ -200,7 +164,7 @@ func (s *Session) ChallengesActive() (challenges ChallengesList, err error) {
 	return
 }
 
-func (s *Session) ChallengesRetired() (challenges ChallengesList, err error) {
+func (s *Session) ChallengesRetired() (challenges *ChallengesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/list/retired"
 	err = parseJSON(s, url, &challenges)
@@ -208,7 +172,7 @@ func (s *Session) ChallengesRetired() (challenges ChallengesList, err error) {
 	return
 }
 
-func (s *Session) Challenge(challengeID int) (info ChallengeInfo, err error) {
+func (s *Session) Challenge(challengeID int) (info *ChallengeInfo, err error) {
 
 	challengeIDString, err := toPositiveIntString(challengeID)
 	if err != nil {
@@ -221,7 +185,7 @@ func (s *Session) Challenge(challengeID int) (info ChallengeInfo, err error) {
 	return
 }
 
-func (s *Session) ChallengeActivity(challengeID int) (activities ChallengeActivityList, err error) {
+func (s *Session) ChallengeActivity(challengeID int) (activities *ChallengeActivityList, err error) {
 
 	challengeIDString, err := toPositiveIntString(challengeID)
 	if err != nil {
