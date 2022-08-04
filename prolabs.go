@@ -10,173 +10,207 @@ type ProlabMaster struct {
 // https://www.hackthebox.com/api/v4/prolabs
 
 type ProLabsActiveList struct {
-	Status bool `json:"status"`
-	Data   struct {
-		Count int `json:"count"`
-		Labs  []struct {
-			ID                int    `json:"id"`
-			Name              string `json:"name"`
-			ReleaseAt         string `json:"release_at"`
-			MachineCount      int    `json:"pro_machines_count"`
-			FlagCount         int    `json:"pro_flags_count"`
-			Ownership         int    `json:"ownership"`
-			IsEligibleForCert bool   `json:"user_eligible_for_certificate"`
-			IsNew             bool   `json:"new"`
-			SkillLevel        string `json:"skill_level"`
-			Category          string `json:"designated_category"`
-			Team              string `json:"team"`
-			Level             int    `json:"level"`
-			ServersCount      int    `json:"lab_servers_count"`
-			Cover             string `json:"cover_img_url"`
-		} `json:"labs"`
-	} `json:"data"`
+	Status bool                   `json:"status"`
+	Data   *ProLabsActiveListData `json:"data"`
+}
+
+type ProLabsActiveListData struct {
+	Count int                    `json:"count"`
+	Labs  *ProLabsActiveListLabs `json:"labs"`
+}
+
+type ProLabsActiveListLabs []struct {
+	ID                int    `json:"id"`
+	Name              string `json:"name"`
+	ReleaseAt         string `json:"release_at"`
+	MachineCount      int    `json:"pro_machines_count"`
+	FlagCount         int    `json:"pro_flags_count"`
+	Ownership         int    `json:"ownership"`
+	IsEligibleForCert bool   `json:"user_eligible_for_certificate"`
+	IsNew             bool   `json:"new"`
+	SkillLevel        string `json:"skill_level"`
+	Category          string `json:"designated_category"`
+	Team              string `json:"team"`
+	Level             int    `json:"level"`
+	ServersCount      int    `json:"lab_servers_count"`
+	Cover             string `json:"cover_img_url"`
 }
 
 // Prolab Profile
 // https://www.hackthebox.com/api/v4/prolab/{prolabID}/info
 
 type ProLabInfo struct {
-	Status bool `json:"status"`
-	Data   struct {
-		ID           int          `json:"id"`
-		Name         string       `json:"name"`
-		Version      string       `json:"version"`
-		EntryPoints  []string     `json:"entry_points"`
-		Description  string       `json:"description"`
-		Video        string       `json:"video_url"`
-		MachineCount int          `json:"pro_machines_count"`
-		FlagCount    int          `json:"pro_flags_count"`
-		Cover        string       `json:"cover_image_url"`
-		ServersCount int          `json:"lab_servers_count"`
-		ActiveUsers  int          `json:"active_users"`
-		LabMaster    ProlabMaster `json:"lab_master"`
-	} `json:"data"`
+	Status bool            `json:"status"`
+	Data   *ProLabInfoData `json:"data"`
+}
+
+type ProLabInfoData struct {
+	ID           int           `json:"id"`
+	Name         string        `json:"name"`
+	Version      string        `json:"version"`
+	EntryPoints  []string      `json:"entry_points"`
+	Description  string        `json:"description"`
+	Video        string        `json:"video_url"`
+	MachineCount int           `json:"pro_machines_count"`
+	FlagCount    int           `json:"pro_flags_count"`
+	Cover        string        `json:"cover_image_url"`
+	ServersCount int           `json:"lab_servers_count"`
+	ActiveUsers  int           `json:"active_users"`
+	LabMaster    *ProlabMaster `json:"lab_master"`
 }
 
 // Prolab Overview
 // https://www.hackthebox.com/api/v4/prolab/{prolabID}/overview
 
 type ProLabOverviewInfo struct {
-	Status bool `json:"status"`
-	Data   struct {
-		ID      int    `json:"id"`
-		Name    string `json:"name"`
-		Version string `json:"version"`
-		Excerpt interface{} `json:"excerpt"`
-		MachinsCount int `json:"pro_machines_count"`
-		FlagCount    int `json:"pro_flags_count"`
-		SocialLinks  struct {
-			Discord string `json:"discord"`
-			Forum   string `json:"forum"`
-		} `json:"social_links"`
-		NewVersion      bool   `json:"new_version"`
-		OverviewImg     string `json:"overview_image_url"`
-		SkillLevel      string `json:"skill_level"`
-		DesignatedLevel struct {
-			Category    string `json:"category"`
-			Level       int    `json:"level"`
-			Description string `json:"description"`
-			Team        string `json:"team"`
-		} `json:"designated_level"`
-		LabMaster ProlabMaster `json:"lab_master"`
-	} `json:"data"`
+	Status bool                    `json:"status"`
+	Data   *ProLabOverviewInfoData `json:"data"`
+}
+
+type ProLabOverviewInfoData struct {
+	ID              int                                `json:"id"`
+	Name            string                             `json:"name"`
+	Version         string                             `json:"version"`
+	Excerpt         interface{}                        `json:"excerpt"`
+	MachinsCount    int                                `json:"pro_machines_count"`
+	FlagCount       int                                `json:"pro_flags_count"`
+	SocialLinks     *ProLabOverviewInfoSocialLinks     `json:"social_links"`
+	NewVersion      bool                               `json:"new_version"`
+	OverviewImg     string                             `json:"overview_image_url"`
+	SkillLevel      string                             `json:"skill_level"`
+	DesignatedLevel *ProLabOverviewInfoDesignatedLevel `json:"designated_level"`
+	LabMaster       *ProlabMaster                      `json:"lab_master"`
+}
+
+type ProLabOverviewInfoSocialLinks struct {
+	Discord string `json:"discord"`
+	Forum   string `json:"forum"`
+}
+
+type ProLabOverviewInfoDesignatedLevel struct {
+	Category    string `json:"category"`
+	Level       int    `json:"level"`
+	Description string `json:"description"`
+	Team        string `json:"team"`
 }
 
 // Prolab Machines List
 // https://www.hackthebox.com/api/v4/prolab/{prolabID}/machines
 
 type ProLabMachinesList struct {
-	Status bool `json:"status"`
-	Data   []struct {
-		ID    int    `json:"id"`
-		Name  string `json:"name"`
-		OS    string `json:"os"`
-		Thumb string `json:"avatar_thumb_url"`
-	} `json:"data"`
+	Status bool                    `json:"status"`
+	Data   *ProLabMachinesListData `json:"data"`
+}
+
+type ProLabMachinesListData []struct {
+	ID    int    `json:"id"`
+	Name  string `json:"name"`
+	OS    string `json:"os"`
+	Thumb string `json:"avatar_thumb_url"`
 }
 
 // Prolab Flags List
 // https://www.hackthebox.com/api/v4/prolab/{prolabID}/flags
 
 type ProLabFlagsList struct {
-	Status bool `json:"status"`
-	Data   []struct {
-		ID       int    `json:"id"`
-		Title    string `json:"title"`
-		Points   int    `json:"points"`
-		HasOwned bool   `json:"owned"`
-	} `json:"data"`
+	Status bool                 `json:"status"`
+	Data   *ProLabFlagsListData `json:"data"`
+}
+
+type ProLabFlagsListData []struct {
+	ID       int    `json:"id"`
+	Title    string `json:"title"`
+	Points   int    `json:"points"`
+	HasOwned bool   `json:"owned"`
 }
 
 // Prolab FAQ
 // https://www.hackthebox.com/api/v4/prolab/{prolabID}/faq
 
 type ProLabFAQList struct {
-	Status bool `json:"status"`
-	Data   []struct {
-		Question  string `json:"question"`
-		Answer    string `json:"answer"`
-		IsGeneric bool   `json:"generic"`
-	} `json:"data"`
+	Status bool               `json:"status"`
+	Data   *ProLabFAQListData `json:"data"`
+}
+
+type ProLabFAQListData []struct {
+	Question  string `json:"question"`
+	Answer    string `json:"answer"`
+	IsGeneric bool   `json:"generic"`
 }
 
 // Prolab Selected Reviews
 // https://www.hackthebox.com/api/v4/prolab/{prolabID}/reviews_overview
 
 type ProLabSelectedReviewsList struct {
-	Status bool `json:"status"`
-	Data   struct {
-		RatingsCount int `json:"total_number_of_ratings"`
-		RatingAvg    int `json:"users_average_rating"`
-		Feedbacks    []struct {
-			Rating int    `json:"rating"`
-			Text   string `json:"text"`
-			User   struct {
-				ID   int    `json:"id"`
-				Name string `json:"name"`
-			} `json:"user"`
-		} `json:"feedbacks"`
-	} `json:"data"`
+	Status bool                           `json:"status"`
+	Data   *ProLabSelectedReviewsListData `json:"data"`
+}
+
+type ProLabSelectedReviewsListData struct {
+	RatingsCount int                                 `json:"total_number_of_ratings"`
+	RatingAvg    int                                 `json:"users_average_rating"`
+	Feedbacks    *ProLabSelectedReviewsListFeedbacks `json:"feedbacks"`
+}
+
+type ProLabSelectedReviewsListFeedbacks []struct {
+	Rating int                            `json:"rating"`
+	Text   string                         `json:"text"`
+	User   *ProLabSelectedReviewsListUser `json:"user"`
+}
+
+type ProLabSelectedReviewsListUser struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
 }
 
 // Prolab Paginated Reviews
 // https://www.hackthebox.com/api/v4/prolab/{prolabID}/reviews?page={page}
 
 type ProLabPaginatedReviewsList struct {
-	Data []struct {
-		ID                 int    `json:"id"`
-		Rating             int    `json:"rating"`
-		Difficulty         int    `json:"difficulty"`
-		CreatedAt          string `json:"created_at"`
-		Text               string `json:"text"`
-		HelpfulReviewCount int    `json:"helpful_pro_feedbacks_count"`
-		InHelpfulReview    bool   `json:"user_in_helpful_pro_feedbacks"`
-		User               struct {
-			ID    int    `json:"id"`
-			Name  string `json:"name"`
-			Thumb string `json:"avatar_thumb"`
-		} `json:"user"`
-	} `json:"data"`
-	Links struct {
-		First string `json:"first"`
-		Last  string `json:"last"`
-		Prev  string `json:"prev"`
-		Next  string `json:"next"`
-	} `json:"links"`
-	Meta struct {
-		CurrentPage int `json:"current_page"`
-		From        int `json:"from"`
-		LastPage    int `json:"last_page"`
-		Links       []struct {
-			URL      string `json:"url"`
-			Label    string `json:"label"`
-			IsActive bool   `json:"active"`
-		} `json:"links"`
-		Path    string `json:"path"`
-		PerPage int    `json:"per_page"`
-		To      int    `json:"to"`
-		Total   int    `json:"total"`
-	} `json:"meta"`
+	Data  *ProLabPaginatedReviewsListData  `json:"data"`
+	Links *ProLabPaginatedReviewsListLinks `json:"links"`
+	Meta  *ProLabPaginatedReviewsListMeta  `json:"meta"`
+}
+
+type ProLabPaginatedReviewsListData []struct {
+	ID                 int                             `json:"id"`
+	Rating             int                             `json:"rating"`
+	Difficulty         int                             `json:"difficulty"`
+	CreatedAt          string                          `json:"created_at"`
+	Text               string                          `json:"text"`
+	HelpfulReviewCount int                             `json:"helpful_pro_feedbacks_count"`
+	InHelpfulReview    bool                            `json:"user_in_helpful_pro_feedbacks"`
+	User               *ProLabPaginatedReviewsListUser `json:"user"`
+}
+
+type ProLabPaginatedReviewsListUser struct {
+	ID    int    `json:"id"`
+	Name  string `json:"name"`
+	Thumb string `json:"avatar_thumb"`
+}
+
+type ProLabPaginatedReviewsListLinks struct {
+	First string `json:"first"`
+	Last  string `json:"last"`
+	Prev  string `json:"prev"`
+	Next  string `json:"next"`
+}
+
+type ProLabPaginatedReviewsListMeta struct {
+	CurrentPage int                                  `json:"current_page"`
+	From        int                                  `json:"from"`
+	LastPage    int                                  `json:"last_page"`
+	Links       *ProLabPaginatedReviewsListMetaLinks `json:"links"`
+	Path        string                               `json:"path"`
+	PerPage     int                                  `json:"per_page"`
+	To          int                                  `json:"to"`
+	Total       int                                  `json:"total"`
+}
+
+type ProLabPaginatedReviewsListMetaLinks []struct {
+	URL      string `json:"url"`
+	Label    string `json:"label"`
+	IsActive bool   `json:"active"`
 }
 
 func (s *Session) ProLabsActive() (proLabs *ProLabsActiveList, err error) {

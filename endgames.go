@@ -16,73 +16,81 @@ type EndgameAvailability struct {
 // https://www.hackthebox.com/api/v4/endgames
 
 type EndgamesActiveList struct {
-	Status bool `json:"status"`
-	Data   []struct {
-		ID            int                 `json:"id"`
-		Name          string              `json:"name"`
-		Avatar        string              `json:"avatar_url"`
-		Cover         string              `json:"cover_image_url"`
-		IsRetired     bool                `json:"retired"`
-		IsVip         bool                `json:"vip"`
-		Creators      EndgameCreators     `json:"creators"`
-		MachinesCount int                 `json:"endgame_machines_count"`
-		FlagsCount    int                 `json:"endgame_flags_count"`
-		Availability  EndgameAvailability `json:"user_availability"`
-		IsNew         bool                `json:"new"`
-	} `json:"data"`
+	Status bool                    `json:"status"`
+	Data   *EndgamesActiveListData `json:"data"`
+}
+
+type EndgamesActiveListData []struct {
+	ID            int                  `json:"id"`
+	Name          string               `json:"name"`
+	Avatar        string               `json:"avatar_url"`
+	Cover         string               `json:"cover_image_url"`
+	IsRetired     bool                 `json:"retired"`
+	IsVip         bool                 `json:"vip"`
+	Creators      *EndgameCreators     `json:"creators"`
+	MachinesCount int                  `json:"endgame_machines_count"`
+	FlagsCount    int                  `json:"endgame_flags_count"`
+	Availability  *EndgameAvailability `json:"user_availability"`
+	IsNew         bool                 `json:"new"`
 }
 
 // Endgame Profile
 // https://www.hackthebox.com/api/v4/endgame/{endgameID}
 
 type EndgameInfo struct {
-	Status bool `json:"status"`
-	Data   struct {
-		ID               int                 `json:"id"`
-		Name             string              `json:"name"`
-		Avatar           string              `json:"avatar_url"`
-		Cover            string              `json:"cover_image_url"`
-		IsRetired        bool                `json:"retired"`
-		IsVip            bool                `json:"vip"`
-		Creators         EndgameCreators     `json:"creators"`
-		Points           int                 `json:"points"`
-		PlayersCompleted int                 `json:"players_completed"`
-		ResetVotes       int                 `json:"endgame_reset_votes"`
-		LastReset        string              `json:"most_recent_reset"`
-		EntryPoints      []string            `json:"entry_points"`
-		Video            string              `json:"video_url"`
-		Description      string              `json:"description"`
-		CompletionIcon   string              `json:"completion_icon"`
-		CompletionText   string              `json:"completion_text"`
-		HasFinished      bool                `json:"has_user_finished"`
-		Availability     EndgameAvailability `json:"user_availability"`
-	}
+	Status bool             `json:"status"`
+	Data   *EndgameInfoData `json:"data"`
+}
+
+type EndgameInfoData struct {
+	ID               int                  `json:"id"`
+	Name             string               `json:"name"`
+	Avatar           string               `json:"avatar_url"`
+	Cover            string               `json:"cover_image_url"`
+	IsRetired        bool                 `json:"retired"`
+	IsVip            bool                 `json:"vip"`
+	Creators         *EndgameCreators     `json:"creators"`
+	Points           int                  `json:"points"`
+	PlayersCompleted int                  `json:"players_completed"`
+	ResetVotes       int                  `json:"endgame_reset_votes"`
+	LastReset        string               `json:"most_recent_reset"`
+	EntryPoints      []string             `json:"entry_points"`
+	Video            string               `json:"video_url"`
+	Description      string               `json:"description"`
+	CompletionIcon   string               `json:"completion_icon"`
+	CompletionText   string               `json:"completion_text"`
+	HasFinished      bool                 `json:"has_user_finished"`
+	Availability     *EndgameAvailability `json:"user_availability"`
 }
 
 // Endgame Flag List
 // https://www.hackthebox.com/api/v4/endgame/{endgameID}/flags
 
 type EndgameFlagsList struct {
-	Status bool `json:"status"`
-	Data   []struct {
-		ID     int    `json:"id"`
-		Title  string `json:"title"`
-		Points int    `json:"points"`
-		Owned  bool   `json:"owned"`
-	} `json:"data"`
+	Status bool                  `json:"status"`
+	Data   *EndgameFlagsListData `json:"data"`
+}
+
+type EndgameFlagsListData []struct {
+	ID     int    `json:"id"`
+	Title  string `json:"title"`
+	Points int    `json:"points"`
+	Owned  bool   `json:"owned"`
 }
 
 // Endgame Machine List
 // https://www.hackthebox.com/api/v4/endgame/{endgameID}}/machines
 
 type EndgameMachinesList struct {
-	Status bool `json:"status"`
-	Data   []struct {
-		ID    int    `json:"id"`
-		Name  string `json:"name"`
-		OS    string `json:"os"`
-		Thumb string `json:"avatar_thumb_url"`
-	} `json:"data"`
+	Status bool                     `json:"status"`
+	Data   *EndgameMachinesListData `json:"data"`
+}
+
+type EndgameMachinesListData []struct {
+	ID    int    `json:"id"`
+	Name  string `json:"name"`
+	OS    string `json:"os"`
+	Thumb string `json:"avatar_thumb_url"`
 }
 
 func (s *Session) EndgamesActive() (endgames *EndgamesActiveList, err error) {

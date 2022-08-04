@@ -2,65 +2,75 @@ package htbgo
 
 // Get a list of universities
 type UniversitiesList struct {
-	Message string `json:"message"`
-	Section string `json:"section"`
-	Data    struct {
-		Page       int `json:"current_page"`
-		University []struct {
-			ID               int      `json:"id"`
-			Name             string   `json:"name"`
-			HasRandomLogo    int      `json:"has_auto_generated_logo"`
-			CCA2             string   `json:"cca2"`
-			CreatedAt        string   `json:"created_at"`
-			UsersCount       int      `json:"users_count"`
-			RespectedByCount int      `json:"respected_by_count"`
-			Country          string   `json:"country"`
-			UserAvatars      []string `json:"user_avatars"`
-		} `json:"data"`
-		FirstPageURL    string `json:"first_page_url"`
-		From            int    `json:"from"`
-		To              int    `json:"to"`
-		NextPageURL     string `json:"next_page_url"`
-		LastPage        int    `json:"last_page"`
-		LastPageURL     string `json:"last_page_url"`
-		Path            string `json:"path"`
-		PerPage         int    `json:"per_page"`
-		PreviousPageURL string `json:"prev_page_url"`
-		Links           []struct {
-			URL      string `json:"url"`
-			Label    string `json:"label"`
-			IsActive bool   `json:"active"`
-		} `json:"links"`
-		Total int `json:"total"`
-	} `json:"data"`
+	Message string                `json:"message"`
+	Section string                `json:"section"`
+	Data    *UniversitiesListData `json:"data"`
+}
+
+type UniversitiesListData struct {
+	Page            int                         `json:"current_page"`
+	University      *UniversitiesListUniversity `json:"data"`
+	FirstPageURL    string                      `json:"first_page_url"`
+	From            int                         `json:"from"`
+	To              int                         `json:"to"`
+	NextPageURL     string                      `json:"next_page_url"`
+	LastPage        int                         `json:"last_page"`
+	LastPageURL     string                      `json:"last_page_url"`
+	Path            string                      `json:"path"`
+	PerPage         int                         `json:"per_page"`
+	PreviousPageURL string                      `json:"prev_page_url"`
+	Links           *UniversitiesListLinks      `json:"links"`
+	Total           int                         `json:"total"`
+}
+
+type UniversitiesListUniversity []struct {
+	ID               int      `json:"id"`
+	Name             string   `json:"name"`
+	HasRandomLogo    int      `json:"has_auto_generated_logo"`
+	CCA2             string   `json:"cca2"`
+	CreatedAt        string   `json:"created_at"`
+	UsersCount       int      `json:"users_count"`
+	RespectedByCount int      `json:"respected_by_count"`
+	Country          string   `json:"country"`
+	UserAvatars      []string `json:"user_avatars"`
+}
+
+type UniversitiesListLinks []struct {
+	URL      string `json:"url"`
+	Label    string `json:"label"`
+	IsActive bool   `json:"active"`
 }
 
 // get a profile of a university by id
 type UniversityInfo struct {
-	Message string `json:"message"`
-	Data    struct {
-		ID              int    `json:"id"`
-		Name            string `json:"name"`
-		Points          int    `json:"points"`
-		Motto           string `json:"motto"`
-		Description     string `json:"description"`
-		CountryName     string `json:"country_name"`
-		CountryCode     string `json:"country_code"`
-		HasRandomLogo   int    `json:"has_auto_generated_logo"`
-		JoinRequestSent bool   `json:"join_request_sent"`
-		IsRespected     bool   `json:"is_respected"`
-		URL             string `json:"url"`
-		Twitter         string `json:"twitter"`
-		Discord         string `json:"discord"`
-		Logo            string `json:"logo_url"`
-		Cover           string `json:"cover_image_url"`
-		Active          int    `json:"active"`
-		Captain         struct {
-			ID    int    `json:"id"`
-			Name  string `json:"name"`
-			Thumb string `json:"avatar_thumb"`
-		} `json:"captain"`
-	} `json:"data"`
+	Message string              `json:"message"`
+	Data    *UniversityInfoData `json:"data"`
+}
+
+type UniversityInfoData struct {
+	ID              int                    `json:"id"`
+	Name            string                 `json:"name"`
+	Points          int                    `json:"points"`
+	Motto           string                 `json:"motto"`
+	Description     string                 `json:"description"`
+	CountryName     string                 `json:"country_name"`
+	CountryCode     string                 `json:"country_code"`
+	HasRandomLogo   int                    `json:"has_auto_generated_logo"`
+	JoinRequestSent bool                   `json:"join_request_sent"`
+	IsRespected     bool                   `json:"is_respected"`
+	URL             string                 `json:"url"`
+	Twitter         string                 `json:"twitter"`
+	Discord         string                 `json:"discord"`
+	Logo            string                 `json:"logo_url"`
+	Cover           string                 `json:"cover_image_url"`
+	Active          int                    `json:"active"`
+	Captain         *UniversityInfoCaptain `json:"captain"`
+}
+
+type UniversityInfoCaptain struct {
+	ID    int    `json:"id"`
+	Name  string `json:"name"`
+	Thumb string `json:"avatar_thumb"`
 }
 
 // get stats of a university by id
@@ -73,49 +83,51 @@ type UniversityOwnsWeek struct {
 	WeekEndDate   string `json:"week_end_date"`
 }
 type UniversityOwnsWeeks struct {
-	WeekOne    UniversityOwnsWeek `json:"week1"`
-	WeekTwo    UniversityOwnsWeek `json:"week2"`
-	WeekThree  UniversityOwnsWeek `json:"week3"`
-	WeekFour   UniversityOwnsWeek `json:"week4"`
-	WeekFive   UniversityOwnsWeek `json:"week5"`
-	WeekSix    UniversityOwnsWeek `json:"week6"`
-	WeekSeven  UniversityOwnsWeek `json:"week7"`
-	WeekEight  UniversityOwnsWeek `json:"week8"`
-	WeekNine   UniversityOwnsWeek `json:"week9"`
-	WeekTen    UniversityOwnsWeek `json:"week10"`
-	WeekEleven UniversityOwnsWeek `json:"week11"`
-	WeekTwelve UniversityOwnsWeek `json:"week12"`
+	WeekOne    *UniversityOwnsWeek `json:"week1"`
+	WeekTwo    *UniversityOwnsWeek `json:"week2"`
+	WeekThree  *UniversityOwnsWeek `json:"week3"`
+	WeekFour   *UniversityOwnsWeek `json:"week4"`
+	WeekFive   *UniversityOwnsWeek `json:"week5"`
+	WeekSix    *UniversityOwnsWeek `json:"week6"`
+	WeekSeven  *UniversityOwnsWeek `json:"week7"`
+	WeekEight  *UniversityOwnsWeek `json:"week8"`
+	WeekNine   *UniversityOwnsWeek `json:"week9"`
+	WeekTen    *UniversityOwnsWeek `json:"week10"`
+	WeekEleven *UniversityOwnsWeek `json:"week11"`
+	WeekTwelve *UniversityOwnsWeek `json:"week12"`
 }
 type UniversityOwnsInfo struct {
-	Rank          int                 `json:"rank"`
-	UserOwns      int                 `json:"user_owns"`
-	SystemOwns    int                 `json:"system_owns"`
-	Bloods        int                 `json:"first_bloods"`
-	ChallengeOwns int                 `json:"challenge_owns"`
-	Respects      int                 `json:"respects"`
-	Weekly        UniversityOwnsWeeks `json:"weekly"`
+	Rank          int                  `json:"rank"`
+	UserOwns      int                  `json:"user_owns"`
+	SystemOwns    int                  `json:"system_owns"`
+	Bloods        int                  `json:"first_bloods"`
+	ChallengeOwns int                  `json:"challenge_owns"`
+	Respects      int                  `json:"respects"`
+	Weekly        *UniversityOwnsWeeks `json:"weekly"`
 }
 
 // List University Members
 type UniversityMembersList []struct {
-	ID          int         `json:"id"`
-	Name        string      `json:"name"`
-	Avatar      string      `json:"avatar"`
-	Rank        interface{} `json:"rank"`
-	Points      int         `json:"points"`
-	RootOwns    int         `json:"root_owns"`
-	RootBloods  int         `json:"root_bloods_count"`
-	UserBloods  int         `json:"user_bloods_count"`
-	UserOwns    int         `json:"user_owns"`
-	RankText    string      `json:"rank_text"`
-	CountryName string      `json:"country_name"`
-	CountryCode string      `json:"country_code"`
-	Role        string      `json:"role"`
-	University  struct {
-		ID        int `json:"id"`
-		CaptainID int `json:"captain_id"`
-	} `json:"university"`
-	Public int `json:"public"`
+	ID          int                              `json:"id"`
+	Name        string                           `json:"name"`
+	Avatar      string                           `json:"avatar"`
+	Rank        interface{}                      `json:"rank"`
+	Points      int                              `json:"points"`
+	RootOwns    int                              `json:"root_owns"`
+	RootBloods  int                              `json:"root_bloods_count"`
+	UserBloods  int                              `json:"user_bloods_count"`
+	UserOwns    int                              `json:"user_owns"`
+	RankText    string                           `json:"rank_text"`
+	CountryName string                           `json:"country_name"`
+	CountryCode string                           `json:"country_code"`
+	Role        string                           `json:"role"`
+	University  *UniversityMembersListUniversity `json:"university"`
+	Public      int                              `json:"public"`
+}
+
+type UniversityMembersListUniversity struct {
+	ID        int `json:"id"`
+	CaptainID int `json:"captain_id"`
 }
 
 func (s *Session) UniversitiesByPage(page int) (universities *UniversitiesList, err error) {
