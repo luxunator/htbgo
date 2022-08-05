@@ -12,66 +12,74 @@ type ConnectionStatusInfo struct {
 // https://www.hackthebox.com/api/v4/machine/active
 
 type ActiveMachineInfo struct {
-	Info struct {
-		ID         int    `json:"id"`
-		Name       string `json:"name"`
-		Avatar     string `json:"avatar"`
-		ExpiresAt  string `json:"expires_at"`
-		IsVoting   bool   `json:"voting"`
-		HasVoted   bool   `json:"voted"`
-		IsSpawning bool   `json:"isSpawning"`
-		Type       string `json:"type"`
-		LabServer  string `json:"lab_server"`
-	} `json:"info"`
+	Info *ActiveMachineInfoItem `json:"info"`
+}
+
+type ActiveMachineInfoItem struct {
+	ID         int    `json:"id"`
+	Name       string `json:"name"`
+	Avatar     string `json:"avatar"`
+	ExpiresAt  string `json:"expires_at"`
+	IsVoting   bool   `json:"voting"`
+	HasVoted   bool   `json:"voted"`
+	IsSpawning bool   `json:"isSpawning"`
+	Type       string `json:"type"`
+	LabServer  string `json:"lab_server"`
 }
 
 // Bearer Followers
 // https://www.hackthebox.com/api/v4/user/followers
 
 type FollowersList struct {
-	Info []struct {
-		ID int `json:"id"`
-	} `json:"info"`
+	Info []*FollowersListItem `json:"info"`
+}
+
+type FollowersListItem struct {
+	ID int `json:"id"`
 }
 
 // Bearer Profile
 // https://www.hackthebox.com/api/v4/user/info
 
 type ProfileInfo struct {
-	Info struct {
-		ID                        int    `json:"id"`
-		Name                      string `json:"name"`
-		Email                     string `json:"email"`
-		Timezone                  string `json:"timezone"`
-		IsVIP                     bool   `json:"isVip"`
-		IsModerator               bool   `json:"isModerator"`
-		IsBGModerator             bool   `json:"isBGModerator"`
-		IsChatBanned              bool   `json:"isChatBanned"`
-		IsDedicatedVIP            bool   `json:"isDedicatedVip"`
-		CanAccessVIP              bool   `json:"canAccessVIP"`
-		CanAccessDediLab          bool   `json:"canAccessDedilab"`
-		IsServerVIP               bool   `json:"isServerVIP"`
-		ServerID                  int    `json:"server_id"`
-		Avatar                    string `json:"avatar"`
-		BetaTester                int    `json:"beta_tester"`
-		RankID                    int    `json:"rank_id"`
-		IsOnboardComplete         bool   `json:"onboarding_completed"`
-		IsOnboardTutorialComplete int    `json:"onboarding_tutorial_complete"`
-		Verified                  bool   `json:"verified"`
-		CanDeleteAvatar           bool   `json:"can_delete_avatar"`
-		Team                      struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			AvatarThumb string `json:"avatar_thumb_url"`
-		} `json:"team"`
-		// University `json:"university"` TODO
-		Identifier        string `json:"identifier"`
-		HasTeamInvitation bool   `json:"hasTeamInvitation"`
-		HasTwoFAEnabled   bool   `json:"TwoFaEnabled"`
-		HasAppTokens      bool   `json:"hasAppTokens"`
-		SubscriptionPlan  string `json:"subscription_plan"`
-		DunningExists     bool   `json:"dunning_exists"`
-	} `json:"info"`
+	Info *ProfileInfoItem `json:"info"`
+}
+
+type ProfileInfoItem struct {
+	ID                        int                  `json:"id"`
+	Name                      string               `json:"name"`
+	Email                     string               `json:"email"`
+	Timezone                  string               `json:"timezone"`
+	IsVIP                     bool                 `json:"isVip"`
+	IsModerator               bool                 `json:"isModerator"`
+	IsBGModerator             bool                 `json:"isBGModerator"`
+	IsChatBanned              bool                 `json:"isChatBanned"`
+	IsDedicatedVIP            bool                 `json:"isDedicatedVip"`
+	CanAccessVIP              bool                 `json:"canAccessVIP"`
+	CanAccessDediLab          bool                 `json:"canAccessDedilab"`
+	IsServerVIP               bool                 `json:"isServerVIP"`
+	ServerID                  int                  `json:"server_id"`
+	Avatar                    string               `json:"avatar"`
+	BetaTester                int                  `json:"beta_tester"`
+	RankID                    int                  `json:"rank_id"`
+	IsOnboardComplete         bool                 `json:"onboarding_completed"`
+	IsOnboardTutorialComplete int                  `json:"onboarding_tutorial_complete"`
+	Verified                  bool                 `json:"verified"`
+	CanDeleteAvatar           bool                 `json:"can_delete_avatar"`
+	Team                      *ProfileInfoItemTeam `json:"team"`
+	University                interface{}          `json:"university"`
+	Identifier                string               `json:"identifier"`
+	HasTeamInvitation         bool                 `json:"hasTeamInvitation"`
+	HasTwoFAEnabled           bool                 `json:"TwoFaEnabled"`
+	HasAppTokens              bool                 `json:"hasAppTokens"`
+	SubscriptionPlan          string               `json:"subscription_plan"`
+	DunningExists             bool                 `json:"dunning_exists"`
+}
+
+type ProfileInfoItemTeam struct {
+	ID          int    `json:"id"`
+	Name        string `json:"name"`
+	AvatarThumb string `json:"avatar_thumb_url"`
 }
 
 // Bearer Settings
@@ -89,30 +97,33 @@ type SettingsInfo struct {
 // https://www.hackthebox.com/api/v4/user/subscriptions
 
 type SubscriptionsList struct {
-	Subscriptions []struct {
-		Name        string `json:"name"`
-		EndsAt      string `json:"ends_at"`
-		RenewsAt    string `json:"renews_at"`
-		RecurlyPlan string `json:"recurly_plan"`
-		PausedAt    string `json:"paused_at"`
-		CreatedAt   string `json:"created_at"`
-		ResumeAt    string `json:"resume_at"`
-		StripePlan  string `json:"stripe_plan"`
-		// Items [] `json:"items"` TODO
-	} `json:"subscriptions"`
+	Subscriptions []*SubscriptionsListItem `json:"subscriptions"`
+}
+
+type SubscriptionsListItem struct {
+	Name        string        `json:"name"`
+	EndsAt      string        `json:"ends_at"`
+	RenewsAt    string        `json:"renews_at"`
+	RecurlyPlan string        `json:"recurly_plan"`
+	PausedAt    string        `json:"paused_at"`
+	CreatedAt   string        `json:"created_at"`
+	ResumeAt    string        `json:"resume_at"`
+	StripePlan  string        `json:"stripe_plan"`
+	Items       []interface{} `json:"items"`
 }
 
 // Bearer Subscriptions Balance
 // https://www.hackthebox.com/api/v4/user/subscriptions/balance
 
 type SubscriptionsBalanceInfo struct {
-	Balances struct {
-		USD int `json:"USD"`
-		GBP int `json:"GBP"`
-		EUR int `json:"EUR"`
-	} `json:"balances"`
+	Balances        *SubscriptionsBalanceInfoBalances `json:"balances"`
+	DefaultCurrency string                            `json:"default_currency"`
+}
 
-	DefaultCurrency string `json:"default_currency"`
+type SubscriptionsBalanceInfoBalances struct {
+	USD int `json:"USD"`
+	GBP int `json:"GBP"`
+	EUR int `json:"EUR"`
 }
 
 // Bearer Recurly URL
@@ -135,315 +146,383 @@ type EnrolledTracksList []struct {
 // https://www.hackthebox.com/api/v4/user/profile/basic/{userID}
 
 type UserRelationshipInfo struct {
-	Profile struct {
-		ID           int    `json:"id"`
-		SSOID        int    `json:"sso_id"`
-		Name         string `json:"name"`
-		SystemOwns   int    `json:"system_owns"`
-		UserOwns     int    `json:"user_owns"`
-		UserBloods   int    `json:"user_bloods"`
-		SystemBloods int    `json:"system_bloods"`
-		Team         struct {
-			ID      int    `json:"id"`
-			Name    string `json:"name"`
-			Ranking int    `json:"ranking"`
-			Avatar  string `json:"avatar"`
-		} `json:"team"`
-		Respects        int     `json:"respects"`
-		Rank            string  `json:"rank"`
-		RankID          int     `json:"rank_id"`
-		RankProgress    int     `json:"current_rank_progress"`
-		NextRank        string  `json:"next_rank"`
-		NextRankPoints  float64 `json:"next_rank_points"`
-		RankOwnership   string  `json:"rank_ownership"`
-		RankRequirement int     `json:"rank_requirement"`
-		Ranking         int     `json:"ranking"`
-		Avatar          string  `json:"avatar"`
-		Timezone        string  `json:"timezone"`
-		IsVIP           bool    `json:"isVip"`
-		IsDedicatedVip  bool    `json:"isDedicatedVip"`
-		IsPublic        bool    `json:"public"`
-		CountryName     string  `json:"country_name"`
-		CountryCode     string  `json:"country_code"`
-		Points          int     `json:"points"`
-		University      struct {
-			ID        int    `json:"id"`
-			Name      string `json:"name"`
-			LogoThumb string `json:"logo_thumb_url"`
-			Rank      int    `json:"rank"`
-		} `json:"university"`
-		UniversityName string `json:"university_name"`
-		Description    string `json:"description"`
-		Github         string `json:"github"`
-		LinkedIn       string `json:"linkedin"`
-		Twitter        string `json:"twitter"`
-		Website        string `json:"website"`
-		IsRespected    bool   `json:"isRespected"`
-		IsFollowed     bool   `json:"isFollowed"`
-	}
+	Profile *UserRelationshipInfoItem `json:"profile"`
+}
+
+type UserRelationshipInfoItem struct {
+	ID              int                                 `json:"id"`
+	SSOID           int                                 `json:"sso_id"`
+	Name            string                              `json:"name"`
+	SystemOwns      int                                 `json:"system_owns"`
+	UserOwns        int                                 `json:"user_owns"`
+	UserBloods      int                                 `json:"user_bloods"`
+	SystemBloods    int                                 `json:"system_bloods"`
+	Team            *UserRelationshipInfoItemTeam       `json:"team"`
+	Respects        int                                 `json:"respects"`
+	Rank            string                              `json:"rank"`
+	RankID          int                                 `json:"rank_id"`
+	RankProgress    int                                 `json:"current_rank_progress"`
+	NextRank        string                              `json:"next_rank"`
+	NextRankPoints  float64                             `json:"next_rank_points"`
+	RankOwnership   string                              `json:"rank_ownership"`
+	RankRequirement int                                 `json:"rank_requirement"`
+	Ranking         int                                 `json:"ranking"`
+	Avatar          string                              `json:"avatar"`
+	Timezone        string                              `json:"timezone"`
+	IsVIP           bool                                `json:"isVip"`
+	IsDedicatedVip  bool                                `json:"isDedicatedVip"`
+	IsPublic        bool                                `json:"public"`
+	CountryName     string                              `json:"country_name"`
+	CountryCode     string                              `json:"country_code"`
+	Points          int                                 `json:"points"`
+	University      *UserRelationshipInfoItemUniversity `json:"university"`
+	UniversityName  string                              `json:"university_name"`
+	Description     string                              `json:"description"`
+	Github          string                              `json:"github"`
+	LinkedIn        string                              `json:"linkedin"`
+	Twitter         string                              `json:"twitter"`
+	Website         string                              `json:"website"`
+	IsRespected     bool                                `json:"isRespected"`
+	IsFollowed      bool                                `json:"isFollowed"`
+}
+
+type UserRelationshipInfoItemTeam struct {
+	ID      int    `json:"id"`
+	Name    string `json:"name"`
+	Ranking int    `json:"ranking"`
+	Avatar  string `json:"avatar"`
+}
+
+type UserRelationshipInfoItemUniversity struct {
+	ID        int    `json:"id"`
+	Name      string `json:"name"`
+	LogoThumb string `json:"logo_thumb_url"`
+	Rank      int    `json:"rank"`
 }
 
 // User Machines Progress
 // https://www.hackthebox.com/api/v4/profile/progress/machines/os/{userID}
 
 type UserMachinesList struct {
-	Profile struct {
-		OperatingSystems []struct {
-			Name          string  `json:"name"`
-			Completion    float64 `json:"completion_percentage"`
-			OwnedMachines int     `json:"owned_machines"`
-			TotalMachines int     `json:"total_machines"`
-		} `json:"operating_systems"`
-	} `json:"profile"`
+	Profile *UserMachinesListItem `json:"profile"`
+}
+
+type UserMachinesListItem struct {
+	OperatingSystems []*UserMachinesListItemOperatingSystem `json:"operating_systems"`
+}
+
+type UserMachinesListItemOperatingSystem struct {
+	Name          string  `json:"name"`
+	Completion    float64 `json:"completion_percentage"`
+	OwnedMachines int     `json:"owned_machines"`
+	TotalMachines int     `json:"total_machines"`
 }
 
 // User Challenges Progress
 // https://www.hackthebox.com/api/v4/profile/progress/challenges/{userID}
 
 type UserChallengesList struct {
-	Profile struct {
-		ChallengeOwns struct {
-			Solved int `json:"solved"`
-			Total  int `json:"total"`
-		} `json:"challenge_owns"`
-		ChallengeCategories []struct {
-			Name          string  `json:"name"`
-			OwnedFlags    int     `json:"owned_flags"`
-			TotalFlags    int     `json:"total_flags"`
-			Completion    float64 `json:"completion_percentage"`
-			UserSolvedAvg float64 `json:"avg_user_solved"`
-		} `json:"challenge_categories"`
-	} `json:"profile"`
+	Profile *UserChallengesListItem `json:"profile"`
+}
+
+type UserChallengesListItem struct {
+	Owns       *UserChallengesListItemOwns       `json:"challenge_owns"`
+	Categories []*UserChallengesListItemCategory `json:"challenge_categories"`
+}
+
+type UserChallengesListItemOwns struct {
+	Solved int `json:"solved"`
+	Total  int `json:"total"`
+}
+
+type UserChallengesListItemCategory struct {
+	Name          string  `json:"name"`
+	OwnedFlags    int     `json:"owned_flags"`
+	TotalFlags    int     `json:"total_flags"`
+	Completion    float64 `json:"completion_percentage"`
+	UserSolvedAvg float64 `json:"avg_user_solved"`
 }
 
 // User Endgames Progress
 // https://www.hackthebox.com/api/v4/profile/progress/endgame/{userID}
 
 type UserEndgamesList struct {
-	Profile struct {
-		Endgames []struct {
-			Name       string  `json:"name"`
-			Completion float64 `json:"completion_percentage"`
-			OwnedFlags int     `json:"owned_flags"`
-			TotalFlags int     `json:"total_flags"`
-		} `json:"endgames"`
-	} `json:"profile"`
+	Profile *UserEndgamesListItem `json:"profile"`
+}
+
+type UserEndgamesListItem struct {
+	Endgames []*UserEndgamesListItemEndgame `json:"endgames"`
+}
+
+type UserEndgamesListItemEndgame struct {
+	Name       string  `json:"name"`
+	Completion float64 `json:"completion_percentage"`
+	OwnedFlags int     `json:"owned_flags"`
+	TotalFlags int     `json:"total_flags"`
 }
 
 // User Fortress Progress
 // https://www.hackthebox.com/api/v4/profile/progress/fortress/{userID}
 
 type UserFortressesList struct {
-	Profile struct {
-		Fortresses []struct {
-			Name       string  `json:"name"`
-			Avatar     string  `json:"avatar"`
-			Completion float64 `json:"completion_percentage"`
-			OwnedFlags int     `json:"owned_flags"`
-			TotalFlags int     `json:"total_flags"`
-		} `json:"fortresses"`
-	} `json:"profile"`
+	Profile *UserFortressesListItem `json:"profile"`
+}
+
+type UserFortressesListItem struct {
+	Fortresses []*UserFortressesListItemFortress `json:"fortresses"`
+}
+
+type UserFortressesListItemFortress struct {
+	Name       string  `json:"name"`
+	Avatar     string  `json:"avatar"`
+	Completion float64 `json:"completion_percentage"`
+	OwnedFlags int     `json:"owned_flags"`
+	TotalFlags int     `json:"total_flags"`
 }
 
 // User ProLabs Progress
 // https://www.hackthebox.com/api/v4/profile/progress/prolab/{userID}
 
 type UserProLabsList struct {
-	Profile struct {
-		ProLabs []struct {
-			Name          string  `json:"name"`
-			Completion    float64 `json:"completion_percentage"`
-			OwnedFlags    int     `json:"owned_flags"`
-			TotalFlags    int     `json:"total_flags"`
-			TotalMachines int     `json:"total_machines"`
-			RatingsAvg    float64 `json:"average_ratings"`
-		} `json:"prolabs"`
-	} `json:"profile"`
+	Profile *UserProLabsListItem `json:"profile"`
+}
+
+type UserProLabsListItem struct {
+	ProLabs []*UserProLabsListItemProLab `json:"prolabs"`
+}
+
+type UserProLabsListItemProLab struct {
+	Name          string  `json:"name"`
+	Completion    float64 `json:"completion_percentage"`
+	OwnedFlags    int     `json:"owned_flags"`
+	TotalFlags    int     `json:"total_flags"`
+	TotalMachines int     `json:"total_machines"`
+	RatingsAvg    float64 `json:"average_ratings"`
 }
 
 // User Activity
 // https://www.hackthebox.com/api/v4/profile/activity/{userID}
 
 type UserActivityList struct {
-	Profile struct {
-		Activity []struct {
-			Date              string `json:"date"`
-			DateDiff          string `json:"date_diff"`
-			ObjectType        string `json:"object_type"`
-			Type              string `json:"type"`
-			Blood             bool   `json:"first_blood"`
-			ID                int    `json:"id"`
-			Name              string `json:"name"`
-			Points            int    `json:"points"`
-			MachineAvatar     string `json:"machine_avatar"`
-			ChallengeCategory string `json:"challenge_category"`
-			FlagTitle         string `json:"flag_title"`
-		} `json:"activity"`
-	} `json:"profile"`
+	Profile *UserActivityListItem `json:"profile"`
+}
+
+type UserActivityListItem struct {
+	Activity []*UserActivityListItemActivity `json:"activity"`
+}
+
+type UserActivityListItemActivity struct {
+	Date              string `json:"date"`
+	DateDiff          string `json:"date_diff"`
+	ObjectType        string `json:"object_type"`
+	Type              string `json:"type"`
+	Blood             bool   `json:"first_blood"`
+	ID                int    `json:"id"`
+	Name              string `json:"name"`
+	Points            int    `json:"points"`
+	MachineAvatar     string `json:"machine_avatar"`
+	ChallengeCategory string `json:"challenge_category"`
+	FlagTitle         string `json:"flag_title"`
 }
 
 // User Bloods
 // https://www.hackthebox.com/api/v4/profile/bloods/{userID}
 
 type UserBloodsList struct {
-	Profile struct {
-		Bloods struct {
-			Machines []struct {
-				ID            int    `json:"id"`
-				Name          string `json:"name"`
-				Avatar        string `json:"avatar"`
-				OS            string `json:"os"`
-				Difficulty    string `json:"difficulty_text"`
-				UserBlood     bool   `json:"user_blood"`
-				UserBloodDiff string `json:"user_blood_difference"`
-				RootBlood     bool   `json:"root_blood"`
-				RootBloodDiff string `json:"root_blood_difference"`
-			} `json:"machines"`
-			Challenges []struct {
-				ID         int    `json:"id"`
-				Name       string `json:"name"`
-				Category   string `json:"category_name"`
-				Difficulty string `json:"difficulty_test"`
-				BloodDiff  string `json:"blood_difference"`
-			} `json:"challenges"`
-		} `json:"bloods"`
-	} `json:"profile"`
+	Profile *UserBloodsListItem `json:"profile"`
+}
+
+type UserBloodsListItem struct {
+	Bloods *UserBloodsListItemBloods `json:"bloods"`
+}
+
+type UserBloodsListItemBloods struct {
+	Machines   []*UserBloodsListItemBloodsMachine   `json:"machines"`
+	Challenges []*UserBloodsListItemBloodsChallenge `json:"challenges"`
+}
+
+type UserBloodsListItemBloodsMachine struct {
+	ID            int    `json:"id"`
+	Name          string `json:"name"`
+	Avatar        string `json:"avatar"`
+	OS            string `json:"os"`
+	Difficulty    string `json:"difficulty_text"`
+	UserBlood     bool   `json:"user_blood"`
+	UserBloodDiff string `json:"user_blood_difference"`
+	RootBlood     bool   `json:"root_blood"`
+	RootBloodDiff string `json:"root_blood_difference"`
+}
+
+type UserBloodsListItemBloodsChallenge struct {
+	ID         int    `json:"id"`
+	Name       string `json:"name"`
+	Category   string `json:"category_name"`
+	Difficulty string `json:"difficulty_test"`
+	BloodDiff  string `json:"blood_difference"`
 }
 
 // User Submissions
 // https://www.hackthebox.com/api/v4/profile/content/{userID}
 
 type UserSubmissionsList struct {
-	Profile struct {
-		Content struct {
-			Machines []struct {
-				ID            int    `json:"id"`
-				Name          string `json:"name"`
-				OS            string `json:"os"`
-				Avatar        string `json:"machine_avatar"`
-				Difficulty    string `json:"difficulty"`
-				Rating        string `json:"rating"`
-				UserOwns      int    `json:"user_owns"`
-				SystemOwns    int    `json:"system_owns"`
-			} `json:"machines"`
-			Challenges []struct {
-				ID       int    `json:"id"`
-				Name     string `json:"name"`
-				Category string `json:"category"`
-				Likes    int    `json:"likes"`
-				Dislikes int    `json:"dislikes"`
-			} `json:"challenges"`
-			Writeups []struct {
-				ID            int    `json:"id"`
-				MachineID     int    `json:"machine_id"`
-				MachineAvatar string `json:"machine_avatar"`
-				MachineName   string `json:"machine_name"`
-				URL           string `json:"url"`
-				Likes         int    `json:"likes"`
-				Dislikes      int    `json:"dislikes"`
-				Type          string `json:"type"`
-			} `json:"writeups"`
-		} `json:"content"`
-	} `json:"profile"`
+	Profile *UserSubmissionsListItem `json:"profile"`
+}
+
+type UserSubmissionsListItem struct {
+	Content *UserSubmissionsListItemContent `json:"content"`
+}
+
+type UserSubmissionsListItemContent struct {
+	Machines   []*UserSubmissionsListItemContentMachine   `json:"machines"`
+	Challenges []*UserSubmissionsListItemContentChallenge `json:"challenges"`
+	Writeups   []*UserSubmissionsListItemContentWriteup   `json:"writeups"`
+}
+
+type UserSubmissionsListItemContentMachine struct {
+	ID         int    `json:"id"`
+	Name       string `json:"name"`
+	OS         string `json:"os"`
+	Avatar     string `json:"machine_avatar"`
+	Difficulty string `json:"difficulty"`
+	Rating     string `json:"rating"`
+	UserOwns   int    `json:"user_owns"`
+	SystemOwns int    `json:"system_owns"`
+}
+
+type UserSubmissionsListItemContentChallenge struct {
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	Category string `json:"category"`
+	Likes    int    `json:"likes"`
+	Dislikes int    `json:"dislikes"`
+}
+
+type UserSubmissionsListItemContentWriteup struct {
+	ID            int    `json:"id"`
+	MachineID     int    `json:"machine_id"`
+	MachineAvatar string `json:"machine_avatar"`
+	MachineName   string `json:"machine_name"`
+	URL           string `json:"url"`
+	Likes         int    `json:"likes"`
+	Dislikes      int    `json:"dislikes"`
+	Type          string `json:"type"`
 }
 
 // User Achievements
 // https://www.hackthebox.com/api/v4/profile/graph/{duration}/{userID}
 
 type UserAchievementsList struct {
-	Profile struct {
-		GraphData struct {
-			UserOwns      []int `json:"user_owns"`
-			SystemOwns    []int `json:"system_owns"`
-			ChallengeOwns []int `json:"challenge_owns"`
-			Bloods        []int `json:"first_bloods"`
-			Respects      []int `json:"respects"`
-		} `json:"graphData"`
-	} `json:"profile"`
+	Profile *UserAchievementsListItem `json:"profile"`
+}
+
+type UserAchievementsListItem struct {
+	Graph *UserAchievementsListItemGraph `json:"graphData"`
+}
+
+type UserAchievementsListItemGraph struct {
+	UserOwns      []int `json:"user_owns"`
+	SystemOwns    []int `json:"system_owns"`
+	ChallengeOwns []int `json:"challenge_owns"`
+	Bloods        []int `json:"first_bloods"`
+	Respects      []int `json:"respects"`
 }
 
 // User Machine Owns By Attack Path
 // https://www.hackthebox.com/api/v4/profile/chart/machines/attack/{userID}
 
 type UserOwnsByPathMap struct {
-	Profile struct {
-		MachineOwns struct {
-			Solved int `json:"solved"`
-			Total  int `json:"total"`
-		} `json:"machine_owns"`
-		MachineAttackPaths map[string]struct {
-			Solved        int     `json:"solved"`
-			Total         int     `json:"total"`
-			UserSolvedAvg float64 `json:"avg_user_solved"`
-		} `json:"machine_attack_paths"`
-	} `json:"profile"`
+	Profile *UserOwnsByPathMapItem `json:"profile"`
+}
+
+type UserOwnsByPathMapItem struct {
+	MachineOwns        *UserOwnsByPathMapItemMachineOwns                  `json:"machine_owns"`
+	MachineAttackPaths map[string]*UserOwnsByPathMapItemMachineAttackPath `json:"machine_attack_paths"`
+}
+
+type UserOwnsByPathMapItemMachineOwns struct {
+	Solved int `json:"solved"`
+	Total  int `json:"total"`
+}
+
+type UserOwnsByPathMapItemMachineAttackPath struct {
+	Solved        int     `json:"solved"`
+	Total         int     `json:"total"`
+	UserSolvedAvg float64 `json:"avg_user_solved"`
 }
 
 // User Profile
 // https://www.hackthebox.com/api/v4/profile/{userID}
 
 type UserInfo struct {
-	Profile struct {
-		ID           int    `json:"id"`
-		SSOID        int    `json:"sso_id"`
-		Name         string `json:"name"`
-		SystemOwns   int    `json:"system_owns"`
-		UserOwns     int    `json:"user_owns"`
-		UserBloods   int    `json:"user_bloods"`
-		SystemBloods int    `json:"system_bloods"`
-		Team         struct {
-			ID      int    `json:"id"`
-			Name    string `json:"name"`
-			Ranking int    `json:"ranking"`
-			Avatar  string `json:"avatar"`
-		} `json:"team"`
-		Respects        int         `json:"respects"`
-		Rank            string      `json:"rank"`
-		RankID          int         `json:"rank_id"`
-		RankProgress    int         `json:"current_rank_progress"`
-		NextRank        string      `json:"next_rank"`
-		NextRankPoints  float64     `json:"next_rank_points"`
-		RankOwnership   interface{} `json:"rank_ownership"`
-		RankRequirement int         `json:"rank_requirement"`
-		Ranking         int         `json:"ranking"`
-		Avatar          string      `json:"avatar"`
-		Timezone        string      `json:"timezone"`
-		Points          int         `json:"points"`
-		CountryName     string      `json:"country_name"`
-		CountryCode     string      `json:"country_code"`
-		UniversityName  string      `json:"university_name"`
-		Description     string      `json:"description"`
-		Github          string      `json:"github"`
-		LinkedIn        string      `json:"linkedin"`
-		Twitter         string      `json:"twitter"`
-		Website         string      `json:"website"`
-	}
+	Profile *UserInfoItem `json:"profile"`
+}
+
+type UserInfoItem struct {
+	ID              int               `json:"id"`
+	SSOID           int               `json:"sso_id"`
+	Name            string            `json:"name"`
+	SystemOwns      int               `json:"system_owns"`
+	UserOwns        int               `json:"user_owns"`
+	UserBloods      int               `json:"user_bloods"`
+	SystemBloods    int               `json:"system_bloods"`
+	Team            *UserInfoItemTeam `json:"team"`
+	Respects        int               `json:"respects"`
+	Rank            string            `json:"rank"`
+	RankID          int               `json:"rank_id"`
+	RankProgress    int               `json:"current_rank_progress"`
+	NextRank        string            `json:"next_rank"`
+	NextRankPoints  float64           `json:"next_rank_points"`
+	RankOwnership   interface{}       `json:"rank_ownership"`
+	RankRequirement int               `json:"rank_requirement"`
+	Ranking         int               `json:"ranking"`
+	Avatar          string            `json:"avatar"`
+	Timezone        string            `json:"timezone"`
+	Points          int               `json:"points"`
+	CountryName     string            `json:"country_name"`
+	CountryCode     string            `json:"country_code"`
+	UniversityName  string            `json:"university_name"`
+	Description     string            `json:"description"`
+	Github          string            `json:"github"`
+	LinkedIn        string            `json:"linkedin"`
+	Twitter         string            `json:"twitter"`
+	Website         string            `json:"website"`
+}
+
+type UserInfoItemTeam struct {
+	ID      int    `json:"id"`
+	Name    string `json:"name"`
+	Ranking int    `json:"ranking"`
+	Avatar  string `json:"avatar"`
 }
 
 // User Badges
 // https://www.hackthebox.com/api/v4/profile/badges/{userID}
 
 type UserBadgesList struct {
-	Badges []struct {
-		ID           int     `json:"id"`
-		Name         string  `json:"name"`
-		Description  string  `json:"description_en"`
-		Color        string  `json:"color"`
-		Icon         string  `json:"icon"`
-		CategoryID   int     `json:"badge_category_id"`
-		BadgableType string  `json:"badgable_type"`
-		BadgableID   int     `json:"badgable_id"`
-		Percentage   float64 `json:"percentage"`
-		Pivot        struct {
-			UserID    int    `json:"user_id"`
-			BadgeID   int    `json:"badge_id"`
-			CreatedAt string `json:"created_at"`
-			UpdatedAt string `json:"updated_at"`
-		} `json:"pivot"`
-	} `json:"badges"`
+	Badges []*UserBadgesListItem `json:"badges"`
 }
 
-func (s *Session) ConnectionStatus() (status ConnectionStatusInfo, err error) {
+type UserBadgesListItem struct {
+	ID           int                      `json:"id"`
+	Name         string                   `json:"name"`
+	Description  string                   `json:"description_en"`
+	Color        string                   `json:"color"`
+	Icon         string                   `json:"icon"`
+	CategoryID   int                      `json:"badge_category_id"`
+	BadgableType string                   `json:"badgable_type"`
+	BadgableID   int                      `json:"badgable_id"`
+	Percentage   float64                  `json:"percentage"`
+	Pivot        *UserBadgesListItemPivot `json:"pivot"`
+}
+
+type UserBadgesListItemPivot struct {
+	UserID    int    `json:"user_id"`
+	BadgeID   int    `json:"badge_id"`
+	CreatedAt string `json:"created_at"`
+	UpdatedAt string `json:"updated_at"`
+}
+
+func (s *Session) ConnectionStatus() (status *ConnectionStatusInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/connection/status"
 	err = parseJSON(s, url, &status)
@@ -451,7 +530,7 @@ func (s *Session) ConnectionStatus() (status ConnectionStatusInfo, err error) {
 	return
 }
 
-func (s *Session) ActiveMachine() (active ActiveMachineInfo, err error) {
+func (s *Session) ActiveMachine() (active *ActiveMachineInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/active"
 	err = parseJSON(s, url, &active)
@@ -459,7 +538,7 @@ func (s *Session) ActiveMachine() (active ActiveMachineInfo, err error) {
 	return
 }
 
-func (s *Session) Followers() (followers FollowersList, err error) {
+func (s *Session) Followers() (followers *FollowersList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/followers"
 	err = parseJSON(s, url, &followers)
@@ -467,7 +546,7 @@ func (s *Session) Followers() (followers FollowersList, err error) {
 	return
 }
 
-func (s *Session) Profile() (profile ProfileInfo, err error) {
+func (s *Session) Profile() (profile *ProfileInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/info"
 	err = parseJSON(s, url, &profile)
@@ -475,7 +554,7 @@ func (s *Session) Profile() (profile ProfileInfo, err error) {
 	return
 }
 
-func (s *Session) Settings() (settings SettingsInfo, err error) {
+func (s *Session) Settings() (settings *SettingsInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/settings"
 	err = parseJSON(s, url, &settings)
@@ -483,7 +562,7 @@ func (s *Session) Settings() (settings SettingsInfo, err error) {
 	return
 }
 
-func (s *Session) Subscriptions() (subscriptions SubscriptionsList, err error) {
+func (s *Session) Subscriptions() (subscriptions *SubscriptionsList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/subscriptions"
 	err = parseJSON(s, url, &subscriptions)
@@ -491,7 +570,7 @@ func (s *Session) Subscriptions() (subscriptions SubscriptionsList, err error) {
 	return
 }
 
-func (s *Session) SubscriptionsBalance() (balance SubscriptionsBalanceInfo, err error) {
+func (s *Session) SubscriptionsBalance() (balance *SubscriptionsBalanceInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/subscriptions/balance"
 	err = parseJSON(s, url, &balance)
@@ -499,7 +578,7 @@ func (s *Session) SubscriptionsBalance() (balance SubscriptionsBalanceInfo, err 
 	return
 }
 
-func (s *Session) SubscriptionsRecurly() (recurly SubscriptionsRecurlyInfo, err error) {
+func (s *Session) SubscriptionsRecurly() (recurly *SubscriptionsRecurlyInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/subscriptions/manage/recurly"
 	err = parseJSON(s, url, &recurly)
@@ -507,7 +586,7 @@ func (s *Session) SubscriptionsRecurly() (recurly SubscriptionsRecurlyInfo, err 
 	return
 }
 
-func (s *Session) EnrolledTracks() (tracks EnrolledTracksList, err error) {
+func (s *Session) EnrolledTracks() (tracks *EnrolledTracksList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/tracks"
 	err = parseJSON(s, url, &tracks)

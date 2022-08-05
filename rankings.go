@@ -9,9 +9,9 @@ type RankBracket struct {
 }
 
 type RankDuring struct {
-	Rank          int    `json:"rank"`
-	Date          string `json:"date"`
-	RankChart     []int  `json:"rank_chart_data"`
+	Rank      int    `json:"rank"`
+	Date      string `json:"date"`
+	RankChart []int  `json:"rank_chart_data"`
 }
 
 // Get the user's best rank within the period
@@ -19,8 +19,8 @@ type RankDuring struct {
 // https://www.hackthebox.com/api/v4/rankings/country/best?period={period}
 
 type RankInCountryBestDuringInfo struct {
-	Status bool       `json:"status"`
-	Data   RankDuring `json:"data"`
+	Status bool        `json:"status"`
+	Data   *RankDuring `json:"data"`
 }
 
 // Get the overview of the user's rank in the country
@@ -28,25 +28,29 @@ type RankInCountryBestDuringInfo struct {
 // https://www.hackthebox.com/api/v4/rankings/country/overview?period=1Y
 
 type RankInCountryDuringInfo struct {
-	Status bool `json:"status"`
-	Data   struct {
-		PointsDiff   int    `json:"points_diff"`
-		PointsGrowth string `json:"points_growth"`
-		RanksDiff    int    `json:"ranks_diff"`
-		Chart        []int  `json:"chart_data"`
-		Country      struct {
-			Code string `json:"code"`
-			Name string `json:"name"`
-		} `json:"country"`
-	} `json:"data"`
+	Status bool                         `json:"status"`
+	Data   *RankInCountryDuringInfoItem `json:"data"`
+}
+
+type RankInCountryDuringInfoItem struct {
+	PointsDiff   int                                 `json:"points_diff"`
+	PointsGrowth string                              `json:"points_growth"`
+	RanksDiff    int                                 `json:"ranks_diff"`
+	Chart        []int                               `json:"chart_data"`
+	Country      *RankInCountryDuringInfoItemCountry `json:"country"`
+}
+
+type RankInCountryDuringInfoItemCountry struct {
+	Code string `json:"code"`
+	Name string `json:"name"`
 }
 
 // Get the current user's rank bracket in their country
 // https://www.hackthebox.com/api/v4/rankings/country/ranking_bracket
 
 type RankBracketInCountryInfo struct {
-	Status bool        `json:"status"`
-	Data   RankBracket `json:"data"`
+	Status bool         `json:"status"`
+	Data   *RankBracket `json:"data"`
 }
 
 // Get the user's current team their best rank within a period
@@ -54,8 +58,8 @@ type RankBracketInCountryInfo struct {
 // https://www.hackthebox.com/api/v4/rankings/team/best?period=1Y
 
 type RankOfTeamBestDuringInfo struct {
-	Status bool       `json:"status"`
-	Data   RankDuring `json:"data"`
+	Status bool        `json:"status"`
+	Data   *RankDuring `json:"data"`
 }
 
 // Get the user's current team their rank overview
@@ -63,154 +67,170 @@ type RankOfTeamBestDuringInfo struct {
 // https://www.hackthebox.com/api/v4/rankings/team/overview?period=1Y
 
 type RankOfTeamDuringInfo struct {
-	Status bool `json:"status"`
-	Data   struct {
-		PointsDiff   int    `json:"points_diff"`
-		PointsGrowth string `json:"points_growth"`
-		RanksDiff    int    `json:"ranks_diff"`
-		Chart        []int  `json:"chart_data"`
-		Team         struct {
-			ID     int    `json:"id"`
-			Name   string `json:"name"`
-			Avatar string `json:"avatar_url"`
-			Thumb  string `json:"avatar_thumb_url"`
-		} `json:"team"`
-	} `json:"data"`
+	Status bool                      `json:"status"`
+	Data   *RankOfTeamDuringInfoItem `json:"data"`
+}
+
+type RankOfTeamDuringInfoItem struct {
+	PointsDiff   int                           `json:"points_diff"`
+	PointsGrowth string                        `json:"points_growth"`
+	RanksDiff    int                           `json:"ranks_diff"`
+	Chart        []int                         `json:"chart_data"`
+	Team         *RankOfTeamDuringInfoItemTeam `json:"team"`
+}
+
+type RankOfTeamDuringInfoItemTeam struct {
+	ID     int    `json:"id"`
+	Name   string `json:"name"`
+	Avatar string `json:"avatar_url"`
+	Thumb  string `json:"avatar_thumb_url"`
 }
 
 // Get the user's current team their rank bracket
 // https://www.hackthebox.com/api/v4/rankings/country/ranking_bracket
 
 type RankBracketOfTeamInfo struct {
-	Status bool        `json:"status"`
-	Data   RankBracket `json:"data"`
+	Status bool         `json:"status"`
+	Data   *RankBracket `json:"data"`
 }
 
 // Get the user's best rank in the general leaderboard for a certain period.
 // https://www.hackthebox.com/api/v4/rankings/user/best?period={period}&vip={numberValue}
 
 type RankBestDuringInfo struct {
-	Status bool       `json:"status"`
-	Data   RankDuring `json:"data"`
+	Status bool        `json:"status"`
+	Data   *RankDuring `json:"data"`
 }
 
 // Get the user's rank overview in the general ledearboard for a certain period.
 // https://www.hackthebox.com/api/v4/rankings/user/overview?period=1Y&vip=0
 
 type RankDuringInfo struct {
-	Status bool `json:"status"`
-	Data   struct {
-		PointsDiff   int         `json:"points_diff"`
-		PointsGrowth interface{} `json:"points_growth"`
-		RanksDiff    int         `json:"ranks_diff"`
-		Chart        []int       `json:"chart_data"`
-		User         struct {
-			ID     int    `json:"id"`
-			Name   string `json:"name"`
-			Avatar string `json:"avatar"`
-			Thumb  string `json:"avatar_thumb"`
-		} `json:"user"`
-	} `json:"data"`
+	Status bool                `json:"status"`
+	Data   *RankDuringInfoItem `json:"data"`
+}
+
+type RankDuringInfoItem struct {
+	PointsDiff   int                     `json:"points_diff"`
+	PointsGrowth interface{}             `json:"points_growth"`
+	RanksDiff    int                     `json:"ranks_diff"`
+	Chart        []int                   `json:"chart_data"`
+	User         *RankDuringInfoItemUser `json:"user"`
+}
+
+type RankDuringInfoItemUser struct {
+	ID     int    `json:"id"`
+	Name   string `json:"name"`
+	Avatar string `json:"avatar"`
+	Thumb  string `json:"avatar_thumb"`
 }
 
 // Get the user's  current rank bracket in the general leaderboard
 // https://www.hackthebox.com/api/v4/rankings/user/ranking_bracket?vip=0
 
 type RankBracketInfo struct {
-	Status bool        `json:"status"`
-	Data   RankBracket `json:"data"`
+	Status bool         `json:"status"`
+	Data   *RankBracket `json:"data"`
 }
 
 // Get the Rankings of the countries
 // https://www.hackthebox.com/api/v4/rankings/countries
 
 type RanksOfCountriesList struct {
-	Status bool `json:"status"`
-	Data   []struct {
-		Rank          int    `json:"rank"`
-		Country       string `json:"country"`
-		Members       int    `json:"members"`
-		Points        int    `json:"points"`
-		RootOwns      int    `json:"root_owns"`
-		UserOwns      int    `json:"user_owns"`
-		ChallengeOwns int    `json:"challenge_owns"`
-		RootBloods    int    `json:"root_bloods"`
-		UserBloods    int    `json:"user_bloods"`
-		Fortress      int    `json:"fortress"`
-		Endgame       int    `json:"endgame"`
-		Name          string `json:"name"`
-		RanksDiff     int    `json:"ranks_diff"`
-	} `json:"data"`
+	Status bool                        `json:"status"`
+	Data   []*RanksOfCountriesListItem `json:"data"`
+}
+
+type RanksOfCountriesListItem struct {
+	Rank          int    `json:"rank"`
+	Country       string `json:"country"`
+	Members       int    `json:"members"`
+	Points        int    `json:"points"`
+	RootOwns      int    `json:"root_owns"`
+	UserOwns      int    `json:"user_owns"`
+	ChallengeOwns int    `json:"challenge_owns"`
+	RootBloods    int    `json:"root_bloods"`
+	UserBloods    int    `json:"user_bloods"`
+	Fortress      int    `json:"fortress"`
+	Endgame       int    `json:"endgame"`
+	Name          string `json:"name"`
+	RanksDiff     int    `json:"ranks_diff"`
 }
 
 // Get the rankings of the teams
 // https://www.hackthebox.com/api/v4/rankings/teams
 
 type RanksOfTeamsList struct {
-	Status bool `json:"status"`
-	Data   []struct {
-		Rank            int    `json:"rank"`
-		Points          int    `json:"points"`
-		RootOwns        int    `json:"root_owns"`
-		UserOwns        int    `json:"user_owns"`
-		ChallengeOwns   int    `json:"challenge_owns"`
-		RootBloods      int    `json:"root_bloods"`
-		UserBloods      int    `json:"user_bloods"`
-		ChallengeBloods int    `json:"challenge_bloods"`
-		Fortress        int    `json:"fortress"`
-		Endgame         int    `json:"endgame"`
-		ID              int    `json:"id"`
-		Name            string `json:"name"`
-		Thumb           string `json:"avatar_thumb_url"`
-		Country         string `json:"country"`
-		RanksDiff       int    `json:"ranks_diff"`
-	} `json:"data"`
+	Status bool                    `json:"status"`
+	Data   []*RanksOfTeamsListItem `json:"data"`
+}
+
+type RanksOfTeamsListItem struct {
+	Rank            int    `json:"rank"`
+	Points          int    `json:"points"`
+	RootOwns        int    `json:"root_owns"`
+	UserOwns        int    `json:"user_owns"`
+	ChallengeOwns   int    `json:"challenge_owns"`
+	RootBloods      int    `json:"root_bloods"`
+	UserBloods      int    `json:"user_bloods"`
+	ChallengeBloods int    `json:"challenge_bloods"`
+	Fortress        int    `json:"fortress"`
+	Endgame         int    `json:"endgame"`
+	ID              int    `json:"id"`
+	Name            string `json:"name"`
+	Thumb           string `json:"avatar_thumb_url"`
+	Country         string `json:"country"`
+	RanksDiff       int    `json:"ranks_diff"`
 }
 
 // Get the rankings of the users
 // https://www.hackthebox.com/api/v4/rankings/users?vip=1
 
 type RanksOfUsersList struct {
-	Status bool `json:"status"`
-	Data   []struct {
-		Rank            int    `json:"rank"`
-		Points          int    `json:"points"`
-		RootOwns        int    `json:"root_owns"`
-		UserOwns        int    `json:"user_owns"`
-		ChallengeOwns   int    `json:"challenge_owns"`
-		RootBloods      int    `json:"root_bloods"`
-		UserBloods      int    `json:"user_bloods"`
-		ChallengeBloods int    `json:"challenge_bloods"`
-		Fortress        int    `json:"fortress"`
-		Endgame         int    `json:"endgame"`
-		ID              int    `json:"id"`
-		Name            string `json:"name"`
-		Thumb           string `json:"avatar_thumb"`
-		Country         string `json:"country"`
-		Level           string `json:"level"`
-		RanksDiff       int    `json:"ranks_diff"`
-	} `json:"data"`
+	Status bool                    `json:"status"`
+	Data   []*RanksOfUsersListItem `json:"data"`
+}
+
+type RanksOfUsersListItem struct {
+	Rank            int    `json:"rank"`
+	Points          int    `json:"points"`
+	RootOwns        int    `json:"root_owns"`
+	UserOwns        int    `json:"user_owns"`
+	ChallengeOwns   int    `json:"challenge_owns"`
+	RootBloods      int    `json:"root_bloods"`
+	UserBloods      int    `json:"user_bloods"`
+	ChallengeBloods int    `json:"challenge_bloods"`
+	Fortress        int    `json:"fortress"`
+	Endgame         int    `json:"endgame"`
+	ID              int    `json:"id"`
+	Name            string `json:"name"`
+	Thumb           string `json:"avatar_thumb"`
+	Country         string `json:"country"`
+	Level           string `json:"level"`
+	RanksDiff       int    `json:"ranks_diff"`
 }
 
 type RanksOfUniversitiesList struct {
-	Status bool `json:"status"`
-	Data   []struct {
-		Rank            int    `json:"rank"`
-		Students        int    `json:"students"`
-		Points          int    `json:"points"`
-		RootOwns        int    `json:"root_owns"`
-		UserOwns        int    `json:"user_owns"`
-		ChallengeOwns   int    `json:"challenge_owns"`
-		RootBloods      int    `json:"root_bloods"`
-		UserBloods      int    `json:"user_bloods"`
-		ChallengeBloods int    `json:"challenge_bloods"`
-		Fortress        int    `json:"fortress"`
-		Endgame         int    `json:"endgame"`
-		ID              int    `json:"id"`
-		Name            string `json:"name"`
-		Country         string `json:"country"`
-		RanksDiff       int    `json:"ranks_diff"`
-	} `json:"data"`
+	Status bool                           `json:"status"`
+	Data   []*RanksOfUniversitiesListItem `json:"data"`
+}
+
+type RanksOfUniversitiesListItem struct {
+	Rank            int    `json:"rank"`
+	Students        int    `json:"students"`
+	Points          int    `json:"points"`
+	RootOwns        int    `json:"root_owns"`
+	UserOwns        int    `json:"user_owns"`
+	ChallengeOwns   int    `json:"challenge_owns"`
+	RootBloods      int    `json:"root_bloods"`
+	UserBloods      int    `json:"user_bloods"`
+	ChallengeBloods int    `json:"challenge_bloods"`
+	Fortress        int    `json:"fortress"`
+	Endgame         int    `json:"endgame"`
+	ID              int    `json:"id"`
+	Name            string `json:"name"`
+	Country         string `json:"country"`
+	RanksDiff       int    `json:"ranks_diff"`
 }
 
 func (s *Session) RankInCountryBestDuring(period Duration) (rank *RankInCountryBestDuringInfo, err error) {
