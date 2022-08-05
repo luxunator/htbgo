@@ -31,10 +31,10 @@ type ChallengesRetiredSuggestedInfo struct {
 // https://www.hackthebox.com/api/v4/challenge/categories/list
 
 type ChallengeCategoriesList struct {
-	Info *ChallengeCategoriesListInfo `json:"info"`
+	Info []*ChallengeCategoriesListItem `json:"info"`
 }
 
-type ChallengeCategoriesListInfo []struct {
+type ChallengeCategoriesListItem struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
 }
@@ -46,10 +46,10 @@ type ChallengeCategoriesListInfo []struct {
 // https://www.hackthebox.com/api/v4/challenge/list/retired
 
 type ChallengesList struct {
-	Challenges *ChallengeListChallenges `json:"challenges"`
+	Challenges []*ChallengeListItem `json:"challenges"`
 }
 
-type ChallengeListChallenges []struct {
+type ChallengeListItem struct {
 	ID                 int           `json:"id"`
 	Name               string        `json:"name"`
 	URLName            string        `json:"url_name"`
@@ -78,10 +78,10 @@ type ChallengeListChallenges []struct {
 // https://www.hackthebox.com/api/v4/challenge/info/{challengeID}
 
 type ChallengeInfo struct {
-	Challenge *ChallengeInfoChallenge `json:"challenge"`
+	Challenge *ChallengeInfoItem `json:"challenge"`
 }
 
-type ChallengeInfoChallenge struct {
+type ChallengeInfoItem struct {
 	ID                    int           `json:"id"`
 	Name                  string        `json:"name"`
 	Retired               int           `json:"retired"`
@@ -125,14 +125,14 @@ type ChallengeInfoChallenge struct {
 // https://www.hackthebox.com/api/v4/challenge/activity/{challengeID}
 
 type ChallengeActivityList struct {
-	Info *ChallengeActivityListInfo `json:"info"`
+	Info *ChallengeActivityListItem `json:"info"`
 }
 
-type ChallengeActivityListInfo struct {
-	Activity *ChallengeActivityListActivity `json:"activity"`
+type ChallengeActivityListItem struct {
+	Activity []*ChallengeActivityListItemActivity `json:"activity"`
 }
 
-type ChallengeActivityListActivity []struct {
+type ChallengeActivityListItemActivity struct {
 	CreatedAt  string `json:"created_at"`
 	Date       string `json:"date"`
 	DateDiff   string `json:"date_diff"`

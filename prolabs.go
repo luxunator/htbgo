@@ -11,15 +11,15 @@ type ProlabMaster struct {
 
 type ProLabsActiveList struct {
 	Status bool                   `json:"status"`
-	Data   *ProLabsActiveListData `json:"data"`
+	Data   *ProLabsActiveListItem `json:"data"`
 }
 
-type ProLabsActiveListData struct {
-	Count int                    `json:"count"`
-	Labs  *ProLabsActiveListLabs `json:"labs"`
+type ProLabsActiveListItem struct {
+	Count int                         `json:"count"`
+	Labs  []*ProLabsActiveListItemLab `json:"labs"`
 }
 
-type ProLabsActiveListLabs []struct {
+type ProLabsActiveListItemLab struct {
 	ID                int    `json:"id"`
 	Name              string `json:"name"`
 	ReleaseAt         string `json:"release_at"`
@@ -41,10 +41,10 @@ type ProLabsActiveListLabs []struct {
 
 type ProLabInfo struct {
 	Status bool            `json:"status"`
-	Data   *ProLabInfoData `json:"data"`
+	Data   *ProLabInfoItem `json:"data"`
 }
 
-type ProLabInfoData struct {
+type ProLabInfoItem struct {
 	ID           int           `json:"id"`
 	Name         string        `json:"name"`
 	Version      string        `json:"version"`
@@ -64,30 +64,30 @@ type ProLabInfoData struct {
 
 type ProLabOverviewInfo struct {
 	Status bool                    `json:"status"`
-	Data   *ProLabOverviewInfoData `json:"data"`
+	Data   *ProLabOverviewInfoItem `json:"data"`
 }
 
-type ProLabOverviewInfoData struct {
-	ID              int                                `json:"id"`
-	Name            string                             `json:"name"`
-	Version         string                             `json:"version"`
-	Excerpt         interface{}                        `json:"excerpt"`
-	MachinsCount    int                                `json:"pro_machines_count"`
-	FlagCount       int                                `json:"pro_flags_count"`
-	SocialLinks     *ProLabOverviewInfoSocialLinks     `json:"social_links"`
-	NewVersion      bool                               `json:"new_version"`
-	OverviewImg     string                             `json:"overview_image_url"`
-	SkillLevel      string                             `json:"skill_level"`
-	DesignatedLevel *ProLabOverviewInfoDesignatedLevel `json:"designated_level"`
-	LabMaster       *ProlabMaster                      `json:"lab_master"`
+type ProLabOverviewInfoItem struct {
+	ID              int                                    `json:"id"`
+	Name            string                                 `json:"name"`
+	Version         string                                 `json:"version"`
+	Excerpt         interface{}                            `json:"excerpt"`
+	MachinsCount    int                                    `json:"pro_machines_count"`
+	FlagCount       int                                    `json:"pro_flags_count"`
+	SocialLinks     *ProLabOverviewInfoItemSocialLinks     `json:"social_links"`
+	NewVersion      bool                                   `json:"new_version"`
+	OverviewImg     string                                 `json:"overview_image_url"`
+	SkillLevel      string                                 `json:"skill_level"`
+	DesignatedLevel *ProLabOverviewInfoItemDesignatedLevel `json:"designated_level"`
+	LabMaster       *ProlabMaster                          `json:"lab_master"`
 }
 
-type ProLabOverviewInfoSocialLinks struct {
+type ProLabOverviewInfoItemSocialLinks struct {
 	Discord string `json:"discord"`
 	Forum   string `json:"forum"`
 }
 
-type ProLabOverviewInfoDesignatedLevel struct {
+type ProLabOverviewInfoItemDesignatedLevel struct {
 	Category    string `json:"category"`
 	Level       int    `json:"level"`
 	Description string `json:"description"`
@@ -98,11 +98,11 @@ type ProLabOverviewInfoDesignatedLevel struct {
 // https://www.hackthebox.com/api/v4/prolab/{prolabID}/machines
 
 type ProLabMachinesList struct {
-	Status bool                    `json:"status"`
-	Data   *ProLabMachinesListData `json:"data"`
+	Status bool                      `json:"status"`
+	Data   []*ProLabMachinesListItem `json:"data"`
 }
 
-type ProLabMachinesListData []struct {
+type ProLabMachinesListItem struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	OS    string `json:"os"`
@@ -113,11 +113,11 @@ type ProLabMachinesListData []struct {
 // https://www.hackthebox.com/api/v4/prolab/{prolabID}/flags
 
 type ProLabFlagsList struct {
-	Status bool                 `json:"status"`
-	Data   *ProLabFlagsListData `json:"data"`
+	Status bool                   `json:"status"`
+	Data   []*ProLabFlagsListItem `json:"data"`
 }
 
-type ProLabFlagsListData []struct {
+type ProLabFlagsListItem struct {
 	ID       int    `json:"id"`
 	Title    string `json:"title"`
 	Points   int    `json:"points"`
@@ -128,11 +128,11 @@ type ProLabFlagsListData []struct {
 // https://www.hackthebox.com/api/v4/prolab/{prolabID}/faq
 
 type ProLabFAQList struct {
-	Status bool               `json:"status"`
-	Data   *ProLabFAQListData `json:"data"`
+	Status bool                 `json:"status"`
+	Data   []*ProLabFAQListItem `json:"data"`
 }
 
-type ProLabFAQListData []struct {
+type ProLabFAQListItem struct {
 	Question  string `json:"question"`
 	Answer    string `json:"answer"`
 	IsGeneric bool   `json:"generic"`
@@ -143,22 +143,22 @@ type ProLabFAQListData []struct {
 
 type ProLabSelectedReviewsList struct {
 	Status bool                           `json:"status"`
-	Data   *ProLabSelectedReviewsListData `json:"data"`
+	Data   *ProLabSelectedReviewsListItem `json:"data"`
 }
 
-type ProLabSelectedReviewsListData struct {
-	RatingsCount int                                 `json:"total_number_of_ratings"`
-	RatingAvg    int                                 `json:"users_average_rating"`
-	Feedbacks    *ProLabSelectedReviewsListFeedbacks `json:"feedbacks"`
+type ProLabSelectedReviewsListItem struct {
+	RatingsCount int                                      `json:"total_number_of_ratings"`
+	RatingAvg    int                                      `json:"users_average_rating"`
+	Feedbacks    []*ProLabSelectedReviewsListItemFeedback `json:"feedbacks"`
 }
 
-type ProLabSelectedReviewsListFeedbacks []struct {
-	Rating int                            `json:"rating"`
-	Text   string                         `json:"text"`
-	User   *ProLabSelectedReviewsListUser `json:"user"`
+type ProLabSelectedReviewsListItemFeedback struct {
+	Rating int                                        `json:"rating"`
+	Text   string                                     `json:"text"`
+	User   *ProLabSelectedReviewsListItemFeedbackUser `json:"user"`
 }
 
-type ProLabSelectedReviewsListUser struct {
+type ProLabSelectedReviewsListItemFeedbackUser struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
 }
@@ -167,23 +167,23 @@ type ProLabSelectedReviewsListUser struct {
 // https://www.hackthebox.com/api/v4/prolab/{prolabID}/reviews?page={page}
 
 type ProLabPaginatedReviewsList struct {
-	Data  *ProLabPaginatedReviewsListData  `json:"data"`
-	Links *ProLabPaginatedReviewsListLinks `json:"links"`
-	Meta  *ProLabPaginatedReviewsListMeta  `json:"meta"`
+	Data  []*ProLabPaginatedReviewsListData `json:"data"`
+	Links *ProLabPaginatedReviewsListLinks  `json:"links"`
+	Meta  *ProLabPaginatedReviewsListMeta   `json:"meta"`
 }
 
-type ProLabPaginatedReviewsListData []struct {
-	ID                 int                             `json:"id"`
-	Rating             int                             `json:"rating"`
-	Difficulty         int                             `json:"difficulty"`
-	CreatedAt          string                          `json:"created_at"`
-	Text               string                          `json:"text"`
-	HelpfulReviewCount int                             `json:"helpful_pro_feedbacks_count"`
-	InHelpfulReview    bool                            `json:"user_in_helpful_pro_feedbacks"`
-	User               *ProLabPaginatedReviewsListUser `json:"user"`
+type ProLabPaginatedReviewsListData struct {
+	ID                 int                                 `json:"id"`
+	Rating             int                                 `json:"rating"`
+	Difficulty         int                                 `json:"difficulty"`
+	CreatedAt          string                              `json:"created_at"`
+	Text               string                              `json:"text"`
+	HelpfulReviewCount int                                 `json:"helpful_pro_feedbacks_count"`
+	InHelpfulReview    bool                                `json:"user_in_helpful_pro_feedbacks"`
+	User               *ProLabPaginatedReviewsListDataUser `json:"user"`
 }
 
-type ProLabPaginatedReviewsListUser struct {
+type ProLabPaginatedReviewsListDataUser struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Thumb string `json:"avatar_thumb"`
@@ -197,17 +197,17 @@ type ProLabPaginatedReviewsListLinks struct {
 }
 
 type ProLabPaginatedReviewsListMeta struct {
-	CurrentPage int                                  `json:"current_page"`
-	From        int                                  `json:"from"`
-	LastPage    int                                  `json:"last_page"`
-	Links       *ProLabPaginatedReviewsListMetaLinks `json:"links"`
-	Path        string                               `json:"path"`
-	PerPage     int                                  `json:"per_page"`
-	To          int                                  `json:"to"`
-	Total       int                                  `json:"total"`
+	CurrentPage int                                   `json:"current_page"`
+	From        int                                   `json:"from"`
+	LastPage    int                                   `json:"last_page"`
+	Links       []*ProLabPaginatedReviewsListMetaLink `json:"links"`
+	Path        string                                `json:"path"`
+	PerPage     int                                   `json:"per_page"`
+	To          int                                   `json:"to"`
+	Total       int                                   `json:"total"`
 }
 
-type ProLabPaginatedReviewsListMetaLinks []struct {
+type ProLabPaginatedReviewsListMetaLink struct {
 	URL      string `json:"url"`
 	Label    string `json:"label"`
 	IsActive bool   `json:"active"`

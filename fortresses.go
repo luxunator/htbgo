@@ -1,6 +1,6 @@
 package htbgo
 
-type FortessFlags []struct {
+type FortessFlag struct {
 	ID     int    `json:"id"`
 	Title  string `json:"title"`
 	Points int    `json:"points"`
@@ -11,11 +11,11 @@ type FortessFlags []struct {
 // https://www.hackthebox.com/api/v4/fortresses
 
 type FortressesActiveMap struct {
-	Status bool                     `json:"status"`
-	Data   *FortressesActiveMapData `json:"data"`
+	Status bool                                `json:"status"`
+	Data   map[string]*FortressesActiveMapItem `json:"data"`
 }
 
-type FortressesActiveMapData map[string]struct {
+type FortressesActiveMapItem struct {
 	ID         int    `json:"id"`
 	Name       string `json:"name"`
 	Logo       string `json:"image"`
@@ -29,28 +29,28 @@ type FortressesActiveMapData map[string]struct {
 
 type FortessInfo struct {
 	Status bool             `json:"enum"`
-	Data   *FortessInfoData `json:"data"`
+	Data   *FortessInfoItem `json:"data"`
 }
 
-type FortessInfoData struct {
-	ID                   int                      `json:"id"`
-	Name                 string                   `json:"name"`
-	IP                   string                   `json:"ip"`
-	Logo                 string                   `json:"image"`
-	CoverFull            string                   `json:"cover_image_url"`
-	Company              *FortessInfoCompany      `json:"company"`
-	ResetVotes           int                      `json:"reset_votes"`
-	Description          string                   `json:"description"`
-	HasCompletionMessage bool                     `json:"has_completion_message"`
-	CompletionMessage    string                   `json:"completion_message"`
-	Progress             int                      `json:"progress_percent"`
-	PlayersCompleted     int                      `json:"players_completed"`
-	Points               string                   `json:"points"`
-	Availability         *FortessInfoAvailability `json:"user_availability"`
-	Flags                *FortessFlags            `json:"flags"`
+type FortessInfoItem struct {
+	ID                   int                          `json:"id"`
+	Name                 string                       `json:"name"`
+	IP                   string                       `json:"ip"`
+	Logo                 string                       `json:"image"`
+	CoverFull            string                       `json:"cover_image_url"`
+	Company              *FortessInfoItemCompany      `json:"company"`
+	ResetVotes           int                          `json:"reset_votes"`
+	Description          string                       `json:"description"`
+	HasCompletionMessage bool                         `json:"has_completion_message"`
+	CompletionMessage    string                       `json:"completion_message"`
+	Progress             int                          `json:"progress_percent"`
+	PlayersCompleted     int                          `json:"players_completed"`
+	Points               string                       `json:"points"`
+	Availability         *FortessInfoItemAvailability `json:"user_availability"`
+	Flags                []*FortessFlag               `json:"flags"`
 }
 
-type FortessInfoCompany struct {
+type FortessInfoItemCompany struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
@@ -58,7 +58,7 @@ type FortessInfoCompany struct {
 	Image       string `json:"image"`
 }
 
-type FortessInfoAvailability struct {
+type FortessInfoItemAvailability struct {
 	Available bool   `json:"available"`
 	Code      int    `json:"code"`
 	Message   string `json:"message"`
@@ -68,8 +68,8 @@ type FortessInfoAvailability struct {
 // https://www.hackthebox.com/api/v4/fortress/{fortressID}/flags
 
 type FortressFlagList struct {
-	Status bool          `json:"status"`
-	Data   *FortessFlags `json:"data"`
+	Status bool           `json:"status"`
+	Data   []*FortessFlag `json:"data"`
 }
 
 func (s *Session) FortressesActive() (fortresses *FortressesActiveMap, err error) {

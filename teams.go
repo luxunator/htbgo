@@ -57,7 +57,7 @@ type TeamActivityListUser struct {
 // Get Team Owns
 // https://www.hackthebox.com/api/v4/team/stats/owns/{teamid}
 
-type TeamOwnsWeek struct {
+type TeamOwnsByWeekMapWeek struct {
 	UserOwns      int    `json:"user_owns"`
 	SystemOwns    int    `json:"system_owns"`
 	ChallengeOwns int    `json:"challenge_owns"`
@@ -67,13 +67,13 @@ type TeamOwnsWeek struct {
 }
 
 type TeamOwnsByWeekMap struct {
-	Rank          int                      `json:"rank"`
-	UserOwns      int                      `json:"user_owns"`
-	SystemOwns    int                      `json:"system_owns"`
-	Bloods        int                      `json:"first_bloods"`
-	ChallengeOwns int                      `json:"challenge_owns"`
-	Respects      int                      `json:"respects"`
-	Weekly        map[string]*TeamOwnsWeek `json:"weekly"`
+	Rank          int                               `json:"rank"`
+	UserOwns      int                               `json:"user_owns"`
+	SystemOwns    int                               `json:"system_owns"`
+	Bloods        int                               `json:"first_bloods"`
+	ChallengeOwns int                               `json:"challenge_owns"`
+	Respects      int                               `json:"respects"`
+	Weekly        map[string]*TeamOwnsByWeekMapWeek `json:"weekly"`
 }
 
 // Get Team Graph for Duration
@@ -81,10 +81,10 @@ type TeamOwnsByWeekMap struct {
 
 type TeamStatsDuringInfo struct {
 	Status bool                     `json:"status"`
-	Data   *TeamStatsDuringInfoData `json:"data"`
+	Data   *TeamStatsDuringInfoItem `json:"data"`
 }
 
-type TeamStatsDuringInfoData struct {
+type TeamStatsDuringInfoItem struct {
 	Points  []int `json:"points"`
 	Rank    []int `json:"rank"`
 	Respect []int `json:"respect"`
@@ -95,7 +95,7 @@ type TeamStatsDuringInfoData struct {
 
 type TeamOwnsByPathMap struct {
 	MachineOwns *TeamOwnsByPathMapMachineOwns `json:"machine_owns"`
-	AttackPaths *TeamOwnsByPathMapAttackPaths `json:"machine_attack_paths"`
+	AttackPaths *TeamOwnsByPathMapAttackPath  `json:"machine_attack_paths"`
 }
 
 type TeamOwnsByPathMapMachineOwns struct {
@@ -103,7 +103,7 @@ type TeamOwnsByPathMapMachineOwns struct {
 	Total  int `json:"total"`
 }
 
-type TeamOwnsByPathMapAttackPaths map[string]struct {
+type TeamOwnsByPathMapAttackPath map[string]struct {
 	Name           string  `json:"name"`
 	Solved         int     `json:"solved"`
 	Total          int     `json:"total"`
@@ -140,20 +140,20 @@ type TeamMembersListTeam struct {
 // https://www.hackthebox.com/api/v4/team/invitations/{teamid}
 
 type TeamInvitationsList struct {
-	Headers   struct{}                     `json:"headers"`
-	Original  *TeamInvitationsListOriginal `json:"original"`
-	Exception bool                         `json:"exception"`
+	Headers   struct{}                       `json:"headers"`
+	Original  []*TeamInvitationsListOriginal `json:"original"`
+	Exception bool                           `json:"exception"`
 }
 
-type TeamInvitationsListOriginal []struct {
-	ID          int                      `json:"id"`
-	UserID      int                      `json:"user_id"`
-	TeamID      int                      `json:"team_id"`
-	UserRequest int                      `json:"user_request"`
-	User        *TeamInvitationsListUser `json:"user"`
+type TeamInvitationsListOriginal struct {
+	ID          int                              `json:"id"`
+	UserID      int                              `json:"user_id"`
+	TeamID      int                              `json:"team_id"`
+	UserRequest int                              `json:"user_request"`
+	User        *TeamInvitationsListOriginalUser `json:"user"`
 }
 
-type TeamInvitationsListUser struct {
+type TeamInvitationsListOriginalUser struct {
 	ID       int         `json:"id"`
 	Name     string      `json:"name"`
 	Points   int         `json:"points"`
@@ -170,10 +170,10 @@ type TeamInvitationsListUser struct {
 
 type TeamRankingsInfo struct {
 	Status bool                  `json:"status"`
-	Data   *TeamRankingsInfoData `json:"data"`
+	Data   *TeamRankingsInfoItem `json:"data"`
 }
 
-type TeamRankingsInfoData struct {
+type TeamRankingsInfoItem struct {
 	Rank      int    `json:"rank"`
 	Date      string `json:"date"`
 	RankChart []int  `json:"rank_chart_data"`
@@ -184,18 +184,18 @@ type TeamRankingsInfoData struct {
 
 type TeamPointsInfo struct {
 	Status bool                `json:"status"`
-	Data   *TeamPointsInfoData `json:"data"`
+	Data   *TeamPointsInfoItem `json:"data"`
 }
 
-type TeamPointsInfoData struct {
-	PointsDiff   int                 `json:"points_diff"`
-	PointsGrowth string              `json:"points_growth"`
-	RanksDiff    int                 `json:"ranks_diff"`
-	Chart        []int               `json:"chart_data"`
-	Team         *TeamPointsInfoTeam `json:"team"`
+type TeamPointsInfoItem struct {
+	PointsDiff   int                     `json:"points_diff"`
+	PointsGrowth string                  `json:"points_growth"`
+	RanksDiff    int                     `json:"ranks_diff"`
+	Chart        []int                   `json:"chart_data"`
+	Team         *TeamPointsInfoItemTeam `json:"team"`
 }
 
-type TeamPointsInfoTeam struct {
+type TeamPointsInfoItemTeam struct {
 	ID     int    `json:"id"`
 	Name   string `json:"name"`
 	Avatar string `json:"avatar_url"`

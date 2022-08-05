@@ -29,18 +29,18 @@ type RankInCountryBestDuringInfo struct {
 
 type RankInCountryDuringInfo struct {
 	Status bool                         `json:"status"`
-	Data   *RankInCountryDuringInfoData `json:"data"`
+	Data   *RankInCountryDuringInfoItem `json:"data"`
 }
 
-type RankInCountryDuringInfoData struct {
-	PointsDiff   int                             `json:"points_diff"`
-	PointsGrowth string                          `json:"points_growth"`
-	RanksDiff    int                             `json:"ranks_diff"`
-	Chart        []int                           `json:"chart_data"`
-	Country      *RankInCountryDuringInfoCountry `json:"country"`
+type RankInCountryDuringInfoItem struct {
+	PointsDiff   int                                 `json:"points_diff"`
+	PointsGrowth string                              `json:"points_growth"`
+	RanksDiff    int                                 `json:"ranks_diff"`
+	Chart        []int                               `json:"chart_data"`
+	Country      *RankInCountryDuringInfoItemCountry `json:"country"`
 }
 
-type RankInCountryDuringInfoCountry struct {
+type RankInCountryDuringInfoItemCountry struct {
 	Code string `json:"code"`
 	Name string `json:"name"`
 }
@@ -68,18 +68,18 @@ type RankOfTeamBestDuringInfo struct {
 
 type RankOfTeamDuringInfo struct {
 	Status bool                      `json:"status"`
-	Data   *RankOfTeamDuringInfoData `json:"data"`
+	Data   *RankOfTeamDuringInfoItem `json:"data"`
 }
 
-type RankOfTeamDuringInfoData struct {
-	PointsDiff   int                       `json:"points_diff"`
-	PointsGrowth string                    `json:"points_growth"`
-	RanksDiff    int                       `json:"ranks_diff"`
-	Chart        []int                     `json:"chart_data"`
-	Team         *RankOfTeamDuringInfoTeam `json:"team"`
+type RankOfTeamDuringInfoItem struct {
+	PointsDiff   int                           `json:"points_diff"`
+	PointsGrowth string                        `json:"points_growth"`
+	RanksDiff    int                           `json:"ranks_diff"`
+	Chart        []int                         `json:"chart_data"`
+	Team         *RankOfTeamDuringInfoItemTeam `json:"team"`
 }
 
-type RankOfTeamDuringInfoTeam struct {
+type RankOfTeamDuringInfoItemTeam struct {
 	ID     int    `json:"id"`
 	Name   string `json:"name"`
 	Avatar string `json:"avatar_url"`
@@ -107,18 +107,18 @@ type RankBestDuringInfo struct {
 
 type RankDuringInfo struct {
 	Status bool                `json:"status"`
-	Data   *RankDuringInfoData `json:"data"`
+	Data   *RankDuringInfoItem `json:"data"`
 }
 
-type RankDuringInfoData struct {
-	PointsDiff   int                 `json:"points_diff"`
-	PointsGrowth interface{}         `json:"points_growth"`
-	RanksDiff    int                 `json:"ranks_diff"`
-	Chart        []int               `json:"chart_data"`
-	User         *RankDuringInfoUser `json:"user"`
+type RankDuringInfoItem struct {
+	PointsDiff   int                     `json:"points_diff"`
+	PointsGrowth interface{}             `json:"points_growth"`
+	RanksDiff    int                     `json:"ranks_diff"`
+	Chart        []int                   `json:"chart_data"`
+	User         *RankDuringInfoItemUser `json:"user"`
 }
 
-type RankDuringInfoUser struct {
+type RankDuringInfoItemUser struct {
 	ID     int    `json:"id"`
 	Name   string `json:"name"`
 	Avatar string `json:"avatar"`
@@ -137,11 +137,11 @@ type RankBracketInfo struct {
 // https://www.hackthebox.com/api/v4/rankings/countries
 
 type RanksOfCountriesList struct {
-	Status bool                      `json:"status"`
-	Data   *RanksOfCountriesListData `json:"data"`
+	Status bool                        `json:"status"`
+	Data   []*RanksOfCountriesListItem `json:"data"`
 }
 
-type RanksOfCountriesListData []struct {
+type RanksOfCountriesListItem struct {
 	Rank          int    `json:"rank"`
 	Country       string `json:"country"`
 	Members       int    `json:"members"`
@@ -161,11 +161,11 @@ type RanksOfCountriesListData []struct {
 // https://www.hackthebox.com/api/v4/rankings/teams
 
 type RanksOfTeamsList struct {
-	Status bool                  `json:"status"`
-	Data   *RanksOfTeamsListData `json:"data"`
+	Status bool                    `json:"status"`
+	Data   []*RanksOfTeamsListItem `json:"data"`
 }
 
-type RanksOfTeamsListData []struct {
+type RanksOfTeamsListItem struct {
 	Rank            int    `json:"rank"`
 	Points          int    `json:"points"`
 	RootOwns        int    `json:"root_owns"`
@@ -187,11 +187,11 @@ type RanksOfTeamsListData []struct {
 // https://www.hackthebox.com/api/v4/rankings/users?vip=1
 
 type RanksOfUsersList struct {
-	Status bool                  `json:"status"`
-	Data   *RanksOfUsersListData `json:"data"`
+	Status bool                    `json:"status"`
+	Data   []*RanksOfUsersListItem `json:"data"`
 }
 
-type RanksOfUsersListData []struct {
+type RanksOfUsersListItem struct {
 	Rank            int    `json:"rank"`
 	Points          int    `json:"points"`
 	RootOwns        int    `json:"root_owns"`
@@ -211,11 +211,11 @@ type RanksOfUsersListData []struct {
 }
 
 type RanksOfUniversitiesList struct {
-	Status bool                         `json:"status"`
-	Data   *RanksOfUniversitiesListData `json:"data"`
+	Status bool                           `json:"status"`
+	Data   []*RanksOfUniversitiesListItem `json:"data"`
 }
 
-type RanksOfUniversitiesListData []struct {
+type RanksOfUniversitiesListItem struct {
 	Rank            int    `json:"rank"`
 	Students        int    `json:"students"`
 	Points          int    `json:"points"`

@@ -9,7 +9,7 @@ type UniversitiesList struct {
 
 type UniversitiesListData struct {
 	Page            int                         `json:"current_page"`
-	University      *UniversitiesListUniversity `json:"data"`
+	University      []*UniversitiesListDataItem `json:"data"`
 	FirstPageURL    string                      `json:"first_page_url"`
 	From            int                         `json:"from"`
 	To              int                         `json:"to"`
@@ -19,11 +19,11 @@ type UniversitiesListData struct {
 	Path            string                      `json:"path"`
 	PerPage         int                         `json:"per_page"`
 	PreviousPageURL string                      `json:"prev_page_url"`
-	Links           *UniversitiesListLinks      `json:"links"`
+	Links           []*UniversitiesListDataLink `json:"links"`
 	Total           int                         `json:"total"`
 }
 
-type UniversitiesListUniversity []struct {
+type UniversitiesListDataItem struct {
 	ID               int      `json:"id"`
 	Name             string   `json:"name"`
 	HasRandomLogo    int      `json:"has_auto_generated_logo"`
@@ -35,7 +35,7 @@ type UniversitiesListUniversity []struct {
 	UserAvatars      []string `json:"user_avatars"`
 }
 
-type UniversitiesListLinks []struct {
+type UniversitiesListDataLink struct {
 	URL      string `json:"url"`
 	Label    string `json:"label"`
 	IsActive bool   `json:"active"`
@@ -44,37 +44,37 @@ type UniversitiesListLinks []struct {
 // get a profile of a university by id
 type UniversityInfo struct {
 	Message string              `json:"message"`
-	Data    *UniversityInfoData `json:"data"`
+	Data    *UniversityInfoItem `json:"data"`
 }
 
-type UniversityInfoData struct {
-	ID              int                    `json:"id"`
-	Name            string                 `json:"name"`
-	Points          int                    `json:"points"`
-	Motto           string                 `json:"motto"`
-	Description     string                 `json:"description"`
-	CountryName     string                 `json:"country_name"`
-	CountryCode     string                 `json:"country_code"`
-	HasRandomLogo   int                    `json:"has_auto_generated_logo"`
-	JoinRequestSent bool                   `json:"join_request_sent"`
-	IsRespected     bool                   `json:"is_respected"`
-	URL             string                 `json:"url"`
-	Twitter         string                 `json:"twitter"`
-	Discord         string                 `json:"discord"`
-	Logo            string                 `json:"logo_url"`
-	Cover           string                 `json:"cover_image_url"`
-	Active          int                    `json:"active"`
-	Captain         *UniversityInfoCaptain `json:"captain"`
+type UniversityInfoItem struct {
+	ID              int                        `json:"id"`
+	Name            string                     `json:"name"`
+	Points          int                        `json:"points"`
+	Motto           string                     `json:"motto"`
+	Description     string                     `json:"description"`
+	CountryName     string                     `json:"country_name"`
+	CountryCode     string                     `json:"country_code"`
+	HasRandomLogo   int                        `json:"has_auto_generated_logo"`
+	JoinRequestSent bool                       `json:"join_request_sent"`
+	IsRespected     bool                       `json:"is_respected"`
+	URL             string                     `json:"url"`
+	Twitter         string                     `json:"twitter"`
+	Discord         string                     `json:"discord"`
+	Logo            string                     `json:"logo_url"`
+	Cover           string                     `json:"cover_image_url"`
+	Active          int                        `json:"active"`
+	Captain         *UniversityInfoItemCaptain `json:"captain"`
 }
 
-type UniversityInfoCaptain struct {
+type UniversityInfoItemCaptain struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Thumb string `json:"avatar_thumb"`
 }
 
 // get stats of a university by id
-type UniversityOwnsWeek struct {
+type UniversityOwnsWeeklyWeek struct {
 	UserOwns      int    `json:"user_owns"`
 	SystemOwns    int    `json:"system_owns"`
 	ChallengeOwns int    `json:"challenge_owns"`
@@ -82,28 +82,28 @@ type UniversityOwnsWeek struct {
 	Respects      int    `json:"respects"`
 	WeekEndDate   string `json:"week_end_date"`
 }
-type UniversityOwnsWeeks struct {
-	WeekOne    *UniversityOwnsWeek `json:"week1"`
-	WeekTwo    *UniversityOwnsWeek `json:"week2"`
-	WeekThree  *UniversityOwnsWeek `json:"week3"`
-	WeekFour   *UniversityOwnsWeek `json:"week4"`
-	WeekFive   *UniversityOwnsWeek `json:"week5"`
-	WeekSix    *UniversityOwnsWeek `json:"week6"`
-	WeekSeven  *UniversityOwnsWeek `json:"week7"`
-	WeekEight  *UniversityOwnsWeek `json:"week8"`
-	WeekNine   *UniversityOwnsWeek `json:"week9"`
-	WeekTen    *UniversityOwnsWeek `json:"week10"`
-	WeekEleven *UniversityOwnsWeek `json:"week11"`
-	WeekTwelve *UniversityOwnsWeek `json:"week12"`
+type UniversityOwnsWeekly struct {
+	WeekOne    *UniversityOwnsWeeklyWeek `json:"week1"`
+	WeekTwo    *UniversityOwnsWeeklyWeek `json:"week2"`
+	WeekThree  *UniversityOwnsWeeklyWeek `json:"week3"`
+	WeekFour   *UniversityOwnsWeeklyWeek `json:"week4"`
+	WeekFive   *UniversityOwnsWeeklyWeek `json:"week5"`
+	WeekSix    *UniversityOwnsWeeklyWeek `json:"week6"`
+	WeekSeven  *UniversityOwnsWeeklyWeek `json:"week7"`
+	WeekEight  *UniversityOwnsWeeklyWeek `json:"week8"`
+	WeekNine   *UniversityOwnsWeeklyWeek `json:"week9"`
+	WeekTen    *UniversityOwnsWeeklyWeek `json:"week10"`
+	WeekEleven *UniversityOwnsWeeklyWeek `json:"week11"`
+	WeekTwelve *UniversityOwnsWeeklyWeek `json:"week12"`
 }
 type UniversityOwnsInfo struct {
-	Rank          int                  `json:"rank"`
-	UserOwns      int                  `json:"user_owns"`
-	SystemOwns    int                  `json:"system_owns"`
-	Bloods        int                  `json:"first_bloods"`
-	ChallengeOwns int                  `json:"challenge_owns"`
-	Respects      int                  `json:"respects"`
-	Weekly        *UniversityOwnsWeeks `json:"weekly"`
+	Rank          int                   `json:"rank"`
+	UserOwns      int                   `json:"user_owns"`
+	SystemOwns    int                   `json:"system_owns"`
+	Bloods        int                   `json:"first_bloods"`
+	ChallengeOwns int                   `json:"challenge_owns"`
+	Respects      int                   `json:"respects"`
+	Weekly        *UniversityOwnsWeekly `json:"weekly"`
 }
 
 // List University Members

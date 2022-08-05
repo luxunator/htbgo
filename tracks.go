@@ -25,25 +25,25 @@ type TracksActiveList []struct {
 // https://www.hackthebox.com/api/v4/tracks/{trackID}
 
 type TrackInfo struct {
-	ID                   int             `json:"id"`
-	Name                 string          `json:"name"`
-	Description          string          `json:"description"`
-	Difficulty           string          `json:"difficulty"`
-	Creator              *TrackCreator   `json:"creator"`
-	IsOfficial           bool            `json:"official"`
-	StaffPick            int             `json:"staff_pick"`
-	Items                *TrackInfoItems `json:"items"`
-	Cover                string          `json:"cover_image"`
-	Likes                int             `json:"likes"`
-	HasLiked             bool            `json:"liked"`
-	IsEnrolled           bool            `json:"enrolled"`
-	HasCompletionMessage bool            `json:"has_completion_message"`
-	CompletionURL        string          `json:"completion_url"`
-	CompletionMessage    string          `json:"completion_message"`
-	CompletionCTA        interface{}     `json:"completion_cta"`
+	ID                   int              `json:"id"`
+	Name                 string           `json:"name"`
+	Description          string           `json:"description"`
+	Difficulty           string           `json:"difficulty"`
+	Creator              *TrackCreator    `json:"creator"`
+	IsOfficial           bool             `json:"official"`
+	StaffPick            int              `json:"staff_pick"`
+	Items                []*TrackInfoItem `json:"items"`
+	Cover                string           `json:"cover_image"`
+	Likes                int              `json:"likes"`
+	HasLiked             bool             `json:"liked"`
+	IsEnrolled           bool             `json:"enrolled"`
+	HasCompletionMessage bool             `json:"has_completion_message"`
+	CompletionURL        string           `json:"completion_url"`
+	CompletionMessage    string           `json:"completion_message"`
+	CompletionCTA        interface{}      `json:"completion_cta"`
 }
 
-type TrackInfoItems []struct {
+type TrackInfoItem struct {
 	ID              int           `json:"id"`
 	Type            string        `json:"type"`
 	Name            string        `json:"name"`

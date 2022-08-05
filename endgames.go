@@ -1,6 +1,6 @@
 package htbgo
 
-type EndgameCreators []struct {
+type EndgameCreator struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Thumb string `json:"avatar_thumb"`
@@ -16,18 +16,18 @@ type EndgameAvailability struct {
 // https://www.hackthebox.com/api/v4/endgames
 
 type EndgamesActiveList struct {
-	Status bool                    `json:"status"`
-	Data   *EndgamesActiveListData `json:"data"`
+	Status bool                      `json:"status"`
+	Data   []*EndgamesActiveListItem `json:"data"`
 }
 
-type EndgamesActiveListData []struct {
+type EndgamesActiveListItem struct {
 	ID            int                  `json:"id"`
 	Name          string               `json:"name"`
 	Avatar        string               `json:"avatar_url"`
 	Cover         string               `json:"cover_image_url"`
 	IsRetired     bool                 `json:"retired"`
 	IsVip         bool                 `json:"vip"`
-	Creators      *EndgameCreators     `json:"creators"`
+	Creators      []*EndgameCreator    `json:"creators"`
 	MachinesCount int                  `json:"endgame_machines_count"`
 	FlagsCount    int                  `json:"endgame_flags_count"`
 	Availability  *EndgameAvailability `json:"user_availability"`
@@ -39,17 +39,17 @@ type EndgamesActiveListData []struct {
 
 type EndgameInfo struct {
 	Status bool             `json:"status"`
-	Data   *EndgameInfoData `json:"data"`
+	Data   *EndgameInfoItem `json:"data"`
 }
 
-type EndgameInfoData struct {
+type EndgameInfoItem struct {
 	ID               int                  `json:"id"`
 	Name             string               `json:"name"`
 	Avatar           string               `json:"avatar_url"`
 	Cover            string               `json:"cover_image_url"`
 	IsRetired        bool                 `json:"retired"`
 	IsVip            bool                 `json:"vip"`
-	Creators         *EndgameCreators     `json:"creators"`
+	Creators         []*EndgameCreator    `json:"creators"`
 	Points           int                  `json:"points"`
 	PlayersCompleted int                  `json:"players_completed"`
 	ResetVotes       int                  `json:"endgame_reset_votes"`
@@ -67,11 +67,11 @@ type EndgameInfoData struct {
 // https://www.hackthebox.com/api/v4/endgame/{endgameID}/flags
 
 type EndgameFlagsList struct {
-	Status bool                  `json:"status"`
-	Data   *EndgameFlagsListData `json:"data"`
+	Status bool                    `json:"status"`
+	Data   []*EndgameFlagsListItem `json:"data"`
 }
 
-type EndgameFlagsListData []struct {
+type EndgameFlagsListItem struct {
 	ID     int    `json:"id"`
 	Title  string `json:"title"`
 	Points int    `json:"points"`
@@ -82,11 +82,11 @@ type EndgameFlagsListData []struct {
 // https://www.hackthebox.com/api/v4/endgame/{endgameID}}/machines
 
 type EndgameMachinesList struct {
-	Status bool                     `json:"status"`
-	Data   *EndgameMachinesListData `json:"data"`
+	Status bool                       `json:"status"`
+	Data   []*EndgameMachinesListItem `json:"data"`
 }
 
-type EndgameMachinesListData []struct {
+type EndgameMachinesListItem struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	OS    string `json:"os"`
