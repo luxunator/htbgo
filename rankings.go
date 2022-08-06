@@ -9,9 +9,9 @@ type RankBracket struct {
 }
 
 type RankDuring struct {
-	Rank      int    `json:"rank"`
-	Date      string `json:"date"`
-	RankChart []int  `json:"rank_chart_data"`
+	Rank      interface{}   `json:"rank"`
+	Date      string        `json:"date"`
+	RankChart []interface{} `json:"rank_chart_data"`
 }
 
 // Get the user's best rank within the period
@@ -283,7 +283,7 @@ func (s *Session) RankBracketOfTeam() (bracket *RankBracketOfTeamInfo, err error
 
 func (s *Session) RankBestDuring(period Duration, wantVIP bool) (rank *RankBestDuringInfo, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/rankings/user/best?period=" + string(period) + "&vip=" + stringFromVIP(wantVIP)
+	var url string = "https://www.hackthebox.com/api/v4/rankings/user/best?period=" + string(period) + "&vip=" + StringFromVIP(wantVIP)
 	err = parseJSON(s, url, &rank)
 
 	return
@@ -291,7 +291,7 @@ func (s *Session) RankBestDuring(period Duration, wantVIP bool) (rank *RankBestD
 
 func (s *Session) RankDuring(period Duration, wantVIP bool) (rank *RankDuringInfo, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/rankings/user/overview?period=" + string(period) + "&vip=" + stringFromVIP(wantVIP)
+	var url string = "https://www.hackthebox.com/api/v4/rankings/user/overview?period=" + string(period) + "&vip=" + StringFromVIP(wantVIP)
 	err = parseJSON(s, url, &rank)
 
 	return
@@ -299,7 +299,7 @@ func (s *Session) RankDuring(period Duration, wantVIP bool) (rank *RankDuringInf
 
 func (s *Session) RankBracket(wantVIP bool) (bracket *RankBracketInfo, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/rankings/user/ranking_bracket?vip=" + stringFromVIP(wantVIP)
+	var url string = "https://www.hackthebox.com/api/v4/rankings/user/ranking_bracket?vip=" + StringFromVIP(wantVIP)
 	err = parseJSON(s, url, &bracket)
 
 	return
@@ -323,7 +323,7 @@ func (s *Session) RanksOfTeams() (ranks *RanksOfTeamsList, err error) {
 
 func (s *Session) RanksOfUsers(wantVIP bool) (ranks *RanksOfUsersList, err error) {
 
-	var url string = "https://www.hackthebox.com/api/v4/rankings/users?vip=" + stringFromVIP(wantVIP)
+	var url string = "https://www.hackthebox.com/api/v4/rankings/users?vip=" + StringFromVIP(wantVIP)
 	err = parseJSON(s, url, &ranks)
 
 	return
