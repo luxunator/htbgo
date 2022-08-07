@@ -1,11 +1,13 @@
 package htbgo
 
+// EndgameCreator
 type EndgameCreator struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Thumb string `json:"avatar_thumb"`
 }
 
+// EndgameAvailability
 type EndgameAvailability struct {
 	Available bool   `json:"available"`
 	Code      int    `json:"code"`
@@ -15,11 +17,13 @@ type EndgameAvailability struct {
 // Endgames List
 // https://www.hackthebox.com/api/v4/endgames
 
+// EndgamesActiveList
 type EndgamesActiveList struct {
 	Status bool                      `json:"status"`
 	Data   []*EndgamesActiveListItem `json:"data"`
 }
 
+// EndgamesActiveListItem
 type EndgamesActiveListItem struct {
 	ID            int                  `json:"id"`
 	Name          string               `json:"name"`
@@ -37,11 +41,13 @@ type EndgamesActiveListItem struct {
 // Endgame Profile
 // https://www.hackthebox.com/api/v4/endgame/{endgameID}
 
+// EndgameInfo
 type EndgameInfo struct {
 	Status bool             `json:"status"`
 	Data   *EndgameInfoItem `json:"data"`
 }
 
+// EndgameInfoItem
 type EndgameInfoItem struct {
 	ID               int                  `json:"id"`
 	Name             string               `json:"name"`
@@ -66,11 +72,13 @@ type EndgameInfoItem struct {
 // Endgame Flag List
 // https://www.hackthebox.com/api/v4/endgame/{endgameID}/flags
 
+// EndgameFlagsList
 type EndgameFlagsList struct {
 	Status bool                    `json:"status"`
 	Data   []*EndgameFlagsListItem `json:"data"`
 }
 
+// EndgameFlagsListItem
 type EndgameFlagsListItem struct {
 	ID     int    `json:"id"`
 	Title  string `json:"title"`
@@ -81,11 +89,14 @@ type EndgameFlagsListItem struct {
 // Endgame Machine List
 // https://www.hackthebox.com/api/v4/endgame/{endgameID}}/machines
 
+
+// EndgameMachinesList
 type EndgameMachinesList struct {
 	Status bool                       `json:"status"`
 	Data   []*EndgameMachinesListItem `json:"data"`
 }
 
+// EndgameMachinesListItem
 type EndgameMachinesListItem struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
@@ -93,6 +104,7 @@ type EndgameMachinesListItem struct {
 	Thumb string `json:"avatar_thumb_url"`
 }
 
+// EndgamesActive returns a list of the currently active endgames
 func (s *Session) EndgamesActive() (endgames *EndgamesActiveList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/endgames"
@@ -101,6 +113,7 @@ func (s *Session) EndgamesActive() (endgames *EndgamesActiveList, err error) {
 	return
 }
 
+// Endgame returns the information of an endgame, given an endgame ID
 func (s *Session) Endgame(endgameID int) (endgame *EndgameInfo, err error) {
 
 	endgameIDString, err := toPositiveIntString(endgameID)
@@ -114,6 +127,7 @@ func (s *Session) Endgame(endgameID int) (endgame *EndgameInfo, err error) {
 	return
 }
 
+// EndgameFlags returns a list of information on the flags within an endgame, given an endgame ID
 func (s *Session) EndgameFlags(endgameID int) (flags *EndgameFlagsList, err error) {
 
 	endgameIDString, err := toPositiveIntString(endgameID)
@@ -127,6 +141,7 @@ func (s *Session) EndgameFlags(endgameID int) (flags *EndgameFlagsList, err erro
 	return
 }
 
+// EndgameMachines returns a list of the machines that an endgame contains, given an endgame ID
 func (s *Session) EndgameMachines(endgameID int) (machines *EndgameMachinesList, err error) {
 
 	endgameIDString, err := toPositiveIntString(endgameID)

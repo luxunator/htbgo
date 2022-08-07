@@ -3,6 +3,7 @@ package htbgo
 // Bearer Connection Status
 // https://www.hackthebox.com/api/v4/user/connection/status
 
+// ConnectionStatusInfo
 type ConnectionStatusInfo struct {
 	Status     string      `json:"status"`
 	Connection interface{} `json:"connection"`
@@ -11,10 +12,12 @@ type ConnectionStatusInfo struct {
 // Bearer Active Machine
 // https://www.hackthebox.com/api/v4/machine/active
 
+// ActiveMachineInfo
 type ActiveMachineInfo struct {
 	Info *ActiveMachineInfoItem `json:"info"`
 }
 
+// ActiveMachineInfoItem
 type ActiveMachineInfoItem struct {
 	ID         int    `json:"id"`
 	Name       string `json:"name"`
@@ -30,10 +33,12 @@ type ActiveMachineInfoItem struct {
 // Bearer Followers
 // https://www.hackthebox.com/api/v4/user/followers
 
+// FollowersList
 type FollowersList struct {
 	Info []*FollowersListItem `json:"info"`
 }
 
+// FollowersListItem
 type FollowersListItem struct {
 	ID int `json:"id"`
 }
@@ -41,10 +46,12 @@ type FollowersListItem struct {
 // Bearer Profile
 // https://www.hackthebox.com/api/v4/user/info
 
+// ProfileInfo
 type ProfileInfo struct {
 	Info *ProfileInfoItem `json:"info"`
 }
 
+// ProfileInfoItem
 type ProfileInfoItem struct {
 	ID                        int                  `json:"id"`
 	Name                      string               `json:"name"`
@@ -76,6 +83,7 @@ type ProfileInfoItem struct {
 	DunningExists             bool                 `json:"dunning_exists"`
 }
 
+// ProfileInfoItemTeam
 type ProfileInfoItemTeam struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
@@ -85,6 +93,7 @@ type ProfileInfoItemTeam struct {
 // Bearer Settings
 // https://www.hackthebox.com/api/v4/user/settings
 
+// SettingsInfo
 type SettingsInfo struct {
 	Email           string `json:"email"`
 	Notifications   int    `json:"email_notifications"`
@@ -96,10 +105,12 @@ type SettingsInfo struct {
 // Bearer Subscriptions
 // https://www.hackthebox.com/api/v4/user/subscriptions
 
+// SubscriptionsList
 type SubscriptionsList struct {
 	Subscriptions []*SubscriptionsListItem `json:"subscriptions"`
 }
 
+// SubscriptionsListItem
 type SubscriptionsListItem struct {
 	Name        string        `json:"name"`
 	EndsAt      string        `json:"ends_at"`
@@ -115,11 +126,13 @@ type SubscriptionsListItem struct {
 // Bearer Subscriptions Balance
 // https://www.hackthebox.com/api/v4/user/subscriptions/balance
 
+// SubscriptionsBalanceInfo
 type SubscriptionsBalanceInfo struct {
 	Balances        *SubscriptionsBalanceInfoBalances `json:"balances"`
 	DefaultCurrency string                            `json:"default_currency"`
 }
 
+// SubscriptionsBalanceInfoBalances
 type SubscriptionsBalanceInfoBalances struct {
 	USD int `json:"USD"`
 	GBP int `json:"GBP"`
@@ -129,6 +142,7 @@ type SubscriptionsBalanceInfoBalances struct {
 // Bearer Recurly URL
 // https://www.hackthebox.com/api/v4/user/subscriptions/manage/recurly
 
+// SubscriptionsRecurlyInfo
 type SubscriptionsRecurlyInfo struct {
 	Message string `json:"message"`
 	URL     string `json:"url"`
@@ -137,6 +151,7 @@ type SubscriptionsRecurlyInfo struct {
 // Bearer Enrolled Tracks
 // https://www.hackthebox.com/api/v4/user/tracks
 
+// EnrolledTracksList
 type EnrolledTracksList []struct {
 	ID       int `json:"id"`
 	Complete int `json:"complete"`
@@ -145,10 +160,12 @@ type EnrolledTracksList []struct {
 // User Profile with Bearer Relationship
 // https://www.hackthebox.com/api/v4/user/profile/basic/{userID}
 
+// UserRelationshipInfo
 type UserRelationshipInfo struct {
 	Profile *UserRelationshipInfoItem `json:"profile"`
 }
 
+// UserRelationshipInfoItem
 type UserRelationshipInfoItem struct {
 	ID              int                                 `json:"id"`
 	SSOID           int                                 `json:"sso_id"`
@@ -186,6 +203,7 @@ type UserRelationshipInfoItem struct {
 	IsFollowed      bool                                `json:"isFollowed"`
 }
 
+// UserRelationshipInfoItemTeam
 type UserRelationshipInfoItemTeam struct {
 	ID      int    `json:"id"`
 	Name    string `json:"name"`
@@ -193,6 +211,7 @@ type UserRelationshipInfoItemTeam struct {
 	Avatar  string `json:"avatar"`
 }
 
+// UserRelationshipInfoItemUniversity
 type UserRelationshipInfoItemUniversity struct {
 	ID        int    `json:"id"`
 	Name      string `json:"name"`
@@ -203,14 +222,17 @@ type UserRelationshipInfoItemUniversity struct {
 // User Machines Progress
 // https://www.hackthebox.com/api/v4/profile/progress/machines/os/{userID}
 
+// UserMachinesList
 type UserMachinesList struct {
 	Profile *UserMachinesListItem `json:"profile"`
 }
 
+// UserMachinesListItem
 type UserMachinesListItem struct {
 	OperatingSystems []*UserMachinesListItemOperatingSystem `json:"operating_systems"`
 }
 
+// UserMachinesListItemOperatingSystem
 type UserMachinesListItemOperatingSystem struct {
 	Name          string  `json:"name"`
 	Completion    float64 `json:"completion_percentage"`
@@ -221,20 +243,24 @@ type UserMachinesListItemOperatingSystem struct {
 // User Challenges Progress
 // https://www.hackthebox.com/api/v4/profile/progress/challenges/{userID}
 
+// UserChallengesList
 type UserChallengesList struct {
 	Profile *UserChallengesListItem `json:"profile"`
 }
 
+// UserChallengesListItem
 type UserChallengesListItem struct {
 	Owns       *UserChallengesListItemOwns       `json:"challenge_owns"`
 	Categories []*UserChallengesListItemCategory `json:"challenge_categories"`
 }
 
+// UserChallengesListItemOwns
 type UserChallengesListItemOwns struct {
 	Solved int `json:"solved"`
 	Total  int `json:"total"`
 }
 
+// UserChallengesListItemCategory
 type UserChallengesListItemCategory struct {
 	Name          string  `json:"name"`
 	OwnedFlags    int     `json:"owned_flags"`
@@ -246,14 +272,17 @@ type UserChallengesListItemCategory struct {
 // User Endgames Progress
 // https://www.hackthebox.com/api/v4/profile/progress/endgame/{userID}
 
+// UserEndgamesList
 type UserEndgamesList struct {
 	Profile *UserEndgamesListItem `json:"profile"`
 }
 
+// UserEndgamesListItem
 type UserEndgamesListItem struct {
 	Endgames []*UserEndgamesListItemEndgame `json:"endgames"`
 }
 
+// UserEndgamesListItemEndgame
 type UserEndgamesListItemEndgame struct {
 	Name       string  `json:"name"`
 	Completion float64 `json:"completion_percentage"`
@@ -264,14 +293,17 @@ type UserEndgamesListItemEndgame struct {
 // User Fortress Progress
 // https://www.hackthebox.com/api/v4/profile/progress/fortress/{userID}
 
+// UserFortressesList
 type UserFortressesList struct {
 	Profile *UserFortressesListItem `json:"profile"`
 }
 
+// UserFortressesListItem
 type UserFortressesListItem struct {
 	Fortresses []*UserFortressesListItemFortress `json:"fortresses"`
 }
 
+// UserFortressesListItemFortress
 type UserFortressesListItemFortress struct {
 	Name       string  `json:"name"`
 	Avatar     string  `json:"avatar"`
@@ -283,14 +315,17 @@ type UserFortressesListItemFortress struct {
 // User ProLabs Progress
 // https://www.hackthebox.com/api/v4/profile/progress/prolab/{userID}
 
+// UserProLabsList
 type UserProLabsList struct {
 	Profile *UserProLabsListItem `json:"profile"`
 }
 
+// UserProLabsListItem
 type UserProLabsListItem struct {
 	ProLabs []*UserProLabsListItemProLab `json:"prolabs"`
 }
 
+// UserProLabsListItemProLab
 type UserProLabsListItemProLab struct {
 	Name          string  `json:"name"`
 	Completion    float64 `json:"completion_percentage"`
@@ -303,14 +338,17 @@ type UserProLabsListItemProLab struct {
 // User Activity
 // https://www.hackthebox.com/api/v4/profile/activity/{userID}
 
+// UserActivityList
 type UserActivityList struct {
 	Profile *UserActivityListItem `json:"profile"`
 }
 
+// UserActivityListItem
 type UserActivityListItem struct {
 	Activity []*UserActivityListItemActivity `json:"activity"`
 }
 
+// UserActivityListItemActivity
 type UserActivityListItemActivity struct {
 	Date              string `json:"date"`
 	DateDiff          string `json:"date_diff"`
@@ -328,19 +366,23 @@ type UserActivityListItemActivity struct {
 // User Bloods
 // https://www.hackthebox.com/api/v4/profile/bloods/{userID}
 
+// UserBloodsList
 type UserBloodsList struct {
 	Profile *UserBloodsListItem `json:"profile"`
 }
 
+// UserBloodsListItem
 type UserBloodsListItem struct {
 	Bloods *UserBloodsListItemBloods `json:"bloods"`
 }
 
+// UserBloodsListItemBloods
 type UserBloodsListItemBloods struct {
 	Machines   []*UserBloodsListItemBloodsMachine   `json:"machines"`
 	Challenges []*UserBloodsListItemBloodsChallenge `json:"challenges"`
 }
 
+// UserBloodsListItemBloodsMachine
 type UserBloodsListItemBloodsMachine struct {
 	ID            int    `json:"id"`
 	Name          string `json:"name"`
@@ -353,6 +395,7 @@ type UserBloodsListItemBloodsMachine struct {
 	RootBloodDiff string `json:"root_blood_difference"`
 }
 
+// UserBloodsListItemBloodsChallenge
 type UserBloodsListItemBloodsChallenge struct {
 	ID         int    `json:"id"`
 	Name       string `json:"name"`
@@ -364,20 +407,24 @@ type UserBloodsListItemBloodsChallenge struct {
 // User Submissions
 // https://www.hackthebox.com/api/v4/profile/content/{userID}
 
+// UserSubmissionsList
 type UserSubmissionsList struct {
 	Profile *UserSubmissionsListItem `json:"profile"`
 }
 
+// UserSubmissionsListItem
 type UserSubmissionsListItem struct {
 	Content *UserSubmissionsListItemContent `json:"content"`
 }
 
+// UserSubmissionsListItemContent
 type UserSubmissionsListItemContent struct {
 	Machines   []*UserSubmissionsListItemContentMachine   `json:"machines"`
 	Challenges []*UserSubmissionsListItemContentChallenge `json:"challenges"`
 	Writeups   []*UserSubmissionsListItemContentWriteup   `json:"writeups"`
 }
 
+// UserSubmissionsListItemContentMachine
 type UserSubmissionsListItemContentMachine struct {
 	ID         int    `json:"id"`
 	Name       string `json:"name"`
@@ -389,6 +436,7 @@ type UserSubmissionsListItemContentMachine struct {
 	SystemOwns int    `json:"system_owns"`
 }
 
+// UserSubmissionsListItemContentChallenge
 type UserSubmissionsListItemContentChallenge struct {
 	ID       int    `json:"id"`
 	Name     string `json:"name"`
@@ -397,6 +445,7 @@ type UserSubmissionsListItemContentChallenge struct {
 	Dislikes int    `json:"dislikes"`
 }
 
+// UserSubmissionsListItemContentWriteup
 type UserSubmissionsListItemContentWriteup struct {
 	ID            int    `json:"id"`
 	MachineID     int    `json:"machine_id"`
@@ -411,14 +460,17 @@ type UserSubmissionsListItemContentWriteup struct {
 // User Achievements
 // https://www.hackthebox.com/api/v4/profile/graph/{duration}/{userID}
 
+// UserAchievementsList
 type UserAchievementsList struct {
 	Profile *UserAchievementsListItem `json:"profile"`
 }
 
+// UserAchievementsListItem
 type UserAchievementsListItem struct {
 	Graph *UserAchievementsListItemGraph `json:"graphData"`
 }
 
+// UserAchievementsListItemGraph
 type UserAchievementsListItemGraph struct {
 	UserOwns      []int `json:"user_owns"`
 	SystemOwns    []int `json:"system_owns"`
@@ -430,20 +482,24 @@ type UserAchievementsListItemGraph struct {
 // User Machine Owns By Attack Path
 // https://www.hackthebox.com/api/v4/profile/chart/machines/attack/{userID}
 
+// UserOwnsByPathMap
 type UserOwnsByPathMap struct {
 	Profile *UserOwnsByPathMapItem `json:"profile"`
 }
 
+// UserOwnsByPathMapItem
 type UserOwnsByPathMapItem struct {
 	MachineOwns        *UserOwnsByPathMapItemMachineOwns                  `json:"machine_owns"`
 	MachineAttackPaths map[string]*UserOwnsByPathMapItemMachineAttackPath `json:"machine_attack_paths"`
 }
 
+// UserOwnsByPathMapItemMachineOwns
 type UserOwnsByPathMapItemMachineOwns struct {
 	Solved int `json:"solved"`
 	Total  int `json:"total"`
 }
 
+// UserOwnsByPathMapItemMachineAttackPath
 type UserOwnsByPathMapItemMachineAttackPath struct {
 	Solved        int     `json:"solved"`
 	Total         int     `json:"total"`
@@ -453,10 +509,12 @@ type UserOwnsByPathMapItemMachineAttackPath struct {
 // User Profile
 // https://www.hackthebox.com/api/v4/profile/{userID}
 
+// UserInfo
 type UserInfo struct {
 	Profile *UserInfoItem `json:"profile"`
 }
 
+// UserInfoItem
 type UserInfoItem struct {
 	ID              int               `json:"id"`
 	SSOID           int               `json:"sso_id"`
@@ -488,6 +546,7 @@ type UserInfoItem struct {
 	Website         string            `json:"website"`
 }
 
+// UserInfoItemTeam
 type UserInfoItemTeam struct {
 	ID      int    `json:"id"`
 	Name    string `json:"name"`
@@ -498,10 +557,12 @@ type UserInfoItemTeam struct {
 // User Badges
 // https://www.hackthebox.com/api/v4/profile/badges/{userID}
 
+// UserBadgesList
 type UserBadgesList struct {
 	Badges []*UserBadgesListItem `json:"badges"`
 }
 
+// UserBadgesListItem
 type UserBadgesListItem struct {
 	ID           int                      `json:"id"`
 	Name         string                   `json:"name"`
@@ -515,6 +576,7 @@ type UserBadgesListItem struct {
 	Pivot        *UserBadgesListItemPivot `json:"pivot"`
 }
 
+// UserBadgesListItemPivot
 type UserBadgesListItemPivot struct {
 	UserID    int    `json:"user_id"`
 	BadgeID   int    `json:"badge_id"`
@@ -522,6 +584,7 @@ type UserBadgesListItemPivot struct {
 	UpdatedAt string `json:"updated_at"`
 }
 
+// ConnectionStatus returns the connection status of the Token User
 func (s *Session) ConnectionStatus() (status *ConnectionStatusInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/connection/status"
@@ -530,6 +593,7 @@ func (s *Session) ConnectionStatus() (status *ConnectionStatusInfo, err error) {
 	return
 }
 
+// ActiveMachine returns the active machine of the Token User
 func (s *Session) ActiveMachine() (active *ActiveMachineInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/machine/active"
@@ -538,6 +602,7 @@ func (s *Session) ActiveMachine() (active *ActiveMachineInfo, err error) {
 	return
 }
 
+// Followers returns a list of users following the Token User
 func (s *Session) Followers() (followers *FollowersList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/followers"
@@ -546,6 +611,7 @@ func (s *Session) Followers() (followers *FollowersList, err error) {
 	return
 }
 
+// Profile returns the profile information of the Token User
 func (s *Session) Profile() (profile *ProfileInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/info"
@@ -554,6 +620,7 @@ func (s *Session) Profile() (profile *ProfileInfo, err error) {
 	return
 }
 
+// Settings returns the setting information of the Token User
 func (s *Session) Settings() (settings *SettingsInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/settings"
@@ -562,6 +629,7 @@ func (s *Session) Settings() (settings *SettingsInfo, err error) {
 	return
 }
 
+// Subscriptions returns the current subscriptions of the Token User
 func (s *Session) Subscriptions() (subscriptions *SubscriptionsList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/subscriptions"
@@ -570,6 +638,7 @@ func (s *Session) Subscriptions() (subscriptions *SubscriptionsList, err error) 
 	return
 }
 
+// SubscriptionsBalance returns the current subscriptions balance of the Token User
 func (s *Session) SubscriptionsBalance() (balance *SubscriptionsBalanceInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/subscriptions/balance"
@@ -578,6 +647,7 @@ func (s *Session) SubscriptionsBalance() (balance *SubscriptionsBalanceInfo, err
 	return
 }
 
+// SubscriptionsRecurly returns the subscriptions recurly url of the Token User
 func (s *Session) SubscriptionsRecurly() (recurly *SubscriptionsRecurlyInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/subscriptions/manage/recurly"
@@ -586,6 +656,7 @@ func (s *Session) SubscriptionsRecurly() (recurly *SubscriptionsRecurlyInfo, err
 	return
 }
 
+// EnrolledTracks returns a list of tracks that the Token User is enrolled in
 func (s *Session) EnrolledTracks() (tracks *EnrolledTracksList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/user/tracks"
@@ -594,6 +665,7 @@ func (s *Session) EnrolledTracks() (tracks *EnrolledTracksList, err error) {
 	return
 }
 
+// UserRelationship returns the profile information and Token User relation of a user, given a user ID
 func (s *Session) UserRelationship(userID int) (relationship *UserRelationshipInfo, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
@@ -607,6 +679,7 @@ func (s *Session) UserRelationship(userID int) (relationship *UserRelationshipIn
 	return
 }
 
+// UserMachines returns a list of information containing a users machines progess, given a user ID
 func (s *Session) UserMachines(userID int) (machines *UserMachinesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
@@ -620,6 +693,7 @@ func (s *Session) UserMachines(userID int) (machines *UserMachinesList, err erro
 	return
 }
 
+// UserChallenges returns a list of information containing a users challenges progess, given a user ID
 func (s *Session) UserChallenges(userID int) (challenges *UserChallengesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
@@ -633,6 +707,7 @@ func (s *Session) UserChallenges(userID int) (challenges *UserChallengesList, er
 	return
 }
 
+// UserEndgames  returns a list of information containing a users endgames progess, given a user ID
 func (s *Session) UserEndgames(userID int) (endgames *UserEndgamesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
@@ -646,6 +721,7 @@ func (s *Session) UserEndgames(userID int) (endgames *UserEndgamesList, err erro
 	return
 }
 
+// UserFortresses returns a list of information containing a users fortresses progess, given a user ID
 func (s *Session) UserFortresses(userID int) (fortresses *UserFortressesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
@@ -659,6 +735,7 @@ func (s *Session) UserFortresses(userID int) (fortresses *UserFortressesList, er
 	return
 }
 
+// UserProLabs returns a list of information containing a users prolabs progess, given a user ID
 func (s *Session) UserProLabs(userID int) (proLabs *UserProLabsList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
@@ -672,6 +749,7 @@ func (s *Session) UserProLabs(userID int) (proLabs *UserProLabsList, err error) 
 	return
 }
 
+// UserActivity returns the recent activity of a user, given a user ID
 func (s *Session) UserActivity(userID int) (activities *UserActivityList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
@@ -685,6 +763,7 @@ func (s *Session) UserActivity(userID int) (activities *UserActivityList, err er
 	return
 }
 
+// UserBloods returns a users blood information, given a user ID
 func (s *Session) UserBloods(userID int) (bloods *UserBloodsList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
@@ -698,6 +777,7 @@ func (s *Session) UserBloods(userID int) (bloods *UserBloodsList, err error) {
 	return
 }
 
+// UserSubmissions returns a users submissions, given a user ID
 func (s *Session) UserSubmissions(userID int) (submissions *UserSubmissionsList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
@@ -711,6 +791,7 @@ func (s *Session) UserSubmissions(userID int) (submissions *UserSubmissionsList,
 	return
 }
 
+// UserAchievements returns a users achievements, given a user ID
 func (s *Session) UserAchievements(userID int, duration Duration) (acheivements *UserAchievementsList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
@@ -724,6 +805,7 @@ func (s *Session) UserAchievements(userID int, duration Duration) (acheivements 
 	return
 }
 
+// UserOwnsByPath returns the owns information of a user by attack path, given a user ID
 func (s *Session) UserOwnsByPath(userID int) (path *UserOwnsByPathMap, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
@@ -737,6 +819,7 @@ func (s *Session) UserOwnsByPath(userID int) (path *UserOwnsByPathMap, err error
 	return
 }
 
+// User returns the information of a user, given a user ID
 func (s *Session) User(userID int) (profile *UserInfo, err error) {
 
 	userIDString, err := toPositiveIntString(userID)
@@ -750,6 +833,7 @@ func (s *Session) User(userID int) (profile *UserInfo, err error) {
 	return
 }
 
+// UserBadges returns a list of a users badges, given a user ID
 func (s *Session) UserBadges(userID int) (badges *UserBadgesList, err error) {
 
 	userIDString, err := toPositiveIntString(userID)

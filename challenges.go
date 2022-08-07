@@ -1,5 +1,6 @@
 package htbgo
 
+// ChallengeCard
 type ChallengeCard struct {
 	ID           int    `json:"id"`
 	Name         string `json:"name"`
@@ -13,6 +14,7 @@ type ChallengeCard struct {
 // Challenge Recommendation Cards
 // https://www.hackthebox.com/api/v4/challenge/recommended
 
+// ChallengesSuggestedInfo
 type ChallengesSuggestedInfo struct {
 	State   []string       `json:"state"`
 	CardOne *ChallengeCard `json:"card1"`
@@ -22,6 +24,7 @@ type ChallengesSuggestedInfo struct {
 // Challenge Reccomendation Cards Retired
 // https://www.hackthebox.com/api/v4/challenge/recommended/retired
 
+// ChallengesRetiredSuggestedInfo
 type ChallengesRetiredSuggestedInfo struct {
 	CardOne *ChallengeCard `json:"card1"`
 	CardTwo *ChallengeCard `json:"card2"`
@@ -30,10 +33,12 @@ type ChallengesRetiredSuggestedInfo struct {
 // List Challenge Categories
 // https://www.hackthebox.com/api/v4/challenge/categories/list
 
+// ChallengeCategoriesList
 type ChallengeCategoriesList struct {
 	Info []*ChallengeCategoriesListItem `json:"info"`
 }
 
+// ChallengeCategoriesListItem
 type ChallengeCategoriesListItem struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
@@ -45,10 +50,12 @@ type ChallengeCategoriesListItem struct {
 // List Retired Challenges
 // https://www.hackthebox.com/api/v4/challenge/list/retired
 
+// ChallengesList
 type ChallengesList struct {
 	Challenges []*ChallengeListItem `json:"challenges"`
 }
 
+// ChallengeListItem
 type ChallengeListItem struct {
 	ID                 int           `json:"id"`
 	Name               string        `json:"name"`
@@ -77,10 +84,12 @@ type ChallengeListItem struct {
 // Challenge Profile
 // https://www.hackthebox.com/api/v4/challenge/info/{challengeID}
 
+// ChallengeInfo
 type ChallengeInfo struct {
 	Challenge *ChallengeInfoItem `json:"challenge"`
 }
 
+// ChallengeInfoItem
 type ChallengeInfoItem struct {
 	ID                    int           `json:"id"`
 	Name                  string        `json:"name"`
@@ -124,14 +133,17 @@ type ChallengeInfoItem struct {
 // Challenge Activity
 // https://www.hackthebox.com/api/v4/challenge/activity/{challengeID}
 
+// ChallengeActivityList
 type ChallengeActivityList struct {
 	Info *ChallengeActivityListItem `json:"info"`
 }
 
+// ChallengeActivityList
 type ChallengeActivityListItem struct {
 	Activity []*ChallengeActivityListItemActivity `json:"activity"`
 }
 
+// ChallengeActivityListItemActivity
 type ChallengeActivityListItemActivity struct {
 	CreatedAt  string `json:"created_at"`
 	Date       string `json:"date"`
@@ -142,6 +154,7 @@ type ChallengeActivityListItemActivity struct {
 	Type       string `json:"type"`
 }
 
+// ChallengesSuggested returns the currently recommended challenges
 func (s *Session) ChallengesSuggested() (cards *ChallengesSuggestedInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/recommended"
@@ -150,6 +163,7 @@ func (s *Session) ChallengesSuggested() (cards *ChallengesSuggestedInfo, err err
 	return
 }
 
+// ChallengesRetiredSuggested returns the currently recommended challenges that are retired
 func (s *Session) ChallengesRetiredSuggested() (cards *ChallengesRetiredSuggestedInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/recommended/retired"
@@ -158,6 +172,7 @@ func (s *Session) ChallengesRetiredSuggested() (cards *ChallengesRetiredSuggeste
 	return
 }
 
+// ChallengeCategories returns a list of the current challenge categories
 func (s *Session) ChallengeCategories() (categories *ChallengeCategoriesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/categories/list"
@@ -166,6 +181,7 @@ func (s *Session) ChallengeCategories() (categories *ChallengeCategoriesList, er
 	return
 }
 
+// ChallengesActive returns a list of the currently active challenges
 func (s *Session) ChallengesActive() (challenges *ChallengesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/list"
@@ -174,6 +190,7 @@ func (s *Session) ChallengesActive() (challenges *ChallengesList, err error) {
 	return
 }
 
+// ChallengesRetired returns a list of all of the retired challenges
 func (s *Session) ChallengesRetired() (challenges *ChallengesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/challenge/list/retired"
@@ -182,6 +199,7 @@ func (s *Session) ChallengesRetired() (challenges *ChallengesList, err error) {
 	return
 }
 
+// Challenge returns the information of a challenge, given a challenge ID
 func (s *Session) Challenge(challengeID int) (info *ChallengeInfo, err error) {
 
 	challengeIDString, err := toPositiveIntString(challengeID)
@@ -195,6 +213,7 @@ func (s *Session) Challenge(challengeID int) (info *ChallengeInfo, err error) {
 	return
 }
 
+// ChallengeActivity returns the recent activity of users on a challenge, given a challenge ID
 func (s *Session) ChallengeActivity(challengeID int) (activities *ChallengeActivityList, err error) {
 
 	challengeIDString, err := toPositiveIntString(challengeID)

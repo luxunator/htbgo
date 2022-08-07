@@ -1,3 +1,4 @@
+// Package htbgo contains functionality to interact with the Hack The Box v4 API.
 package htbgo
 
 import (
@@ -12,6 +13,7 @@ import (
 const VERSION string = "0.1.0"
 
 const (
+	// Duration constants are used when duration is needed for obtaining information from within a specified period of time
 	Year        Duration = "1Y"
 	HalfYear    Duration = "6M"
 	QuarterYear Duration = "3M"
@@ -20,11 +22,21 @@ const (
 )
 
 var (
+	// Err contants are general errors that could be encountered
 	ErrIntNotPositive = errors.New("value: integer not positive")
 )
 
+// A Session containter holds the information needed to create a valid session with the API
+type Session struct {
+	Token   string
+	Client  *http.Client
+	Headers http.Header
+}
+
+// A Duration holds a representation of a period of time
 type Duration string
 
+// Difficulties is a container for difficulty types defined by the API
 type Difficulties struct {
 	Cake      int `json:"counterCake"`
 	VeryEasy  int `json:"counterVeryEasy"`
@@ -38,6 +50,7 @@ type Difficulties struct {
 	BrainFuck int `json:"counterBrainFuck"`
 }
 
+// New is a function that will create a session to interact with the API when given a valid token
 func New(token string) (s *Session, err error) {
 
 	s = &Session{

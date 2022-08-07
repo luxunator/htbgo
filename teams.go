@@ -3,6 +3,7 @@ package htbgo
 // Get Team Profile
 // https://www.hackthebox.com/api/v4/team/info/{teamid}
 
+// TeamInfo
 type TeamInfo struct {
 	ID              int              `json:"id"`
 	Name            string           `json:"name"`
@@ -23,6 +24,7 @@ type TeamInfo struct {
 	JoinRequestSent bool             `json:"join_request_sent"`
 }
 
+// TeamInfoCaptain
 type TeamInfoCaptain struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
@@ -32,6 +34,7 @@ type TeamInfoCaptain struct {
 // Get Team Activity
 // https://www.hackthebox.com/api/v4/team/activity/{teamid}
 
+// TeamActivityList
 type TeamActivityList []struct {
 	User              *TeamActivityListUser `json:"user"`
 	Date              string                `json:"date"`
@@ -47,6 +50,7 @@ type TeamActivityList []struct {
 	FlagTitle         string                `json:"flag_title"`
 }
 
+// TeamActivityListUser
 type TeamActivityListUser struct {
 	ID     int    `json:"id"`
 	Name   string `json:"name"`
@@ -57,6 +61,7 @@ type TeamActivityListUser struct {
 // Get Team Owns
 // https://www.hackthebox.com/api/v4/team/stats/owns/{teamid}
 
+// TeamOwnsByWeekMapWeek
 type TeamOwnsByWeekMapWeek struct {
 	UserOwns      int    `json:"user_owns"`
 	SystemOwns    int    `json:"system_owns"`
@@ -66,6 +71,7 @@ type TeamOwnsByWeekMapWeek struct {
 	WeekEndDate   string `json:"week_end_date"`
 }
 
+// TeamOwnsByWeekMap
 type TeamOwnsByWeekMap struct {
 	Rank          int                               `json:"rank"`
 	UserOwns      int                               `json:"user_owns"`
@@ -79,11 +85,13 @@ type TeamOwnsByWeekMap struct {
 // Get Team Graph for Duration
 // https://www.hackthebox.com/api/v4/team/graph/2102?duration={duration}
 
+// TeamStatsDuringInfo
 type TeamStatsDuringInfo struct {
 	Status bool                     `json:"status"`
 	Data   *TeamStatsDuringInfoItem `json:"data"`
 }
 
+// TeamStatsDuringInfoItem
 type TeamStatsDuringInfoItem struct {
 	Points  []int `json:"points"`
 	Rank    []int `json:"rank"`
@@ -93,16 +101,19 @@ type TeamStatsDuringInfoItem struct {
 // Get Team Ownage by Attack Path
 // https://www.hackthebox.com/api/v4/team/chart/machines/attack/{teamid}
 
+// TeamOwnsByPathMap
 type TeamOwnsByPathMap struct {
 	MachineOwns *TeamOwnsByPathMapMachineOwns `json:"machine_owns"`
 	AttackPaths *TeamOwnsByPathMapAttackPath  `json:"machine_attack_paths"`
 }
 
+// TeamOwnsByPathMapMachineOwns
 type TeamOwnsByPathMapMachineOwns struct {
 	Solved int `json:"solved"`
 	Total  int `json:"total"`
 }
 
+// TeamOwnsByPathMapAttackPath
 type TeamOwnsByPathMapAttackPath map[string]struct {
 	Name           string  `json:"name"`
 	Solved         int     `json:"solved"`
@@ -113,6 +124,7 @@ type TeamOwnsByPathMapAttackPath map[string]struct {
 // List Team Members
 // https://www.hackthebox.com/api/v4/team/members/{teamid}
 
+// TeamMembersList
 type TeamMembersList []struct {
 	ID          int                  `json:"id"`
 	Name        string               `json:"name"`
@@ -131,6 +143,7 @@ type TeamMembersList []struct {
 	Public      int                  `json:"public"`
 }
 
+// TeamMembersListTeam
 type TeamMembersListTeam struct {
 	ID        int `json:"id"`
 	CaptainID int `json:"captain_id"`
@@ -139,12 +152,14 @@ type TeamMembersListTeam struct {
 // List Team Invitations (only if team captain)
 // https://www.hackthebox.com/api/v4/team/invitations/{teamid}
 
+// TeamInvitationsList
 type TeamInvitationsList struct {
 	Headers   struct{}                       `json:"headers"`
 	Original  []*TeamInvitationsListOriginal `json:"original"`
 	Exception bool                           `json:"exception"`
 }
 
+// TeamInvitationsListOriginal
 type TeamInvitationsListOriginal struct {
 	ID          int                              `json:"id"`
 	UserID      int                              `json:"user_id"`
@@ -153,6 +168,7 @@ type TeamInvitationsListOriginal struct {
 	User        *TeamInvitationsListOriginalUser `json:"user"`
 }
 
+// TeamInvitationsListOriginalUser
 type TeamInvitationsListOriginalUser struct {
 	ID       int         `json:"id"`
 	Name     string      `json:"name"`
@@ -165,43 +181,7 @@ type TeamInvitationsListOriginalUser struct {
 	Ranking  interface{} `json:"ranking"`
 }
 
-// Global Rank History for Bearer's Team
-// https://www.hackthebox.com/api/v4/rankings/team/best?period={duration}
-
-type TeamRankingsInfo struct {
-	Status bool                  `json:"status"`
-	Data   *TeamRankingsInfoItem `json:"data"`
-}
-
-type TeamRankingsInfoItem struct {
-	Rank      int    `json:"rank"`
-	Date      string `json:"date"`
-	RankChart []int  `json:"rank_chart_data"`
-}
-
-// Global Points History for Bearer's Team
-// https://www.hackthebox.com/api/v4/rankings/team/overview?period={duration}
-
-type TeamPointsInfo struct {
-	Status bool                `json:"status"`
-	Data   *TeamPointsInfoItem `json:"data"`
-}
-
-type TeamPointsInfoItem struct {
-	PointsDiff   int                     `json:"points_diff"`
-	PointsGrowth string                  `json:"points_growth"`
-	RanksDiff    int                     `json:"ranks_diff"`
-	Chart        []int                   `json:"chart_data"`
-	Team         *TeamPointsInfoItemTeam `json:"team"`
-}
-
-type TeamPointsInfoItemTeam struct {
-	ID     int    `json:"id"`
-	Name   string `json:"name"`
-	Avatar string `json:"avatar_url"`
-	Thumb  string `json:"avatar_thumb_url"`
-}
-
+// Team returns the information of a team, given a team ID
 func (s *Session) Team(teamID int) (info *TeamInfo, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
@@ -215,6 +195,7 @@ func (s *Session) Team(teamID int) (info *TeamInfo, err error) {
 	return
 }
 
+// TeamActivity returns the recent activity of users in a team, given a team ID
 func (s *Session) TeamActivity(teamID int) (activities *TeamActivityList, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
@@ -228,6 +209,7 @@ func (s *Session) TeamActivity(teamID int) (activities *TeamActivityList, err er
 	return
 }
 
+// TeamOwnsByWeek returns the owns information of a team by the week, given a team ID
 func (s *Session) TeamOwnsByWeek(teamID int) (owns *TeamOwnsByWeekMap, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
@@ -241,6 +223,7 @@ func (s *Session) TeamOwnsByWeek(teamID int) (owns *TeamOwnsByWeekMap, err error
 	return
 }
 
+// TeamStatsDuring returns the statistics of a team within a period of time, given a team ID and duration
 func (s *Session) TeamStatsDuring(teamID int, duration Duration) (graph *TeamStatsDuringInfo, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
@@ -254,6 +237,7 @@ func (s *Session) TeamStatsDuring(teamID int, duration Duration) (graph *TeamSta
 	return
 }
 
+// TeamOwnsByPath returns the owns information of a team by attack path, given a team ID
 func (s *Session) TeamOwnsByPath(teamID int) (path *TeamOwnsByPathMap, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
@@ -267,6 +251,7 @@ func (s *Session) TeamOwnsByPath(teamID int) (path *TeamOwnsByPathMap, err error
 	return
 }
 
+// TeamMembers returns a list of a teams members, given a team ID
 func (s *Session) TeamMembers(teamID int) (members *TeamMembersList, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
@@ -280,6 +265,7 @@ func (s *Session) TeamMembers(teamID int) (members *TeamMembersList, err error) 
 	return
 }
 
+// TeamInvitations returns a list of invitations to a team, given a team ID (TOKEN USER NEEDS TO BE TEAM CAPTAIN)
 func (s *Session) TeamInvitations(teamID int) (invitations *TeamInvitationsList, err error) {
 
 	teamIDString, err := toPositiveIntString(teamID)
@@ -289,22 +275,6 @@ func (s *Session) TeamInvitations(teamID int) (invitations *TeamInvitationsList,
 
 	var url string = "https://www.hackthebox.com/api/v4/team/invitations/" + teamIDString
 	err = parseJSON(s, url, &invitations)
-
-	return
-}
-
-func (s *Session) TeamRankings(period Duration) (rankings *TeamRankingsInfo, err error) {
-
-	var url string = "https://www.hackthebox.com/api/v4/rankings/team/best?period=" + string(period)
-	err = parseJSON(s, url, &rankings)
-
-	return
-}
-
-func (s *Session) TeamPoints(period Duration) (points *TeamPointsInfo, err error) {
-
-	var url string = "https://www.hackthebox.com/api/v4/rankings/team/overview?period=" + string(period)
-	err = parseJSON(s, url, &points)
 
 	return
 }

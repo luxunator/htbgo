@@ -1,5 +1,6 @@
 package htbgo
 
+// TrackCreator
 type TrackCreator struct {
 	Type   string `json:"type"`
 	ID     int    `json:"id"`
@@ -10,6 +11,7 @@ type TrackCreator struct {
 // List Available Tracks
 // https://www.hackthebox.com/api/v4/tracks
 
+// TracksActiveList
 type TracksActiveList []struct {
 	ID         int           `json:"id"`
 	Name       string        `json:"name"`
@@ -24,6 +26,7 @@ type TracksActiveList []struct {
 // Track Profile
 // https://www.hackthebox.com/api/v4/tracks/{trackID}
 
+// TrackInfo
 type TrackInfo struct {
 	ID                   int              `json:"id"`
 	Name                 string           `json:"name"`
@@ -43,6 +46,7 @@ type TrackInfo struct {
 	CompletionCTA        interface{}      `json:"completion_cta"`
 }
 
+// TrackInfoItem
 type TrackInfoItem struct {
 	ID              int           `json:"id"`
 	Type            string        `json:"type"`
@@ -55,6 +59,7 @@ type TrackInfoItem struct {
 	IsComplete      bool          `json:"complete"`
 }
 
+// TracksActive returns a list of the currently active tracks
 func (s *Session) TracksActive() (tracks *TracksActiveList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/tracks"
@@ -63,6 +68,7 @@ func (s *Session) TracksActive() (tracks *TracksActiveList, err error) {
 	return
 }
 
+// Track returns the information of a track, given an track ID
 func (s *Session) Track(trackID int) (info *TrackInfo, err error) {
 
 	trackIDString, err := toPositiveIntString(trackID)

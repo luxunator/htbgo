@@ -1,5 +1,6 @@
 package htbgo
 
+// RankBracket
 type RankBracket struct {
 	Rank           int    `json:"rank"`
 	Points         int    `json:"points"`
@@ -8,6 +9,7 @@ type RankBracket struct {
 	NextBracket    string `json:"next_bracket"`
 }
 
+// RankDuring
 type RankDuring struct {
 	Rank      int    `json:"rank"`
 	Date      string `json:"date"`
@@ -18,6 +20,7 @@ type RankDuring struct {
 // Week - W 	Month - M 		Year -Y
 // https://www.hackthebox.com/api/v4/rankings/country/best?period={period}
 
+// RankInCountryBestDuringInfo
 type RankInCountryBestDuringInfo struct {
 	Status bool        `json:"status"`
 	Data   *RankDuring `json:"data"`
@@ -27,11 +30,13 @@ type RankInCountryBestDuringInfo struct {
 // Week - W 	Month - M 		Year -Y
 // https://www.hackthebox.com/api/v4/rankings/country/overview?period=1Y
 
+// RankInCountryDuringInfo
 type RankInCountryDuringInfo struct {
 	Status bool                         `json:"status"`
 	Data   *RankInCountryDuringInfoItem `json:"data"`
 }
 
+// RankInCountryDuringInfoItem
 type RankInCountryDuringInfoItem struct {
 	PointsDiff   int                                 `json:"points_diff"`
 	PointsGrowth string                              `json:"points_growth"`
@@ -40,6 +45,7 @@ type RankInCountryDuringInfoItem struct {
 	Country      *RankInCountryDuringInfoItemCountry `json:"country"`
 }
 
+// RankInCountryDuringInfoItemCountry
 type RankInCountryDuringInfoItemCountry struct {
 	Code string `json:"code"`
 	Name string `json:"name"`
@@ -48,6 +54,7 @@ type RankInCountryDuringInfoItemCountry struct {
 // Get the current user's rank bracket in their country
 // https://www.hackthebox.com/api/v4/rankings/country/ranking_bracket
 
+// RankBracketInCountryInfo
 type RankBracketInCountryInfo struct {
 	Status bool         `json:"status"`
 	Data   *RankBracket `json:"data"`
@@ -57,6 +64,7 @@ type RankBracketInCountryInfo struct {
 // Week - W 	Month - M 		Year -Y
 // https://www.hackthebox.com/api/v4/rankings/team/best?period=1Y
 
+// RankOfTeamBestDuringInfo
 type RankOfTeamBestDuringInfo struct {
 	Status bool        `json:"status"`
 	Data   *RankDuring `json:"data"`
@@ -66,11 +74,13 @@ type RankOfTeamBestDuringInfo struct {
 // Week -W 		Month - M 		Year - Y
 // https://www.hackthebox.com/api/v4/rankings/team/overview?period=1Y
 
+// RankOfTeamDuringInfo
 type RankOfTeamDuringInfo struct {
 	Status bool                      `json:"status"`
 	Data   *RankOfTeamDuringInfoItem `json:"data"`
 }
 
+// RankOfTeamDuringInfoItem
 type RankOfTeamDuringInfoItem struct {
 	PointsDiff   int                           `json:"points_diff"`
 	PointsGrowth string                        `json:"points_growth"`
@@ -79,6 +89,7 @@ type RankOfTeamDuringInfoItem struct {
 	Team         *RankOfTeamDuringInfoItemTeam `json:"team"`
 }
 
+// RankOfTeamDuringInfoItemTeam
 type RankOfTeamDuringInfoItemTeam struct {
 	ID     int    `json:"id"`
 	Name   string `json:"name"`
@@ -89,6 +100,7 @@ type RankOfTeamDuringInfoItemTeam struct {
 // Get the user's current team their rank bracket
 // https://www.hackthebox.com/api/v4/rankings/country/ranking_bracket
 
+// RankBracketOfTeamInfo
 type RankBracketOfTeamInfo struct {
 	Status bool         `json:"status"`
 	Data   *RankBracket `json:"data"`
@@ -97,6 +109,7 @@ type RankBracketOfTeamInfo struct {
 // Get the user's best rank in the general leaderboard for a certain period.
 // https://www.hackthebox.com/api/v4/rankings/user/best?period={period}&vip={numberValue}
 
+// RankBestDuringInfo
 type RankBestDuringInfo struct {
 	Status bool        `json:"status"`
 	Data   *RankDuring `json:"data"`
@@ -105,11 +118,13 @@ type RankBestDuringInfo struct {
 // Get the user's rank overview in the general ledearboard for a certain period.
 // https://www.hackthebox.com/api/v4/rankings/user/overview?period=1Y&vip=0
 
+// RankDuringInfo
 type RankDuringInfo struct {
 	Status bool                `json:"status"`
 	Data   *RankDuringInfoItem `json:"data"`
 }
 
+// RankDuringInfoItem
 type RankDuringInfoItem struct {
 	PointsDiff   int                     `json:"points_diff"`
 	PointsGrowth interface{}             `json:"points_growth"`
@@ -118,6 +133,7 @@ type RankDuringInfoItem struct {
 	User         *RankDuringInfoItemUser `json:"user"`
 }
 
+// RankDuringInfoItemUser
 type RankDuringInfoItemUser struct {
 	ID     int    `json:"id"`
 	Name   string `json:"name"`
@@ -128,6 +144,7 @@ type RankDuringInfoItemUser struct {
 // Get the user's  current rank bracket in the general leaderboard
 // https://www.hackthebox.com/api/v4/rankings/user/ranking_bracket?vip=0
 
+// RankBracketInfo
 type RankBracketInfo struct {
 	Status bool         `json:"status"`
 	Data   *RankBracket `json:"data"`
@@ -136,11 +153,13 @@ type RankBracketInfo struct {
 // Get the Rankings of the countries
 // https://www.hackthebox.com/api/v4/rankings/countries
 
+// RanksOfCountriesList
 type RanksOfCountriesList struct {
 	Status bool                        `json:"status"`
 	Data   []*RanksOfCountriesListItem `json:"data"`
 }
 
+// RanksOfCountriesListItem
 type RanksOfCountriesListItem struct {
 	Rank          int    `json:"rank"`
 	Country       string `json:"country"`
@@ -160,11 +179,13 @@ type RanksOfCountriesListItem struct {
 // Get the rankings of the teams
 // https://www.hackthebox.com/api/v4/rankings/teams
 
+// RanksOfTeamsList
 type RanksOfTeamsList struct {
 	Status bool                    `json:"status"`
 	Data   []*RanksOfTeamsListItem `json:"data"`
 }
 
+// RanksOfTeamsListItem
 type RanksOfTeamsListItem struct {
 	Rank            int    `json:"rank"`
 	Points          int    `json:"points"`
@@ -186,11 +207,13 @@ type RanksOfTeamsListItem struct {
 // Get the rankings of the users
 // https://www.hackthebox.com/api/v4/rankings/users?vip=1
 
+// RanksOfUsersList
 type RanksOfUsersList struct {
 	Status bool                    `json:"status"`
 	Data   []*RanksOfUsersListItem `json:"data"`
 }
 
+// RanksOfUsersListItem
 type RanksOfUsersListItem struct {
 	Rank            int    `json:"rank"`
 	Points          int    `json:"points"`
@@ -210,11 +233,13 @@ type RanksOfUsersListItem struct {
 	RanksDiff       int    `json:"ranks_diff"`
 }
 
+// RanksOfUniversitiesList
 type RanksOfUniversitiesList struct {
 	Status bool                           `json:"status"`
 	Data   []*RanksOfUniversitiesListItem `json:"data"`
 }
 
+// RanksOfUniversitiesListItem
 type RanksOfUniversitiesListItem struct {
 	Rank            int    `json:"rank"`
 	Students        int    `json:"students"`
@@ -233,6 +258,7 @@ type RanksOfUniversitiesListItem struct {
 	RanksDiff       int    `json:"ranks_diff"`
 }
 
+// RankInCountryBestDuring returns the Token Users countries best rank within a period of time, given a duration
 func (s *Session) RankInCountryBestDuring(period Duration) (rank *RankInCountryBestDuringInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/country/best?period=" + string(period)
@@ -241,6 +267,7 @@ func (s *Session) RankInCountryBestDuring(period Duration) (rank *RankInCountryB
 	return
 }
 
+// RankInCountryDuring returns the Token Users countries rank info within a period of time, given a duration
 func (s *Session) RankInCountryDuring(period Duration) (rank *RankInCountryDuringInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/country/overview?period=" + string(period)
@@ -249,6 +276,7 @@ func (s *Session) RankInCountryDuring(period Duration) (rank *RankInCountryDurin
 	return
 }
 
+// RankBracketInCountry returns the Token Users countries rank bracket information
 func (s *Session) RankBracketInCountry() (bracket *RankBracketInCountryInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/country/ranking_bracket"
@@ -257,6 +285,7 @@ func (s *Session) RankBracketInCountry() (bracket *RankBracketInCountryInfo, err
 	return
 }
 
+// RankOfTeamBestDuring returns the Token Users teams best rank within a period of time, given a duration
 func (s *Session) RankOfTeamBestDuring(period Duration) (rank *RankOfTeamBestDuringInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/best?period=" + string(period)
@@ -265,6 +294,7 @@ func (s *Session) RankOfTeamBestDuring(period Duration) (rank *RankOfTeamBestDur
 	return
 }
 
+// RankOfTeamDuring returns the Token Users team rank info within a period of time, given a duration
 func (s *Session) RankOfTeamDuring(period Duration) (info *RankOfTeamDuringInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/overview?period=" + string(period)
@@ -273,6 +303,7 @@ func (s *Session) RankOfTeamDuring(period Duration) (info *RankOfTeamDuringInfo,
 	return
 }
 
+// RankBracketOfTeam returns the Token Users teams rank bracket information
 func (s *Session) RankBracketOfTeam() (bracket *RankBracketOfTeamInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/team/ranking_bracket"
@@ -281,6 +312,8 @@ func (s *Session) RankBracketOfTeam() (bracket *RankBracketOfTeamInfo, err error
 	return
 }
 
+
+// RankBestDuring returns the Token Users best rank within a period of time, given a duration and indication of VIP info wanting to be returned
 func (s *Session) RankBestDuring(period Duration, wantVIP bool) (rank *RankBestDuringInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/user/best?period=" + string(period) + "&vip=" + stringFromVIP(wantVIP)
@@ -289,6 +322,7 @@ func (s *Session) RankBestDuring(period Duration, wantVIP bool) (rank *RankBestD
 	return
 }
 
+// RankDuring returns the Token Users rank info within a period of time, given a duration
 func (s *Session) RankDuring(period Duration, wantVIP bool) (rank *RankDuringInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/user/overview?period=" + string(period) + "&vip=" + stringFromVIP(wantVIP)
@@ -297,6 +331,7 @@ func (s *Session) RankDuring(period Duration, wantVIP bool) (rank *RankDuringInf
 	return
 }
 
+// RankBracket returns the Token Users rank bracket information
 func (s *Session) RankBracket(wantVIP bool) (bracket *RankBracketInfo, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/user/ranking_bracket?vip=" + stringFromVIP(wantVIP)
@@ -305,6 +340,7 @@ func (s *Session) RankBracket(wantVIP bool) (bracket *RankBracketInfo, err error
 	return
 }
 
+// RanksOfCountries returns a list of all the countries and their ranking information
 func (s *Session) RanksOfCountries() (ranks *RanksOfCountriesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/countries"
@@ -313,6 +349,7 @@ func (s *Session) RanksOfCountries() (ranks *RanksOfCountriesList, err error) {
 	return
 }
 
+// RanksOfTeams returns a list of all the teams and their ranking information
 func (s *Session) RanksOfTeams() (ranks *RanksOfTeamsList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/teams"
@@ -321,6 +358,7 @@ func (s *Session) RanksOfTeams() (ranks *RanksOfTeamsList, err error) {
 	return
 }
 
+// RanksOfUsers returns a list of all the users and their ranking information
 func (s *Session) RanksOfUsers(wantVIP bool) (ranks *RanksOfUsersList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/users?vip=" + stringFromVIP(wantVIP)
@@ -329,6 +367,7 @@ func (s *Session) RanksOfUsers(wantVIP bool) (ranks *RanksOfUsersList, err error
 	return
 }
 
+// RanksOfUniversities returns a list of all the universities and their ranking information
 func (s *Session) RanksOfUniversities() (universities *RanksOfUniversitiesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/universities"

@@ -1,12 +1,13 @@
 package htbgo
 
-// Get a list of universities
+// UniversitiesList
 type UniversitiesList struct {
 	Message string                `json:"message"`
 	Section string                `json:"section"`
 	Data    *UniversitiesListData `json:"data"`
 }
 
+// UniversitiesListData
 type UniversitiesListData struct {
 	Page            int                         `json:"current_page"`
 	University      []*UniversitiesListDataItem `json:"data"`
@@ -23,6 +24,7 @@ type UniversitiesListData struct {
 	Total           int                         `json:"total"`
 }
 
+// UniversitiesListDataItem
 type UniversitiesListDataItem struct {
 	ID               int      `json:"id"`
 	Name             string   `json:"name"`
@@ -35,18 +37,20 @@ type UniversitiesListDataItem struct {
 	UserAvatars      []string `json:"user_avatars"`
 }
 
+// UniversitiesListDataLink
 type UniversitiesListDataLink struct {
 	URL      string `json:"url"`
 	Label    string `json:"label"`
 	IsActive bool   `json:"active"`
 }
 
-// get a profile of a university by id
+// UniversityInfo
 type UniversityInfo struct {
 	Message string              `json:"message"`
 	Data    *UniversityInfoItem `json:"data"`
 }
 
+// UniversityInfoItem
 type UniversityInfoItem struct {
 	ID              int                        `json:"id"`
 	Name            string                     `json:"name"`
@@ -67,13 +71,14 @@ type UniversityInfoItem struct {
 	Captain         *UniversityInfoItemCaptain `json:"captain"`
 }
 
+// UniversityInfoItemCaptain
 type UniversityInfoItemCaptain struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Thumb string `json:"avatar_thumb"`
 }
 
-// get stats of a university by id
+// UniversityOwnsWeeklyWeek
 type UniversityOwnsWeeklyWeek struct {
 	UserOwns      int    `json:"user_owns"`
 	SystemOwns    int    `json:"system_owns"`
@@ -82,6 +87,8 @@ type UniversityOwnsWeeklyWeek struct {
 	Respects      int    `json:"respects"`
 	WeekEndDate   string `json:"week_end_date"`
 }
+
+// UniversityOwnsWeekly
 type UniversityOwnsWeekly struct {
 	WeekOne    *UniversityOwnsWeeklyWeek `json:"week1"`
 	WeekTwo    *UniversityOwnsWeeklyWeek `json:"week2"`
@@ -96,6 +103,8 @@ type UniversityOwnsWeekly struct {
 	WeekEleven *UniversityOwnsWeeklyWeek `json:"week11"`
 	WeekTwelve *UniversityOwnsWeeklyWeek `json:"week12"`
 }
+
+// UniversityOwnsInfo
 type UniversityOwnsInfo struct {
 	Rank          int                   `json:"rank"`
 	UserOwns      int                   `json:"user_owns"`
@@ -106,7 +115,7 @@ type UniversityOwnsInfo struct {
 	Weekly        *UniversityOwnsWeekly `json:"weekly"`
 }
 
-// List University Members
+// UniversityMembersList
 type UniversityMembersList []struct {
 	ID          int                              `json:"id"`
 	Name        string                           `json:"name"`
@@ -125,11 +134,13 @@ type UniversityMembersList []struct {
 	Public      int                              `json:"public"`
 }
 
+// UniversityMembersListUniversity
 type UniversityMembersListUniversity struct {
 	ID        int `json:"id"`
 	CaptainID int `json:"captain_id"`
 }
 
+// UniversitiesByPage returns a list of universities by page, given a page number
 func (s *Session) UniversitiesByPage(page int) (universities *UniversitiesList, err error) {
 
 	pageString, err := toPositiveIntString(page)
@@ -143,6 +154,7 @@ func (s *Session) UniversitiesByPage(page int) (universities *UniversitiesList, 
 	return
 }
 
+// UniversitiesSearch returns a list of universities by search string and page, given a string and page number
 func (s *Session) UniversitiesSearch(query string, page int) (universities *UniversitiesList, err error) {
 
 	pageString, err := toPositiveIntString(page)
@@ -156,6 +168,7 @@ func (s *Session) UniversitiesSearch(query string, page int) (universities *Univ
 	return
 }
 
+// University returns the information of a university, given a university ID
 func (s *Session) University(universityID int) (university *UniversityInfo, err error) {
 
 	universityIDString, err := toPositiveIntString(universityID)
@@ -169,6 +182,7 @@ func (s *Session) University(universityID int) (university *UniversityInfo, err 
 	return
 }
 
+// UniversityOwns returns the own information of a university, given a university ID
 func (s *Session) UniversityOwns(universityID int) (stats *UniversityOwnsInfo, err error) {
 
 	universityIDString, err := toPositiveIntString(universityID)
@@ -182,6 +196,7 @@ func (s *Session) UniversityOwns(universityID int) (stats *UniversityOwnsInfo, e
 	return
 }
 
+// UniversityMembers returns a list of a university members, given a university ID
 func (s *Session) UniversityMembers(universityID int) (members *UniversityMembersList, err error) {
 
 	universityIDString, err := toPositiveIntString(universityID)
