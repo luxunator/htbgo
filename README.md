@@ -20,7 +20,7 @@ import "github.com/luxunator/htbgo"
 
 You will need to create a session with an application token that you can generate in your Hack The Box profile settings
 ```golang
-session, err := htbgo.New("HTP_APP_TOKEN")
+session, err := htbgo.New("HTB_APP_TOKEN")
 ```
 
 After creating a session you will be able to use methods to interact with the API
