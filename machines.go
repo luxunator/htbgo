@@ -19,11 +19,11 @@ type MachineCreator struct {
 
 // MachineStatus contains information on the status of a machine
 type MachineStatus struct {
-	IsSpawned   bool   `json:"isSpawned"`
-	IsSpawning  bool   `json:"isSpawning"`
-	IsActive    bool   `json:"isActive"`
-	PlayerCount int    `json:"active_player_count"`
-	ExpiresAt   string `json:"expires_at"`
+	IsSpawned   interface{} `json:"isSpawned"`
+	IsSpawning  interface{} `json:"isSpawning"`
+	IsActive    bool        `json:"isActive"`
+	PlayerCount interface{} `json:"active_player_count"`
+	ExpiresAt   interface{} `json:"expires_at"`
 }
 
 // MachineBlood contains information on the blood of a machine
@@ -136,6 +136,8 @@ type MachineProfileInfoItem struct {
 	UserBloodTime   string          `json:"firstUserBloodTime"`
 	RootBloodTime   string          `json:"firstRootBloodTime"`
 	Recommended     int             `json:"recommended"`
+	SPFlag          int             `json:"sp_flag"`
+	LabServer       interface{}     `json:"lab_server"`
 }
 
 // MachinesActiveList contains a list of active machines
@@ -145,33 +147,33 @@ type MachinesActiveList struct {
 
 // MachinesActiveListItem contains information on an active machine
 type MachinesActiveListItem struct {
-	ID              int             `json:"id"`
-	Name            string          `json:"name"`
-	OS              string          `json:"os"`
-	Points          int             `json:"points"`
-	StaticPoints    int             `json:"static_points"`
-	Release         string          `json:"release"`
-	UserOwns        int             `json:"user_owns_count"`
-	RootOwns        int             `json:"root_owns_count"`
-	HasOwnedUser    bool            `json:"authUserInUserOwns"`
-	HasOwnedRoot    bool            `json:"authUserInRootOwns"`
-	IsTodo          bool            `json:"isTodo"`
-	HasReviewed     bool            `json:"authUserHasReviewed"`
-	Stars           string          `json:"stars"`
-	DifficultyAvg   int             `json:"difficulty"`
-	DifficultyStats *Difficulties   `json:"feedbackForChart"`
-	Avatar          string          `json:"avatar"`
-	Difficulty      string          `json:"difficultyText"`
-	IsCompleted     bool            `json:"isCompleted"`
-	LastResetTime   string          `json:"last_reset_time"`
-	PlayInfo        *MachineStatus  `json:"playInfo"`
-	IsFree          bool            `json:"free"`
-	CreatorOne      *MachineCreator `json:"maker"`
-	CreatorTwo      *MachineCreator `json:"maker2"`
-	Recommended     int             `json:"recommended"`
-	SPFlag          int             `json:"sp_flag"`
-	EasyMonth       int             `json:"easy_month"`
-	IP              string          `json:"ip"`
+	ID              int           `json:"id"`
+	Name            string        `json:"name"`
+	OS              string        `json:"os"`
+	Points          int           `json:"points"`
+	StaticPoints    int           `json:"static_points"`
+	Release         string        `json:"release"`
+	UserOwns        int           `json:"user_owns_count"`
+	RootOwns        int           `json:"root_owns_count"`
+	HasOwnedUser    interface{}   `json:"authUserInUserOwns"`
+	HasOwnedRoot    interface{}   `json:"authUserInRootOwns"`
+	IsTodo          bool          `json:"isTodo"`
+	HasReviewed     bool          `json:"authUserHasReviewed"`
+	Stars           string        `json:"stars"`
+	DifficultyAvg   int           `json:"difficulty"`
+	DifficultyStats *Difficulties `json:"feedbackForChart"`
+	Avatar          string        `json:"avatar"`
+	Difficulty      string        `json:"difficultyText"`
+	// IsCompleted     bool            `json:"isCompleted"`
+	// LastResetTime   string          `json:"last_reset_time"`
+	PlayInfo    *MachineStatus  `json:"playInfo"`
+	IsFree      bool            `json:"free"`
+	CreatorOne  *MachineCreator `json:"maker"`
+	CreatorTwo  *MachineCreator `json:"maker2"`
+	Recommended int             `json:"recommended"`
+	SPFlag      int             `json:"sp_flag"`
+	EasyMonth   int             `json:"easy_month"`
+	IP          string          `json:"ip"`
 }
 
 // MachinesRetiredList contains a list of retired machines
@@ -181,34 +183,34 @@ type MachinesRetiredList struct {
 
 // MachinesRetiredListItem contains information of a retired machine
 type MachinesRetiredListItem struct {
-	ID              int             `json:"id"`
-	Name            string          `json:"name"`
-	OS              string          `json:"os"`
-	Points          int             `json:"points"`
-	StaticPoints    int             `json:"static_points"`
-	Release         string          `json:"release"`
-	UserOwns        int             `json:"user_owns_count"`
-	RootOwns        int             `json:"root_owns_count"`
-	HasOwnedUser    bool            `json:"authUserInUserOwns"`
-	HasOwnedRoot    bool            `json:"authUserInRootOwns"`
-	IsTodo          bool            `json:"isTodo"`
-	HasReviewed     bool            `json:"authUserHasReviewed"`
-	Stars           string          `json:"stars"`
-	DifficultyAvg   int             `json:"difficulty"`
-	DifficultyStats *Difficulties   `json:"feedbackForChart"`
-	Avatar          string          `json:"avatar"`
-	Difficulty      string          `json:"difficultyText"`
-	IsCompleted     bool            `json:"isCompleted"`
-	LastResetTime   string          `json:"last_reset_time"`
-	PlayInfo        *MachineStatus  `json:"playInfo"`
-	IsFree          bool            `json:"free"`
-	CreatorOne      *MachineCreator `json:"maker"`
-	CreatorTwo      *MachineCreator `json:"maker2"`
-	Recommended     int             `json:"recommended"`
-	SPFlag          int             `json:"sp_flag"`
-	EasyMonth       int             `json:"easy_month"`
-	IP              string          `json:"ip"`
-	Tags            []*MachineTag   `json:"tags"`
+	ID              int           `json:"id"`
+	Name            string        `json:"name"`
+	OS              string        `json:"os"`
+	Points          int           `json:"points"`
+	StaticPoints    int           `json:"static_points"`
+	Release         string        `json:"release"`
+	UserOwns        int           `json:"user_owns_count"`
+	RootOwns        int           `json:"root_owns_count"`
+	HasOwnedUser    bool          `json:"authUserInUserOwns"`
+	HasOwnedRoot    bool          `json:"authUserInRootOwns"`
+	IsTodo          bool          `json:"isTodo"`
+	HasReviewed     bool          `json:"authUserHasReviewed"`
+	Stars           string        `json:"stars"`
+	DifficultyAvg   int           `json:"difficulty"`
+	DifficultyStats *Difficulties `json:"feedbackForChart"`
+	Avatar          string        `json:"avatar"`
+	Difficulty      string        `json:"difficultyText"`
+	// IsCompleted     bool            `json:"isCompleted"`
+	// LastResetTime   string          `json:"last_reset_time"`
+	PlayInfo    *MachineStatus  `json:"playInfo"`
+	IsFree      bool            `json:"free"`
+	CreatorOne  *MachineCreator `json:"maker"`
+	CreatorTwo  *MachineCreator `json:"maker2"`
+	Recommended int             `json:"recommended"`
+	SPFlag      int             `json:"sp_flag"`
+	EasyMonth   int             `json:"easy_month"`
+	IP          string          `json:"ip"`
+	Tags        []*MachineTag   `json:"tags"`
 }
 
 // MachineTopsUsersList contains a list of top machine users
@@ -282,8 +284,8 @@ type MachinesTodoListItem struct {
 	Release         string          `json:"release"`
 	UserOwns        int             `json:"user_owns_count"`
 	RootOwns        int             `json:"root_owns_count"`
-	HasOwnedUser    bool            `json:"authUserInUserOwns"`
-	HasOwnedRoot    bool            `json:"authUserInRootOwns"`
+	HasOwnedUser    interface{}     `json:"authUserInUserOwns"`
+	HasOwnedRoot    interface{}     `json:"authUserInRootOwns"`
 	IsTodo          bool            `json:"isTodo"`
 	HasReviewed     bool            `json:"authUserHasReviewed"`
 	Stars           string          `json:"stars"`

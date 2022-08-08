@@ -11,9 +11,9 @@ type RankBracket struct {
 
 // RankDuring contains information on a rank during a period of time
 type RankDuring struct {
-	Rank      int    `json:"rank"`
-	Date      string `json:"date"`
-	RankChart []int  `json:"rank_chart_data"`
+	Rank      interface{}   `json:"rank"`
+	Date      string        `json:"date"`
+	RankChart []interface{} `json:"rank_chart_data"`
 }
 
 // RankInCountryBestDuringInfo contains country best rank stats in period of time
@@ -150,21 +150,21 @@ type RanksOfTeamsList struct {
 
 // RanksOfTeamsListItem contains information on a teams rank
 type RanksOfTeamsListItem struct {
-	Rank            int    `json:"rank"`
-	Points          int    `json:"points"`
-	RootOwns        int    `json:"root_owns"`
-	UserOwns        int    `json:"user_owns"`
-	ChallengeOwns   int    `json:"challenge_owns"`
-	RootBloods      int    `json:"root_bloods"`
-	UserBloods      int    `json:"user_bloods"`
-	ChallengeBloods int    `json:"challenge_bloods"`
-	Fortress        int    `json:"fortress"`
-	Endgame         int    `json:"endgame"`
-	ID              int    `json:"id"`
-	Name            string `json:"name"`
-	Thumb           string `json:"avatar_thumb_url"`
-	Country         string `json:"country"`
-	RanksDiff       int    `json:"ranks_diff"`
+	Rank            int         `json:"rank"`
+	Points          int         `json:"points"`
+	RootOwns        int         `json:"root_owns"`
+	UserOwns        int         `json:"user_owns"`
+	ChallengeOwns   int         `json:"challenge_owns"`
+	RootBloods      int         `json:"root_bloods"`
+	UserBloods      int         `json:"user_bloods"`
+	ChallengeBloods int         `json:"challenge_bloods"`
+	Fortress        int         `json:"fortress"`
+	Endgame         int         `json:"endgame"`
+	ID              int         `json:"id"`
+	Name            string      `json:"name"`
+	Thumb           string      `json:"avatar_thumb_url"`
+	Country         string      `json:"country"`
+	RanksDiff       interface{} `json:"ranks_diff"`
 }
 
 // RanksOfUsersList contains a list of user ranks
@@ -175,22 +175,22 @@ type RanksOfUsersList struct {
 
 // RanksOfUsersListItem contains information on a users rank
 type RanksOfUsersListItem struct {
-	Rank            int    `json:"rank"`
-	Points          int    `json:"points"`
-	RootOwns        int    `json:"root_owns"`
-	UserOwns        int    `json:"user_owns"`
-	ChallengeOwns   int    `json:"challenge_owns"`
-	RootBloods      int    `json:"root_bloods"`
-	UserBloods      int    `json:"user_bloods"`
-	ChallengeBloods int    `json:"challenge_bloods"`
-	Fortress        int    `json:"fortress"`
-	Endgame         int    `json:"endgame"`
-	ID              int    `json:"id"`
-	Name            string `json:"name"`
-	Thumb           string `json:"avatar_thumb"`
-	Country         string `json:"country"`
-	Level           string `json:"level"`
-	RanksDiff       int    `json:"ranks_diff"`
+	Rank            int         `json:"rank"`
+	Points          int         `json:"points"`
+	RootOwns        int         `json:"root_owns"`
+	UserOwns        int         `json:"user_owns"`
+	ChallengeOwns   int         `json:"challenge_owns"`
+	RootBloods      int         `json:"root_bloods"`
+	UserBloods      int         `json:"user_bloods"`
+	ChallengeBloods int         `json:"challenge_bloods"`
+	Fortress        int         `json:"fortress"`
+	Endgame         int         `json:"endgame"`
+	ID              int         `json:"id"`
+	Name            string      `json:"name"`
+	Thumb           string      `json:"avatar_thumb"`
+	Country         interface{} `json:"country"`
+	Level           string      `json:"level"`
+	RanksDiff       interface{} `json:"ranks_diff"`
 }
 
 // RanksOfUniversitiesList contains a list of university ranks
