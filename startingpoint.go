@@ -1,5 +1,6 @@
 package htbgo
 
+// StartingPointCreator contains information about a starting points creator
 type StartingPointCreator struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
@@ -7,13 +8,12 @@ type StartingPointCreator struct {
 	IsRespected bool   `json:"isRespected"`
 }
 
-// Starting Point Machines List
-// https://www.hackthebox.com/api/v4/sp/machines
-
+// StartingPointMachinesList contains a list of starting point machines
 type StartingPointMachinesList struct {
 	Info []*StartingPointMachinesListItem `json:"info"`
 }
 
+// StartingPointMachinesListItem contains information about a starting point machine
 type StartingPointMachinesListItem struct {
 	ID              int                                    `json:"id"`
 	Name            string                                 `json:"name"`
@@ -42,6 +42,7 @@ type StartingPointMachinesListItem struct {
 	HasRootFlagOnly bool                                   `json:"root_flag_only"`
 }
 
+// StartingPointMachinesListItemPlayInfo contains information about players on a starting point machine
 type StartingPointMachinesListItemPlayInfo struct {
 	IsSpawned   bool   `json:"isSpawned"`
 	IsSpawning  bool   `json:"isSpawning"`
@@ -50,6 +51,7 @@ type StartingPointMachinesListItemPlayInfo struct {
 	ExpiresAt   string `json:"expires_at"`
 }
 
+// StartingPointMachines returns a list of the current starting point machines
 func (s *Session) StartingPointMachines() (machines *StartingPointMachinesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/sp/machines"

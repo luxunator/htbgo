@@ -1,24 +1,25 @@
 package htbgo
 
+// ProlabMaster contains the information of a prolab master
 type ProlabMaster struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Thumb string `json:"avatar_thumb"`
 }
 
-// Current Prolabs List
-// https://www.hackthebox.com/api/v4/prolabs
-
+// ProLabsActiveList contains a current prolab list
 type ProLabsActiveList struct {
 	Status bool                   `json:"status"`
 	Data   *ProLabsActiveListItem `json:"data"`
 }
 
+// ProLabsActiveListItem contains a list of current prolabs
 type ProLabsActiveListItem struct {
 	Count int                         `json:"count"`
 	Labs  []*ProLabsActiveListItemLab `json:"labs"`
 }
 
+// ProLabsActiveListItemLab contains information on a current prolab
 type ProLabsActiveListItemLab struct {
 	ID                int    `json:"id"`
 	Name              string `json:"name"`
@@ -36,14 +37,13 @@ type ProLabsActiveListItemLab struct {
 	Cover             string `json:"cover_img_url"`
 }
 
-// Prolab Profile
-// https://www.hackthebox.com/api/v4/prolab/{prolabID}/info
-
+// ProLabInfo contains a prolab
 type ProLabInfo struct {
 	Status bool            `json:"status"`
 	Data   *ProLabInfoItem `json:"data"`
 }
 
+// ProLabInfoItem contains information on a prolab
 type ProLabInfoItem struct {
 	ID           int           `json:"id"`
 	Name         string        `json:"name"`
@@ -59,14 +59,13 @@ type ProLabInfoItem struct {
 	LabMaster    *ProlabMaster `json:"lab_master"`
 }
 
-// Prolab Overview
-// https://www.hackthebox.com/api/v4/prolab/{prolabID}/overview
-
+// ProLabOverviewInfo contains a prolab overview
 type ProLabOverviewInfo struct {
 	Status bool                    `json:"status"`
 	Data   *ProLabOverviewInfoItem `json:"data"`
 }
 
+// ProLabOverviewInfoItem contains an overview of a prolab
 type ProLabOverviewInfoItem struct {
 	ID              int                                    `json:"id"`
 	Name            string                                 `json:"name"`
@@ -82,11 +81,13 @@ type ProLabOverviewInfoItem struct {
 	LabMaster       *ProlabMaster                          `json:"lab_master"`
 }
 
+// ProLabOverviewInfoItemSocialLinks contains social links related to a prolab
 type ProLabOverviewInfoItemSocialLinks struct {
 	Discord string `json:"discord"`
 	Forum   string `json:"forum"`
 }
 
+// ProLabOverviewInfoItemDesignatedLevel contains information on the designated category/level
 type ProLabOverviewInfoItemDesignatedLevel struct {
 	Category    string `json:"category"`
 	Level       int    `json:"level"`
@@ -94,14 +95,13 @@ type ProLabOverviewInfoItemDesignatedLevel struct {
 	Team        string `json:"team"`
 }
 
-// Prolab Machines List
-// https://www.hackthebox.com/api/v4/prolab/{prolabID}/machines
-
+// ProLabMachinesList contains a list of machines in a prolab
 type ProLabMachinesList struct {
 	Status bool                      `json:"status"`
 	Data   []*ProLabMachinesListItem `json:"data"`
 }
 
+// ProLabMachinesListItem contains the information of a machine within a prolab
 type ProLabMachinesListItem struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
@@ -109,14 +109,13 @@ type ProLabMachinesListItem struct {
 	Thumb string `json:"avatar_thumb_url"`
 }
 
-// Prolab Flags List
-// https://www.hackthebox.com/api/v4/prolab/{prolabID}/flags
-
+// ProLabFlagsList contains a list of prolab flags
 type ProLabFlagsList struct {
 	Status bool                   `json:"status"`
 	Data   []*ProLabFlagsListItem `json:"data"`
 }
 
+// ProLabFlagsListItem contains information on a prolab flag
 type ProLabFlagsListItem struct {
 	ID       int    `json:"id"`
 	Title    string `json:"title"`
@@ -124,54 +123,53 @@ type ProLabFlagsListItem struct {
 	HasOwned bool   `json:"owned"`
 }
 
-// Prolab FAQ
-// https://www.hackthebox.com/api/v4/prolab/{prolabID}/faq
-
+// ProLabFAQList contains a list of prolab faq
 type ProLabFAQList struct {
 	Status bool                 `json:"status"`
 	Data   []*ProLabFAQListItem `json:"data"`
 }
 
+// ProLabFAQListItem contains a prolab faq
 type ProLabFAQListItem struct {
 	Question  string `json:"question"`
 	Answer    string `json:"answer"`
 	IsGeneric bool   `json:"generic"`
 }
 
-// Prolab Selected Reviews
-// https://www.hackthebox.com/api/v4/prolab/{prolabID}/reviews_overview
-
+// ProLabSelectedReviewsList contains selected prolab reviews
 type ProLabSelectedReviewsList struct {
 	Status bool                           `json:"status"`
 	Data   *ProLabSelectedReviewsListItem `json:"data"`
 }
 
+// ProLabSelectedReviewsListItem contains a list of selected prolab reviews
 type ProLabSelectedReviewsListItem struct {
 	RatingsCount int                                      `json:"total_number_of_ratings"`
 	RatingAvg    int                                      `json:"users_average_rating"`
 	Feedbacks    []*ProLabSelectedReviewsListItemFeedback `json:"feedbacks"`
 }
 
+// ProLabSelectedReviewsListItemFeedback contains information of a prolab review
 type ProLabSelectedReviewsListItemFeedback struct {
 	Rating int                                        `json:"rating"`
 	Text   string                                     `json:"text"`
 	User   *ProLabSelectedReviewsListItemFeedbackUser `json:"user"`
 }
 
+// ProLabSelectedReviewsListItemFeedbackUser contains information on the user of a prolab review
 type ProLabSelectedReviewsListItemFeedbackUser struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
 }
 
-// Prolab Paginated Reviews
-// https://www.hackthebox.com/api/v4/prolab/{prolabID}/reviews?page={page}
-
+// ProLabPaginatedReviewsList contains a list of reviews of a prolab
 type ProLabPaginatedReviewsList struct {
 	Data  []*ProLabPaginatedReviewsListData `json:"data"`
 	Links *ProLabPaginatedReviewsListLinks  `json:"links"`
 	Meta  *ProLabPaginatedReviewsListMeta   `json:"meta"`
 }
 
+// ProLabPaginatedReviewsListData contains information of a paginated prolab review
 type ProLabPaginatedReviewsListData struct {
 	ID                 int                                 `json:"id"`
 	Rating             int                                 `json:"rating"`
@@ -183,12 +181,14 @@ type ProLabPaginatedReviewsListData struct {
 	User               *ProLabPaginatedReviewsListDataUser `json:"user"`
 }
 
+// ProLabPaginatedReviewsListDataUser contains information on the user of a paginated prolab review
 type ProLabPaginatedReviewsListDataUser struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Thumb string `json:"avatar_thumb"`
 }
 
+// ProLabPaginatedReviewsListLinks contains information on pagination of a paginated prolab review
 type ProLabPaginatedReviewsListLinks struct {
 	First string `json:"first"`
 	Last  string `json:"last"`
@@ -196,6 +196,7 @@ type ProLabPaginatedReviewsListLinks struct {
 	Next  string `json:"next"`
 }
 
+// ProLabPaginatedReviewsListMeta contains meta information of a paginated prolab review
 type ProLabPaginatedReviewsListMeta struct {
 	CurrentPage int                                   `json:"current_page"`
 	From        int                                   `json:"from"`
@@ -207,12 +208,14 @@ type ProLabPaginatedReviewsListMeta struct {
 	Total       int                                   `json:"total"`
 }
 
+// ProLabPaginatedReviewsListMetaLink contains meta link information of a paginated prolab review
 type ProLabPaginatedReviewsListMetaLink struct {
 	URL      string `json:"url"`
 	Label    string `json:"label"`
 	IsActive bool   `json:"active"`
 }
 
+// ProLabsActive returns a list of the currently active prolabs
 func (s *Session) ProLabsActive() (proLabs *ProLabsActiveList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/prolabs"
@@ -221,6 +224,7 @@ func (s *Session) ProLabsActive() (proLabs *ProLabsActiveList, err error) {
 	return
 }
 
+// ProLab returns the information of a prolab, given a prolab ID
 func (s *Session) ProLab(proLabID int) (info *ProLabInfo, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
@@ -234,6 +238,7 @@ func (s *Session) ProLab(proLabID int) (info *ProLabInfo, err error) {
 	return
 }
 
+// ProLabOverview returns the overview of a prolab, given a prolab ID
 func (s *Session) ProLabOverview(proLabID int) (overview *ProLabOverviewInfo, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
@@ -247,6 +252,7 @@ func (s *Session) ProLabOverview(proLabID int) (overview *ProLabOverviewInfo, er
 	return
 }
 
+// ProLabMachines returns a list of the machines that a prolab contains, given an prolab ID
 func (s *Session) ProLabMachines(proLabID int) (machines *ProLabMachinesList, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
@@ -260,6 +266,7 @@ func (s *Session) ProLabMachines(proLabID int) (machines *ProLabMachinesList, er
 	return
 }
 
+// ProLabFlags returns a list of information on the flags within a prolab, given an prolab ID
 func (s *Session) ProLabFlags(proLabID int) (flags *ProLabFlagsList, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
@@ -273,6 +280,7 @@ func (s *Session) ProLabFlags(proLabID int) (flags *ProLabFlagsList, err error) 
 	return
 }
 
+// ProLabFAQ returns a list of FAQ's of a prolab, given a prolab ID
 func (s *Session) ProLabFAQ(proLabID int) (faq *ProLabFAQList, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
@@ -286,6 +294,7 @@ func (s *Session) ProLabFAQ(proLabID int) (faq *ProLabFAQList, err error) {
 	return
 }
 
+// ProLabSelectedReviews returns a list of selected reviews of a prolab, given a prolab ID
 func (s *Session) ProLabSelectedReviews(proLabID int) (reviews *ProLabSelectedReviewsList, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
@@ -299,6 +308,7 @@ func (s *Session) ProLabSelectedReviews(proLabID int) (reviews *ProLabSelectedRe
 	return
 }
 
+// ProLabPaginatedReviews returns a list of reviews of a machine, given a machine ID and page number
 func (s *Session) ProLabPaginatedReviews(proLabID int, page int) (reviews *ProLabPaginatedReviewsList, err error) {
 
 	proLabIDString, err := toPositiveIntString(proLabID)
