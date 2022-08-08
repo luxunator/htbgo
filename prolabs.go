@@ -59,7 +59,7 @@ type ProLabInfoItem struct {
 	LabMaster    *ProlabMaster `json:"lab_master"`
 }
 
-// ProLabOverviewInfo ontains a prolab overview
+// ProLabOverviewInfo contains a prolab overview
 type ProLabOverviewInfo struct {
 	Status bool                    `json:"status"`
 	Data   *ProLabOverviewInfoItem `json:"data"`
