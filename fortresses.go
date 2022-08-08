@@ -1,6 +1,6 @@
 package htbgo
 
-// FortessFlag
+// FortessFlag contains information of a fortress flag
 type FortessFlag struct {
 	ID     int    `json:"id"`
 	Title  string `json:"title"`
@@ -8,16 +8,13 @@ type FortessFlag struct {
 	Owned  bool   `json:"owned"`
 }
 
-// Active Fortesses List
-// https://www.hackthebox.com/api/v4/fortresses
-
-// FortressesActiveMap
+// FortressesActiveMap contains a map of active fortresses
 type FortressesActiveMap struct {
 	Status bool                                `json:"status"`
 	Data   map[string]*FortressesActiveMapItem `json:"data"`
 }
 
-// FortressesActiveMapItem
+// FortressesActiveMapItem contains information on an active fortress
 type FortressesActiveMapItem struct {
 	ID         int    `json:"id"`
 	Name       string `json:"name"`
@@ -27,16 +24,13 @@ type FortressesActiveMapItem struct {
 	Flags      int    `json:"number_of_flags"`
 }
 
-// Fortress Profile
-// https://www.hackthebox.com/api/v4/fortress/{fortressID}
-
-// FortessInfo
+// FortessInfo contains a fortress
 type FortessInfo struct {
 	Status bool             `json:"enum"`
 	Data   *FortessInfoItem `json:"data"`
 }
 
-// FortessInfoItem
+// FortessInfoItem contains information on a fortress
 type FortessInfoItem struct {
 	ID                   int                          `json:"id"`
 	Name                 string                       `json:"name"`
@@ -55,7 +49,7 @@ type FortessInfoItem struct {
 	Flags                []*FortessFlag               `json:"flags"`
 }
 
-// FortessInfoItemCompany
+// FortessInfoItemCompany contains information of a company related to a fortress
 type FortessInfoItemCompany struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
@@ -64,15 +58,12 @@ type FortessInfoItemCompany struct {
 	Image       string `json:"image"`
 }
 
-// FortessInfoItemAvailability
+// FortessInfoItemAvailability contains information on availability of a fortress
 type FortessInfoItemAvailability struct {
 	Available bool   `json:"available"`
 	Code      int    `json:"code"`
 	Message   string `json:"message"`
 }
-
-// Fortress Flag List
-// https://www.hackthebox.com/api/v4/fortress/{fortressID}/flags
 
 // FortressFlagList
 type FortressFlagList struct {

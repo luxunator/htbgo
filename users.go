@@ -1,23 +1,17 @@
 package htbgo
 
-// Bearer Connection Status
-// https://www.hackthebox.com/api/v4/user/connection/status
-
-// ConnectionStatusInfo
+// ConnectionStatusInfo contains information on the connection status of the Token User
 type ConnectionStatusInfo struct {
 	Status     string      `json:"status"`
 	Connection interface{} `json:"connection"`
 }
 
-// Bearer Active Machine
-// https://www.hackthebox.com/api/v4/machine/active
-
-// ActiveMachineInfo
+// ActiveMachineInfo contains Token User active machine
 type ActiveMachineInfo struct {
 	Info *ActiveMachineInfoItem `json:"info"`
 }
 
-// ActiveMachineInfoItem
+// ActiveMachineInfoItem information on the Token Users active machine
 type ActiveMachineInfoItem struct {
 	ID         int    `json:"id"`
 	Name       string `json:"name"`
@@ -30,28 +24,22 @@ type ActiveMachineInfoItem struct {
 	LabServer  string `json:"lab_server"`
 }
 
-// Bearer Followers
-// https://www.hackthebox.com/api/v4/user/followers
-
-// FollowersList
+// FollowersList contains a list of the Token Users followers
 type FollowersList struct {
 	Info []*FollowersListItem `json:"info"`
 }
 
-// FollowersListItem
+// FollowersListItem contains information on a follower of the Token User
 type FollowersListItem struct {
 	ID int `json:"id"`
 }
 
-// Bearer Profile
-// https://www.hackthebox.com/api/v4/user/info
-
-// ProfileInfo
+// ProfileInfo contains the Token User profile
 type ProfileInfo struct {
 	Info *ProfileInfoItem `json:"info"`
 }
 
-// ProfileInfoItem
+// ProfileInfoItem contains the information of the Token User
 type ProfileInfoItem struct {
 	ID                        int                  `json:"id"`
 	Name                      string               `json:"name"`
@@ -83,17 +71,14 @@ type ProfileInfoItem struct {
 	DunningExists             bool                 `json:"dunning_exists"`
 }
 
-// ProfileInfoItemTeam
+// ProfileInfoItemTeam contains the team information of a Token User
 type ProfileInfoItemTeam struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
 	AvatarThumb string `json:"avatar_thumb_url"`
 }
 
-// Bearer Settings
-// https://www.hackthebox.com/api/v4/user/settings
-
-// SettingsInfo
+// SettingsInfo contains the settings information for the Token User
 type SettingsInfo struct {
 	Email           string `json:"email"`
 	Notifications   int    `json:"email_notifications"`
@@ -102,15 +87,12 @@ type SettingsInfo struct {
 	HideMachineTags int    `json:"hide_machine_tags"`
 }
 
-// Bearer Subscriptions
-// https://www.hackthebox.com/api/v4/user/subscriptions
-
-// SubscriptionsList
+// SubscriptionsList contains a list of the Token Users subscriptions
 type SubscriptionsList struct {
 	Subscriptions []*SubscriptionsListItem `json:"subscriptions"`
 }
 
-// SubscriptionsListItem
+// SubscriptionsListItem contains the information of a Token Users subscription
 type SubscriptionsListItem struct {
 	Name        string        `json:"name"`
 	EndsAt      string        `json:"ends_at"`
@@ -123,49 +105,37 @@ type SubscriptionsListItem struct {
 	Items       []interface{} `json:"items"`
 }
 
-// Bearer Subscriptions Balance
-// https://www.hackthebox.com/api/v4/user/subscriptions/balance
-
-// SubscriptionsBalanceInfo
+// SubscriptionsBalanceInfo contains Token User balance and currency
 type SubscriptionsBalanceInfo struct {
 	Balances        *SubscriptionsBalanceInfoBalances `json:"balances"`
 	DefaultCurrency string                            `json:"default_currency"`
 }
 
-// SubscriptionsBalanceInfoBalances
+// SubscriptionsBalanceInfoBalances contains information on the Token Users balance
 type SubscriptionsBalanceInfoBalances struct {
 	USD int `json:"USD"`
 	GBP int `json:"GBP"`
 	EUR int `json:"EUR"`
 }
 
-// Bearer Recurly URL
-// https://www.hackthebox.com/api/v4/user/subscriptions/manage/recurly
-
-// SubscriptionsRecurlyInfo
+// SubscriptionsRecurlyInfo contains the Token Users subscription recurly information
 type SubscriptionsRecurlyInfo struct {
 	Message string `json:"message"`
 	URL     string `json:"url"`
 }
 
-// Bearer Enrolled Tracks
-// https://www.hackthebox.com/api/v4/user/tracks
-
-// EnrolledTracksList
+// EnrolledTracksList contains a list of the Token Users enrolled tracks
 type EnrolledTracksList []struct {
 	ID       int `json:"id"`
 	Complete int `json:"complete"`
 }
 
-// User Profile with Bearer Relationship
-// https://www.hackthebox.com/api/v4/user/profile/basic/{userID}
-
-// UserRelationshipInfo
+// UserRelationshipInfo contains user and Token User relationship
 type UserRelationshipInfo struct {
 	Profile *UserRelationshipInfoItem `json:"profile"`
 }
 
-// UserRelationshipInfoItem
+// UserRelationshipInfoItem contains information on a user and the relationship to the Token User
 type UserRelationshipInfoItem struct {
 	ID              int                                 `json:"id"`
 	SSOID           int                                 `json:"sso_id"`
@@ -203,7 +173,7 @@ type UserRelationshipInfoItem struct {
 	IsFollowed      bool                                `json:"isFollowed"`
 }
 
-// UserRelationshipInfoItemTeam
+// UserRelationshipInfoItemTeam contains information of the team of a user in a Token User relationship
 type UserRelationshipInfoItemTeam struct {
 	ID      int    `json:"id"`
 	Name    string `json:"name"`
@@ -211,7 +181,7 @@ type UserRelationshipInfoItemTeam struct {
 	Avatar  string `json:"avatar"`
 }
 
-// UserRelationshipInfoItemUniversity
+// UserRelationshipInfoItemUniversity contains information of the university of a user in a Token User relationship
 type UserRelationshipInfoItemUniversity struct {
 	ID        int    `json:"id"`
 	Name      string `json:"name"`
@@ -219,20 +189,17 @@ type UserRelationshipInfoItemUniversity struct {
 	Rank      int    `json:"rank"`
 }
 
-// User Machines Progress
-// https://www.hackthebox.com/api/v4/profile/progress/machines/os/{userID}
-
-// UserMachinesList
+// UserMachinesList contains a users machine progress
 type UserMachinesList struct {
 	Profile *UserMachinesListItem `json:"profile"`
 }
 
-// UserMachinesListItem
+// UserMachinesListItem contains a list of a users machine progress by operating system
 type UserMachinesListItem struct {
 	OperatingSystems []*UserMachinesListItemOperatingSystem `json:"operating_systems"`
 }
 
-// UserMachinesListItemOperatingSystem
+// UserMachinesListItemOperatingSystem contains information on a users machine progress of an operating system
 type UserMachinesListItemOperatingSystem struct {
 	Name          string  `json:"name"`
 	Completion    float64 `json:"completion_percentage"`
@@ -240,27 +207,24 @@ type UserMachinesListItemOperatingSystem struct {
 	TotalMachines int     `json:"total_machines"`
 }
 
-// User Challenges Progress
-// https://www.hackthebox.com/api/v4/profile/progress/challenges/{userID}
-
-// UserChallengesList
+// UserChallengesList contains a users challenge progress
 type UserChallengesList struct {
 	Profile *UserChallengesListItem `json:"profile"`
 }
 
-// UserChallengesListItem
+// UserChallengesListItem contains a list of users challenge progress by categories
 type UserChallengesListItem struct {
 	Owns       *UserChallengesListItemOwns       `json:"challenge_owns"`
 	Categories []*UserChallengesListItemCategory `json:"challenge_categories"`
 }
 
-// UserChallengesListItemOwns
+// UserChallengesListItemOwns contains information on solves in users challenge progress
 type UserChallengesListItemOwns struct {
 	Solved int `json:"solved"`
 	Total  int `json:"total"`
 }
 
-// UserChallengesListItemCategory
+// UserChallengesListItemCategory contains information on challenge sovles in users challenge progress in a category
 type UserChallengesListItemCategory struct {
 	Name          string  `json:"name"`
 	OwnedFlags    int     `json:"owned_flags"`
@@ -269,20 +233,17 @@ type UserChallengesListItemCategory struct {
 	UserSolvedAvg float64 `json:"avg_user_solved"`
 }
 
-// User Endgames Progress
-// https://www.hackthebox.com/api/v4/profile/progress/endgame/{userID}
-
-// UserEndgamesList
+// UserEndgamesList contains a users endgame progress
 type UserEndgamesList struct {
 	Profile *UserEndgamesListItem `json:"profile"`
 }
 
-// UserEndgamesListItem
+// UserEndgamesListItem contains a list of users endgame progress
 type UserEndgamesListItem struct {
 	Endgames []*UserEndgamesListItemEndgame `json:"endgames"`
 }
 
-// UserEndgamesListItemEndgame
+// UserEndgamesListItemEndgame contains information on a users progress of an endgame
 type UserEndgamesListItemEndgame struct {
 	Name       string  `json:"name"`
 	Completion float64 `json:"completion_percentage"`
@@ -290,20 +251,17 @@ type UserEndgamesListItemEndgame struct {
 	TotalFlags int     `json:"total_flags"`
 }
 
-// User Fortress Progress
-// https://www.hackthebox.com/api/v4/profile/progress/fortress/{userID}
-
-// UserFortressesList
+// UserFortressesList contains a users fortress progress
 type UserFortressesList struct {
 	Profile *UserFortressesListItem `json:"profile"`
 }
 
-// UserFortressesListItem
+// UserFortressesListItem contains a list of users fortress progress
 type UserFortressesListItem struct {
 	Fortresses []*UserFortressesListItemFortress `json:"fortresses"`
 }
 
-// UserFortressesListItemFortress
+// UserFortressesListItemFortress contains information on a users progress of a fortress
 type UserFortressesListItemFortress struct {
 	Name       string  `json:"name"`
 	Avatar     string  `json:"avatar"`
@@ -312,20 +270,17 @@ type UserFortressesListItemFortress struct {
 	TotalFlags int     `json:"total_flags"`
 }
 
-// User ProLabs Progress
-// https://www.hackthebox.com/api/v4/profile/progress/prolab/{userID}
-
-// UserProLabsList
+// UserProLabsList contains a users prolab progress
 type UserProLabsList struct {
 	Profile *UserProLabsListItem `json:"profile"`
 }
 
-// UserProLabsListItem
+// UserProLabsListItem contains a list of users prolab progress
 type UserProLabsListItem struct {
 	ProLabs []*UserProLabsListItemProLab `json:"prolabs"`
 }
 
-// UserProLabsListItemProLab
+// UserProLabsListItemProLab contains information on a users progress of a prolab
 type UserProLabsListItemProLab struct {
 	Name          string  `json:"name"`
 	Completion    float64 `json:"completion_percentage"`
@@ -335,20 +290,17 @@ type UserProLabsListItemProLab struct {
 	RatingsAvg    float64 `json:"average_ratings"`
 }
 
-// User Activity
-// https://www.hackthebox.com/api/v4/profile/activity/{userID}
-
-// UserActivityList
+// UserActivityList contains a users activity
 type UserActivityList struct {
 	Profile *UserActivityListItem `json:"profile"`
 }
 
-// UserActivityListItem
+// UserActivityListItem contains a list of a users activity
 type UserActivityListItem struct {
 	Activity []*UserActivityListItemActivity `json:"activity"`
 }
 
-// UserActivityListItemActivity
+// UserActivityListItemActivity contains information of an activity of a user
 type UserActivityListItemActivity struct {
 	Date              string `json:"date"`
 	DateDiff          string `json:"date_diff"`
@@ -363,26 +315,23 @@ type UserActivityListItemActivity struct {
 	FlagTitle         string `json:"flag_title"`
 }
 
-// User Bloods
-// https://www.hackthebox.com/api/v4/profile/bloods/{userID}
-
-// UserBloodsList
+// UserBloodsList contains a users bloods
 type UserBloodsList struct {
 	Profile *UserBloodsListItem `json:"profile"`
 }
 
-// UserBloodsListItem
+// UserBloodsListItem contains a users machine and challenge bloods
 type UserBloodsListItem struct {
 	Bloods *UserBloodsListItemBloods `json:"bloods"`
 }
 
-// UserBloodsListItemBloods
+// UserBloodsListItemBloods contains lists of machine and challenge bloods of a user
 type UserBloodsListItemBloods struct {
 	Machines   []*UserBloodsListItemBloodsMachine   `json:"machines"`
 	Challenges []*UserBloodsListItemBloodsChallenge `json:"challenges"`
 }
 
-// UserBloodsListItemBloodsMachine
+// UserBloodsListItemBloodsMachine contains information on a users machine blood
 type UserBloodsListItemBloodsMachine struct {
 	ID            int    `json:"id"`
 	Name          string `json:"name"`
@@ -395,7 +344,7 @@ type UserBloodsListItemBloodsMachine struct {
 	RootBloodDiff string `json:"root_blood_difference"`
 }
 
-// UserBloodsListItemBloodsChallenge
+// UserBloodsListItemBloodsChallenge contains information on a users challenge blood
 type UserBloodsListItemBloodsChallenge struct {
 	ID         int    `json:"id"`
 	Name       string `json:"name"`
@@ -404,27 +353,24 @@ type UserBloodsListItemBloodsChallenge struct {
 	BloodDiff  string `json:"blood_difference"`
 }
 
-// User Submissions
-// https://www.hackthebox.com/api/v4/profile/content/{userID}
-
-// UserSubmissionsList
+// UserSubmissionsList contains user submissions
 type UserSubmissionsList struct {
 	Profile *UserSubmissionsListItem `json:"profile"`
 }
 
-// UserSubmissionsListItem
+// UserSubmissionsListItem contains a users machine, challenge, and writeup submissions
 type UserSubmissionsListItem struct {
 	Content *UserSubmissionsListItemContent `json:"content"`
 }
 
-// UserSubmissionsListItemContent
+// UserSubmissionsListItemContent contains lists of machine, challenge, and writeup submissions of a user
 type UserSubmissionsListItemContent struct {
 	Machines   []*UserSubmissionsListItemContentMachine   `json:"machines"`
 	Challenges []*UserSubmissionsListItemContentChallenge `json:"challenges"`
 	Writeups   []*UserSubmissionsListItemContentWriteup   `json:"writeups"`
 }
 
-// UserSubmissionsListItemContentMachine
+// UserSubmissionsListItemContentMachine contains information of a users machine submission
 type UserSubmissionsListItemContentMachine struct {
 	ID         int    `json:"id"`
 	Name       string `json:"name"`
@@ -436,7 +382,7 @@ type UserSubmissionsListItemContentMachine struct {
 	SystemOwns int    `json:"system_owns"`
 }
 
-// UserSubmissionsListItemContentChallenge
+// UserSubmissionsListItemContentChallenge contains information of a users challenge submission
 type UserSubmissionsListItemContentChallenge struct {
 	ID       int    `json:"id"`
 	Name     string `json:"name"`
@@ -445,7 +391,7 @@ type UserSubmissionsListItemContentChallenge struct {
 	Dislikes int    `json:"dislikes"`
 }
 
-// UserSubmissionsListItemContentWriteup
+// UserSubmissionsListItemContentWriteup contains information of a users writeup submission
 type UserSubmissionsListItemContentWriteup struct {
 	ID            int    `json:"id"`
 	MachineID     int    `json:"machine_id"`
@@ -457,20 +403,17 @@ type UserSubmissionsListItemContentWriteup struct {
 	Type          string `json:"type"`
 }
 
-// User Achievements
-// https://www.hackthebox.com/api/v4/profile/graph/{duration}/{userID}
-
-// UserAchievementsList
+// UserAchievementsList contains user achievements
 type UserAchievementsList struct {
 	Profile *UserAchievementsListItem `json:"profile"`
 }
 
-// UserAchievementsListItem
+// UserAchievementsListItem contains a users achievement graph
 type UserAchievementsListItem struct {
 	Graph *UserAchievementsListItemGraph `json:"graphData"`
 }
 
-// UserAchievementsListItemGraph
+// UserAchievementsListItemGraph contains lists of a users achievments
 type UserAchievementsListItemGraph struct {
 	UserOwns      []int `json:"user_owns"`
 	SystemOwns    []int `json:"system_owns"`
@@ -479,42 +422,36 @@ type UserAchievementsListItemGraph struct {
 	Respects      []int `json:"respects"`
 }
 
-// User Machine Owns By Attack Path
-// https://www.hackthebox.com/api/v4/profile/chart/machines/attack/{userID}
-
-// UserOwnsByPathMap
+// UserOwnsByPathMap contains user attack path owns
 type UserOwnsByPathMap struct {
 	Profile *UserOwnsByPathMapItem `json:"profile"`
 }
 
-// UserOwnsByPathMapItem
+// UserOwnsByPathMapItem contains user owns by the attack path
 type UserOwnsByPathMapItem struct {
 	MachineOwns        *UserOwnsByPathMapItemMachineOwns                  `json:"machine_owns"`
 	MachineAttackPaths map[string]*UserOwnsByPathMapItemMachineAttackPath `json:"machine_attack_paths"`
 }
 
-// UserOwnsByPathMapItemMachineOwns
+// UserOwnsByPathMapItemMachineOwns contains total information of user machine owns with attack path
 type UserOwnsByPathMapItemMachineOwns struct {
 	Solved int `json:"solved"`
 	Total  int `json:"total"`
 }
 
-// UserOwnsByPathMapItemMachineAttackPath
+// UserOwnsByPathMapItemMachineAttackPath contains information about user owns in an attack path
 type UserOwnsByPathMapItemMachineAttackPath struct {
 	Solved        int     `json:"solved"`
 	Total         int     `json:"total"`
 	UserSolvedAvg float64 `json:"avg_user_solved"`
 }
 
-// User Profile
-// https://www.hackthebox.com/api/v4/profile/{userID}
-
-// UserInfo
+// UserInfo contains a user
 type UserInfo struct {
 	Profile *UserInfoItem `json:"profile"`
 }
 
-// UserInfoItem
+// UserInfoItem contains a users information
 type UserInfoItem struct {
 	ID              int               `json:"id"`
 	SSOID           int               `json:"sso_id"`
@@ -546,7 +483,7 @@ type UserInfoItem struct {
 	Website         string            `json:"website"`
 }
 
-// UserInfoItemTeam
+// UserInfoItemTeam contains team information of a user
 type UserInfoItemTeam struct {
 	ID      int    `json:"id"`
 	Name    string `json:"name"`
@@ -554,15 +491,12 @@ type UserInfoItemTeam struct {
 	Avatar  string `json:"avatar"`
 }
 
-// User Badges
-// https://www.hackthebox.com/api/v4/profile/badges/{userID}
-
-// UserBadgesList
+// UserBadgesList contains a list of badges of a user
 type UserBadgesList struct {
 	Badges []*UserBadgesListItem `json:"badges"`
 }
 
-// UserBadgesListItem
+// UserBadgesListItem contains information on a badge of a user
 type UserBadgesListItem struct {
 	ID           int                      `json:"id"`
 	Name         string                   `json:"name"`
@@ -576,7 +510,7 @@ type UserBadgesListItem struct {
 	Pivot        *UserBadgesListItemPivot `json:"pivot"`
 }
 
-// UserBadgesListItemPivot
+// UserBadgesListItemPivot contains pivot information on a badge of a user
 type UserBadgesListItemPivot struct {
 	UserID    int    `json:"user_id"`
 	BadgeID   int    `json:"badge_id"`

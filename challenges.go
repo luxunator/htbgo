@@ -1,6 +1,6 @@
 package htbgo
 
-// ChallengeCard
+// ChallengeCard contains information of a challenge as a card
 type ChallengeCard struct {
 	ID           int    `json:"id"`
 	Name         string `json:"name"`
@@ -11,51 +11,36 @@ type ChallengeCard struct {
 	ReleaseDate  string `json:"release_date"`
 }
 
-// Challenge Recommendation Cards
-// https://www.hackthebox.com/api/v4/challenge/recommended
-
-// ChallengesSuggestedInfo
+// ChallengesSuggestedInfo contains information on suggested challenges
 type ChallengesSuggestedInfo struct {
 	State   []string       `json:"state"`
 	CardOne *ChallengeCard `json:"card1"`
 	CardTwo *ChallengeCard `json:"card2"`
 }
 
-// Challenge Reccomendation Cards Retired
-// https://www.hackthebox.com/api/v4/challenge/recommended/retired
-
-// ChallengesRetiredSuggestedInfo
+// ChallengesRetiredSuggestedInfo contains information on suggested retired challenges
 type ChallengesRetiredSuggestedInfo struct {
 	CardOne *ChallengeCard `json:"card1"`
 	CardTwo *ChallengeCard `json:"card2"`
 }
 
-// List Challenge Categories
-// https://www.hackthebox.com/api/v4/challenge/categories/list
-
-// ChallengeCategoriesList
+// ChallengeCategoriesList contains a list of challenge categories
 type ChallengeCategoriesList struct {
 	Info []*ChallengeCategoriesListItem `json:"info"`
 }
 
-// ChallengeCategoriesListItem
+// ChallengeCategoriesListItem contains a challenge category
 type ChallengeCategoriesListItem struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
 }
 
-// List Active Challenges
-// https://www.hackthebox.com/api/v4/challenge/list
-
-// List Retired Challenges
-// https://www.hackthebox.com/api/v4/challenge/list/retired
-
-// ChallengesList
+// ChallengesList contains a list of challenges
 type ChallengesList struct {
 	Challenges []*ChallengeListItem `json:"challenges"`
 }
 
-// ChallengeListItem
+// ChallengeListItem contains information on a challenge within a challenge list
 type ChallengeListItem struct {
 	ID                 int           `json:"id"`
 	Name               string        `json:"name"`
@@ -81,15 +66,12 @@ type ChallengeListItem struct {
 	Recommended        int           `json:"recommended"`
 }
 
-// Challenge Profile
-// https://www.hackthebox.com/api/v4/challenge/info/{challengeID}
-
-// ChallengeInfo
+// ChallengeInfo contains a challenge
 type ChallengeInfo struct {
 	Challenge *ChallengeInfoItem `json:"challenge"`
 }
 
-// ChallengeInfoItem
+// ChallengeInfoItem contains information on a challenge
 type ChallengeInfoItem struct {
 	ID                    int           `json:"id"`
 	Name                  string        `json:"name"`
@@ -130,20 +112,17 @@ type ChallengeInfoItem struct {
 	HasReviewed           bool          `json:"authUserHasReviewed"`
 }
 
-// Challenge Activity
-// https://www.hackthebox.com/api/v4/challenge/activity/{challengeID}
-
-// ChallengeActivityList
+// ChallengeActivityList contains challenge activities
 type ChallengeActivityList struct {
 	Info *ChallengeActivityListItem `json:"info"`
 }
 
-// ChallengeActivityList
+// ChallengeActivityList contains a list of challenge activity
 type ChallengeActivityListItem struct {
 	Activity []*ChallengeActivityListItemActivity `json:"activity"`
 }
 
-// ChallengeActivityListItemActivity
+// ChallengeActivityListItemActivity contains information on a challenge activity history item
 type ChallengeActivityListItemActivity struct {
 	CreatedAt  string `json:"created_at"`
 	Date       string `json:"date"`

@@ -1,13 +1,13 @@
 package htbgo
 
-// UniversitiesList
+// UniversitiesList contains a university list
 type UniversitiesList struct {
 	Message string                `json:"message"`
 	Section string                `json:"section"`
 	Data    *UniversitiesListData `json:"data"`
 }
 
-// UniversitiesListData
+// UniversitiesListData contains pagination information and lists of universities
 type UniversitiesListData struct {
 	Page            int                         `json:"current_page"`
 	University      []*UniversitiesListDataItem `json:"data"`
@@ -24,7 +24,7 @@ type UniversitiesListData struct {
 	Total           int                         `json:"total"`
 }
 
-// UniversitiesListDataItem
+// UniversitiesListDataItem contains information of a university on a page
 type UniversitiesListDataItem struct {
 	ID               int      `json:"id"`
 	Name             string   `json:"name"`
@@ -37,20 +37,20 @@ type UniversitiesListDataItem struct {
 	UserAvatars      []string `json:"user_avatars"`
 }
 
-// UniversitiesListDataLink
+// UniversitiesListDataLink contains link information on a page of universities
 type UniversitiesListDataLink struct {
 	URL      string `json:"url"`
 	Label    string `json:"label"`
 	IsActive bool   `json:"active"`
 }
 
-// UniversityInfo
+// UniversityInfo contains a university
 type UniversityInfo struct {
 	Message string              `json:"message"`
 	Data    *UniversityInfoItem `json:"data"`
 }
 
-// UniversityInfoItem
+// UniversityInfoItem contains information on a university
 type UniversityInfoItem struct {
 	ID              int                        `json:"id"`
 	Name            string                     `json:"name"`
@@ -71,24 +71,25 @@ type UniversityInfoItem struct {
 	Captain         *UniversityInfoItemCaptain `json:"captain"`
 }
 
-// UniversityInfoItemCaptain
+// UniversityInfoItemCaptain contains information of the captain of a university
 type UniversityInfoItemCaptain struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Thumb string `json:"avatar_thumb"`
 }
 
-// UniversityOwnsWeeklyWeek
-type UniversityOwnsWeeklyWeek struct {
-	UserOwns      int    `json:"user_owns"`
-	SystemOwns    int    `json:"system_owns"`
-	ChallengeOwns int    `json:"challenge_owns"`
-	FirstBloods   int    `json:"first_bloods"`
-	Respects      int    `json:"respects"`
-	WeekEndDate   string `json:"week_end_date"`
+// UniversityOwnsInfo owns information of a university
+type UniversityOwnsInfo struct {
+	Rank          int                   `json:"rank"`
+	UserOwns      int                   `json:"user_owns"`
+	SystemOwns    int                   `json:"system_owns"`
+	Bloods        int                   `json:"first_bloods"`
+	ChallengeOwns int                   `json:"challenge_owns"`
+	Respects      int                   `json:"respects"`
+	Weekly        *UniversityOwnsWeekly `json:"weekly"`
 }
 
-// UniversityOwnsWeekly
+// UniversityOwnsWeekly contains owns of a university by the week
 type UniversityOwnsWeekly struct {
 	WeekOne    *UniversityOwnsWeeklyWeek `json:"week1"`
 	WeekTwo    *UniversityOwnsWeeklyWeek `json:"week2"`
@@ -104,18 +105,17 @@ type UniversityOwnsWeekly struct {
 	WeekTwelve *UniversityOwnsWeeklyWeek `json:"week12"`
 }
 
-// UniversityOwnsInfo
-type UniversityOwnsInfo struct {
-	Rank          int                   `json:"rank"`
-	UserOwns      int                   `json:"user_owns"`
-	SystemOwns    int                   `json:"system_owns"`
-	Bloods        int                   `json:"first_bloods"`
-	ChallengeOwns int                   `json:"challenge_owns"`
-	Respects      int                   `json:"respects"`
-	Weekly        *UniversityOwnsWeekly `json:"weekly"`
+// UniversityOwnsWeeklyWeek contains the information of own of a university by the week
+type UniversityOwnsWeeklyWeek struct {
+	UserOwns      int    `json:"user_owns"`
+	SystemOwns    int    `json:"system_owns"`
+	ChallengeOwns int    `json:"challenge_owns"`
+	FirstBloods   int    `json:"first_bloods"`
+	Respects      int    `json:"respects"`
+	WeekEndDate   string `json:"week_end_date"`
 }
 
-// UniversityMembersList
+// UniversityMembersList contains a list of university members and their information
 type UniversityMembersList []struct {
 	ID          int                              `json:"id"`
 	Name        string                           `json:"name"`
@@ -134,7 +134,7 @@ type UniversityMembersList []struct {
 	Public      int                              `json:"public"`
 }
 
-// UniversityMembersListUniversity
+// UniversityMembersListUniversity contains information on the university of a university member
 type UniversityMembersListUniversity struct {
 	ID        int `json:"id"`
 	CaptainID int `json:"captain_id"`

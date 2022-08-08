@@ -1,6 +1,6 @@
 package htbgo
 
-// MachineMatrixGroup
+// MachineMatrixGroup contains information on a machine matrix
 type MachineMatrixGroup struct {
 	Enum   float64 `json:"enum"`
 	Real   float64 `json:"real"`
@@ -9,7 +9,7 @@ type MachineMatrixGroup struct {
 	CTF    float64 `json:"ctf"`
 }
 
-// MachineCreator 
+// MachineCreator contains information on a machine creator
 type MachineCreator struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
@@ -17,7 +17,7 @@ type MachineCreator struct {
 	IsRespected bool   `json:"isRespected"`
 }
 
-// MachineStatus
+// MachineStatus contains information on the status of a machine
 type MachineStatus struct {
 	IsSpawned   bool   `json:"isSpawned"`
 	IsSpawning  bool   `json:"isSpawning"`
@@ -26,50 +26,44 @@ type MachineStatus struct {
 	ExpiresAt   string `json:"expires_at"`
 }
 
-// MachineBlood
+// MachineBlood contains information on the blood of a machine
 type MachineBlood struct {
 	User      *MachineBloodUser `json:"user"`
 	CreatedAt string            `json:"created_at"`
 	BloodDiff string            `json:"blood_difference"`
 }
 
-// MachineBloodUser
+// MachineBloodUser contains information on the user of a blood
 type MachineBloodUser struct {
 	Name   string `json:"name"`
 	ID     int    `json:"id"`
 	Avatar string `json:"avatar"`
 }
 
-// MachineTag
+// MachineTag contains information on a machine tag
 type MachineTag struct {
 	ID         int `json:"id"`
 	CategoryID int `json:"tag_category_id"`
 }
 
-// Get Machine Matrix
-// https://www.hackthebox.com/api/v4/machine/graph/matrix/{machineID}
-
-// MachineMatrixInfo
+// MachineMatrixInfo contains a machine matrix
 type MachineMatrixInfo struct {
 	Info *MachineMatrixInfoItem `json:"info"`
 }
 
-// MachineMatrixInfoItem
+// MachineMatrixInfoItem contains machine matrixes of different user groups
 type MachineMatrixInfoItem struct {
 	Aggregate *MachineMatrixGroup `json:"aggregate"`
 	Creator   *MachineMatrixGroup `json:"maker"`
 	User      *MachineMatrixGroup `json:"user"`
 }
 
-// Get the Information of the machine ( doesn't include the first blood information)
-//  https://www.hackthebox.com/api/v4/machine/info/{machineID}
-
-// MachineInfo
+// MachineInfo contains a machine
 type MachineInfo struct {
 	Info *MachineInfoItem `json:"info"`
 }
 
-// MachineInfoItem
+// MachineInfoItem contains information on a machine
 type MachineInfoItem struct {
 	ID              int             `json:"id"`
 	Name            string          `json:"name"`
@@ -101,15 +95,12 @@ type MachineInfoItem struct {
 	SPFlag          int             `json:"sp_flag"`
 }
 
-// Get the Profile of the machine (includes first blood information)
-// https://www.hackthebox.com/api/v4/machine/profile/{machineID}
-
-// MachineProfileInfo
+// MachineProfileInfo contains a machine profile
 type MachineProfileInfo struct {
 	Info *MachineProfileInfoItem `json:"info"`
 }
 
-// MachineProfileInfoItem
+// MachineProfileInfoItem contains the profile of a machine
 type MachineProfileInfoItem struct {
 	ID              int             `json:"id"`
 	Name            string          `json:"name"`
@@ -147,15 +138,12 @@ type MachineProfileInfoItem struct {
 	Recommended     int             `json:"recommended"`
 }
 
-//	Get Active Machines
-// https://www.hackthebox.com/api/v4/machine/list
-
-// MachinesActiveList
+// MachinesActiveList contains a list of active machines
 type MachinesActiveList struct {
 	Info []*MachinesActiveListItem `json:"info"`
 }
 
-// MachinesActiveListItem
+// MachinesActiveListItem contains information on an active machine
 type MachinesActiveListItem struct {
 	ID              int             `json:"id"`
 	Name            string          `json:"name"`
@@ -186,15 +174,12 @@ type MachinesActiveListItem struct {
 	IP              string          `json:"ip"`
 }
 
-// Get Retired Machines
-// https://www.hackthebox.com/api/v4/machine/list/retired
-
-// MachinesRetiredList
+// MachinesRetiredList contains a list of retired machines
 type MachinesRetiredList struct {
 	Info []*MachinesRetiredListItem `json:"info"`
 }
 
-// MachinesRetiredListItem
+// MachinesRetiredListItem contains information of a retired machine
 type MachinesRetiredListItem struct {
 	ID              int             `json:"id"`
 	Name            string          `json:"name"`
@@ -226,15 +211,12 @@ type MachinesRetiredListItem struct {
 	Tags            []*MachineTag   `json:"tags"`
 }
 
-// Get the top 25 users in a machine
-// https://www.hackthebox.com/api/v4/machine/owns/top/{machineID}
-
-// MachineTopsUsersList
+// MachineTopsUsersList contains a list of top machine users
 type MachineTopsUsersList struct {
 	Info []*MachineTopsUsersListItem `json:"info"`
 }
 
-// MachineTopsUsersListItem
+// MachineTopsUsersListItem contains information of a machines top user
 type MachineTopsUsersListItem struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
@@ -250,15 +232,12 @@ type MachineTopsUsersListItem struct {
 	Position    int    `json:"position"`
 }
 
-// Get the list of scheduled machines to release
-// https://www.hackthebox.com/api/v4/machine/unreleased
-
-// MachinesToReleaseList
+// MachinesToReleaseList contains a list of machines that are scheduled to release
 type MachinesToReleaseList struct {
 	Data []*MachinesToReleaseListItem `json:"data"`
 }
 
-// MachinesToReleaseListItem
+// MachinesToReleaseListItem contains information on a machine scheduled to release
 type MachinesToReleaseListItem struct {
 	ID            int                                 `json:"id"`
 	Name          string                              `json:"name"`
@@ -272,14 +251,14 @@ type MachinesToReleaseListItem struct {
 	Retiring      *MachinesToReleaseListItemRetiring  `json:"retiring"`
 }
 
-// MachinesToReleaseListItemCreator
+// MachinesToReleaseListItemCreator contains information on a creator of a machine scheduled to release
 type MachinesToReleaseListItemCreator struct {
 	ID     int    `json:"id"`
 	Name   string `json:"name"`
 	Avatar string `json:"avatar"`
 }
 
-// MachinesToReleaseListItemRetiring
+// MachinesToReleaseListItemRetiring contains the information of the machine that the scheduled machine will be retiring
 type MachinesToReleaseListItemRetiring struct {
 	Difficulty string `json:"difficulty_text"`
 	Avatar     string `json:"avatar"`
@@ -288,15 +267,12 @@ type MachinesToReleaseListItemRetiring struct {
 	ID         int    `json:"id"`
 }
 
-// Get the list of machines using the todo endpoint
-// https://www.hackthebox.com/api/v4/machine/list/todo
-
-// MachinesTodoList
+// MachinesTodoList contains a list of machines that are left to do
 type MachinesTodoList struct {
 	Info []*MachinesTodoListItem `json:"info"`
 }
 
-// MachinesTodoListItem
+// MachinesTodoListItem contains information on a machine left to do
 type MachinesTodoListItem struct {
 	ID              int             `json:"id"`
 	Name            string          `json:"name"`
@@ -326,29 +302,23 @@ type MachinesTodoListItem struct {
 	Tags            []*MachineTag   `json:"tags"`
 }
 
-// Get a retired machine their tags
-// https://www.hackthebox.com/api/v4/machine/tags/{machineID}
-
-// MachineTagsMap
+// MachineTagsMap contains a map of machine tags
 type MachineTagsMap struct {
 	Info map[string]*MachineTagsMapItem `json:"info"`
 }
 
-// MachineTagsMapItem
+// MachineTagsMapItem contains information on a machine tag
 type MachineTagsMapItem struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
 }
 
-// Get the changelog of a machine
-// https://www.hackthebox.com/api/v4/machine/changelog/{machineID}
-
-// MachineChangelogList
+// MachineChangelogList contains a list of a machines changelog
 type MachineChangelogList struct {
 	Info []*MachineChangelogListItem `json:"info"`
 }
 
-// MachineChangelogListItem
+// MachineChangelogListItem contains information of a machine changelog item
 type MachineChangelogListItem struct {
 	ID          int    `json:"id"`
 	UserID      int    `json:"user_id"`
@@ -361,15 +331,12 @@ type MachineChangelogListItem struct {
 	UpdatedAt   string `json:"updated_at"`
 }
 
-// Get the reviews of a retired machine
-// https://www.hackthebox.com/api/v4/machine/reviews/{machineID}
-
-// MachineReviewsList
+// MachineReviewsList contains a list of machine reviews
 type MachineReviewsList struct {
 	Message []*MachineReviewsListItem `json:"message"`
 }
 
-// MachineReviewsListItem
+// MachineReviewsListItem contains information on a machine review
 type MachineReviewsListItem struct {
 	ID        int                         `json:"id"`
 	UserID    int                         `json:"user_id"`
@@ -383,7 +350,7 @@ type MachineReviewsListItem struct {
 	User      *MachineReviewsListItemUser `json:"user"`
 }
 
-// MachineReviewsListItemUser
+// MachineReviewsListItemUser contains information of a user behind a machine review
 type MachineReviewsListItemUser struct {
 	ID     int    `json:"id"`
 	Name   string `json:"name"`

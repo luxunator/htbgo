@@ -1,9 +1,6 @@
 package htbgo
 
-// Get Team Profile
-// https://www.hackthebox.com/api/v4/team/info/{teamid}
-
-// TeamInfo
+// TeamInfo contains information about a team
 type TeamInfo struct {
 	ID              int              `json:"id"`
 	Name            string           `json:"name"`
@@ -24,17 +21,14 @@ type TeamInfo struct {
 	JoinRequestSent bool             `json:"join_request_sent"`
 }
 
-// TeamInfoCaptain
+// TeamInfoCaptain contains information about a teams captain
 type TeamInfoCaptain struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Thumb string `json:"avatar_thumb"`
 }
 
-// Get Team Activity
-// https://www.hackthebox.com/api/v4/team/activity/{teamid}
-
-// TeamActivityList
+// TeamActivityList contains a list of team activity and its information
 type TeamActivityList []struct {
 	User              *TeamActivityListUser `json:"user"`
 	Date              string                `json:"date"`
@@ -50,7 +44,7 @@ type TeamActivityList []struct {
 	FlagTitle         string                `json:"flag_title"`
 }
 
-// TeamActivityListUser
+// TeamActivityListUser contains information on the user of a team activity
 type TeamActivityListUser struct {
 	ID     int    `json:"id"`
 	Name   string `json:"name"`
@@ -58,20 +52,7 @@ type TeamActivityListUser struct {
 	Thumb  string `json:"avatar_thumb"`
 }
 
-// Get Team Owns
-// https://www.hackthebox.com/api/v4/team/stats/owns/{teamid}
-
-// TeamOwnsByWeekMapWeek
-type TeamOwnsByWeekMapWeek struct {
-	UserOwns      int    `json:"user_owns"`
-	SystemOwns    int    `json:"system_owns"`
-	ChallengeOwns int    `json:"challenge_owns"`
-	Bloods        int    `json:"first_bloods"`
-	Respects      int    `json:"respects"`
-	WeekEndDate   string `json:"week_end_date"`
-}
-
-// TeamOwnsByWeekMap
+// TeamOwnsByWeekMap contains information about team owns by the week
 type TeamOwnsByWeekMap struct {
 	Rank          int                               `json:"rank"`
 	UserOwns      int                               `json:"user_owns"`
@@ -82,49 +63,50 @@ type TeamOwnsByWeekMap struct {
 	Weekly        map[string]*TeamOwnsByWeekMapWeek `json:"weekly"`
 }
 
-// Get Team Graph for Duration
-// https://www.hackthebox.com/api/v4/team/graph/2102?duration={duration}
+// TeamOwnsByWeekMapWeek contains information about team owns in a week
+type TeamOwnsByWeekMapWeek struct {
+	UserOwns      int    `json:"user_owns"`
+	SystemOwns    int    `json:"system_owns"`
+	ChallengeOwns int    `json:"challenge_owns"`
+	Bloods        int    `json:"first_bloods"`
+	Respects      int    `json:"respects"`
+	WeekEndDate   string `json:"week_end_date"`
+}
 
-// TeamStatsDuringInfo
+// TeamStatsDuringInfo contains team stats during a period of time
 type TeamStatsDuringInfo struct {
 	Status bool                     `json:"status"`
 	Data   *TeamStatsDuringInfoItem `json:"data"`
 }
 
-// TeamStatsDuringInfoItem
+// TeamStatsDuringInfoItem contains information on a teams stats during a period of time
 type TeamStatsDuringInfoItem struct {
 	Points  []int `json:"points"`
 	Rank    []int `json:"rank"`
 	Respect []int `json:"respect"`
 }
 
-// Get Team Ownage by Attack Path
-// https://www.hackthebox.com/api/v4/team/chart/machines/attack/{teamid}
-
-// TeamOwnsByPathMap
+// TeamOwnsByPathMap contains team owns by the attack path
 type TeamOwnsByPathMap struct {
-	MachineOwns *TeamOwnsByPathMapMachineOwns `json:"machine_owns"`
-	AttackPaths *TeamOwnsByPathMapAttackPath  `json:"machine_attack_paths"`
+	MachineOwns *TeamOwnsByPathMapMachineOwns           `json:"machine_owns"`
+	AttackPaths map[string]*TeamOwnsByPathMapAttackPath `json:"machine_attack_paths"`
 }
 
-// TeamOwnsByPathMapMachineOwns
+// TeamOwnsByPathMapMachineOwns contains total information of team machine owns with attack path
 type TeamOwnsByPathMapMachineOwns struct {
 	Solved int `json:"solved"`
 	Total  int `json:"total"`
 }
 
-// TeamOwnsByPathMapAttackPath
-type TeamOwnsByPathMapAttackPath map[string]struct {
+// TeamOwnsByPathMapAttackPath contains information about team owns in an attack path
+type TeamOwnsByPathMapAttackPath struct {
 	Name           string  `json:"name"`
 	Solved         int     `json:"solved"`
 	Total          int     `json:"total"`
 	TeamsSolvedAvg float64 `json:"avg_teams_solved"`
 }
 
-// List Team Members
-// https://www.hackthebox.com/api/v4/team/members/{teamid}
-
-// TeamMembersList
+// TeamMembersList contains a list of team members and their information
 type TeamMembersList []struct {
 	ID          int                  `json:"id"`
 	Name        string               `json:"name"`
@@ -143,23 +125,20 @@ type TeamMembersList []struct {
 	Public      int                  `json:"public"`
 }
 
-// TeamMembersListTeam
+// TeamMembersListTeam contains information on the team in a list of team members
 type TeamMembersListTeam struct {
 	ID        int `json:"id"`
 	CaptainID int `json:"captain_id"`
 }
 
-// List Team Invitations (only if team captain)
-// https://www.hackthebox.com/api/v4/team/invitations/{teamid}
-
-// TeamInvitationsList
+// TeamInvitationsList contains a list of team invitations
 type TeamInvitationsList struct {
 	Headers   struct{}                       `json:"headers"`
 	Original  []*TeamInvitationsListOriginal `json:"original"`
 	Exception bool                           `json:"exception"`
 }
 
-// TeamInvitationsListOriginal
+// TeamInvitationsListOriginal contains information on a team invitation
 type TeamInvitationsListOriginal struct {
 	ID          int                              `json:"id"`
 	UserID      int                              `json:"user_id"`
@@ -168,7 +147,7 @@ type TeamInvitationsListOriginal struct {
 	User        *TeamInvitationsListOriginalUser `json:"user"`
 }
 
-// TeamInvitationsListOriginalUser
+// TeamInvitationsListOriginalUser contains information on the user of a team invitation
 type TeamInvitationsListOriginalUser struct {
 	ID       int         `json:"id"`
 	Name     string      `json:"name"`

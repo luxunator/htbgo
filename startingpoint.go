@@ -1,6 +1,6 @@
 package htbgo
 
-// StartingPointCreator
+// StartingPointCreator contains information about a starting points creator
 type StartingPointCreator struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
@@ -8,15 +8,12 @@ type StartingPointCreator struct {
 	IsRespected bool   `json:"isRespected"`
 }
 
-// Starting Point Machines List
-// https://www.hackthebox.com/api/v4/sp/machines
-
-// StartingPointMachinesList
+// StartingPointMachinesList contains a list of starting point machines
 type StartingPointMachinesList struct {
 	Info []*StartingPointMachinesListItem `json:"info"`
 }
 
-// StartingPointMachinesListItem
+// StartingPointMachinesListItem contains information about a starting point machine
 type StartingPointMachinesListItem struct {
 	ID              int                                    `json:"id"`
 	Name            string                                 `json:"name"`
@@ -45,7 +42,7 @@ type StartingPointMachinesListItem struct {
 	HasRootFlagOnly bool                                   `json:"root_flag_only"`
 }
 
-// StartingPointMachinesListItemPlayInfo
+// StartingPointMachinesListItemPlayInfo contains information about players on a starting point machine
 type StartingPointMachinesListItemPlayInfo struct {
 	IsSpawned   bool   `json:"isSpawned"`
 	IsSpawning  bool   `json:"isSpawning"`

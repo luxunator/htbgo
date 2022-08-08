@@ -1,28 +1,24 @@
 package htbgo
 
-// ReportArea
+// ReportArea contains information on a report category
 type ReportArea struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
 }
 
-// List of BadgesList
-// https://www.hackthebox.com/api/v4/category/badges
-
-// BadgesList
+// BadgesList contains a list of badge categories
 type BadgesList struct {
 	Categories []*BadgesListItem `json:"categories"`
 }
 
-
-// BadgesListItem
+// BadgesListItem contains a list of badges
 type BadgesListItem struct {
 	ID     int                    `json:"id"`
 	Name   string                 `json:"name"`
 	Badges []*BadgesListItemBadge `json:"badges"`
 }
 
-// BadgesListItemBadge
+// BadgesListItemBadge contains information on a badge
 type BadgesListItemBadge struct {
 	ID            int    `json:"id"`
 	Name          string `json:"name"`
@@ -36,18 +32,12 @@ type BadgesListItemBadge struct {
 	UsersCount    int    `json:"users_count"`
 }
 
-// List Bug Feedback Areas
-// https://www.hackthebox.com/api/v4/user/feedback/bug/areas
-
-// ReportBugAreasList
+// ReportBugAreasList contains a list of bug feedback categories
 type ReportBugAreasList struct {
 	Info []*ReportArea `json:"info"`
 }
 
-// Machine And Challenge Stats
-// https://www.hackthebox.com/api/v4/content/stats
-
-// LabsStatsInfo
+// LabsStatsInfo contains various information on labs
 type LabsStatsInfo struct {
 	Machines         int                           `json:"machines"`
 	Challenges       int                           `json:"challenges"`
@@ -63,42 +53,39 @@ type LabsStatsInfo struct {
 	Companies        int                           `json:"companies"`
 }
 
-// LabsStatsInfoChallengeType
+// LabsStatsInfoChallengeType contains information on a challenge type within lab stats
 type LabsStatsInfoChallengeType struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Count int    `json:"challenges_count"`
 }
 
-// LabsStatsInfoProlabs
+// LabsStatsInfoProlabs contains related information of prolabs within lab stats
 type LabsStatsInfoProlabs struct {
 	Info    []*LabsStatsInfoProlabsItem `json:"info"`
 	Servers int                         `json:"servers"`
 	Users   int                         `json:"users"`
 }
 
-// LabsStatsInfoProlabsItem
+// LabsStatsInfoProlabsItem contains information of prolabs within lab stats
 type LabsStatsInfoProlabsItem struct {
 	ID       int `json:"id"`
 	Flags    int `json:"flags"`
 	Machines int `json:"machines"`
 }
 
-// LabsStatsInfoDedicatedLabs
+// LabsStatsInfoDedicatedLabs contains information on dedicated labs within lab stats
 type LabsStatsInfoDedicatedLabs struct {
 	Labs  int `json:"labs"`
 	Users int `json:"users"`
 }
 
-// ChangelogsList
-// https://www.hackthebox.com/api/v4/changelogs
-
-// ChangelogsList
+// ChangelogsList contains a list of changelog items
 type ChangelogsList struct {
 	Changelogs []*ChangelogsListItem `json:"changelogs"`
 }
 
-// ChangelogsListItem
+// ChangelogsListItem contains information on a changelog item
 type ChangelogsListItem struct {
 	ID          int                         `json:"id"`
 	Version     string                      `json:"version"`
@@ -107,7 +94,7 @@ type ChangelogsListItem struct {
 	Changes     []*ChangelogsListItemChange `json:"changes"`
 }
 
-// ChangelogsListItemChange
+// ChangelogsListItemChange contains the change information of a changelog item
 type ChangelogsListItemChange struct {
 	ID          int    `json:"id"`
 	ChangelogID int    `json:"changelog_id"`
@@ -115,10 +102,7 @@ type ChangelogsListItemChange struct {
 	Text        string `json:"text"`
 }
 
-// List Hackthebox Servers
-// https://www.hackthebox.com/api/v4/lab/list
-
-// ServersList
+// ServersList contains lists of server information
 type ServersList struct {
 	LabCategories    []*ServersListLabCategory     `json:"lab_categories"`
 	LabCategoryCode  string                        `json:"lab_category_code"`
@@ -128,72 +112,60 @@ type ServersList struct {
 	Disabled         bool                          `json:"disabled"`
 }
 
-// ServersListLabCategory
+// ServersListLabCategory contains information on a lab category
 type ServersListLabCategory struct {
 	Code     string `json:"code"`
 	Name     string `json:"name"`
 	Location string `json:"location"`
 }
 
-// ServersListServer
+// ServersListServer contains information on a lab server
 type ServersListServer struct {
 	ID                   int    `json:"id"`
 	Name                 string `json:"friendly_name"`
 	CurrentClientsActive int    `json:"current_clients"`
 }
 
-// ServersListReleaseArenaLab
+// ServersListReleaseArenaLab contains information on a release arena lab
 type ServersListReleaseArenaLab struct {
 	Name     string `json:"name"`
 	Location string `json:"location"`
 	Code     string `json:"code"`
 }
 
-// List Improvement Feedback Areas
-// https://www.hackthebox.com/api/v4/user/feedback/improvement/areas
-
-// ReportImprovementAreasList
+// ReportImprovementAreasList contains a list of improvement feedback categories
 type ReportImprovementAreasList struct {
 	Info []*ReportArea `json:"info"`
 }
 
-// Various Stats
-// https://www.hackthebox.com/api/v4/user/dashboard
-
-// StatsInfo
+// StatsInfo contains dashboard stats
 type StatsInfo struct {
 	DashboardPlayers *StatsInfoItem `json:"dashboard_players"`
 }
 
-// StatsInfoItem
+// StatsInfoItem contains information on online players within dashboard stats
 type StatsInfoItem struct {
 	Online string `json:"online_players"`
 }
 
-// Sidebar changelogs
-// https://www.hackthebox.com/api/v4/sidebar/changelog
-
-// ChangelogsSidebarInfo
+// ChangelogsSidebarInfo contains the sidebar changelog
 type ChangelogsSidebarInfo struct {
 	Changelog *ChangelogsSidebarInfoItem `json:"changelog"`
 }
 
-// ChangelogsSidebarInfoItem
+// ChangelogsSidebarInfoItem contains the information of the sidebar changelog
 type ChangelogsSidebarInfoItem struct {
 	ID        int    `json:"id"`
 	Version   string `json:"version"`
 	CreatedAt string `json:"created_at"`
 }
 
-// Announcement
-// https://www.hackthebox.com/api/v4/sidebar/announcement
-
-// AnnouncementInfo
+// AnnouncementInfo contains a sidebar announcement
 type AnnouncementInfo struct {
 	Announcement *AnnouncementInfoItem `json:"announcement"`
 }
 
-// AnnouncementInfoItem
+// AnnouncementInfoItem contains information of a sidebar announcement
 type AnnouncementInfoItem struct {
 	ID        int    `json:"id"`
 	UpdatedAt string `json:"updated_at"`

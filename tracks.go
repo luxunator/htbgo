@@ -1,6 +1,6 @@
 package htbgo
 
-// TrackCreator
+// TrackCreator contains information on a track creator
 type TrackCreator struct {
 	Type   string `json:"type"`
 	ID     int    `json:"id"`
@@ -8,10 +8,7 @@ type TrackCreator struct {
 	Avatar string `json:"avatar"`
 }
 
-// List Available Tracks
-// https://www.hackthebox.com/api/v4/tracks
-
-// TracksActiveList
+// TracksActiveList contains a list of available tracks and its information
 type TracksActiveList []struct {
 	ID         int           `json:"id"`
 	Name       string        `json:"name"`
@@ -23,10 +20,7 @@ type TracksActiveList []struct {
 	Likes      int           `json:"likes"`
 }
 
-// Track Profile
-// https://www.hackthebox.com/api/v4/tracks/{trackID}
-
-// TrackInfo
+// TrackInfo contains information on track
 type TrackInfo struct {
 	ID                   int              `json:"id"`
 	Name                 string           `json:"name"`
@@ -46,7 +40,7 @@ type TrackInfo struct {
 	CompletionCTA        interface{}      `json:"completion_cta"`
 }
 
-// TrackInfoItem
+// TrackInfoItem contains information on items in a track
 type TrackInfoItem struct {
 	ID              int           `json:"id"`
 	Type            string        `json:"type"`

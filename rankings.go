@@ -1,6 +1,6 @@
 package htbgo
 
-// RankBracket
+// RankBracket contains information on a ranking bracket
 type RankBracket struct {
 	Rank           int    `json:"rank"`
 	Points         int    `json:"points"`
@@ -9,34 +9,26 @@ type RankBracket struct {
 	NextBracket    string `json:"next_bracket"`
 }
 
-// RankDuring
+// RankDuring contains information on a rank during a period of time
 type RankDuring struct {
 	Rank      int    `json:"rank"`
 	Date      string `json:"date"`
 	RankChart []int  `json:"rank_chart_data"`
 }
 
-// Get the user's best rank within the period
-// Week - W 	Month - M 		Year -Y
-// https://www.hackthebox.com/api/v4/rankings/country/best?period={period}
-
-// RankInCountryBestDuringInfo
+// RankInCountryBestDuringInfo contains country best rank stats in period of time
 type RankInCountryBestDuringInfo struct {
 	Status bool        `json:"status"`
 	Data   *RankDuring `json:"data"`
 }
 
-// Get the overview of the user's rank in the country
-// Week - W 	Month - M 		Year -Y
-// https://www.hackthebox.com/api/v4/rankings/country/overview?period=1Y
-
-// RankInCountryDuringInfo
+// RankInCountryDuringInfo contains country rank stats in period of time
 type RankInCountryDuringInfo struct {
 	Status bool                         `json:"status"`
 	Data   *RankInCountryDuringInfoItem `json:"data"`
 }
 
-// RankInCountryDuringInfoItem
+// RankInCountryDuringInfoItem contains information of country rank in a period of time
 type RankInCountryDuringInfoItem struct {
 	PointsDiff   int                                 `json:"points_diff"`
 	PointsGrowth string                              `json:"points_growth"`
@@ -45,42 +37,31 @@ type RankInCountryDuringInfoItem struct {
 	Country      *RankInCountryDuringInfoItemCountry `json:"country"`
 }
 
-// RankInCountryDuringInfoItemCountry
+// RankInCountryDuringInfoItemCountry contains information about a country in a country rank period of time
 type RankInCountryDuringInfoItemCountry struct {
 	Code string `json:"code"`
 	Name string `json:"name"`
 }
 
-// Get the current user's rank bracket in their country
-// https://www.hackthebox.com/api/v4/rankings/country/ranking_bracket
-
-// RankBracketInCountryInfo
+// RankBracketInCountryInfo contains information on a country rank bracket
 type RankBracketInCountryInfo struct {
 	Status bool         `json:"status"`
 	Data   *RankBracket `json:"data"`
 }
 
-// Get the user's current team their best rank within a period
-// Week - W 	Month - M 		Year -Y
-// https://www.hackthebox.com/api/v4/rankings/team/best?period=1Y
-
-// RankOfTeamBestDuringInfo
+// RankOfTeamBestDuringInfo contains team best rank stats in period of time
 type RankOfTeamBestDuringInfo struct {
 	Status bool        `json:"status"`
 	Data   *RankDuring `json:"data"`
 }
 
-// Get the user's current team their rank overview
-// Week -W 		Month - M 		Year - Y
-// https://www.hackthebox.com/api/v4/rankings/team/overview?period=1Y
-
-// RankOfTeamDuringInfo
+// RankOfTeamDuringInfo contains team rank stats in period of time
 type RankOfTeamDuringInfo struct {
 	Status bool                      `json:"status"`
 	Data   *RankOfTeamDuringInfoItem `json:"data"`
 }
 
-// RankOfTeamDuringInfoItem
+// RankOfTeamDuringInfoItem contains information of team rank in a period of time
 type RankOfTeamDuringInfoItem struct {
 	PointsDiff   int                           `json:"points_diff"`
 	PointsGrowth string                        `json:"points_growth"`
@@ -89,7 +70,7 @@ type RankOfTeamDuringInfoItem struct {
 	Team         *RankOfTeamDuringInfoItemTeam `json:"team"`
 }
 
-// RankOfTeamDuringInfoItemTeam
+// RankOfTeamDuringInfoItemTeam contains information about a team in a team rank period of time
 type RankOfTeamDuringInfoItemTeam struct {
 	ID     int    `json:"id"`
 	Name   string `json:"name"`
@@ -97,34 +78,25 @@ type RankOfTeamDuringInfoItemTeam struct {
 	Thumb  string `json:"avatar_thumb_url"`
 }
 
-// Get the user's current team their rank bracket
-// https://www.hackthebox.com/api/v4/rankings/country/ranking_bracket
-
-// RankBracketOfTeamInfo
+// RankBracketOfTeamInfo  contains information on a team rank bracket
 type RankBracketOfTeamInfo struct {
 	Status bool         `json:"status"`
 	Data   *RankBracket `json:"data"`
 }
 
-// Get the user's best rank in the general leaderboard for a certain period.
-// https://www.hackthebox.com/api/v4/rankings/user/best?period={period}&vip={numberValue}
-
-// RankBestDuringInfo
+// RankBestDuringInfo contains user best rank stats in period of time
 type RankBestDuringInfo struct {
 	Status bool        `json:"status"`
 	Data   *RankDuring `json:"data"`
 }
 
-// Get the user's rank overview in the general ledearboard for a certain period.
-// https://www.hackthebox.com/api/v4/rankings/user/overview?period=1Y&vip=0
-
-// RankDuringInfo
+// RankDuringInfo contains user rank stats in period of time
 type RankDuringInfo struct {
 	Status bool                `json:"status"`
 	Data   *RankDuringInfoItem `json:"data"`
 }
 
-// RankDuringInfoItem
+// RankDuringInfoItem contains information of user rank in a period of time
 type RankDuringInfoItem struct {
 	PointsDiff   int                     `json:"points_diff"`
 	PointsGrowth interface{}             `json:"points_growth"`
@@ -133,7 +105,7 @@ type RankDuringInfoItem struct {
 	User         *RankDuringInfoItemUser `json:"user"`
 }
 
-// RankDuringInfoItemUser
+// RankDuringInfoItemUser contains information about a user in a user rank period of time
 type RankDuringInfoItemUser struct {
 	ID     int    `json:"id"`
 	Name   string `json:"name"`
@@ -141,25 +113,19 @@ type RankDuringInfoItemUser struct {
 	Thumb  string `json:"avatar_thumb"`
 }
 
-// Get the user's  current rank bracket in the general leaderboard
-// https://www.hackthebox.com/api/v4/rankings/user/ranking_bracket?vip=0
-
-// RankBracketInfo
+// RankBracketInfo contains information for a users bracket rank
 type RankBracketInfo struct {
 	Status bool         `json:"status"`
 	Data   *RankBracket `json:"data"`
 }
 
-// Get the Rankings of the countries
-// https://www.hackthebox.com/api/v4/rankings/countries
-
-// RanksOfCountriesList
+// RanksOfCountriesList contains a list of country ranks
 type RanksOfCountriesList struct {
 	Status bool                        `json:"status"`
 	Data   []*RanksOfCountriesListItem `json:"data"`
 }
 
-// RanksOfCountriesListItem
+// RanksOfCountriesListItem contains information on a countries rank
 type RanksOfCountriesListItem struct {
 	Rank          int    `json:"rank"`
 	Country       string `json:"country"`
@@ -176,16 +142,13 @@ type RanksOfCountriesListItem struct {
 	RanksDiff     int    `json:"ranks_diff"`
 }
 
-// Get the rankings of the teams
-// https://www.hackthebox.com/api/v4/rankings/teams
-
-// RanksOfTeamsList
+// RanksOfTeamsList contains a list of team ranks
 type RanksOfTeamsList struct {
 	Status bool                    `json:"status"`
 	Data   []*RanksOfTeamsListItem `json:"data"`
 }
 
-// RanksOfTeamsListItem
+// RanksOfTeamsListItem contains information on a teams rank
 type RanksOfTeamsListItem struct {
 	Rank            int    `json:"rank"`
 	Points          int    `json:"points"`
@@ -204,16 +167,13 @@ type RanksOfTeamsListItem struct {
 	RanksDiff       int    `json:"ranks_diff"`
 }
 
-// Get the rankings of the users
-// https://www.hackthebox.com/api/v4/rankings/users?vip=1
-
-// RanksOfUsersList
+// RanksOfUsersList contains a list of user ranks
 type RanksOfUsersList struct {
 	Status bool                    `json:"status"`
 	Data   []*RanksOfUsersListItem `json:"data"`
 }
 
-// RanksOfUsersListItem
+// RanksOfUsersListItem contains information on a users rank
 type RanksOfUsersListItem struct {
 	Rank            int    `json:"rank"`
 	Points          int    `json:"points"`
@@ -233,13 +193,13 @@ type RanksOfUsersListItem struct {
 	RanksDiff       int    `json:"ranks_diff"`
 }
 
-// RanksOfUniversitiesList
+// RanksOfUniversitiesList contains a list of university ranks
 type RanksOfUniversitiesList struct {
 	Status bool                           `json:"status"`
 	Data   []*RanksOfUniversitiesListItem `json:"data"`
 }
 
-// RanksOfUniversitiesListItem
+// RanksOfUniversitiesListItem contains information on a universities rank
 type RanksOfUniversitiesListItem struct {
 	Rank            int    `json:"rank"`
 	Students        int    `json:"students"`
@@ -311,7 +271,6 @@ func (s *Session) RankBracketOfTeam() (bracket *RankBracketOfTeamInfo, err error
 
 	return
 }
-
 
 // RankBestDuring returns the Token Users best rank within a period of time, given a duration and indication of VIP info wanting to be returned
 func (s *Session) RankBestDuring(period Duration, wantVIP bool) (rank *RankBestDuringInfo, err error) {

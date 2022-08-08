@@ -1,29 +1,26 @@
 package htbgo
 
-// EndgameCreator
+// EndgameCreator contains information on an endgame creator
 type EndgameCreator struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Thumb string `json:"avatar_thumb"`
 }
 
-// EndgameAvailability
+// EndgameAvailability contains information on the availability of an endgame
 type EndgameAvailability struct {
 	Available bool   `json:"available"`
 	Code      int    `json:"code"`
 	Message   string `json:"message"`
 }
 
-// Endgames List
-// https://www.hackthebox.com/api/v4/endgames
-
-// EndgamesActiveList
+// EndgamesActiveList contains a list of active endgames
 type EndgamesActiveList struct {
 	Status bool                      `json:"status"`
 	Data   []*EndgamesActiveListItem `json:"data"`
 }
 
-// EndgamesActiveListItem
+// EndgamesActiveListItem contains information on an endgame within an active endgame list
 type EndgamesActiveListItem struct {
 	ID            int                  `json:"id"`
 	Name          string               `json:"name"`
@@ -38,16 +35,13 @@ type EndgamesActiveListItem struct {
 	IsNew         bool                 `json:"new"`
 }
 
-// Endgame Profile
-// https://www.hackthebox.com/api/v4/endgame/{endgameID}
-
-// EndgameInfo
+// EndgameInfo contains an endgame
 type EndgameInfo struct {
 	Status bool             `json:"status"`
 	Data   *EndgameInfoItem `json:"data"`
 }
 
-// EndgameInfoItem
+// EndgameInfoItem contains information on an endgame
 type EndgameInfoItem struct {
 	ID               int                  `json:"id"`
 	Name             string               `json:"name"`
@@ -69,16 +63,13 @@ type EndgameInfoItem struct {
 	Availability     *EndgameAvailability `json:"user_availability"`
 }
 
-// Endgame Flag List
-// https://www.hackthebox.com/api/v4/endgame/{endgameID}/flags
-
-// EndgameFlagsList
+// EndgameFlagsList contains a list of endgame flags
 type EndgameFlagsList struct {
 	Status bool                    `json:"status"`
 	Data   []*EndgameFlagsListItem `json:"data"`
 }
 
-// EndgameFlagsListItem
+// EndgameFlagsListItem contains information on an endgame flag
 type EndgameFlagsListItem struct {
 	ID     int    `json:"id"`
 	Title  string `json:"title"`
@@ -86,17 +77,13 @@ type EndgameFlagsListItem struct {
 	Owned  bool   `json:"owned"`
 }
 
-// Endgame Machine List
-// https://www.hackthebox.com/api/v4/endgame/{endgameID}}/machines
-
-
-// EndgameMachinesList
+// EndgameMachinesList contains a list of machines in an endame
 type EndgameMachinesList struct {
 	Status bool                       `json:"status"`
 	Data   []*EndgameMachinesListItem `json:"data"`
 }
 
-// EndgameMachinesListItem
+// EndgameMachinesListItem contains information on a machine within an endgame
 type EndgameMachinesListItem struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
