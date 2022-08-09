@@ -77,6 +77,7 @@ type ChallengeInfoItem struct {
 	Name                  string        `json:"name"`
 	Retired               int           `json:"retired"`
 	Difficulty            string        `json:"difficulty"`
+	Points                int           `json:"points"`
 	DifficultyStats       *Difficulties `json:"difficulty_chart"`
 	Solves                int           `json:"solves"`
 	SolveTime             interface{}   `json:"authUserSolveTime"` // null or string "test"
