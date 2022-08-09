@@ -77,10 +77,9 @@ type ChallengeInfoItem struct {
 	Name                  string        `json:"name"`
 	Retired               int           `json:"retired"`
 	Difficulty            string        `json:"difficulty"`
-	Points                string        `json:"points"`
 	DifficultyStats       *Difficulties `json:"difficulty_chart"`
 	Solves                int           `json:"solves"`
-	SolveTime             string        `json:"authUserSolveTime"`
+	SolveTime             interface{}   `json:"authUserSolveTime"` // null or string "test"
 	Likes                 int           `json:"likes"`
 	Dislikes              int           `json:"dislikes"`
 	Description           string        `json:"description"`
@@ -93,15 +92,15 @@ type ChallengeInfoItem struct {
 	CreatorName           string        `json:"creator_name"`
 	CreatorAvatar         string        `json:"creator_avatar"`
 	CreatorIsRespected    bool          `json:"isRespected"`
-	CreatorTwoID          int           `json:"creator2_id"`
-	CreatorTwoName        string        `json:"creator2_name"`
-	CreatorTwoAvatar      string        `json:"creator2_avatar"`
-	CreatorTwoIsRespected bool          `json:"isRespected2"`
+	CreatorTwoID          interface{}   `json:"creator2_id"`     // null or int #
+	CreatorTwoName        interface{}   `json:"creator2_name"`   // null or string "test"
+	CreatorTwoAvatar      interface{}   `json:"creator2_avatar"` // null or string "test"
+	CreatorTwoIsRespected interface{}   `json:"isRespected2"`    // null or boolean true
 	HasDownload           bool          `json:"download"`
 	SHA256                string        `json:"sha256"`
-	HasDocker             bool          `json:"docker"`
-	DockerIP              string        `json:"docker_ip"`
-	DockerPort            int           `json:"docker_port"`
+	HasDocker             interface{}   `json:"docker"`      // null or boolean true
+	DockerIP              interface{}   `json:"docker_ip"`   // null or string "test"
+	DockerPort            interface{}   `json:"docker_port"` // null or int #
 	ReleaseDate           string        `json:"release_date"`
 	Released              int           `json:"released"`
 	IsSolved              bool          `json:"authUserSolve"`
