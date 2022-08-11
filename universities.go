@@ -80,7 +80,7 @@ type UniversityInfoItemCaptain struct {
 
 // UniversityOwnsInfo owns information of a university
 type UniversityOwnsInfo struct {
-	Rank          int                   `json:"rank"`
+	Rank          interface{}                   `json:"rank"`
 	UserOwns      int                   `json:"user_owns"`
 	SystemOwns    int                   `json:"system_owns"`
 	Bloods        int                   `json:"first_bloods"`

@@ -144,13 +144,13 @@ func TestChallengesRetired(t *testing.T) {
 
 func TestChallenge(t *testing.T) {
     challengeIDs := []int{390, 4, 2}
-    url := "https://www.hackthebox.com/api/v4/challenge/info/"
 
     for _, challengeID := range challengeIDs {
         t.Run(fmt.Sprintf("id %d", challengeID), func(t *testing.T) {
             challengeIDString, _ := toPositiveIntString(challengeID)
+            url := "https://www.hackthebox.com/api/v4/challenge/info/" + challengeIDString
 
-            responseCode, isValidJSON, err := checkResponse(session, url + challengeIDString)
+            responseCode, isValidJSON, err := checkResponse(session, url)
 
             if responseCode != 200 {
                 t.Error("response code should be 200, got", responseCode)
@@ -171,13 +171,13 @@ func TestChallenge(t *testing.T) {
 
 func TestChallengeActivty(t *testing.T) {
     challengeIDs := []int{390, 4, 2}
-    url := "https://www.hackthebox.com/api/v4/challenge/activity/"
-
+    
     for _, challengeID := range challengeIDs {
         t.Run(fmt.Sprintf("id %d", challengeID), func(t *testing.T) {
             challengeIDString, _ := toPositiveIntString(challengeID)
+            url := "https://www.hackthebox.com/api/v4/challenge/activity/" + challengeIDString
 
-            responseCode, isValidJSON, err := checkResponse(session, url + challengeIDString)
+            responseCode, isValidJSON, err := checkResponse(session, url)
 
             if responseCode != 200 {
                 t.Error("response code should be 200, got", responseCode)

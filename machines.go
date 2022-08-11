@@ -80,7 +80,7 @@ type MachineInfoItem struct {
 	HasOwnedUser    bool            `json:"authUserInUserOwns"`
 	HasOwnedRoot    bool            `json:"authUserInRootOwns"`
 	HasReviewed     bool            `json:"authUserHasReviewed"`
-	Stars           string          `json:"stars"`
+	Stars           float64          `json:"stars"`
 	DifficultyAvg   int             `json:"difficulty"`
 	Avatar          string          `json:"avatar"`
 	DifficultyStats *Difficulties   `json:"feedbackForChart"`
@@ -117,7 +117,7 @@ type MachineProfileInfoItem struct {
 	HasOwnedUser    bool            `json:"authUserInUserOwns"`
 	HasOwnedRoot    bool            `json:"authUserInRootOwns"`
 	HasReviewed     bool            `json:"authUserHasReviewed"`
-	Stars           string          `json:"stars"`
+	Stars           float64          `json:"stars"`
 	DifficultyAvg   int             `json:"difficulty"`
 	Avatar          string          `json:"avatar"`
 	DifficultyStats *Difficulties   `json:"feedbackForChart"`
@@ -159,7 +159,7 @@ type MachinesActiveListItem struct {
 	HasOwnedRoot    interface{}   `json:"authUserInRootOwns"`
 	IsTodo          bool          `json:"isTodo"`
 	HasReviewed     bool          `json:"authUserHasReviewed"`
-	Stars           string        `json:"stars"`
+	Stars           float64        `json:"stars"`
 	DifficultyAvg   int           `json:"difficulty"`
 	DifficultyStats *Difficulties `json:"feedbackForChart"`
 	Avatar          string        `json:"avatar"`
@@ -195,7 +195,7 @@ type MachinesRetiredListItem struct {
 	HasOwnedRoot    bool          `json:"authUserInRootOwns"`
 	IsTodo          bool          `json:"isTodo"`
 	HasReviewed     bool          `json:"authUserHasReviewed"`
-	Stars           string        `json:"stars"`
+	Stars           float64        `json:"stars"`
 	DifficultyAvg   int           `json:"difficulty"`
 	DifficultyStats *Difficulties `json:"feedbackForChart"`
 	Avatar          string        `json:"avatar"`
@@ -288,7 +288,7 @@ type MachinesTodoListItem struct {
 	HasOwnedRoot    interface{}     `json:"authUserInRootOwns"`
 	IsTodo          bool            `json:"isTodo"`
 	HasReviewed     bool            `json:"authUserHasReviewed"`
-	Stars           string          `json:"stars"`
+	Stars           float64          `json:"stars"`
 	DifficultyAvg   int             `json:"difficulty"`
 	DifficultyStats *Difficulties   `json:"feedbackForChart"`
 	Avatar          string          `json:"avatar"`
@@ -343,7 +343,7 @@ type MachineReviewsListItem struct {
 	ID        int                         `json:"id"`
 	UserID    int                         `json:"user_id"`
 	MachineID int                         `json:"machine_id"`
-	Stars     int                         `json:"stars"`
+	Stars     float64                         `json:"stars"`
 	Message   string                      `json:"message"`
 	CreatedAt string                      `json:"created_at"`
 	UpdatedAt string                      `json:"updated_at"`
