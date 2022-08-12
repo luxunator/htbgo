@@ -1,69 +1,61 @@
 package htbgo
 
-// Starting Point Machines List
-// https://www.hackthebox.com/api/v4/sp/machines
-
-type StartingPointMachinesList struct {
-	Info []struct {
-		ID                  int    `json:"id"`
-		Name                string `json:"name"`
-		OS                  string `json:"os"`
-		Points              int    `json:"points"`
-		StaticPoints        int    `json:"static_points"`
-		Release             string `json:"release"`
-		UserOwnsCount       int    `json:"user_owns_count"`
-		RootOwnsCount       int    `json:"root_owns_count"`
-		AuthUserInUserOwns  bool   `json:"authUserInUserOwns"`
-		AuthUserInRootOwns  bool   `json:"authUserInRootOwns"`
-		IsTodo              bool   `json:"isTodo"`
-		AuthUserHasReviewed bool   `json:"authUserHasReviewed"`
-		Stars               string `json:"stars"`
-		Difficulty          int    `json:"difficulty"`
-		FeedbackForChart    struct {
-			CakeDifficulty      int `json:"counterCake"`
-			VeryEasyDifficulty  int `json:"counterVeryEasy"`
-			EasyDifficulty      int `json:"counterEasy"`
-			TooEasyDifficulty   int `json:"counterTooEasy"`
-			MediumDifficulty    int `json:"counterMedium"`
-			BitHardDifficulty   int `json:"counterBitHard"`
-			HardDifficulty      int `json:"counterHard"`
-			TooHardDifficulty   int `json:"counterTooHard"`
-			ExtraHardDifficulty int `json:"counterExHard"`
-			BrainFuckDifficulty int `json:"counterBrainFuck"`
-		} `json:"feedbackForChart"`
-		Avatar         string `json:"avatar"`
-		DifficultyText string `json:"difficultyText"`
-		PlayInfo       struct {
-			IsSpawned         bool   `json:"isSpawned"`
-			IsSpawning        bool   `json:"isSpawning"`
-			IsActive          bool   `json:"isActive"`
-			ActivePlayerCount int    `json:"active_player_count"`
-			ExpiresAt         string `json:"expires_at"`
-		} `json:"playInfo"`
-		Free  bool `json:"free"`
-		Maker struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			Avatar      string `json:"avatar"`
-			IsRespected bool   `json:"isRespected"`
-		} `json:"maker"`
-		MakerTwo struct {
-			ID          int    `json:"id"`
-			Name        string `json:"name"`
-			Avatar      string `json:"avatar"`
-			IsRespected bool   `json:"isRespected"`
-		} `json:"maker2"`
-		Recommended  int  `json:"recommended"`
-		SPFlag       int  `json:"sp_flag"`
-		EasyMonth    int  `json:"easy_month"`
-		RootFlagOnly bool `json:"root_flag_only"`
-	}
+// StartingPointCreator contains information about a starting points creator
+type StartingPointCreator struct {
+	ID          int    `json:"id"`
+	Name        string `json:"name"`
+	Avatar      string `json:"avatar"`
+	IsRespected bool   `json:"isRespected"`
 }
 
-func (s *Session) StartingPointMachines() (machines StartingPointMachinesList) {
+// StartingPointMachinesList contains a list of starting point machines
+type StartingPointMachinesList struct {
+	Info []*StartingPointMachinesListItem `json:"info"`
+}
+
+// StartingPointMachinesListItem contains information about a starting point machine
+type StartingPointMachinesListItem struct {
+	ID              int                                    `json:"id"`
+	Name            string                                 `json:"name"`
+	OS              string                                 `json:"os"`
+	Points          int                                    `json:"points"`
+	StaticPoints    int                                    `json:"static_points"`
+	Release         string                                 `json:"release"`
+	UserOwns        int                                    `json:"user_owns_count"`
+	RootOwns        int                                    `json:"root_owns_count"`
+	InUserOwns      bool                                   `json:"authUserInUserOwns"`
+	InRootOwns      bool                                   `json:"authUserInRootOwns"`
+	IsTodo          bool                                   `json:"isTodo"`
+	HasReviewed     bool                                   `json:"authUserHasReviewed"`
+	Stars           float64                                `json:"stars"`
+	DifficultyAvg   int                                    `json:"difficulty"`
+	DifficultyStats *Difficulties                          `json:"feedbackForChart"`
+	Avatar          string                                 `json:"avatar"`
+	Difficulty      string                                 `json:"difficultyText"`
+	PlayInfo        *StartingPointMachinesListItemPlayInfo `json:"playInfo"`
+	IsFree          bool                                   `json:"free"`
+	CreatorOne      *StartingPointCreator                  `json:"maker"`
+	CreatorTwo      *StartingPointCreator                  `json:"maker2"`
+	Recommended     int                                    `json:"recommended"`
+	SPFlag          int                                    `json:"sp_flag"`
+	EasyMonth       int                                    `json:"easy_month"`
+	HasRootFlagOnly bool                                   `json:"root_flag_only"`
+}
+
+// StartingPointMachinesListItemPlayInfo contains information about players on a starting point machine
+type StartingPointMachinesListItemPlayInfo struct {
+	IsSpawned   bool   `json:"isSpawned"`
+	IsSpawning  bool   `json:"isSpawning"`
+	IsActive    bool   `json:"isActive"`
+	PlayerCount int    `json:"active_player_count"`
+	ExpiresAt   string `json:"expires_at"`
+}
+
+// StartingPointMachines returns a list of the current starting point machines
+func (s *Session) StartingPointMachines() (machines *StartingPointMachinesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/sp/machines"
-	parseJSON(s, url, &machines)
+	err = parseJSON(s, url, &machines)
 
 	return
 }
