@@ -50,7 +50,7 @@ type EndgameInfoItem struct {
 	IsRetired        bool                 `json:"retired"`
 	IsVip            bool                 `json:"vip"`
 	Creators         []*EndgameCreator    `json:"creators"`
-	Points           interface{}          `json:"points"`
+	Points           interface{}          `json:"points"` // string or int 0
 	PlayersCompleted int                  `json:"players_completed"`
 	ResetVotes       int                  `json:"endgame_reset_votes"`
 	LastReset        string               `json:"most_recent_reset"`

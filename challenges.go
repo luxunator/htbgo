@@ -48,7 +48,7 @@ type ChallengeListItem struct {
 	Retired            int           `json:"retired"`
 	Difficulty         string        `json:"difficulty"`
 	DifficultyAvg      int           `json:"avg_difficulty"`
-	Points             interface{}   `json:"points"`
+	Points             interface{}   `json:"points"`  // string or int 0
 	StaticPoints       string        `json:"static_points"`
 	DifficultyStats    *Difficulties `json:"difficulty_chart"`
 	DifficultyStatsArr []int         `json:"difficulty_chart_arr"`

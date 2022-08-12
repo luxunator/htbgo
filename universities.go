@@ -80,7 +80,7 @@ type UniversityInfoItemCaptain struct {
 
 // UniversityOwnsInfo owns information of a university
 type UniversityOwnsInfo struct {
-	Rank          interface{}                   `json:"rank"`
+	Rank          interface{}                   `json:"rank"` // int or string "unranked"
 	UserOwns      int                   `json:"user_owns"`
 	SystemOwns    int                   `json:"system_owns"`
 	Bloods        int                   `json:"first_bloods"`
@@ -120,7 +120,7 @@ type UniversityMembersList []struct {
 	ID          int                              `json:"id"`
 	Name        string                           `json:"name"`
 	Avatar      string                           `json:"avatar"`
-	Rank        interface{}                      `json:"rank"`
+	Rank        interface{}                      `json:"rank"` // int or string "unranked"
 	Points      int                              `json:"points"`
 	RootOwns    int                              `json:"root_owns"`
 	RootBloods  int                              `json:"root_bloods_count"`
