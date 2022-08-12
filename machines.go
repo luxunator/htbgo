@@ -80,11 +80,7 @@ type MachineInfoItem struct {
 	HasOwnedUser    bool            `json:"authUserInUserOwns"`
 	HasOwnedRoot    bool            `json:"authUserInRootOwns"`
 	HasReviewed     bool            `json:"authUserHasReviewed"`
-<<<<<<< HEAD
 	Stars           float64          `json:"stars"`
-=======
-	Stars           float32         `json:"stars"`
->>>>>>> 4c1e6bde25b9a31e933654d743f0a6ed7a58830e
 	DifficultyAvg   int             `json:"difficulty"`
 	Avatar          string          `json:"avatar"`
 	DifficultyStats *Difficulties   `json:"feedbackForChart"`
@@ -121,11 +117,7 @@ type MachineProfileInfoItem struct {
 	HasOwnedUser    bool            `json:"authUserInUserOwns"`
 	HasOwnedRoot    bool            `json:"authUserInRootOwns"`
 	HasReviewed     bool            `json:"authUserHasReviewed"`
-<<<<<<< HEAD
 	Stars           float64          `json:"stars"`
-=======
-	Stars           float32         `json:"stars"`
->>>>>>> 4c1e6bde25b9a31e933654d743f0a6ed7a58830e
 	DifficultyAvg   int             `json:"difficulty"`
 	Avatar          string          `json:"avatar"`
 	DifficultyStats *Difficulties   `json:"feedbackForChart"`
@@ -201,11 +193,7 @@ type MachinesRetiredListItem struct {
 	HasOwnedRoot    bool          `json:"authUserInRootOwns"`
 	IsTodo          bool          `json:"isTodo"`
 	HasReviewed     bool          `json:"authUserHasReviewed"`
-<<<<<<< HEAD
 	Stars           float64        `json:"stars"`
-=======
-	Stars           float32       `json:"stars"`
->>>>>>> 4c1e6bde25b9a31e933654d743f0a6ed7a58830e
 	DifficultyAvg   int           `json:"difficulty"`
 	DifficultyStats *Difficulties `json:"feedbackForChart"`
 	Avatar          string        `json:"avatar"`
@@ -296,11 +284,7 @@ type MachinesTodoListItem struct {
 	HasOwnedRoot    bool     `json:"authUserInRootOwns"`
 	IsTodo          bool            `json:"isTodo"`
 	HasReviewed     bool            `json:"authUserHasReviewed"`
-<<<<<<< HEAD
 	Stars           float64          `json:"stars"`
-=======
-	Stars           float32         `json:"stars"`
->>>>>>> 4c1e6bde25b9a31e933654d743f0a6ed7a58830e
 	DifficultyAvg   int             `json:"difficulty"`
 	DifficultyStats *Difficulties   `json:"feedbackForChart"`
 	Avatar          string          `json:"avatar"`
