@@ -1,7 +1,6 @@
 package htbgo
 
 import (
-<<<<<<< HEAD
     "encoding/json"
     "io/ioutil"
     "net/http"
