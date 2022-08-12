@@ -2,7 +2,7 @@ package htbgo
 
 // RankBracket contains information on a ranking bracket
 type RankBracket struct {
-	Rank           int    `json:"rank"`
+	Rank           interface{}    `json:"rank"`
 	Points         int    `json:"points"`
 	PointsToGo     int    `json:"points_for_next_bracket"`
 	CurrentBracket string `json:"current_bracket"`
@@ -11,7 +11,7 @@ type RankBracket struct {
 
 // RankDuring contains information on a rank during a period of time
 type RankDuring struct {
-	Rank      interface{}   `json:"rank"`
+	Rank      interface{}   `json:"rank"` // int or string "unranked"
 	Date      string        `json:"date"`
 	RankChart []interface{} `json:"rank_chart_data"`
 }
@@ -99,7 +99,7 @@ type RankDuringInfo struct {
 // RankDuringInfoItem contains information of user rank in a period of time
 type RankDuringInfoItem struct {
 	PointsDiff   int                     `json:"points_diff"`
-	PointsGrowth interface{}             `json:"points_growth"`
+	PointsGrowth interface{}             `json:"points_growth"` // string or int 0
 	RanksDiff    int                     `json:"ranks_diff"`
 	Chart        []int                   `json:"chart_data"`
 	User         *RankDuringInfoItemUser `json:"user"`
@@ -164,7 +164,7 @@ type RanksOfTeamsListItem struct {
 	Name            string      `json:"name"`
 	Thumb           string      `json:"avatar_thumb_url"`
 	Country         string      `json:"country"`
-	RanksDiff       interface{} `json:"ranks_diff"`
+	RanksDiff       int         `json:"ranks_diff"`
 }
 
 // RanksOfUsersList contains a list of user ranks
@@ -188,9 +188,9 @@ type RanksOfUsersListItem struct {
 	ID              int         `json:"id"`
 	Name            string      `json:"name"`
 	Thumb           string      `json:"avatar_thumb"`
-	Country         interface{} `json:"country"`
+	Country         string `json:"country"`
 	Level           string      `json:"level"`
-	RanksDiff       interface{} `json:"ranks_diff"`
+	RanksDiff       int `json:"ranks_diff"`
 }
 
 // RanksOfUniversitiesList contains a list of university ranks
@@ -299,7 +299,7 @@ func (s *Session) RankBracket(wantVIP bool) (bracket *RankBracketInfo, err error
 	return
 }
 
-// RanksOfCountries returns a list of all the countries and their ranking information
+// RanksOfCountries returns a list of top countries and their ranking information
 func (s *Session) RanksOfCountries() (ranks *RanksOfCountriesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/countries"
@@ -308,7 +308,7 @@ func (s *Session) RanksOfCountries() (ranks *RanksOfCountriesList, err error) {
 	return
 }
 
-// RanksOfTeams returns a list of all the teams and their ranking information
+// RanksOfTeams returns a list of top teams and their ranking information
 func (s *Session) RanksOfTeams() (ranks *RanksOfTeamsList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/teams"
@@ -317,7 +317,7 @@ func (s *Session) RanksOfTeams() (ranks *RanksOfTeamsList, err error) {
 	return
 }
 
-// RanksOfUsers returns a list of all the users and their ranking information
+// RanksOfUsers returns a list of top users and their ranking information
 func (s *Session) RanksOfUsers(wantVIP bool) (ranks *RanksOfUsersList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/users?vip=" + stringFromVIP(wantVIP)
@@ -326,7 +326,7 @@ func (s *Session) RanksOfUsers(wantVIP bool) (ranks *RanksOfUsersList, err error
 	return
 }
 
-// RanksOfUniversities returns a list of all the universities and their ranking information
+// RanksOfUniversities returns a list of top universities and their ranking information
 func (s *Session) RanksOfUniversities() (universities *RanksOfUniversitiesList, err error) {
 
 	var url string = "https://www.hackthebox.com/api/v4/rankings/universities"

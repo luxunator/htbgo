@@ -27,7 +27,7 @@ type StartingPointMachinesListItem struct {
 	InRootOwns      bool                                   `json:"authUserInRootOwns"`
 	IsTodo          bool                                   `json:"isTodo"`
 	HasReviewed     bool                                   `json:"authUserHasReviewed"`
-	Stars           string                                 `json:"stars"`
+	Stars           float64                                `json:"stars"`
 	DifficultyAvg   int                                    `json:"difficulty"`
 	DifficultyStats *Difficulties                          `json:"feedbackForChart"`
 	Avatar          string                                 `json:"avatar"`

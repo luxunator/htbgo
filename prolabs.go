@@ -70,7 +70,7 @@ type ProLabOverviewInfoItem struct {
 	ID              int                                    `json:"id"`
 	Name            string                                 `json:"name"`
 	Version         string                                 `json:"version"`
-	Excerpt         interface{}                            `json:"excerpt"`
+	Excerpt         interface{}                            `json:"excerpt"` // Unknown
 	MachinsCount    int                                    `json:"pro_machines_count"`
 	FlagCount       int                                    `json:"pro_flags_count"`
 	SocialLinks     *ProLabOverviewInfoItemSocialLinks     `json:"social_links"`

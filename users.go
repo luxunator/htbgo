@@ -62,7 +62,7 @@ type ProfileInfoItem struct {
 	Verified                  bool                 `json:"verified"`
 	CanDeleteAvatar           bool                 `json:"can_delete_avatar"`
 	Team                      *ProfileInfoItemTeam `json:"team"`
-	University                interface{}          `json:"university"`
+	University                interface{}          `json:"university"` // Unknown
 	Identifier                string               `json:"identifier"`
 	HasTeamInvitation         bool                 `json:"hasTeamInvitation"`
 	HasTwoFAEnabled           bool                 `json:"TwoFaEnabled"`
@@ -151,7 +151,7 @@ type UserRelationshipInfoItem struct {
 	RankProgress    int                                 `json:"current_rank_progress"`
 	NextRank        string                              `json:"next_rank"`
 	NextRankPoints  float64                             `json:"next_rank_points"`
-	RankOwnership   string                              `json:"rank_ownership"`
+	RankOwnership   interface{}                              `json:"rank_ownership"` // string or int 0
 	RankRequirement int                                 `json:"rank_requirement"`
 	Ranking         int                                 `json:"ranking"`
 	Avatar          string                              `json:"avatar"`
@@ -467,7 +467,7 @@ type UserInfoItem struct {
 	RankProgress    int               `json:"current_rank_progress"`
 	NextRank        string            `json:"next_rank"`
 	NextRankPoints  float64           `json:"next_rank_points"`
-	RankOwnership   interface{}       `json:"rank_ownership"`
+	RankOwnership   interface{}       `json:"rank_ownership"` // string or int 0
 	RankRequirement int               `json:"rank_requirement"`
 	Ranking         int               `json:"ranking"`
 	Avatar          string            `json:"avatar"`

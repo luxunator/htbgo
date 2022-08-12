@@ -48,7 +48,7 @@ type ChallengeListItem struct {
 	Retired            int           `json:"retired"`
 	Difficulty         string        `json:"difficulty"`
 	DifficultyAvg      int           `json:"avg_difficulty"`
-	Points             interface{}   `json:"points"`
+	Points             interface{}   `json:"points"`  // string or int 0
 	StaticPoints       string        `json:"static_points"`
 	DifficultyStats    *Difficulties `json:"difficulty_chart"`
 	DifficultyStatsArr []int         `json:"difficulty_chart_arr"`
@@ -77,10 +77,10 @@ type ChallengeInfoItem struct {
 	Name                  string        `json:"name"`
 	Retired               int           `json:"retired"`
 	Difficulty            string        `json:"difficulty"`
-	Points                int           `json:"points"`
+	Points                interface{}   `json:"points"` // string or int 0
 	DifficultyStats       *Difficulties `json:"difficulty_chart"`
 	Solves                int           `json:"solves"`
-	SolveTime             interface{}   `json:"authUserSolveTime"` // null or string "test"
+	SolveTime             string        `json:"authUserSolveTime"`
 	Likes                 int           `json:"likes"`
 	Dislikes              int           `json:"dislikes"`
 	Description           string        `json:"description"`
@@ -93,15 +93,15 @@ type ChallengeInfoItem struct {
 	CreatorName           string        `json:"creator_name"`
 	CreatorAvatar         string        `json:"creator_avatar"`
 	CreatorIsRespected    bool          `json:"isRespected"`
-	CreatorTwoID          interface{}   `json:"creator2_id"`     // null or int #
-	CreatorTwoName        interface{}   `json:"creator2_name"`   // null or string "test"
-	CreatorTwoAvatar      interface{}   `json:"creator2_avatar"` // null or string "test"
-	CreatorTwoIsRespected interface{}   `json:"isRespected2"`    // null or boolean true
+	CreatorTwoID          int           `json:"creator2_id"`
+	CreatorTwoName        string        `json:"creator2_name"`
+	CreatorTwoAvatar      string        `json:"creator2_avatar"`
+	CreatorTwoIsRespected string        `json:"isRespected2"`
 	HasDownload           bool          `json:"download"`
 	SHA256                string        `json:"sha256"`
-	HasDocker             interface{}   `json:"docker"`      // null or boolean true
-	DockerIP              interface{}   `json:"docker_ip"`   // null or string "test"
-	DockerPort            interface{}   `json:"docker_port"` // null or int #
+	HasDocker             bool          `json:"docker"`
+	DockerIP              string        `json:"docker_ip"`
+	DockerPort            int           `json:"docker_port"`
 	ReleaseDate           string        `json:"release_date"`
 	Released              int           `json:"released"`
 	IsSolved              bool          `json:"authUserSolve"`

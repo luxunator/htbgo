@@ -111,7 +111,7 @@ type TeamMembersList []struct {
 	ID          int                  `json:"id"`
 	Name        string               `json:"name"`
 	Avatar      string               `json:"avatar"`
-	Rank        interface{}          `json:"rank"`
+	Rank        interface{}          `json:"rank"` // int or string "unranked"
 	Points      int                  `json:"points"`
 	RootOwns    int                  `json:"root_owns"`
 	RootBloods  int                  `json:"root_bloods_count"`
@@ -133,7 +133,7 @@ type TeamMembersListTeam struct {
 
 // TeamInvitationsList contains a list of team invitations
 type TeamInvitationsList struct {
-	Headers   struct{}                       `json:"headers"`
+	Headers   interface{}                       `json:"headers"`
 	Original  []*TeamInvitationsListOriginal `json:"original"`
 	Exception bool                           `json:"exception"`
 }
@@ -157,7 +157,7 @@ type TeamInvitationsListOriginalUser struct {
 	Respects int         `json:"respected_by_count"`
 	Thumb    string      `json:"avatar_thumb"`
 	RankName string      `json:"rank_name"`
-	Ranking  interface{} `json:"ranking"`
+	Ranking  interface{} `json:"ranking"` // int or string "unranked"
 }
 
 // Team returns the information of a team, given a team ID

@@ -35,9 +35,9 @@ type TrackInfo struct {
 	HasLiked             bool             `json:"liked"`
 	IsEnrolled           bool             `json:"enrolled"`
 	HasCompletionMessage bool             `json:"has_completion_message"`
-	CompletionURL        interface{}      `json:"completion_url"`     // null or string "test"
-	CompletionMessage    interface{}      `json:"completion_message"` // null or string "test"
-	CompletionCTA        interface{}      `json:"completion_cta"`
+	CompletionURL        string      `json:"completion_url"`
+	CompletionMessage    string      `json:"completion_message"`
+	CompletionCTA        string      `json:"completion_cta"`
 }
 
 // TrackInfoItem contains information on items in a track
@@ -47,9 +47,9 @@ type TrackInfoItem struct {
 	Name            string        `json:"name"`
 	Difficulty      string        `json:"difficulty"`
 	DifficultyStats *Difficulties `json:"difficulty_ratings"`
-	Avatar          interface{}   `json:"avatar"`   // null or string "test"
-	OS              interface{}   `json:"os"`       // null or string "test"
-	Category        interface{}   `json:"category"` // null or string "test"
+	Avatar          string   `json:"avatar"`
+	OS              string   `json:"os"`
+	Category        string   `json:"category"`
 	IsComplete      bool          `json:"complete"`
 }
 
